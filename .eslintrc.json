@@ -1,0 +1,28 @@
+{
+    "extends": [
+        "airbnb"
+    ],
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "func-names": "off",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "no-underscore-dangle": [
+            "error",
+            {
+                "allow": [
+                    "_id"
+                ]
+            }
+        ]
+    }
+}
