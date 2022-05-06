@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable import/extensions */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
