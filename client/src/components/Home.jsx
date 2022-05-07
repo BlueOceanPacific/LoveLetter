@@ -21,6 +21,8 @@ function Home() {
       <Link to="/login">login</Link>
       <br />
       <Link to="/signup">signup</Link>
+      <br />
+      <Link to="/userprofile">userprofile</Link>
     </div>
   );
 }

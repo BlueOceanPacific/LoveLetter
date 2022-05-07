@@ -19,7 +19,7 @@ function SignUp() {
             aria-describedby="emailHelp"
           />
           <div id="emailHelp" className="form-text">
-            We&apos;ll never share your email with anyone else my leige.
+            We&apos;ll never share your email with anyone else my liege.
           </div>
         </div>
         <div className="mb-3">
@@ -64,7 +64,7 @@ function SignUp() {
             </div>
           </div>
           <div id="avatarHelp" className="form-text">
-            Choose your avatar or be seen as a peasent.
+            Choose your avatar or be seen as a peasant.
           </div>
         </div>
 
