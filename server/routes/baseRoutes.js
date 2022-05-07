@@ -10,4 +10,14 @@ module.exports = function (app) {
       { username: 'jenny', gamesPlayed: 13, gamesWon: 10 },
     ]);
   });
+
+  app.get('/games', (req, res) => {
+    res.send([
+      { name: 'KingDares Castle', currentPlayers: 3, id: 3456 },
+      { name: 'Toms Team Battle', currentPlayers: 1, id: 401 },
+      { name: 'asdfasdf', currentPlayers: 2, id: 399 },
+      { name: 'daily', currentPlayers: 0, id: 3 },
+      { name: 'baseTest', currentPlayers: 3, id: 47 },
+    ]);
+  });
 };

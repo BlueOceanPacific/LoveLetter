@@ -19,6 +19,7 @@ module.exports = function (app) {
 
 const demoGame = {
   id: 12345,
+  name: 'Dares room',
   state: 'playing', // state is building, playing, or ended
   host: { username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
   players: [{ username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
