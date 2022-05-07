@@ -13,7 +13,7 @@ module.exports = function (app) {
     console.log('Game posted: ', req.params.id);
     console.log('Chat data: ', req.body);
     demoGame.chat.push(req.body);
-    res.send(200);
+    res.send(201);
   });
 };
 
