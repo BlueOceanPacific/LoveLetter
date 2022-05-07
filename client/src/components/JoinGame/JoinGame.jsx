@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 function JoinGame() {
+  const [count, setCount] = useState(0);
+
+  const incrementCount = () => {
+    if (count < 4) setCount(count + 1);
+  };
+
+  // const createRow = () => {
+  //   const [expandedRows, setExandedRows]
+  //   <tr>
+  //     <th scope="row">{/*this.roomName*/}</th>
+  //     <td colSpan="2">{count}/4</td>
+  //     <td><button type="button" className="btn btn-primary btn-sm" onClick={incrementCount}>Join</button></td>
+  //   </tr>
+  // }
+
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-sm-4"><div className="p-4"></div><button type="button" className="btn btn-success btn-lg">Auto-Join</button></div>
+        <div className="col-sm-4">
+          <div className="p-4" />
+          <button type="button" className="btn btn-success btn-lg">Auto-Join</button>
+        </div>
         <div className="col-sm-8"><div className="p-4"><h1>List of Open Games</h1></div></div>
       </div>
 
@@ -22,23 +40,33 @@ function JoinGame() {
           <tbody>
             <tr>
               <th scope="row">Friends of Sir Dare the Fair (Url)</th>
-              <td colSpan="2">3/4</td>
-              <td><button type="button" className="btn btn-primary btn-sm">Join</button></td>
+              <td colSpan="2">
+                {count}
+                /4
+              </td>
+              <td><button type="button" className="btn btn-primary btn-sm" onClick={incrementCount}>Join</button></td>
             </tr>
             <tr>
               <th scope="row">Friends of Sir Dareitus the Fairitus (Url)</th>
-              <td colSpan="2">1/4</td>
-              <td><button type="button" className="btn btn-primary btn-sm">Join</button></td>
+              <td colSpan="2">
+                {count}
+                /4
+              </td>
+              <td><button type="button" className="btn btn-primary btn-sm" onClick={incrementCount}>Join</button></td>
             </tr>
             <tr>
               <th className="text-danger" scope="row">Stupid Peasants (BANNED)</th>
-              <td colSpan="2">0/4</td>
-              <td><button type="button" className="btn btn-primary btn-sm">Join</button></td>
+              <td colSpan="2">
+                {count}
+                /4
+              </td>
+              <td><button type="button" className="btn btn-primary btn-sm" onClick={incrementCount}>Join</button></td>
             </tr>
+            {/* {createRow()} */}
           </tbody>
         </table>
       </div>
-    </div >
+    </div>
   );
 }
 
