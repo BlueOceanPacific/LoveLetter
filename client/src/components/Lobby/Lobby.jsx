@@ -30,10 +30,13 @@ function Lobby() {
         <h3>...waiting for other players</h3>
       </div>
       <div className="lobby-player-list-container">
-        <h4>Current Players</h4>
+        <h4 className="lobby-player-list-title">Current Players</h4>
         <ul className="lobby-list-group">
           {populatePlayers()}
         </ul>
+      </div>
+      <div className="lobby-chat">
+        <h4>lobby chat</h4>
       </div>
       <button type="button" className="lobby-btn-leave btn-primary btn-lg">Leave Lobby</button>
       {createStartGameButton()}
