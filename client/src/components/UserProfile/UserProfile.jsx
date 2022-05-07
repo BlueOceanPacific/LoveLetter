@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './UserProfile.scss';
+import './UserProfile.css';
 
 // identify user (id sent in props) before sending put
 function UserProfile(props) {
