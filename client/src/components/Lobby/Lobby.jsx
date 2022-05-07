@@ -17,6 +17,13 @@ function Lobby() {
     return buttons;
   };
 
+  const populatePlayers = () => players.map((player) => (
+    <li className="list-group-item">
+      <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon"/>
+      {player}
+    </li>
+  ));
+
   return (
     <div className="lobby-container">
       <div className="lobby-title-container">
@@ -25,7 +32,7 @@ function Lobby() {
       <div className="lobby-player-list-container">
         <h4>Current Players</h4>
         <ul className="lobby-list-group">
-          {players.map((player) => <li className="list-group-item">{player}</li>)}
+          {populatePlayers()}
         </ul>
       </div>
       <button type="button" className="lobby-btn-leave btn-primary btn-lg">Leave Lobby</button>
