@@ -10,7 +10,7 @@ import JoinGame from './JoinGame.jsx';
 import Leaderboard from './Leaderboard.jsx';
 import Lobby from './Lobby.jsx';
 import Login from './Login.jsx';
-import SignUp from './SignUp.jsx';
+import SignUp from './SignUp/SignUp.jsx';
 import AuthWrapper from './Auth/AuthWrapper.jsx';
 import AuthTest from './Auth/AuthTest.jsx';
 import UserProfile from './UserProfile/UserProfile.jsx';
