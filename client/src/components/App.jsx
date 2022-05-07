@@ -1,9 +1,6 @@
 /* eslint-disable import/extensions */
 import React from 'react';
-import {
-  Route,
-  Routes,
-} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Home from './Home.jsx';
 import Chat from './Chat.jsx';
@@ -13,7 +10,7 @@ import JoinGame from './JoinGame.jsx';
 import Leaderboard from './Leaderboard/Leaderboard.jsx';
 import Lobby from './Lobby.jsx';
 import Login from './Login.jsx';
-import SignUp from './SignUp.jsx';
+import SignUp from './SignUp/SignUp.jsx';
 import UserProfile from './UserProfile/UserProfile.jsx';
 
 function App() {
