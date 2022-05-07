@@ -2,17 +2,23 @@
   text-align: center;
 }
 
-#su-container {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 10px;
+.lobby-list-group {
+  width: 15rem;
 }
 
-.lobby-btn {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: left;
-  margin-top: 30px;
+.lobby-btn-leave {
+  position: absolute;
+  bottom: 2rem;
+  margin: 1rem;
+  width: 15rem;
+  height: 5rem;
+}
+
+.lobby-btn-start {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 2rem;
+  margin: 1rem;
+  width: 15rem;
+  height: 5rem;
 }

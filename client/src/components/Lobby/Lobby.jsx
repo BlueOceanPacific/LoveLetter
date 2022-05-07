@@ -9,9 +9,9 @@ function Lobby() {
   // }, []);
 
   const createStartGameButton = () => {
-    let buttons = <button type="button" className="lobby-btn btn-primary btn-lg">Start Game</button>;
+    let buttons = <button type="button" className="lobby-btn-start btn-primary btn-lg">Start Game</button>;
     if (players.length < 2) {
-      buttons = <button type="button" className="lobby-btn btn-primary btn-lg" disabled>Start Game</button>;
+      buttons = <button type="button" className="lobby-btn-start btn-primary btn-lg" disabled>Start Game</button>;
     }
 
     return buttons;
@@ -24,11 +24,11 @@ function Lobby() {
       </div>
       <div className="lobby-player-list-container">
         <h4>Current Players</h4>
-        <ul className="list-group">
+        <ul className="lobby-list-group">
           {players.map((player) => <li className="list-group-item">{player}</li>)}
         </ul>
       </div>
-      <button type="button" className="lobby-btn btn-primary btn-lg">Leave Lobby</button>
+      <button type="button" className="lobby-btn-leave btn-primary btn-lg">Leave Lobby</button>
       {createStartGameButton()}
     </div>
   );
