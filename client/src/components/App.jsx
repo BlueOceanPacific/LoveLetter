@@ -8,7 +8,7 @@ import CreateGame from './CreateGame';
 import GameView from './GameView/GameView';
 import JoinGame from './JoinGame/JoinGame';
 import Leaderboard from './Leaderboard/Leaderboard';
-import Lobby from './Lobby';
+import Lobby from './Lobby/Lobby';
 import Login from './Login';
 import SignUp from './SignUp/SignUp';
 import AuthWrapper from './Auth/AuthWrapper';
