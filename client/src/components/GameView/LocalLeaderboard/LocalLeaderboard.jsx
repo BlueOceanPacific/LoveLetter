@@ -1,7 +1,7 @@
 import React from 'react';
 
 function LocalLeaderboard() {
-  return <div className="component">Local Leaderboard</div>;
+  return <div className="leaderboard component">Local Leaderboard</div>;
 }
 
 export default LocalLeaderboard;

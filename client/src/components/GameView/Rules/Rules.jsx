@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Rules() {
-  return <div className="component">Rules</div>;
+  return <div className="rules component">Rules</div>;
 }
 
 export default Rules;
