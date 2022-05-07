@@ -34,8 +34,8 @@ function SignUp() {
             aria-describedby="passwordHelp"
           />
           <div id="passwordHelp" className="form-text">
-            {` Use 8 or more characters with a mix of letters, numbers, and symbols to build the strongest
-              castle in all of England.`}
+            Use 8 or more characters with a mix of letters, numbers, and symbols to build the
+            strongest castle in all of England.
           </div>
         </div>
         <div className="mb-3">
