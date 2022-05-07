@@ -6,7 +6,7 @@ import Home from './Home.jsx';
 import Chat from './Chat.jsx';
 import CreateGame from './CreateGame.jsx';
 import GameView from './GameView.jsx';
-import JoinGame from './JoinGame.jsx';
+import JoinGame from './JoinGame/JoinGame.jsx';
 import Leaderboard from './Leaderboard.jsx';
 import Lobby from './Lobby.jsx';
 import Login from './Login.jsx';
