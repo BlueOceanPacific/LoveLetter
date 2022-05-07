@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Home.jsx';
 import Chat from './Chat.jsx';
 import CreateGame from './CreateGame.jsx';
-import GameView from './GameView.jsx';
+import GameView from './GameView/GameView.jsx';
 import JoinGame from './JoinGame.jsx';
 import Leaderboard from './Leaderboard.jsx';
 import Lobby from './Lobby.jsx';
