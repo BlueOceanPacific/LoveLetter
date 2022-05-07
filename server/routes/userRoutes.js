@@ -2,6 +2,11 @@ const bcrypt = require('bcryptjs');
 const db = require('../../db');
 
 module.exports = function (app) {
+  app.get('/authTest', (req, res) => {
+    const { session } = req;
+    console.log(session);
+    res.send(200);
+  });
   /*
   * Compares password submitted by user with hashed password stored in DB
   * Sends back {valid: true} if the password is correct, {valid: false} if incorrect
@@ -11,11 +16,14 @@ module.exports = function (app) {
     db.User.findOne({ username: req.body.username }).exec()
       .then((user) => {
         bcrypt.compare(req.body.password, user.password, (error, isMatch) => {
+          const { session } = req;
           if (error) {
             throw error;
           } else if (!isMatch) {
             res.send({ valid: false });
           } else {
+            session.username = req.body.username;
+            session.loggedIn = true;
             res.send({ valid: true });
           }
         });
