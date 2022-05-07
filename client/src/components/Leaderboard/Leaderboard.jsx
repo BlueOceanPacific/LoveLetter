@@ -1,5 +1,5 @@
 import React from 'react';
-import './Leaderboard.css';
+import './Leaderboard.scss';
 import PlayersList from './PlayersList';
 import WinsList from './WinsList';
 import AveragesList from './AveragesList';
