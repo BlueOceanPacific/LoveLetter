@@ -7,7 +7,7 @@ import Chat from './Chat.jsx';
 import CreateGame from './CreateGame.jsx';
 import GameView from './GameView/GameView.jsx';
 import JoinGame from './JoinGame.jsx';
-import Leaderboard from './Leaderboard.jsx';
+import Leaderboard from './Leaderboard/Leaderboard.jsx';
 import Lobby from './Lobby.jsx';
 import Login from './Login.jsx';
 import SignUp from './SignUp/SignUp.jsx';
@@ -33,7 +33,7 @@ function App() {
           <AuthWrapper>
             <AuthTest />
           </AuthWrapper>
-    )}
+        )}
       />
       <Route path="/userprofile" element={<UserProfile />} />
     </Routes>
