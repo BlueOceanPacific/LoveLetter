@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -21,6 +19,8 @@ function Home() {
       <Link to="/login">login</Link>
       <br />
       <Link to="/signup">signup</Link>
+      <br />
+      <Link to="/userprofile">userprofile</Link>
     </div>
   );
 }
