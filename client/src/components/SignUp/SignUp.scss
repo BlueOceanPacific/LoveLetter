@@ -1,4 +1,4 @@
-.container {
+#su-container {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -6,7 +6,7 @@
   padding: 10px;
 }
 
-.buttons {
+#su-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
