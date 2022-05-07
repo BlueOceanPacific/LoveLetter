@@ -6,7 +6,7 @@ import Home from './Home';
 import Chat from './Chat';
 import CreateGame from './CreateGame';
 import GameView from './GameView/GameView';
-import JoinGame from './JoinGame';
+import JoinGame from './JoinGame/JoinGame';
 import Leaderboard from './Leaderboard/Leaderboard';
 import Lobby from './Lobby';
 import Login from './Login';
