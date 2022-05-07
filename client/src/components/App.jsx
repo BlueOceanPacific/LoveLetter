@@ -1,8 +1,6 @@
+/* eslint-disable import/extensions */
 import React from 'react';
-import {
-  Route,
-  Routes,
-} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Home from './Home.jsx';
 import Chat from './Chat.jsx';
@@ -15,6 +13,7 @@ import Login from './Login.jsx';
 import SignUp from './SignUp.jsx';
 import AuthWrapper from './Auth/AuthWrapper.jsx';
 import AuthTest from './Auth/AuthTest.jsx';
+import UserProfile from './UserProfile/UserProfile.jsx';
 
 function App() {
   return (
@@ -36,6 +35,7 @@ function App() {
           </AuthWrapper>
     )}
       />
+      <Route path="/userprofile" element={<UserProfile />} />
     </Routes>
   );
 }
