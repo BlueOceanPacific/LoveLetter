@@ -1,0 +1,8 @@
+.container {
+  text-align: center;
+  font-weight: 100;
+  background-color: tan;
+  border-radius: 10px;
+  width: 30%;
+  padding: 10px;
+}
