@@ -7,7 +7,7 @@ import AveragesList from './AveragesList';
 function Leaderboard() {
   return (
     <div className="container" id="leaderboard">
-      <h6>LEADER BOARD</h6>
+      <h6>LEADERBOARD</h6>
       <div className="row">
         <PlayersList />
         <WinsList />
