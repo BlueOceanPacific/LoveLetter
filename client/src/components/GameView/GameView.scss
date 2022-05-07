@@ -1,5 +1,42 @@
 .gameview {
-  .text {
-    font-size: 200px;
+  border: 1px solid black;
+  .top-row {
+    height: 35%;
+
+    .leaderboard {
+      height: 25vh;
+      min-height: 70%;
+    }
+    .card-count {
+      height: 25vh;
+      min-height: 70%;
+    }
+  }
+  .bottom-row {
+    height: 55%;
+    .chat {
+      border: 1px solid black;
+    }
+    .rules {
+      min-height: 30vh;
+    }
+    .my-hand {
+      min-height: 20vh;
+
+      height: 20vh;
+    }
+    .scoreboard {
+      min-height: 30vh;
+    }
+  }
+  // This class is applied to all components in GameView. If you need to make a change to this,
+  // create a new unique class on the component as to only change the component you're working on.
+  .component {
+    border: 1px solid black;
+    height: 100%;
+    width: 100%;
+  }
+  .hand {
+    height: 10vh;
   }
 }
