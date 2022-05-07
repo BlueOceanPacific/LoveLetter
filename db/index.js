@@ -11,6 +11,9 @@ const { Schema } = mongoose;
 const usersSchema = new Schema({
   username: { type: String, unique: true },
   password: String,
+  email: String,
+  pronouns: String,
+  avatar: String,
 });
 
 // Before saving a password, we hash it with bycrypt to ensure no live passwords are stored
