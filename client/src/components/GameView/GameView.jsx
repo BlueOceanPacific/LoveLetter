@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
-import OpponentsHand from './Hands/OpponentsHand.jsx';
-import MyHand from './Hands/MyHand.jsx';
-import Rules from './Rules/Rules.jsx';
-import Scoreboard from './Scoreboard/Scoreboard.jsx';
-import LocalLeaderboard from './LocalLeaderboard/LocalLeaderboard.jsx';
-import CardCount from './CardCount/CardCount.jsx';
+import OpponentsHand from './Hands/OpponentsHand';
+import MyHand from './Hands/MyHand';
+import Rules from './Rules/Rules';
+import Scoreboard from './Scoreboard/Scoreboard';
+import LocalLeaderboard from './LocalLeaderboard/LocalLeaderboard';
+import CardCount from './CardCount/CardCount';
 
 import './GameView.scss';
 
 function GameView() {
+  const [game, setGame] = useState();
+
+  useEffect(() => {
+    axios.get('/games/12345').then(({ data }) => {
+      setGame(data);
+    });
+  }, []);
+
   const style = { height: '100vh', width: '100vw' };
   return (
     <div style={style} className="gameview container">

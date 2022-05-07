@@ -7,10 +7,7 @@ function PlayersList() {
     <div className="col">
       <h6 id="local-leaderboard-txt">Player</h6>
       {data.map((obj, index) => (
-        <div
-          className="text-justify"
-          key={JSON.stringify(obj.player + index)}
-        >
+        <div className="text-justify" key={JSON.stringify(obj.player + index)}>
           {obj.player}
         </div>
       ))}
