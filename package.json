@@ -27,6 +27,7 @@
     "eslint": "^8.15.0",
     "eslint-config-airbnb": "^19.0.4",
     "sass": "^1.51.0",
+    "sass-loader": "^12.6.0",
     "source-map-loader": "^3.0.1",
     "style-loader": "^3.3.1",
     "webpack": "^5.72.0",
