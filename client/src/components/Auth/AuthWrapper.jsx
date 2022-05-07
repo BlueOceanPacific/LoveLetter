@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import useStore from '../Store/store';
 
 function AuthWrapper({ children }) {
-  // Update: need to store login status in Zustand store and authenticate based on that
+  // Get login status from Zustand store
+  const loggedIn = useStore((state) => state.loggedIn);
 
-  if (valid === null) {
-    return <div>Processing Login</div>;
-  }
-
-  if (!valid) {
+  // If we are not logged in, redirect to login page
+  if (!loggedIn) {
     return <Navigate to="/login" />;
   }
 
+  // If we are logged in, allow the child component to render
   return children;
 }
 

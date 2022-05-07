@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -10,6 +11,11 @@ const { Schema } = mongoose;
 const usersSchema = new Schema({
   username: { type: String, unique: true },
   password: String,
+  email: String,
+  pronouns: String,
+  avatar: String,
+  gamesPlayed: Number,
+  gamesWon: Number,
 });
 
 // Before saving a password, we hash it with bycrypt to ensure no live passwords are stored
