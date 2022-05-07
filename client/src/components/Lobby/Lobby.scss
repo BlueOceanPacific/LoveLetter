@@ -1,0 +1,18 @@
+.lobby-title-container {
+  text-align: center;
+}
+
+#su-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+.lobby-btn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: left;
+  margin-top: 30px;
+}
