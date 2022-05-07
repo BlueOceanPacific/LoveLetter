@@ -5,6 +5,7 @@ import './SignUp.scss';
 function SignUp() {
   return (
     <div className="container">
+      <h3> Create an Account </h3>
       <form>
         <div className="mb-3 email">
           <label htmlFor="InputEmail" className="form-label">
