@@ -10,7 +10,9 @@ import JoinGame from './JoinGame.jsx';
 import Leaderboard from './Leaderboard.jsx';
 import Lobby from './Lobby.jsx';
 import Login from './Login.jsx';
-import SignUp from './SignUp/SignUp.jsx';
+import SignUp from './SignUp.jsx';
+import AuthWrapper from './Auth/AuthWrapper.jsx';
+import AuthTest from './Auth/AuthTest.jsx';
 import UserProfile from './UserProfile/UserProfile.jsx';
 
 function App() {
@@ -25,6 +27,14 @@ function App() {
       <Route path="/lobby" element={<Lobby />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route
+        path="/authcheck"
+        element={(
+          <AuthWrapper>
+            <AuthTest />
+          </AuthWrapper>
+    )}
+      />
       <Route path="/userprofile" element={<UserProfile />} />
     </Routes>
   );
