@@ -7,7 +7,12 @@ module.exports = function (app) {
   app.post('/games/:id', (req, res) => {
     console.log('Game posted: ', req.params.id);
     console.log('Posted data: ', req.body);
-    // eslint-disable-next-line no-use-before-define
+    res.send(200);
+  });
+  app.post('/games/:id/chat', (req, res) => {
+    console.log('Game posted: ', req.params.id);
+    console.log('Chat data: ', req.body);
+    demoGame.chat.push(req.body);
     res.send(200);
   });
 };
