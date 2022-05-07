@@ -14,7 +14,6 @@ function SignUp() {
             type="email"
             className="form-control"
             id="SignUpInputEmail"
-            name="email"
             placeholder="Email Address"
             requried
             aria-describedby="emailHelp"
