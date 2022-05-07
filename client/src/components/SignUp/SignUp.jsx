@@ -70,7 +70,7 @@ function SignUp() {
           </div>
         </div>
 
-        <div className="buttons" id="su-buttons">
+        <div className="su-buttons" id="su-buttons">
           <button type="button" className="btn btn-primary">
             Back
           </button>
