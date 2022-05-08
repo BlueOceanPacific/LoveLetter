@@ -13,12 +13,14 @@ module.exports = function (app) {
     console.log('Game posted: ', req.params.id);
     console.log('Chat data: ', req.body);
     demoGame.chat.push(req.body);
-    res.send(200);
+    res.send(201);
   });
 };
 
 const demoGame = {
   id: 12345,
+  name: 'Dares room',
+  privacy: 'public',
   state: 'playing', // state is building, playing, or ended
   host: { username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
   players: [{ username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
@@ -40,7 +42,7 @@ const demoGame = {
           card: 'Soldier',
           value: 1,
           image: 'imageUrlHere',
-        }], // array of objects
+        }],
       },
       mteran: {
         value: 7,
