@@ -28,14 +28,16 @@ function Leaderboard() {
       <table className="table">
         <thead>
           <tr>
+            <th scope="col">#</th>
             <th scope="col">Player</th>
             <th scope="col">Total Wins</th>
             <th scope="col">Win %</th>
           </tr>
         </thead>
         <tbody>
-          {inOrder.map((obj) => (
+          {inOrder.map((obj, index) => (
             <tr key={JSON.stringify(obj)}>
+              <td>{index + 1}</td>
               <td>{obj.username}</td>
               <td>{obj.gamesWon}</td>
               <td>
