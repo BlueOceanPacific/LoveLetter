@@ -1,4 +1,5 @@
 import React from 'react';
+import './Rules.scss';
 
 function Rules() {
   return (
@@ -12,7 +13,7 @@ function Rules() {
         Rules
       </button>
       <div
-        className="modal fade"
+        className="modal fade rules"
         id="rules-modal"
         tabIndex="-1"
         aria-labelledby="rules-modal-label"
@@ -33,11 +34,11 @@ function Rules() {
             </div>
 
             <div className="modal-body">
-              <ul>
+              <ul className="card-list">
                 <b>Love Letter Cards</b>
                 <li>
                   (1)Prince/Princess/My Liege - Value 8 - If you discard this
-                  card for any reason, you are out of the round.{' '}
+                  card for any reason, you are out of the round.
                 </li>
                 <li>
                   (1)Minister - Value 7 - If the value of your hand is 12 or
@@ -69,7 +70,7 @@ function Rules() {
                   round (do not show card if it doesn’t match)
                 </li>
               </ul>
-              <ol>
+              <ol className="rules-list">
                 <b>How to Play:</b>
                 <li>Shuffle all 16 cards.</li>
                 <li>
@@ -99,13 +100,15 @@ function Rules() {
                   start again until a player has won 4 times.
                 </li>
                 <br />
-                <b>Notes:</b>
-                Cards are played face up so everyone can see what cards have
-                been played. (except the removed card at the start of each
-                round. This is face down so no one knows what card is out of
-                play) When you are out of the round for any reason, discard all
-                cards face up. You MUST take the action on the discard, if
-                possible. Only the Wizard can target themselves.
+                <p>
+                  <b>Notes: </b>
+                  Cards are played face up so everyone can see what cards have
+                  been played. (except the removed card at the start of each
+                  round. This is face down so no one knows what card is out of
+                  play) When you are out of the round for any reason, discard
+                  all cards face up. You MUST take the action on the discard, if
+                  possible. Only the Wizard can target themselves.
+                </p>
               </ol>
             </div>
             <div className="modal-footer">
