@@ -19,9 +19,4 @@ export default [
     score: '4',
     winRatio: '30%',
   },
-  {
-    player: 'jl',
-    score: '2',
-    winRatio: '15%',
-  },
 ];
