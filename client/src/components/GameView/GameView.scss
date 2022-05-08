@@ -1,5 +1,6 @@
 .gameview {
-  border: 1px solid black;
+  // border: 1px solid black;
+  padding-inline: 5%;
   .top-row {
     height: 35%;
 
@@ -16,9 +17,6 @@
     height: 55%;
     .chat {
       border: 1px solid black;
-    }
-    .rules {
-      min-height: 30vh;
     }
     .my-hand {
       min-height: 20vh;
