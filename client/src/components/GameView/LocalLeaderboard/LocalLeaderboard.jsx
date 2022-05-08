@@ -24,7 +24,7 @@ function LocalLeaderboard() {
               .sort((a, b) => b.score - a.score)
               .map((player, i) => (
                 <LocalLeaderboardRow
-                  key={player.name}
+                  key={player.player}
                   i={i + 1}
                   player={player}
                 />
