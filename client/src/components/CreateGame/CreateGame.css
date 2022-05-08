@@ -1,0 +1,60 @@
+
+.creategame-box {
+  margin:auto;
+  width:70%;
+  height:65%;
+  /* border: 1px solid black; */
+}
+
+.creategame-box .form-control-lg{
+  /* width:100%; */
+  font-size:2em;
+  /* padding: 0.1%; */
+  min-width: 300px;
+
+  margin-top: 30px;
+}
+.creategame-box .form-select-lg{
+  min-width: 300px;
+  /* width:100%; */
+  font-size:2em;
+  margin-top: 30px;
+  color:grey;
+  /* padding: 0.1%; */
+}
+
+.creategame-box .form-check {
+  padding-left: 2em;
+  font-size: 2em;
+}
+
+.creategame-box .createlobby-btn {
+  /* width: 40%!important; */
+  /* max-height: 5%; */
+  /* margin-left: 3%; */
+  /* padding:0.5%; */
+  /* padding:5%; */
+  font-size:2.0rem;
+  margin-bottom: 20px;
+  min-width: 250px;
+}
+
+.creategame-box .back-btn {
+  /* font-size:2.0rem; */
+  min-width: 250px;
+
+  /* padding:2.55%; */
+  /* width: 80%!important; */
+  font-size:2.0rem;
+  margin-bottom: 20px;
+
+}
+
+.back-btn-col{
+  text-align: right;
+}
+
+.btn-row {
+  margin-bottom: 20px;
+  /* border: 1px solid black; */
+}
