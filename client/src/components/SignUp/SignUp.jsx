@@ -1,35 +1,36 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import './SignUp.scss';
 
 function SignUp() {
   return (
-    <div className="container">
+    <div className="container" id="su-container">
       <h3> Create an Account </h3>
       <form>
         <div className="mb-3 email">
-          <label htmlFor="InputEmail" className="form-label">
+          <label htmlFor="SignUpInputEmail" className="form-label">
             Email address
           </label>
           <input
             type="email"
             className="form-control"
-            id="InputEmail"
+            id="SignUpInputEmail"
+            placeholder="Email Address"
             requried
             aria-describedby="emailHelp"
           />
           <div id="emailHelp" className="form-text">
-            We&apos;ll never share your email with anyone else my leige.
+            We&apos;ll never share your email with anyone else my liege.
           </div>
         </div>
         <div className="mb-3">
-          <label htmlFor="InputPassword" className="form-label">
+          <label htmlFor="SignUpInputPassword" className="form-label">
             Password
           </label>
           <input
             type="password"
             className="form-control"
-            id="InputPassword"
+            id="SignUpInputPassword"
+            placeholder="Password"
             required
             aria-describedby="passwordHelp"
           />
@@ -46,6 +47,7 @@ function SignUp() {
             type="text"
             className="form-control"
             id="InputUsername"
+            placeholder="Username"
             required
             aria-describedby="usernameHelp"
           />
@@ -60,15 +62,15 @@ function SignUp() {
           </label>
           <div className="kv-avatar">
             <div className="choose-avatar">
-              <input id="avatar" name="avatar" type="file" required aria-describedby="avatarHelp" />
+              <input id="avatar" name="avatar" type="file" aria-describedby="avatarHelp" />
             </div>
           </div>
           <div id="avatarHelp" className="form-text">
-            Choose your avatar or be seen as a peasent.
+            Choose your avatar or be seen as a peasant.
           </div>
         </div>
 
-        <div className="buttons">
+        <div className="su-buttons" id="su-buttons">
           <button type="button" className="btn btn-primary">
             Back
           </button>
