@@ -12,7 +12,7 @@ import CardCount from './CardCount/CardCount';
 import './GameView.scss';
 
 function GameView() {
-  const [game, setGame] = useState();
+  const [game, setGame] = useState(null);
 
   useEffect(() => {
     axios.get('/games/12345').then(({ data }) => {
@@ -67,9 +67,9 @@ function GameView() {
               </div>
             </div>
           </div>
-          <div className="col-3 scoreboard">
+          <div className="col-3">
             {/** ******************* Scoreboard.jsx ************************** */}
-            <Scoreboard />
+            {game ? <Scoreboard game={game} /> : <div>Loading...</div>}
           </div>
         </div>
         <div className="row bottom-row">
