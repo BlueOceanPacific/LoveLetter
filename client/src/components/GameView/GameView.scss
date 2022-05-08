@@ -9,9 +9,8 @@
       min-height: 70%;
       padding: 0;
     }
-    .card-count {
-      height: 25vh;
-      min-height: 70%;
+    .scoreboard {
+      min-height: 30vh;
     }
   }
   .bottom-row {
@@ -19,13 +18,14 @@
     .chat {
       border: 1px solid black;
     }
+    .card-count {
+      height: 25vh;
+      min-height: 70%;
+    }
     .my-hand {
       min-height: 20vh;
 
       height: 20vh;
-    }
-    .scoreboard {
-      min-height: 30vh;
     }
   }
   // This class is applied to all components in GameView. If you need to make a change to this,

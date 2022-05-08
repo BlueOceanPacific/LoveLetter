@@ -23,7 +23,11 @@ function LocalLeaderboard() {
             {players
               .sort((a, b) => b.score - a.score)
               .map((player, i) => (
-                <LocalLeaderboardRow i={i + 1} player={player} />
+                <LocalLeaderboardRow
+                  key={player.name}
+                  i={i + 1}
+                  player={player}
+                />
               ))}
           </tbody>
         </table>

@@ -56,16 +56,19 @@ function GameView() {
       <div style={style} className="bg-light gameview">
         <div className="row justify-content-between align-items-center top-row">
           <div className="col-3 leaderboard">
+            {/** ******************* LocalLeaderboard.jsx ************************** */}
             <LocalLeaderboard />
           </div>
           <div className="col">
             <div className="row justify-content-center">
               <div className="col-3 hand">
+                {/** ******************* OpponentsHand.jsx ************************** */}
                 <OpponentsHand />
               </div>
             </div>
           </div>
-          <div className="col-3 card-count">
+          <div className="col-3 scoreboard">
+            {/** ******************* Scoreboard.jsx ************************** */}
             <Scoreboard />
           </div>
         </div>
@@ -76,14 +79,17 @@ function GameView() {
               <div className="col">
                 <div className="row justify-content-evenly">
                   <div className="col-3 hand">
+                    {/** ******************* OpponentsHand.jsx ************************** */}
                     <OpponentsHand />
                   </div>
                   <div className="col-3 hand">
+                    {/** ******************* OpponentsHand.jsx ************************** */}
                     <OpponentsHand />
                   </div>
                 </div>
               </div>
-              <div className="col-4 rules">
+              <div className="col-4 card-count">
+                {/** ******************* CardCount.jsx ************************** */}
                 <CardCount />
               </div>
             </div>
@@ -91,11 +97,13 @@ function GameView() {
               <div className="col">
                 <div className="row justify-content-center">
                   <div className="col-5 my-hand">
+                    {/** ******************* MyHand.jsx ************************** */}
                     <MyHand />
                   </div>
                 </div>
               </div>
-              <div className="col-4 gy-3 scoreboard">
+              <div className="col-4 gy-3 rules">
+                {/** ******************** Rules.jsx *************************** */}
                 <Rules />
               </div>
             </div>
