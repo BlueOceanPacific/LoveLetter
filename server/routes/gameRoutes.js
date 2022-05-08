@@ -20,6 +20,7 @@ module.exports = function (app) {
 const demoGame = {
   id: 12345,
   name: 'Dares room',
+  privacy: 'public',
   state: 'playing', // state is building, playing, or ended
   host: { username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
   players: [{ username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
@@ -41,7 +42,7 @@ const demoGame = {
           card: 'Soldier',
           value: 1,
           image: 'imageUrlHere',
-        }], // array of objects
+        }],
       },
       mteran: {
         value: 7,
