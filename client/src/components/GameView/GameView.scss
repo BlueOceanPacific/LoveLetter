@@ -23,9 +23,7 @@
       min-height: 70%;
     }
     .my-hand {
-      min-height: 20vh;
-
-      height: 20vh;
+      width: 25vw;
     }
   }
   // This class is applied to all components in GameView. If you need to make a change to this,
@@ -36,6 +34,18 @@
     width: 100%;
   }
   .hand {
-    height: 10vh;
+    width: 11vw;
+  }
+  .card-art-image {
+    -webkit-filter: brightness(100%);
+
+    &:hover {
+      -webkit-filter: brightness(70%);
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+      transition: all 1s ease;
+    }
   }
 }
