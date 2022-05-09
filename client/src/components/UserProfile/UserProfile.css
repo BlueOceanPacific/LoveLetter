@@ -1,23 +1,78 @@
+
+
+.userprofile-main {
+  display: grid;
+  gap:10px;
+  grid-template-areas: "left close right"
+                       "left avatar right"
+                       "left pronouns right"
+                       "left username right"
+                       "left edit right"
+                       "left logout right" ;
+  grid-template-columns: 4fr 6fr 4fr;
+  /* border: solid red; */
+  margin-top: 20px;
+}
+
+.userprofile-main .btn {
+  min-width: 100px;
+}
+
 .close {
-  height: 1em;
+  grid-area: close;
+  text-align:right;
+}
+
+.closebtn {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
 }
 
 .avatar {
-  height: 3em;
+  grid-area: avatar;
+  height: 300px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.avatarRound {
+  border-radius: 50%;
+  max-height: 200px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.avatarEditBtn {
+  margin-top: 10px;
 }
 
 .pronouns {
-  height: 1em;
+  grid-area: pronouns;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .username {
-  height: 1em;
+  grid-area: username;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.UP-textinput {
+  /* max-width: 300px; */
+  /* text-align: center; */
 }
 
 .edit {
-  height: 1em;
+  grid-area: edit;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .logout {
-  height: 1em;
+  grid-area: logout;
+  text-align: center;
+  margin-top: 20px;
 }
+

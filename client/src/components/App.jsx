@@ -2,18 +2,18 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import Home from './Home.jsx';
-import Chat from './Chat/Chat.jsx';
-import CreateGame from './CreateGame.jsx';
-import GameView from './GameView/GameView.jsx';
-import JoinGame from './JoinGame.jsx';
-import Leaderboard from './Leaderboard/Leaderboard.jsx';
-import Lobby from './Lobby.jsx';
-import Login from './Login.jsx';
-import SignUp from './SignUp/SignUp.jsx';
-import AuthWrapper from './Auth/AuthWrapper.jsx';
-import AuthTest from './Auth/AuthTest.jsx';
-import UserProfile from './UserProfile/UserProfile.jsx';
+import Home from './Home';
+import Chat from './Chat/Chat';
+import CreateGame from './CreateGame';
+import GameView from './GameView/GameView';
+import JoinGame from './JoinGame/JoinGame';
+import Leaderboard from './Leaderboard/Leaderboard';
+import Lobby from './Lobby/Lobby';
+import Login from './Login';
+import SignUp from './SignUp/SignUp';
+import AuthWrapper from './Auth/AuthWrapper';
+import AuthTest from './Auth/AuthTest';
+import UserProfile from './UserProfile/UserProfile';
 
 function App() {
   return (
@@ -29,11 +29,11 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route
         path="/authcheck"
-        element={(
+        element={
           <AuthWrapper>
             <AuthTest />
           </AuthWrapper>
-        )}
+        }
       />
       <Route path="/userprofile" element={<UserProfile />} />
     </Routes>
