@@ -11,8 +11,14 @@
   grid-template-columns: 4fr 6fr 4fr;
   /* border: solid red; */
   margin-top: 20px;
+
+  margin: 4em;
 }
 
+.middle {
+  background-color: rgba($color: white, $alpha:0.6);
+  padding: 2em;
+}
 .userprofile-main .btn {
   min-width: 100px;
 }

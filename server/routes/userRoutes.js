@@ -10,7 +10,7 @@ module.exports = function (app) {
   });
   /*
   * Compares password submitted by user with hashed password stored in DB
-  * Sends back {valid: true} if the password is correct, {valid: false} if incorrect
+  * Sends back user object if login is correct
   * Will sends an error in any other case
   */
   app.post('/user/login', (req, res) => {
@@ -28,9 +28,9 @@ module.exports = function (app) {
             const {
               username, email, pronouns, avatar,
             } = user;
-            res.send({
+            res.send({user: {
               username, email, pronouns, avatar,
-            });
+            }});
           }
         });
       })
@@ -48,7 +48,7 @@ module.exports = function (app) {
 
   // Returns a user profile (all fields excluding password)
   app.get('/user/profile', (req, res) => {
-    console.log('get req user profile', req.body.username);
+    console.log('get req user profile', req.body);
     db.User.findOne({ username: req.body.username }).exec()
       .then((user) => {
         const {
