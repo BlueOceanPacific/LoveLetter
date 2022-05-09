@@ -1,3 +1,5 @@
+const db = require('../../db');
+
 module.exports = function (app) {
   // Create game
   app.post('/games', (req, res) => {
@@ -5,17 +7,21 @@ module.exports = function (app) {
     res.send(201);
   });
 
-  // Get current game state
+  // need to add a join game route and communicate with Nick
+
+  // Get current game state - needs refactor to filter out fields for relevant users
   app.get('/games/:id', (req, res) => {
     console.log('Game requested: ', req.params.id);
-    // eslint-disable-next-line no-use-before-define
-    res.send(demoGame);
+    db.Game.find({ name: 'demo-playing' }).exec()
+      .then((results) => res.send(results))
+      .catch((err) => res.status(500).send(err));
   });
 
   // Submit a move
   app.post('/games/:id', (req, res) => {
     console.log('Game posted: ', req.params.id);
     console.log('Posted data: ', req.body);
+    // send to the game engine
     res.send(200);
   });
 
@@ -27,6 +33,8 @@ module.exports = function (app) {
     res.send(201);
   });
 };
+<<<<<<< HEAD
+=======
 
 const demoGame = {
   id: 12345,
@@ -117,3 +125,4 @@ const demoGame = {
     },
   ],
 };
+>>>>>>> 9fd19e3685a3b30d1a5d7cfe7d3edcc750af44e5

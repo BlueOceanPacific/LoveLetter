@@ -4,7 +4,7 @@ const useStore = create((set) => ({
   user: null,
   loggedIn: false,
   logIn: (user) => set({ user, loggedIn: true }),
-  logOut: () => set({ username: null, loggedIn: false }),
+  logOut: () => set({ user: null, loggedIn: false }),
 }));
 
 export default useStore;
