@@ -13,17 +13,22 @@ function Login() {
 
   const [username, setUsername] = useState(() => '');
   const [password, setPassword] = useState(() => '');
+  const [route, setRoute] = useState(() => '');
 
   const validatesLogin = () => {
     axios.post('user/login', { username, password })
       .then((result) => {
         if (result.data.username) {
           logIn(result.data.user);
+          setRoute('/');
         }
       })
       .catch(() => alert('Invalid username or password'));
   }
 
+  if (route === '/') {
+    return <Redirect to={'/'} />
+  }
   return (
     <div
       className="d-flex justify-content-center"
