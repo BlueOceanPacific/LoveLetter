@@ -20,11 +20,16 @@ module.exports = function (app) {
           if (error) {
             throw error;
           } else if (!isMatch) {
-            res.send({ valid: false });
+            res.send();
           } else {
             session.username = req.body.username;
             session.loggedIn = true;
-            res.send(user); // filter out password
+            const {
+              username, email, pronouns, avatar,
+            } = user;
+            res.send({
+              username, email, pronouns, avatar,
+            });
           }
         });
       })
@@ -40,14 +45,21 @@ module.exports = function (app) {
       .catch((err) => res.status(500).send(err));
   });
 
-  // Returns a user profile
+  // Returns a user profile (all fields excluding password)
   app.get('/user/profile', (req, res) => {
     db.User.findOne({ username: req.body.username }).exec()
-      .then((user) => res.send(user))
+      .then((user) => {
+        const {
+          username, email, pronouns, avatar, gamesPlayed, gamesWon,
+        } = user;
+        res.send({
+          username, email, pronouns, avatar, gamesPlayed, gamesWon,
+        });
+      })
       .catch((err) => res.status(500).send(err));
   });
 
-  // Updates a user profile - does not allow updating username or password (for now)
+  // Updates a user profile - only allows pronoun and avatar updates
   app.put('/user/profile', (req, res) => {
     db.User.updateOne({ username: req.body.username }, {
       pronouns: req.body.pronouns,
