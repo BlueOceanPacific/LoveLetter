@@ -47,12 +47,12 @@ const demoGame = {
         hand: [{
           card: 'Clown',
           value: 2,
-          image: 'imageUrlHere',
+          image: '/images/cards/Clown_Card.png',
         },
         {
           card: 'Soldier',
           value: 1,
-          image: 'imageUrlHere',
+          image: '/images/cards/Soldier_Card.png',
         }],
       },
       mteran: {
@@ -60,7 +60,7 @@ const demoGame = {
         hand: [{
           card: 'Priestess',
           value: 4,
-          image: 'imageUrlHere',
+          image: '/images/cards/Priestess_Card.png',
         }],
       },
     },
@@ -68,40 +68,40 @@ const demoGame = {
       twheeler: [{
         card: 'Minister',
         value: 7,
-        image: 'imageUrlHere',
+        image: '/images/cards/Minister_Card.png',
       }],
       lcosta: [{
         card: 'Prince',
         value: 8,
-        image: 'imageUrlHere',
+        image: '/images/cards/Prince_Card.png',
       }],
       mteran: [{
         card: 'Knight',
         value: 3,
-        image: 'imageUrlHere',
+        image: '/images/cards/Knight_Card.png',
       }],
     },
     deck: [{
       card: 'General',
       value: 6,
-      image: 'imageUrlHere',
+      image: '/images/cards/General_Card.png',
     }, {
       card: 'Minister',
       value: 7,
-      image: 'imageUrlHere',
+      image: '/images/cards/Minister_Card.png',
     }, {
       card: 'Clown',
       value: 2,
-      image: 'imageUrlHere',
+      image: '/images/cards/Clown_Card.png',
     },
     {
       card: 'Soldier',
       value: 1,
-      image: 'imageUrlHere',
+      image: '/images/cards/Soldier_Card.png',
     }, {
       card: 'Wizard',
       value: 5,
-      image: 'imageUrlHere',
+      image: '/images/cards/Wizard_Card.png',
     }], // rewrite deck as array of objects
   },
   roundWins: {

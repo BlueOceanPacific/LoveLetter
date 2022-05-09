@@ -24,6 +24,10 @@
     }
     .my-hand {
       width: 25vw;
+
+      .love-letter-card {
+        width: 50%;
+      }
     }
   }
   // This class is applied to all components in GameView. If you need to make a change to this,
