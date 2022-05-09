@@ -102,7 +102,7 @@ function GameView() {
                   </div>
                 </div>
               </div>
-              <div className="col-4 gy-3 rules">
+              <div className="col-4 gy-3 rules" style={{alignSelf: 'flex-end', display: 'flex', justifyContent: 'center', marginBottom: "5%"}}>
                 {/** ******************** Rules.jsx *************************** */}
                 <Rules />
               </div>
