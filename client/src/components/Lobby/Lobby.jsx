@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../Navbar/Navbar';
+import Chat from '../Chat/Chat';
 import './Lobby.scss';
 
 function Lobby() {
@@ -37,8 +38,10 @@ function Lobby() {
           {populatePlayers()}
         </ul>
       </div>
-      <div className="lobby-chat">
-        <h4>lobby chat</h4>
+      <div className="chat-wrapper">
+        <div className="lobby-chat">
+          <Chat />
+        </div>
       </div>
       <button type="button" className="lobby-btn-leave btn-primary btn-lg">Leave Lobby</button>
       {createStartGameButton()}
