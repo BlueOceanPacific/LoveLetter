@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
+import Chat from '../Chat/Chat'
 import OpponentsHand from './Hands/OpponentsHand';
 import MyHand from './Hands/MyHand';
 import Rules from './Rules/Rules';
@@ -53,7 +54,7 @@ function GameView() {
           </div>
         </div>
       </div>
-      <div style={style} className="bg-light gameview">
+      <div style={style} className="bg-dark bg-gradient gameview">
         <div className="row justify-content-between align-items-center top-row">
           <div className="col-3 leaderboard">
             {/** ******************* LocalLeaderboard.jsx ************************** */}
@@ -73,7 +74,8 @@ function GameView() {
           </div>
         </div>
         <div className="row bottom-row">
-          <div className="col-3 chat">Chat</div>
+          {/** ******************* Chat.jsx ************************** */}
+          <div className="col-3 chat" style={{backgroundColor: 'white'}}><Chat /></div>
           <div className="col">
             <div className="row justify-content-between align-items-center">
               <div className="col">
@@ -98,11 +100,11 @@ function GameView() {
                 <div className="row justify-content-center">
                   <div className="col-5 my-hand">
                     {/** ******************* MyHand.jsx ************************** */}
-                    <MyHand />
+                    <MyHand game={game} />
                   </div>
                 </div>
               </div>
-              <div className="col-4 gy-3 rules">
+              <div className="col-4 gy-3 rules" style={{alignSelf: 'flex-end', display: 'flex', justifyContent: 'center', marginBottom: "5%"}}>
                 {/** ******************** Rules.jsx *************************** */}
                 <Rules />
               </div>
