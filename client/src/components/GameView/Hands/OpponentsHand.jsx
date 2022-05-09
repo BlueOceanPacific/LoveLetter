@@ -1,7 +1,13 @@
 import React from 'react';
+import Card from './Card';
 
 function OpponentsHand() {
-  return <div className="hand component">Opponents Hand</div>;
+  return (
+    <ul className="list-group list-group-horizontal hand">
+      <Card />
+      <Card />
+    </ul>
+  );
 }
 
 export default OpponentsHand;
