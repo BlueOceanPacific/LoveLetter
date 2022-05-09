@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import Message from './Message';
+import MessagesList from './MessagesList';
 import { fakeData, addMessage } from './chatUtils';
 import './Chat.scss';
-
-// TODO
-// - CHAR LIMIT ON INPUT (50)
 
 function Chat() {
   const [newMessageText, setNewMessageText] = useState('');
@@ -12,15 +9,12 @@ function Chat() {
 
   return (
     <div className="chat-container">
-      <div className="overflow-auto chat-messages">
-        {messages.map((message) => (
-          <Message
-            messageBody={message.messageBody}
-            username={message.username}
-            timestamp={message.timestamp}
-            key={message.id}
-          />
-        ))}
+      <div
+        className="chat-messages"
+      >
+        <MessagesList
+          messages={messages}
+        />
       </div>
       <div className="input-group mb-3">
         <input
@@ -29,7 +23,13 @@ function Chat() {
           placeholder="Type to chat..."
           aria-label="User's chat message"
           value={newMessageText}
-          onChange={(e) => setNewMessageText(e.target.value)}
+          onChange={(e) => {
+            if (e.target.value.length < 100) {
+              setNewMessageText(e.target.value);
+            } else {
+              alert('Chat is limited to 100 characters');
+            }
+          }}
         />
         <button
           className="btn btn-primary"
