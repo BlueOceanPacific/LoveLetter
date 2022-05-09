@@ -1,7 +1,8 @@
 const db = require('../../db');
 
 module.exports = function (app) {
-  // Create game
+  // Create game with {name, privacy, prize, user}
+  // Return the MongoDB _id of the created game
   app.post('/games', (req, res) => {
     console.log('Game created: ', req.body);
     res.send(201);
