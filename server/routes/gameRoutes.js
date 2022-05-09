@@ -1,14 +1,25 @@
 module.exports = function (app) {
+  // Create game
+  app.post('/games', (req, res) => {
+    console.log('Game created: ', req.body);
+    res.send(201);
+  });
+
+  // Get current game state
   app.get('/games/:id', (req, res) => {
     console.log('Game requested: ', req.params.id);
     // eslint-disable-next-line no-use-before-define
     res.send(demoGame);
   });
+
+  // Submit a move
   app.post('/games/:id', (req, res) => {
     console.log('Game posted: ', req.params.id);
     console.log('Posted data: ', req.body);
     res.send(200);
   });
+
+  // Submit a chat
   app.post('/games/:id/chat', (req, res) => {
     console.log('Game posted: ', req.params.id);
     console.log('Chat data: ', req.body);
