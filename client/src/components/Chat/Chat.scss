@@ -1,0 +1,24 @@
+.chat-message {
+  margin-top: 1%;
+}
+
+.chat-messages {
+  max-height: 250px;
+}
+
+.chat-timestamp {
+  display: inline-block;
+  margin-right: 1%;
+  margin-left: 1%;
+  font-size: x-small;
+  width: 25px;
+}
+
+.chat-username {
+  margin-right: 0.5%;
+  font-weight: bold;
+}
+
+.chat-message-body {
+  font-size: small;
+}

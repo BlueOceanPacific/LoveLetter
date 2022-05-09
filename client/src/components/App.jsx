@@ -3,7 +3,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Home from './Home';
-import Chat from './Chat';
+import Chat from './Chat/Chat';
 import CreateGame from './CreateGame/CreateGame';
 import GameView from './GameView/GameView';
 import JoinGame from './JoinGame/JoinGame';

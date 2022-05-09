@@ -24,7 +24,7 @@ module.exports = function (app) {
           } else {
             session.username = req.body.username;
             session.loggedIn = true;
-            res.send({ valid: true });
+            res.send(user); // filter out password
           }
         });
       })
@@ -50,7 +50,6 @@ module.exports = function (app) {
   // Updates a user profile - does not allow updating username or password (for now)
   app.put('/user/profile', (req, res) => {
     db.User.updateOne({ username: req.body.username }, {
-      email: req.body.email,
       pronouns: req.body.pronouns,
       avatar: req.body.avatar,
     }).exec()
