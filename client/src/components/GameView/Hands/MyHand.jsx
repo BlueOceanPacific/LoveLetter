@@ -18,11 +18,16 @@ function MyHand({ game }) {
 
   const cards = game && {
     Clown: (<Clown players={game.players} target={target} targetChangeHandler={targetChangeHandler} />),
-    Soldier: <Soldier players={game.players} />,
-    Knight: <Knight players={game.players} />,
+    Soldier: <Soldier
+      players={game.players}
+      target={target}
+      targetChangeHandler={targetChangeHandler}
+      cardType={cardType}
+      cardTypeChangeHandler={cardTypeChangeHandler} />,
+    Knight: <Knight players={game.players} target={target} targetChangeHandler={targetChangeHandler} />,
     Priestess: <Priestess />,
-    Wizard: <Wizard players={game.players} />,
-    General: <General players={game.players} />,
+    Wizard: <Wizard players={game.players} target={target} targetChangeHandler={targetChangeHandler} />,
+    General: <General players={game.players} target={target} targetChangeHandler={targetChangeHandler} />,
     Minister: <Minister />,
     Liege: <Liege />
   };

@@ -1,36 +1,28 @@
-import React, { useState } from 'react';
-
+import React, { useEffect } from 'react';
 import CARD_TYPES from '../../../util/card-types';
 
-function Soldier({ players }) {
-  const [target, setTarget] = useState(0);
-  const [cardType, setCardType] = useState(0);
-
-  const targetChangeHandler = (ev) => setTarget(ev.target.value);
-  const cardTypeChangeHandler = (ev) => setCardType(ev.target.value);
+function Wizard({
+  players,
+  target,
+  targetChangeHandler,
+  cardType,
+  cardTypeChangeHandler,
+  showModal,
+}) {
+  useEffect(() => {
+    showModal && targetChangeHandler("0");
+    showModal && cardTypeChangeHandler("0");
+  }, [showModal]);
 
   return (
     <>
       <select
         className="form-select"
-        aria-label="Select a card type"
-        onChange={cardTypeChangeHandler}
+        aria-label="Choose a Target Player"
+        value={target}
+        onChange={({ target }) => targetChangeHandler(target.value)}
       >
-        <option defaultValue value={0}>
-          Select a Card Type
-        </option>
-        {CARD_TYPES.map((card) => (
-          <option key={card.value} value={card.value}>
-            {card.name}
-          </option>
-        ))}
-      </select>
-      <select
-        className="form-select"
-        aria-label="Choose a target player"
-        onChange={targetChangeHandler}
-      >
-        <option defaultValue value={0}>
+        <option defaultValue value={"0"}>
           Choose a target player
         </option>
         {players.map(({ username }) => (
@@ -39,8 +31,23 @@ function Soldier({ players }) {
           </option>
         ))}
       </select>
+      <select
+        className="form-select"
+        aria-label="Choose a Card Type"
+        value={cardType}
+        onChange={({ target }) => cardTypeChangeHandler(target.value)}
+      >
+        <option defaultValue value={"0"}>
+          Choose a Card Type
+        </option>
+        {CARD_TYPES.map(({ name, value }) => (
+          <option key={value} value={value}>
+            {name}
+          </option>
+        ))}
+      </select>
     </>
   );
 }
 
-export default Soldier;
+export default Wizard;
