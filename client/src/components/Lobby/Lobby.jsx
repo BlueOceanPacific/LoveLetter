@@ -28,7 +28,6 @@ function Lobby() {
 
   return (
     <div className="lobby-container">
-          <Navbar />
       {/* <div className="lobby-title-container">
         <h3>...waiting for other players</h3>
       </div> */}
