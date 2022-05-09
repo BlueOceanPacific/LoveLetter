@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import Message from './Message.jsx';
+import Message from './Message';
 import { fakeData, addMessage } from './chatUtils';
 import './Chat.scss';
+
+// TODO
+// - CHAR LIMIT ON INPUT (50)
 
 function Chat() {
   const [newMessageText, setNewMessageText] = useState('');
@@ -35,6 +38,7 @@ function Chat() {
           onClick={() => {
             addMessage(newMessageText);
             setMessages(() => ([...fakeData.messages]));
+            setNewMessageText('');
           }}
         >
           Send
