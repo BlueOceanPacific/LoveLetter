@@ -16,6 +16,19 @@ Game.find({}).exec()
       PlayingGame.save();
     }
   });
+User.find({}).exec()
+  .then((results) => {
+    if (!results.length) {
+      const Jacob = new User({ username: 'Jacob', password: 'pass', gamesPlayed: 17, gamesWon: 16 });
+      const Lucas = new User({ username: 'Lucas', password: 'pass', gamesPlayed: 12, gamesWon: 2 });
+      const Matt = new User({ username: 'Matt', password: 'pass', gamesPlayed: 45, gamesWon: 20 });
+      const Nick = new User({ username: 'Nick', password: 'pass', gamesPlayed: 8, gamesWon: 2 });
+      Jacob.save();
+      Lucas.save();
+      Matt.save();
+      Nick.save();
+    }
+  });
 
 module.exports.User = User;
 module.exports.Game = Game;

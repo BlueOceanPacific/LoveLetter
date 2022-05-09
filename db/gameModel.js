@@ -7,7 +7,7 @@ const gamesSchema = new Schema({
   name: String,
   privacy: String,
   state: String,
-  host: new Schema({ username: String, pronouns: String, avatar: String }),
+  host: Object,
   players: [Object],
   currentRound: {
     roundNumber: Number,
@@ -18,7 +18,7 @@ const gamesSchema = new Schema({
     deck: [],
   },
   roundWins: Object,
-  chat: [Object],
+  chat: [new Schema({ username: String, message: String })],
 });
 
 const GameModel = mongoose.model('Games', gamesSchema);
