@@ -33,8 +33,6 @@ module.exports = function (app) {
     res.send(201);
   });
 };
-<<<<<<< HEAD
-=======
 
 const demoGame = {
   id: 12345,
@@ -125,4 +123,3 @@ const demoGame = {
     },
   ],
 };
->>>>>>> 9fd19e3685a3b30d1a5d7cfe7d3edcc750af44e5
