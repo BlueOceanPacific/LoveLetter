@@ -5,6 +5,8 @@ module.exports = function (app) {
     res.send(201);
   });
 
+  // need to add a join game route and communicate with Nick
+
   // Get current game state
   app.get('/games/:id', (req, res) => {
     console.log('Game requested: ', req.params.id);
@@ -29,8 +31,7 @@ module.exports = function (app) {
 };
 
 const demoGame = {
-  id: 12345,
-  name: 'Dares room',
+  name: 'demo-playing',
   privacy: 'public',
   state: 'playing', // state is building, playing, or ended
   host: { username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
