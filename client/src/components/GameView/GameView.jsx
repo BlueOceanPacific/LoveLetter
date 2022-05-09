@@ -53,7 +53,7 @@ function GameView() {
           </div>
         </div>
       </div>
-      <div style={style} className="bg-light gameview">
+      <div style={style} className="bg-dark bg-gradient gameview">
         <div className="row justify-content-between align-items-center top-row">
           <div className="col-3 leaderboard">
             {/** ******************* LocalLeaderboard.jsx ************************** */}
@@ -98,7 +98,7 @@ function GameView() {
                 <div className="row justify-content-center">
                   <div className="col-5 my-hand">
                     {/** ******************* MyHand.jsx ************************** */}
-                    <MyHand />
+                    <MyHand game={game} />
                   </div>
                 </div>
               </div>
