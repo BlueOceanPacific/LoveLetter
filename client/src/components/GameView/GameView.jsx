@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
-import Chat from '../Chat/Chat'
+import Chat from '../Chat/Chat';
 import OpponentsHand from './Hands/OpponentsHand';
 import MyHand from './Hands/MyHand';
 import Rules from './Rules/Rules';
@@ -11,13 +11,15 @@ import LocalLeaderboard from './LocalLeaderboard/LocalLeaderboard';
 import CardCount from './CardCount/CardCount';
 
 import './GameView.scss';
+import { useParams } from 'react-router-dom';
 
 function GameView() {
   const [game, setGame] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
-    axios.get('/games/12345').then(({ data }) => {
-      setGame(data);
+    axios.get(`/games/${id}`).then(({ data }) => {
+      setGame(data[0]);
     });
   }, []);
 
@@ -75,7 +77,9 @@ function GameView() {
         </div>
         <div className="row bottom-row">
           {/** ******************* Chat.jsx ************************** */}
-          <div className="col-3 chat" style={{backgroundColor: 'white'}}><Chat /></div>
+          <div className="col-3 chat" style={{ backgroundColor: 'white' }}>
+            <Chat />
+          </div>
           <div className="col">
             <div className="row justify-content-between align-items-center">
               <div className="col">
@@ -100,11 +104,19 @@ function GameView() {
                 <div className="row justify-content-center">
                   <div className="col-5 my-hand">
                     {/** ******************* MyHand.jsx ************************** */}
-                    <MyHand game={game} />
+                    {game && <MyHand game={game} />}
                   </div>
                 </div>
               </div>
-              <div className="col-4 gy-3 rules" style={{alignSelf: 'flex-end', display: 'flex', justifyContent: 'center', marginBottom: "5%"}}>
+              <div
+                className="col-4 gy-3 rules"
+                style={{
+                  alignSelf: 'flex-end',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginBottom: '5%',
+                }}
+              >
                 {/** ******************** Rules.jsx *************************** */}
                 <Rules />
               </div>
