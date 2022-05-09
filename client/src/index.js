@@ -7,6 +7,7 @@ import App from './components/App.jsx';
 
 import './index.css';
 
+
 const container = document.getElementById('root');
 
 // Create a root.
