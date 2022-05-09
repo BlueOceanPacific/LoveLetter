@@ -26,7 +26,6 @@ function UserProfile() {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log('updated data', data);
-    // // put request
     // axios.put('/user/profile', data)
     //   .then((result) => {
     //     console.log(result);
