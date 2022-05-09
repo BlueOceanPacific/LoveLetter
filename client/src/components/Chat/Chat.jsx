@@ -36,9 +36,11 @@ function Chat() {
           type="button"
           id="button-addon2"
           onClick={() => {
-            addMessage(newMessageText);
-            setMessages(() => ([...fakeData.messages]));
-            setNewMessageText('');
+            if (newMessageText.length) {
+              addMessage(newMessageText);
+              setMessages(() => ([...fakeData.messages]));
+              setNewMessageText('');
+            }
           }}
         >
           Send
