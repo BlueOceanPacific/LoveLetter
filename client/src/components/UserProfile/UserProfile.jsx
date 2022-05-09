@@ -26,11 +26,11 @@ function UserProfile() {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log('updated data', data);
-    // axios.put('/user/profile', data)
-    //   .then((result) => {
-    //     console.log(result);
-    //   })
-    //   .catch((err) => console.log(err));
+    axios.put('/user/profile', data)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
