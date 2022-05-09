@@ -34,6 +34,7 @@ function Navbar() {
   const changeBackground = function(e) {
     let lakeUrl = 'images/backgrounds/lake.png';
     let fireflyUrl = 'images/backgrounds/fireflies.png';
+    let blueSkiesUrl = 'images/backgrounds/blueSkiesAnime.jpg';
 
 
     switch(e.target.text) {
@@ -43,6 +44,9 @@ function Navbar() {
       case 'Fireflies':
         document.body.style.backgroundImage = `url(${fireflyUrl})`;
         break;
+      case 'Blue Skies':
+        document.body.style.backgroundImage = `url(${blueSkiesUrl})`;
+        break
     }
   }
 
@@ -84,6 +88,7 @@ function Navbar() {
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <a className="dropdown-item" onClick={changeBackground}>Scenic Lake</a>
               <a className="dropdown-item" onClick={changeBackground}>Fireflies</a>
+              <a className="dropdown-item" onClick={changeBackground}>Blue Skies</a>
             </div>
           </li>
         </ul>

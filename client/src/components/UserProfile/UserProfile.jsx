@@ -10,32 +10,24 @@ import useStore from '../Store/store';
 import './UserProfile.scss';
 
 function UserProfile() {
-  const [user, setUser] = useState({});
-  // const user = useStore((state) => state.user);
+  const user = useStore((state) => state.user);
 
-  const testUser = {
-    username: 'twheeler',
-  };
+  const [data, setData] = useState({
+    pronouns:user.pronouns,
+    avatar: user.avatar
+  })
 
-  // testing: get req - refresh component
-  useEffect(() => {
-    axios.get('/user/profile', testUser)
-      .then((result) => {
-        setUser(result.data);
-        console.log('data from get req', result.data);
-      })
-      .catch((err) => console.log(err));
-  }, [testUser]);
+  const { pronouns, avatar } = data;
 
   const changeHandler = (e) => {
-    setUser({ ...user, [e.target.name]: [e.target.value] });
+    setData({ ...data, [e.target.name]: [e.target.value] });
+    console.log('data', data)
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('updated data', user);
-    // put request
-    axios.put('/user/profile', user)
+    console.log('updated data', user.username);
+    axios.put('/user/profile', data)
       .then((result) => {
         console.log(result);
       })
@@ -46,19 +38,18 @@ function UserProfile() {
     <div>
       <div className="userprofile-main">
         <div className="col-sm" />
-        <div className="col-lg">
+        <div className="col-lg middle">
           <form onSubmit={submitHandler}>
-            {/* <div className="close"> */}
-            {/* add functionality: close modal >> conditional at origin? */}
-            {/* <button type="button" className="btn-primary closebtn">X</button> */}
-            {/* </div> */}
             <div className="username">
-              <span className="UP-username-msg">{user.username}</span>
+              <p className="UP-username-msg">{`Hello ${user.username}!`}</p>
+              <p className="UP-username-msg">{user.pronouns}</p>
             </div>
             <div className="avatar">
               <div>
-                {/* add url to chosen avatar {avatar}  */}
-                <img className="avatarRound" src="/images/avatars/disgustedCat.png" alt="avatar" />
+                {/* add url to chosen avatar {avatar}
+                "/images/avatars/disgustedCat.png" */}
+
+                <img className="avatarRound" src={`${user.avatar}`} alt="avatar" />
               </div>
               {/* add drop down menu */}
               {/* conditional view of dropdown? */}
@@ -74,8 +65,7 @@ function UserProfile() {
                 type="text"
                 className="form-control UP-textinput"
                 name="pronouns"
-                placeholder={`${user.pronouns}`}
-                value={user.pronouns}
+                placeholder="Your pronouns"
                 onChange={changeHandler}
               />
             </div>
