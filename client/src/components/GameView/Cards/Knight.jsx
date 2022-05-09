@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 function Knight({ players, target, targetChangeHandler, showModal }) {
   useEffect(() => {
-    showModal && targetChangeHandler(0);
+    showModal && targetChangeHandler("0");
   }, [showModal])
 
   return (
@@ -12,7 +12,7 @@ function Knight({ players, target, targetChangeHandler, showModal }) {
       value={target}
       onChange={({target}) => targetChangeHandler(target.value)}
     >
-      <option defaultValue value={0}>
+      <option defaultValue value="0">
         Choose a target player
       </option>
       {players.map(({ username }) => (
