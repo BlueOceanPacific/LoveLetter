@@ -3,12 +3,11 @@
 .userprofile-main {
   display: grid;
   gap:10px;
-  grid-template-areas: "left close right"
+  grid-template-areas: "left username right"
+                       "left close right"
                        "left avatar right"
                        "left pronouns right"
-                       "left username right"
-                       "left edit right"
-                       "left logout right" ;
+                       "left edit right" ;
   grid-template-columns: 4fr 6fr 4fr;
   /* border: solid red; */
   margin-top: 20px;
@@ -23,10 +22,17 @@
   text-align:right;
 }
 
+
 .closebtn {
   border-radius: 50%;
   height: 30px;
   width: 30px;
+}
+
+.closebtn:hover {
+  background-color: rgb(187, 7, 31);
+  border: rgb(187, 7, 31);
+
 }
 
 .avatar {
@@ -47,6 +53,10 @@
   margin-top: 10px;
 }
 
+.UP-username-msg{
+  font-style: italic;
+}
+
 .pronouns {
   grid-area: pronouns;
   text-align: center;
@@ -59,20 +69,19 @@
   margin-top: 20px;
 }
 
-.UP-textinput {
-  /* max-width: 300px; */
-  /* text-align: center; */
-}
-
 .edit {
   grid-area: edit;
   text-align: center;
   margin-top: 20px;
 }
 
-.logout {
-  grid-area: logout;
+.UP-textinput{
   text-align: center;
-  margin-top: 20px;
+  // max-width: 400px;
+}
+
+.UP-edit-btn {
+  margin:0 10px;
+  min-width: 200px;
 }
 
