@@ -44,7 +44,7 @@ function PlayingCard({ card, target = false, cardType = false, children }) {
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
                 onClick={() => setShowModal(false)}
-                disabled={!(target !== 0 && cardType !== 0)}
+                disabled={!(target !== "0" && cardType !== "0")}
               >
                 Play Card
               </button>
