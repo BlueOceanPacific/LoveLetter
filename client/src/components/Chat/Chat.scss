@@ -4,6 +4,8 @@
 
 .chat-messages {
   max-height: 250px;
+  overflow: auto;
+  height: 100%;
 }
 
 .chat-timestamp {
