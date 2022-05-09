@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const bcrypt = require('bcryptjs');
 const db = require('../../db');
 
@@ -42,6 +43,7 @@ module.exports = function (app) {
 
   // Returns a user profile
   app.get('/user/profile', (req, res) => {
+    console.log('get req user profile', req.body.username);
     db.User.findOne({ username: req.body.username }).exec()
       .then((user) => res.send(user))
       .catch((err) => res.status(500).send(err));
