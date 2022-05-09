@@ -9,7 +9,7 @@ import GameView from './GameView/GameView';
 import JoinGame from './JoinGame/JoinGame';
 import Leaderboard from './Leaderboard/Leaderboard';
 import Lobby from './Lobby/Lobby';
-import Login from './Login';
+import Login from './Login/Login';
 import SignUp from './SignUp/SignUp';
 import AuthWrapper from './Auth/AuthWrapper';
 import AuthTest from './Auth/AuthTest';
