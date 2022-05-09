@@ -3,8 +3,7 @@ import useStore from '../Store/store';
 
 function Navbar() {
   const logOut = useStore(state => state.logOut);
-  const loggedInStatus = true;
-  // useStore(state => state.loggedIn);
+  const loggedInStatus = useStore(state => state.loggedIn);
   const username = useStore(state => state.username);
 
   let logInDisplay = null;
@@ -12,7 +11,25 @@ function Navbar() {
   let logOutButton = <a class="nav-link" href="./#/Login">Log In</a>;
   let joinGame = null;
   let createGame = null;
+  let gameDisplay = null;
   let signup = <a className="nav-link" href="./#/signup">Signup</a>;
+
+  const createGameDisplay = function() {
+    joinGame = <a className="dropdown-item" href="./#/join">Join Game</a>;
+    createGame = <a className="dropdown-item" href="./#/create">Create Game</a>;
+
+    return (
+      <li className="nav-item dropdown">
+        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
+          Game Actions
+        </a>
+        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+          {joinGame}
+          {createGame}
+        </div>
+      </li>
+    );
+  };
 
   // if logged in
   if (loggedInStatus) {
@@ -25,17 +42,7 @@ function Navbar() {
     signup = null;
     logOutButton = <a className="nav-link" href="#" onClick={logOut}>Logout</a>;
 
-    joinGame = (
-      <li className="nav-item">
-        <a className="nav-link" href="./#/join">Join Game</a>
-      </li>
-    );
-
-    createGame = (
-      <li className="nav-item">
-        <a className="nav-link" href="./#/create">Create Game</a>
-      </li>
-    );
+    gameDisplay = createGameDisplay();
   }
 
   return (
@@ -54,8 +61,7 @@ function Navbar() {
           <li className="nav-item">
             <a className="nav-link" href="./#/leaderboard">Leaderboard</a>
           </li>
-          {createGame}
-          {joinGame}
+          {gameDisplay}
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
               Themes
