@@ -21,11 +21,12 @@ function UserProfile() {
 
   const changeHandler = (e) => {
     setData({ ...data, [e.target.name]: [e.target.value] });
+    console.log('data', data)
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('updated data', data);
+    console.log('updated data', user.username);
     axios.put('/user/profile', data)
       .then((result) => {
         console.log(result);
@@ -47,7 +48,7 @@ function UserProfile() {
               <div>
                 {/* add url to chosen avatar {avatar}
                 "/images/avatars/disgustedCat.png" */}
-                <p> {`${user.avatar}`}</p>
+
                 <img className="avatarRound" src={`${user.avatar}`} alt="avatar" />
               </div>
               {/* add drop down menu */}
