@@ -176,3 +176,34 @@ module.exports.demoBuilding = {
     },
   ],
 };
+
+
+module.exports.usersDraft = [
+  {
+  "username": "twheeler",
+    "password": "twheeler",
+      "email": "twheeler@tw.com",
+        "pronouns": "Your Grace",
+          "avatar": "/images/avatars/redHatCat.png",
+            "gamesPlayed": 37,
+              "gamesWon": 30,
+  },
+  {
+    "username": "lcosta",
+      "password": "lcosta",
+        "email": "lcosta@lc.com",
+          "pronouns": "peasant",
+            "avatar": "/images/avatars/blueFlowersCat.png",
+              "gamesPlayed": 3,
+                "gamesWon": 0,
+    },
+    {
+      "username": ",mteran",
+        "password": "mteran",
+          "email": "mteran@mt.com",
+            "pronouns": "My Lord",
+              "avatar": "/images/avatars/underBlanketCat.png",
+                "gamesPlayed": 37,
+                  "gamesWon": 30,
+      },
+    ]
