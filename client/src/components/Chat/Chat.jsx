@@ -16,7 +16,7 @@ function Chat() {
           messages={messages}
         />
       </div>
-      <div className="input-group mb-3">
+      <div className="input-group mb-3 chat-input">
         <input
           type="text"
           className="form-control"
