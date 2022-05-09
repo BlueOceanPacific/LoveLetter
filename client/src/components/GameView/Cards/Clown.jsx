@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-function Clown({ players, targetChangeHandler }) {
+function Clown({ players, target, targetChangeHandler, showModal }) {
+  useEffect(() => {
+    showModal && targetChangeHandler(0);
+  }, [showModal])
+
   return (
     <select
       className="form-select"
       aria-label="Choose a target player"
-      onChange={targetChangeHandler}
+      value={target}
+      onChange={({target}) => targetChangeHandler(target.value)}
     >
       <option defaultValue value={0}>
         Choose a target player

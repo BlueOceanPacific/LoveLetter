@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
 import Clown from '../Cards/Clown';
+import Priestess from '../Cards/Minister';
 import PlayingCard from '../Cards/PlayingCard';
 import Soldier from '../Cards/Soldier';
 import Wizard from '../Cards/Wizard';
+import Knight from '../Cards/Knight';
+import Liege from '../Cards/Liege';
+import General from '../Cards/General';
+import Minister from '../Cards/Minister';
 
 function MyHand({ game }) {
   const [target, setTarget] = useState();
   const [cardType, setCardType] = useState();
 
-  const targetChangeHandler = (event) => setTarget(event.target.value);
+  const targetChangeHandler = (val) => setTarget(val);
   const cardTypeChangeHandler = (val) => setCardType(val);
 
-  const cards = {
-    Clown: game ? (
-      <Clown players={game.players} targetChangeHandler={targetChangeHandler} />
-    ) : null,
-    Soldier: game ? <Soldier players={game.players} /> : null,
+  const cards = game && {
+    Clown: (<Clown players={game.players} target={target} targetChangeHandler={targetChangeHandler} />),
+    Soldier: <Soldier players={game.players} />,
+    Knight: <Knight players={game.players} />,
+    Priestess: <Priestess />,
+    Wizard: <Wizard players={game.players} />,
+    General: <General players={game.players} />,
+    Minister: <Minister />,
+    Liege: <Liege />
   };
 
   return (

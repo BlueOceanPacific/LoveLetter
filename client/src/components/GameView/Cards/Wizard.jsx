@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
-function Wizard({ players }) {
-  const [target, setTarget] = useState(0);
-
-  const targetChangeHandler = (ev) => setTarget(ev.target.value);
+function Wizard({ players, target, targetChangeHandler, showModal }) {
+  useEffect(() => {
+    showModal && targetChangeHandler(0);
+  }, [showModal])
 
   return (
     <select
       className="form-select"
       aria-label="Choose a target player"
-      onChange={targetChangeHandler}
+      value={target}
+      onChange={({target}) => targetChangeHandler(target.value)}
     >
       <option defaultValue value={0}>
         Choose a target player

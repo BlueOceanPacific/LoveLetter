@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 
 function PlayingCard({ card, target = false, cardType = false, children }) {
-  const [modalClass, setModalClass] = useState(0);
+  const [showModal, setShowModal] = useState(0);
   const modalElement = useRef();
 
   return (
@@ -28,14 +28,14 @@ function PlayingCard({ card, target = false, cardType = false, children }) {
               />
             </div>
             <div className="modal-body">
-              {React.cloneElement(children, { modalClass })}
+              {React.cloneElement(children, { showModal })}
             </div>
             <div className="modal-footer">
               <button
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
-                onClick={() => setModalClass(false)}
+                onClick={() => setShowModal(false)}
               >
                 Cancel
               </button>
@@ -43,8 +43,8 @@ function PlayingCard({ card, target = false, cardType = false, children }) {
                 type="button"
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
-                onClick={card.effect}
-                disabled={!(target !== null && cardType !== null)}
+                onClick={() => setShowModal(false)}
+                disabled={!(target !== 0 && cardType !== 0)}
               >
                 Play Card
               </button>
@@ -60,7 +60,7 @@ function PlayingCard({ card, target = false, cardType = false, children }) {
             style={{ padding: 0 }}
             data-bs-toggle="modal"
             data-bs-target={`#${card.card}-modal`}
-            onClick={() => setModalClass(true)}
+            onClick={() => setShowModal(true)}
           >
             <img
               src={card.image}

@@ -6,10 +6,6 @@ function Soldier({ players }) {
   const [target, setTarget] = useState(0);
   const [cardType, setCardType] = useState(0);
 
-  const playEffect = () => {
-    console.log(target, cardType);
-  };
-
   const targetChangeHandler = (ev) => setTarget(ev.target.value);
   const cardTypeChangeHandler = (ev) => setCardType(ev.target.value);
 
