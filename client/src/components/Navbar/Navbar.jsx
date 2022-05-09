@@ -8,7 +8,7 @@ function Navbar() {
 
   let logInDisplay = null;
 
-  let logOutButton = <a class="nav-link" href="./#/Login">Log In</a>;
+  let logOutButton = <a className="nav-link" href="./#/Login">Log In</a>;
   let joinGame = null;
   let createGame = null;
   let gameDisplay = null;
