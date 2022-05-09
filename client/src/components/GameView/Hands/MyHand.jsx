@@ -1,7 +1,13 @@
 import React from 'react';
+import Card from './Card';
 
 function MyHand() {
-  return <div className="my-hand component">My Hand</div>;
+  return (
+    <ul className="list-group list-group-horizontal my-hand">
+      <Card />
+      <Card />
+    </ul>
+  );
 }
 
 export default MyHand;

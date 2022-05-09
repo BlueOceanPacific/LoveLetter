@@ -1,29 +1,22 @@
-const data = [
+export default [
   {
-    player: 'player',
-    score: 'score',
-    average: 'average',
+    player: 'aa',
+    score: '6',
+    winRatio: '45%',
   },
   {
-    player: 'player',
-    score: 'score',
-    average: 'average',
+    player: 'sirdare',
+    score: '10',
+    winRatio: '100%',
   },
   {
-    player: 'player',
-    score: 'score',
-    average: 'average',
+    player: 'tw',
+    score: '6',
+    winRatio: '43%',
   },
   {
-    player: 'player',
-    score: 'score',
-    average: 'average',
-  },
-  {
-    player: 'player',
-    score: 'score',
-    average: 'average',
+    player: 'ns',
+    score: '4',
+    winRatio: '30%',
   },
 ];
-
-module.exports = data;

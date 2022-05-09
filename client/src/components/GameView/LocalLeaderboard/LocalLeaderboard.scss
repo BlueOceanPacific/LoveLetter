@@ -10,3 +10,14 @@
 #local-leaderboard-txt {
   font-size: 90%;
 }
+.game-view {
+  .leaderboard {
+    padding: 0;
+  }
+}
+.local-leaderboard-title {
+  text-align: center;
+  background-color: #fff3cd;
+  margin-block: 0;
+  font-weight: bold;
+}
