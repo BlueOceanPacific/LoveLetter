@@ -5,6 +5,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
+import ReactUIDropdown from "react-ui-dropdown";
 import axios from 'axios';
 import useStore from '../Store/store';
 import './UserProfile.scss';
@@ -47,7 +48,7 @@ function UserProfile() {
               <div>
                 {/* add url to chosen avatar {avatar}
                 "/images/avatars/disgustedCat.png" */}
-                <p> {`${user.avatar}`}</p>
+
                 <img className="avatarRound" src={`${user.avatar}`} alt="avatar" />
               </div>
               {/* add drop down menu */}
