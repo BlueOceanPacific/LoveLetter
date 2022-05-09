@@ -1,44 +1,48 @@
-.lobby-title-container {
-  text-align: center;
-  margin: 1rem;
+.lobby-container {
+  .lobby-title-container {
+    text-align: center;
+    margin: 1rem;
+  }
+
+  .lobby-list-group {
+    width: 15rem;
+
+  }
+
+  .lobby-btn-leave {
+    position: absolute;
+    bottom: 2rem;
+    margin: 1rem;
+    width: 15rem;
+    height: 5rem;
+  }
+
+  .lobby-btn-start {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 2rem;
+    margin: 1rem;
+    width: 15rem;
+    height: 5rem;
+  }
+
+  .lobby-icon {
+    width: 1.5rem;
+    border-radius: 50%;
+  }
+
+  .lobby-player-list-title {
+    margin-left: 3rem;
+  }
+
+  .lobby-chat {
+    border: solid black;
+    width: 25rem;
+    height: 25rem;
+    position: absolute;
+    right: 5rem;
+    top: 4rem;
+  }
 }
 
-.lobby-list-group {
-  width: 15rem;
 
-}
-
-.lobby-btn-leave {
-  position: absolute;
-  bottom: 2rem;
-  margin: 1rem;
-  width: 15rem;
-  height: 5rem;
-}
-
-.lobby-btn-start {
-  position: absolute;
-  right: 0.5rem;
-  bottom: 2rem;
-  margin: 1rem;
-  width: 15rem;
-  height: 5rem;
-}
-
-.lobby-icon {
-  width: 1.5rem;
-  border-radius: 50%;
-}
-
-.lobby-player-list-title {
-  margin-left: 3rem;
-}
-
-.lobby-chat {
-  border: solid black;
-  width: 25rem;
-  height: 25rem;
-  position: absolute;
-  right: 5rem;
-  top: 4rem;
-}
