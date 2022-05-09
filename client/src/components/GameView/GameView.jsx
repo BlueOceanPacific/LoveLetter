@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
+import Chat from '../Chat/Chat'
 import OpponentsHand from './Hands/OpponentsHand';
 import MyHand from './Hands/MyHand';
 import Rules from './Rules/Rules';
@@ -73,7 +74,8 @@ function GameView() {
           </div>
         </div>
         <div className="row bottom-row">
-          <div className="col-3 chat">Chat</div>
+          {/** ******************* Chat.jsx ************************** */}
+          <div className="col-3 chat" style={{backgroundColor: 'white'}}><Chat /></div>
           <div className="col">
             <div className="row justify-content-between align-items-center">
               <div className="col">

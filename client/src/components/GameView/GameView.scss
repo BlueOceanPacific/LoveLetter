@@ -15,9 +15,6 @@
   }
   .bottom-row {
     height: 55%;
-    .chat {
-      border: 1px solid black;
-    }
     .card-count {
       height: 25vh;
       min-height: 70%;
@@ -50,6 +47,12 @@
       -o-transition: all 1s ease;
       -ms-transition: all 1s ease;
       transition: all 1s ease;
+    }
+  }
+  .chat-container {
+    height: 100%;
+    .chat-messages {
+      height: 90%;
     }
   }
 }
