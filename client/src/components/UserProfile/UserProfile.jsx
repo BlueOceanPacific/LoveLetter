@@ -6,27 +6,40 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import useStore from '../Store/store.js';
+import useStore from '../Store/store';
 import './UserProfile.scss';
 
-// identify user (id sent in props)
-// do get request when opening?
-function UserProfile({
-  username, pronouns, avatar, showUserProfile,
-}) {
-  const [data, setData] = useState({
-    username: { username },
-    pronouns: { pronouns },
-    avatar: { avatar },
-  });
+function UserProfile() {
+  const [user, setUser] = useState({});
+  // const user = useStore((state) => state.user);
+
+  const testUser = {
+    username: 'twheeler',
+  };
+
+  // testing: get req - refresh component
+  useEffect(() => {
+    axios.get('/user/profile', testUser)
+      .then((result) => {
+        setUser(result.data);
+        console.log('data from get req', result.data);
+      })
+      .catch((err) => console.log(err));
+  }, [testUser]);
 
   const changeHandler = (e) => {
-    setData({ ...data, [e.target.name]: [e.target.value] });
+    setUser({ ...user, [e.target.name]: [e.target.value] });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(data);
+    console.log('updated data', user);
+    // put request
+    axios.put('/user/profile', user)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -35,12 +48,12 @@ function UserProfile({
         <div className="col-sm" />
         <div className="col-lg">
           <form onSubmit={submitHandler}>
-            <div className="close">
-              {/* add functionality: close modal >> conditional at origin? */}
-              <button type="button" className="btn-primary closebtn">X</button>
-            </div>
+            {/* <div className="close"> */}
+            {/* add functionality: close modal >> conditional at origin? */}
+            {/* <button type="button" className="btn-primary closebtn">X</button> */}
+            {/* </div> */}
             <div className="username">
-              <span className="UP-username-msg">USERNAME</span>
+              <span className="UP-username-msg">{user.username}</span>
             </div>
             <div className="avatar">
               <div>
@@ -61,8 +74,8 @@ function UserProfile({
                 type="text"
                 className="form-control UP-textinput"
                 name="pronouns"
-                placeholder="to add: variable current pronouns"
-                value={pronouns}
+                placeholder={`${user.pronouns}`}
+                value={user.pronouns}
                 onChange={changeHandler}
               />
             </div>
