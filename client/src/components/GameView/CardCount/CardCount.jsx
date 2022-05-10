@@ -12,8 +12,23 @@ import Minister from "../Cards/Minister";
 import Card from "../Hands/Card";
 import "./CardCount.scss";
 
-function CardCount() {
+function CardCount({ game }) {
+  console.log(game);
+  const { discardPiles } = game;
   let cards = [];
+
+  for (let prop in discardPiles) {
+    let currentCard = discardPiles[prop];
+
+    cards.push(
+      <li className="list-group-item">
+        <PlayingCard card={currentCard.card}/>
+      </li>
+    );
+    card
+  }
+
+
   cards.push(
     <li className="list-group-item">
       <Card />

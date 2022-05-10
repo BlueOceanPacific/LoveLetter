@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import useStore from '../Store/store';
-import "./Navbar.scss"
 
 function Navbar() {
   const logOut = useStore(state => state.logOut);
