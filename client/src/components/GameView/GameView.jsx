@@ -17,7 +17,6 @@ import { useParams } from 'react-router-dom';
 function GameView() {
   const [game, setGame] = useState(null);
   const { id } = useParams();
-  const [socket, setSocket] = useState(io('/game',{query: {id}}));
 
   useEffect(() => {
     axios.get(`/games/${id}`).then(({ data }) => {
@@ -25,7 +24,6 @@ function GameView() {
     });
   }, []);
 
-  const style = { height: '100vh', width: '100vw' };
   return (
     <>
       <div className="modal" tabIndex="-1">
@@ -80,7 +78,7 @@ function GameView() {
         <div className="row bottom-row">
           {/** ******************* Chat.jsx ************************** */}
           <div className="col-3 chat" style={{ backgroundColor: 'white' }}>
-            <Chat socket={socket} />
+            <Chat />
           </div>
           <div className="col">
             <div className="row justify-content-between align-items-center">
@@ -98,7 +96,7 @@ function GameView() {
               </div>
               <div className="col-4 card-count">
                 {/** ******************* CardCount.jsx ************************** */}
-                <CardCount />
+                <CardCount game={game}/>
               </div>
             </div>
             <div className="row justify-content-between align-items-center">
