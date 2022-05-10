@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
+import { Link } from 'react-router-dom';
+=======
 import { Link, useNavigate } from 'react-router-dom';
+>>>>>>> main
 import './Login.scss';
 import useStore from '../Store/store';
 
@@ -17,6 +21,21 @@ function Login() {
 
   const validatesLogin = () => {
     axios
+<<<<<<< HEAD
+      .post('user/login', { username, password })
+      .then((result) => {
+        if (result.data.username) {
+          logIn(result.data.user);
+          setRoute('/');
+        }
+      })
+      .catch(() => alert('Invalid username or password'));
+  };
+
+  if (route === '/') {
+    return <Redirect to="/" />;
+  }
+=======
       .post('/user/login', { username, password })
       .then(({ data }) => {
         console.log('logged in as: ', data);
@@ -31,10 +50,11 @@ function Login() {
       });
   };
   
+>>>>>>> main
   return (
     <div className="d-flex justify-content-center" id="login">
       <h1>Welcome!</h1>
-      <br></br>
+      <br />
 
       <form className="form">
         <input
@@ -43,19 +63,19 @@ function Login() {
           placeholder="username"
           id="login-input"
           onChange={(event) => setUsername(event.target.value)}
-        ></input>
-        <br></br>
-        <br></br>
+        />
+        <br />
+        <br />
         <input
           className="input"
           type="text"
           placeholder="password"
           id="login-input"
           onChange={(event) => setPassword(event.target.value)}
-        ></input>
+        />
       </form>
 
-      <br></br>
+      <br />
       <button
         type="button"
         className="btn btn-primary btn-sm"
@@ -64,13 +84,13 @@ function Login() {
       >
         Submit
       </button>
-      <br></br>
+      <br />
       <Link to="/signup">
         <button type="button" className="btn btn-secondary btn-sm">
           Sign Up
         </button>
       </Link>
-      <br></br>
+      <br />
       <button
         type="button"
         className="btn btn-secondary btn-sm"
