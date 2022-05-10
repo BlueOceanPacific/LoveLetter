@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import io from 'socket.io-client';
 // 2. component imports
+import useStore from '../Store/store';
 import GameView from '../GameView/GameView';
 import Chat from '../Chat/Chat';
 import LoadingSpinner from '../../util/LoadingSpinner';
@@ -14,8 +16,14 @@ function Lobby() {
   const [game, setGame] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
+  const [socket, setSocket] = useState(io('/play', { query: { id } }));
+  const user = useStore(state => state.user);
 
   useEffect(() => {
+    socket.emit('join', user);
+    socket.on('join', () => {
+      console.log('someone connected');
+    })
     axios
       .get(`/games/${id}`)
       .then(({ data }) => setGame(data[0]))
@@ -38,7 +46,7 @@ function Lobby() {
   if (!game) return <LoadingSpinner/>;
 
   if (game.state === 'playing') {
-    return <GameView />;
+    return <GameView socket={socket} />;
   }
 
   return (
@@ -53,7 +61,7 @@ function Lobby() {
       <div className="chat-wrapper">
         <div className="lobby-chat">
           {/* Socket IO logic needs to be updated so that chat can load in the lobby */}
-          <Chat />
+          <Chat socket={socket} />
         </div>
       </div>
       <button

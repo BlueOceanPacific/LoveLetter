@@ -24,7 +24,6 @@ function GameView() {
     });
   }, []);
 
-  const style = { height: '100vh', width: '100vw' };
   return (
     <>
       <div className="modal" tabIndex="-1">
@@ -97,7 +96,7 @@ function GameView() {
               </div>
               <div className="col-4 card-count">
                 {/** ******************* CardCount.jsx ************************** */}
-                <CardCount />
+                <CardCount game={game}/>
               </div>
             </div>
             <div className="row justify-content-between align-items-center">
