@@ -36,12 +36,19 @@
   }
 
   .lobby-chat {
-    border: solid black;
-    width: 25rem;
-    height: 25rem;
+    width: auto;
+    height: auto;
     position: absolute;
     right: 5rem;
-    top: 4rem;
+    top: -10rem;
+    margin-left: 25rem;
+  }
+
+  .chat-wrapper {
+    width: auto;
+    height: auto;
+    margin: 1rem;
+    position: relative;
   }
 }
 

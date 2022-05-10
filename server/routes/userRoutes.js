@@ -48,7 +48,7 @@ module.exports = function (app) {
 
   // Returns a user profile (all fields excluding password)
   app.get('/user/profile', (req, res) => {
-    console.log('get req user profile', req.body.username);
+    console.log('get req user profile', req.body);
     db.User.findOne({ username: req.body.username }).exec()
       .then((user) => {
         const {
@@ -58,16 +58,17 @@ module.exports = function (app) {
           username, email, pronouns, avatar, gamesPlayed, gamesWon,
         });
       })
-      .catch((err) => res.status(500).send(err));
+      .catch((err) => res.sendStatus(500).send(err));
   });
 
   // Updates a user profile - only allows pronoun and avatar updates
   app.put('/user/profile', (req, res) => {
+    console.log('put req.', req.body)
     db.User.updateOne({ username: req.body.username }, {
-      pronouns: req.body.pronouns,
+      pronouns: req.body.pronouns[0],
       avatar: req.body.avatar,
     }).exec()
-      .then(() => res.send(200))
-      .catch((err) => res.status(500).send(err));
+      .then(() => res.sendStatus(200))
+      .catch((err) => res.sendStatus(500).send(err));
   });
 };

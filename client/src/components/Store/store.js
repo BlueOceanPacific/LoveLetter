@@ -6,7 +6,7 @@ const useStore = create((set) => ({
       "password": "twheeler",
         "email": "twheeler@tw.com",
           "pronouns": "Your Grace",
-            "avatar": "../client/dist/images/avatars/redHatCat.png",
+            "avatar": "/images/avatars/redHatCat.png",
               "gamesPlayed": 37,
                 "gamesWon": 30,
     },
