@@ -1,25 +1,26 @@
 body {
   margin: 0;
-  background-image:url('../dist/images/backgrounds/a506ea2c5f7ff01457c8.jpg') ;
+  background-image:url('../dist/images/backgrounds/blueSkiesAnime.jpg');
+  background-repeat: no-repeat;
 }
 
-#baloon {
+.baloon {
   width: 100px;
   height: 100px;
-  background-color: red;
+  opacity: 0.6;
   position: relative;
   animation-name: flying;
-  animation-duration: 5s;
+  animation-duration: 20s;
   animation-timing-function: linear;
   animation-delay: 2s;
   animation-iteration-count: infinite;
-  animation-direction: alternate;
+  /* animation-direction: alternate; */
 }
 
 @keyframes flying {
-  0%   {background-color:red; left:0px; top:0px;}
-  25%  {background-color:yellow; left:200px; top:0px;}
-  50%  {background-color:blue; left:200px; top:200px;}
-  75%  {background-color:green; left:0px; top:200px;}
-  100% {background-color:red; left:0px; top:0px;}
+  0%   { transform: rotate(20deg); left:-20px; top:1200px;}
+  25%  {transform: rotate(-20deg); left:300px; top:900px;}
+  50%  {transform: scale(1.5);  left:600px; top:600px;}
+  75%  {transform: rotate(30deg); transform: scale(2); left:900px; top:300px;}
+  100% {transform: scale(0.5); left:1400px; top:0px;}
 }

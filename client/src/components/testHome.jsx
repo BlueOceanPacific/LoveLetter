@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useStore from './Store/store';
 
-function Home() {
+function testHome() {
   const user = useStore((state) => state.user);
 
   if (!user) {
@@ -73,5 +73,4 @@ function Home() {
     </div>
   );
 }
-
-export default Home;
+export default testHome;
