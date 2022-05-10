@@ -1,42 +1,26 @@
 {
-  "extends": [
-    "airbnb"
-  ],
-  "plugins": [
-    "react"
-  ],
+  "extends": ["airbnb"],
+  "plugins": ["react"],
   "rules": {
     "func-names": "off",
-    "react/prop-types": "off",
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "no-underscore-dangle": [
       "error",
       {
-        "allow": [
-          "_id"
-        ]
+        "allow": ["_id"]
       }
     ],
     "jsx-a11y/label-has-associated-control": [
       2,
       {
-        "labelComponents": [
-          "CustomInputLabel"
-        ],
-        "labelAttributes": [
-          "label"
-        ],
-        "controlComponents": [
-          "CustomInput"
-        ],
+        "labelComponents": ["CustomInputLabel"],
+        "labelAttributes": ["label"],
+        "controlComponents": ["CustomInput"],
         "depth": 3
       }
     ],
