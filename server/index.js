@@ -33,17 +33,20 @@ require('./routes/baseRoutes')(app);// "base" routes like create game, get leade
 require('./routes/gameRoutes')(app);// routes for actual gameplay
 
 // ----------------- Listen for Socket IO Connections -------------------------
-const gameNamespace = io.of('/game');
+const playNamespace = io.of('/play');
 
-gameNamespace.use((socket, next) => {
+playNamespace.use((socket, next) => {
   // if i knew how, i'd verify that the user connecting is authenticated,
   // then invoke the next function if they were =)
   next();
 })
 
-gameNamespace.on('connection', (socket) => {
+playNamespace.on('connection', (socket) => {
   const room = socket.handshake.query.id;
   socket.join(room);
+  socket.on('join', (user) => {
+    console.log(user.username, 'connected in room', room);
+  })
 
   socket.on('disconnect', function() {
     socket.leave(room)

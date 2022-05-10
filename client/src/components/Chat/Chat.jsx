@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import io from 'socket.io-client';
 import Filter from 'bad-words';
 import useStore from '../Store/store';
 import MessagesList from './MessagesList';
@@ -7,6 +9,8 @@ import './Chat.scss';
 function Chat({ socket }) {
   const [newMessageText, setNewMessageText] = useState('');
   const [messages, setMessages] = useState([]);
+  const { id } = useParams();
+  
   const user = useStore((store) => store.user);
   const filter = new Filter();
 

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUp.scss';
 
+// TODO: form validation, add pronoun input
+
 function SignUp() {
   const navigate = useNavigate();
   const [usernameHelper, setUsernameHelper] = useState(() => 'Please choose a username my lord.');
