@@ -21,7 +21,7 @@ function UserProfile() {
 
   const changeHandler = (e) => {
     console.log('clicked', e.target);
-    setData({ ...data, [e.target.name]: [e.target.value] });
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const submitHandler = (e) => {
@@ -47,9 +47,6 @@ function UserProfile() {
             </div>
             <div className="avatar">
               <div>
-                {/* add url to chosen avatar {avatar}
-                "/images/avatars/disgustedCat.png" */}
-
                 <img className="avatarRound" src={`${user.avatar}`} alt="avatar" />
               </div>
               <div className="dropdown">
@@ -57,26 +54,38 @@ function UserProfile() {
                   Choose your avatar
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <div className="row">
-                    <button type="button"  name="avatar" id="blueCat"  className="dd-btn"  value="/images/avatars/blueFlowersCat.png" onClick={changeHandler}><img className="dd-thumbnail" src="/images/avatars/blueFlowersCat.png" /><span>Blue</span></button>
-                    {/*  */}
+                  <div className="row"  value="/images/avatars/blueFlowersCat.png">
+                    <button type="button"  name="avatar" id="blueCat"  className="dd-btn"  value="/images/avatars/blueFlowersCat.png" onClick={() =>  changeHandler (
+                      {target:{
+                          name: 'avatar',
+                          value: "/images/avatars/blueFlowersCat.png"}})}><img
+
+                    className="dd-thumbnail" src="/images/avatars/blueFlowersCat.png" /><span>Blue</span></button>
                   </div>
                   <div className="row">
-                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/redHatCat.png" onClick={changeHandler}><img className="dd-thumbnail" src="/images/avatars/redHatCat.png" />
+                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/redHatCat.png"  onClick={() =>  changeHandler (
+                      {target:{
+                          name: 'avatar',
+                          value: "/images/avatars/redHatCat.png"}})}><img className="dd-thumbnail" src="/images/avatars/redHatCat.png" />
                       <span> Red</span></button>
                   </div>
                   <div className="row">
-                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/underBlanketCat.png" onClick={changeHandler}><img className="dd-thumbnail" src="/images/avatars/underBlanketCat.png" />
+                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/underBlanketCat.png"  onClick={() =>  changeHandler (
+                      {target:{
+                          name: 'avatar',
+                          value: "/images/avatars/underBlanketCat.png"}})}><img className="dd-thumbnail" src="/images/avatars/underBlanketCat.png" />
                       <span>Grey</span></button>
                   </div>
                   <div className="row">
-                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/voidCat.png" onClick={changeHandler}><img className="dd-thumbnail" src="/images/avatars/voidCat.png" />
+                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/voidCat.png"  onClick={() =>  changeHandler (
+                      {target:{
+                          name: 'avatar',
+                          value: "/images/avatars/voidCat.png"}})}><img className="dd-thumbnail" src="/images/avatars/voidCat.png" />
                       <span>Black</span></button>
                   </div>
                 </div>
               </div>
             </div>
-
             <div className="pronouns">
               <input
                 type="text" className="form-control UP-textinput" name="pronouns" placeholder="Your pronouns" onChange={changeHandler}
@@ -84,7 +93,6 @@ function UserProfile() {
             </div>
             <div className="edit">
               <button type="button" data-bs-target="#" className="btn btn-primary UP-edit-btn">Cancel</button>
-
               <button type="submit" name="submit" className="btn btn-primary UP-edit-btn"> Save</button>
             </div>
           </form>
