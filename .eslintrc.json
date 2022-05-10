@@ -26,7 +26,7 @@
     ],
     "react/prop-types": 0
   },
-  "environment": {
+  "env": {
     "browser": true,
     "node": true
   }
