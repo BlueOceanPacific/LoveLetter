@@ -17,19 +17,16 @@ function UserProfile() {
     avatar: user.avatar
   })
   const { pronouns, avatar } = data;
-  const [isShown, setIsShown] = useState(false);
 
-  const handleClick = () => {
-    setIsShown(!isShown);
-  }
 
   const changeHandler = (e) => {
+    console.log('clicked', e.target);
     setData({ ...data, [e.target.name]: [e.target.value] });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('updated data', data);
+    console.log('updated data', data.pronouns, data.avatar);
     axios.put('/user/profile', data)
       .then((result) => {
         console.log(result);
@@ -37,9 +34,6 @@ function UserProfile() {
       .catch((err) => console.log(err));
   };
 
-  const toggleDropdown = () => {
-    setShowDropdown = true;
-  }
 
   return (
     <div>
@@ -62,25 +56,30 @@ function UserProfile() {
                 <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   Choose your avatar
                 </button>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><img className="dd-thumbnail" src="/images/avatars/blueFlowersCat.png" name="avatar"/><span >Blue</span></li>
-                  <li><img className="dd-thumbnail" src="/images/avatars/redHatCat.png" />
-                    <span> Red</span></li>
-                  <li><img className="dd-thumbnail" src="/images/avatars/underBlanketCat.png" />
-                    <span>Grey</span></li>
-                  <li><img className="dd-thumbnail" src="/images/avatars/voidCat.png" />
-                    <span>Black</span></li>
-                </ul>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <div className="row">
+                    <button type="button"  name="avatar" id="blueCat"  className="dd-btn"  value="/images/avatars/blueFlowersCat.png" onClick={changeHandler}><img className="dd-thumbnail" src="/images/avatars/blueFlowersCat.png" /><span>Blue</span></button>
+                    {/*  */}
+                  </div>
+                  <div className="row">
+                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/redHatCat.png" onClick={changeHandler}><img className="dd-thumbnail" src="/images/avatars/redHatCat.png" />
+                      <span> Red</span></button>
+                  </div>
+                  <div className="row">
+                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/underBlanketCat.png" onClick={changeHandler}><img className="dd-thumbnail" src="/images/avatars/underBlanketCat.png" />
+                      <span>Grey</span></button>
+                  </div>
+                  <div className="row">
+                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/voidCat.png" onClick={changeHandler}><img className="dd-thumbnail" src="/images/avatars/voidCat.png" />
+                      <span>Black</span></button>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div className="pronouns">
               <input
-                type="text"
-                className="form-control UP-textinput"
-                name="pronouns"
-                placeholder="Your pronouns"
-                onChange={changeHandler}
+                type="text" className="form-control UP-textinput" name="pronouns" placeholder="Your pronouns" onChange={changeHandler}
               />
             </div>
             <div className="edit">
