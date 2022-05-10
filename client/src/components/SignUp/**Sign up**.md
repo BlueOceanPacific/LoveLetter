@@ -18,3 +18,25 @@
       2. If we get any other error
          1. Render red text stating “error creating an account; please try again”
             1. Likely that DB is down, or something went wrong with bcrypt
+
+// import { useQuery } from 'react-query';
+
+// React Query info for polishing
+// const { data, isFetching, isError } = useQuery(
+// '/user/signup',
+// () => {
+// console.log(form.values);
+// },
+// {
+// enabled: false,
+// retry: false,
+// }
+// );
+// console.log('data: ', data);
+// console.log('isFetching', isFetching);
+// if the error data comes back we need to rerender the
+// useEffect(() => {
+// if (data?.length) {
+// setResults(data);
+// }
+// }, [data, setResults]);

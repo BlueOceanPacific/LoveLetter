@@ -1,14 +1,14 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable object-curly-newline */
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import useStore from '../Store/store';
 import './SignUp.scss';
 
-// import { Redirect } from 'react-router-dom';
-// import { useQuery } from 'react-query';
-
 function SignUp() {
-  // let history = useHistory();
+  let navigate = useNavigate();
   const [usernameHelper, setUsernameHelper] = useState(() => 'Please choose a username my lord.');
 
   const [formData, setFormData] = useState({
@@ -19,12 +19,10 @@ function SignUp() {
     avatar: '',
   });
 
-  const user = useStore((state) => state.user);
-
-  const { username, password, email, pronouns, avatar } = formData;
+  // const { username, password, email, pronouns, avatar } = formData;
 
   const changeHandler = (event) => {
-    setFormData({ ...formData, [event.target.name]: [event.target.value] });
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const submitHandler = (event) => {
@@ -32,16 +30,10 @@ function SignUp() {
     axios
       .post('/user/signup', formData)
       .then((response) => {
-        console.log(response);
-        const status = JSON.parse(response.data.response.status);
-        console.log('response:');
-        console.log(response);
-        if (status === '200' || status === '201') {
-          console.log('username added');
-          setUsernameHelper('username added');
-          // history.push('/login');
-          // return <Redirect to="/login" />;
-        }
+        const status = JSON.parse(response.status);
+        document.getElementById('usernameHelp').style.color = '#ff0000';
+        setUsernameHelper('username added');
+        navigate('/login');
       })
       .catch((error) => {
         console.log('error: ', error);
@@ -49,8 +41,10 @@ function SignUp() {
         console.log(errorCode);
         if (errorCode === '11000') {
           console.log('this username already exists my lord');
+          document.getElementById('usernameHelp').style.color = '#ff0000';
           setUsernameHelper('this username already exists my lord');
         } else if (errorCode === 'ERR_BAD_RESPONSE') {
+          document.getElementById('usernameHelp').style.color = '#ff0000';
           console.log('error creating an account, please refresh and try again later');
           setUsernameHelper('error creating an account, please refresh and try again later');
         }
@@ -171,22 +165,3 @@ function SignUp() {
 }
 
 export default SignUp;
-
-// const { data, isFetching, isError } = useQuery(
-//   '/user/signup',
-//   () => {
-//     console.log(form.values);
-//   },
-//   {
-//     enabled: false,
-//     retry: false,
-//   }
-// );
-// console.log('data: ', data);
-// console.log('isFetching', isFetching);
-// if the error data comes back we need to rerender the
-// useEffect(() => {
-//   if (data?.length) {
-//     setResults(data);
-//   }
-// }, [data, setResults]);
