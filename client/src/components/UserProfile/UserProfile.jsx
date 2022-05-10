@@ -10,63 +10,68 @@ import useStore from '../Store/store';
 import './UserProfile.scss';
 
 function UserProfile() {
-  const [user, setUser] = useState({});
-  // const user = useStore((state) => state.user);
+  const user = useStore((state) => state.user);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [data, setData] = useState({
+    pronouns: user.pronouns,
+    avatar: user.avatar
+  })
+  const { pronouns, avatar } = data;
+  const [isShown, setIsShown] = useState(false);
 
-  const testUser = {
-    username: 'twheeler',
-  };
-
-  // testing: get req - refresh component
-  useEffect(() => {
-    axios.get('/user/profile', testUser)
-      .then((result) => {
-        setUser(result.data);
-        console.log('data from get req', result.data);
-      })
-      .catch((err) => console.log(err));
-  }, [testUser]);
+  const handleClick = () => {
+    setIsShown(!isShown);
+  }
 
   const changeHandler = (e) => {
-    setUser({ ...user, [e.target.name]: [e.target.value] });
+    setData({ ...data, [e.target.name]: [e.target.value] });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('updated data', user);
-    // put request
-    axios.put('/user/profile', user)
+    console.log('updated data', data);
+    axios.put('/user/profile', data)
       .then((result) => {
         console.log(result);
       })
       .catch((err) => console.log(err));
   };
 
+  const toggleDropdown = () => {
+    setShowDropdown = true;
+  }
+
   return (
     <div>
       <div className="userprofile-main">
         <div className="col-sm" />
-        <div className="col-lg">
+        <div className="col-lg middle">
           <form onSubmit={submitHandler}>
-            {/* <div className="close"> */}
-            {/* add functionality: close modal >> conditional at origin? */}
-            {/* <button type="button" className="btn-primary closebtn">X</button> */}
-            {/* </div> */}
             <div className="username">
-              <span className="UP-username-msg">{user.username}</span>
+              <p className="UP-username-hello">{`Hello ${user.username}!`}</p>
+              <p className="UP-username-pronouns">{`[${user.pronouns}]`}</p>
             </div>
             <div className="avatar">
               <div>
-                {/* add url to chosen avatar {avatar}  */}
-                <img className="avatarRound" src="/images/avatars/disgustedCat.png" alt="avatar" />
+                {/* add url to chosen avatar {avatar}
+                "/images/avatars/disgustedCat.png" */}
+
+                <img className="avatarRound" src={`${user.avatar}`} alt="avatar" />
               </div>
-              {/* add drop down menu */}
-              {/* conditional view of dropdown? */}
-              <span>Choose your avatar:</span>
-              <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
+              <div className="dropdown">
+                <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Choose your avatar
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><img className="dd-thumbnail" src="/images/avatars/blueFlowersCat.png" name="avatar"/><span >Blue</span></li>
+                  <li><img className="dd-thumbnail" src="/images/avatars/redHatCat.png" />
+                    <span> Red</span></li>
+                  <li><img className="dd-thumbnail" src="/images/avatars/underBlanketCat.png" />
+                    <span>Grey</span></li>
+                  <li><img className="dd-thumbnail" src="/images/avatars/voidCat.png" />
+                    <span>Black</span></li>
+                </ul>
+              </div>
             </div>
 
             <div className="pronouns">
@@ -74,20 +79,19 @@ function UserProfile() {
                 type="text"
                 className="form-control UP-textinput"
                 name="pronouns"
-                placeholder={`${user.pronouns}`}
-                value={user.pronouns}
+                placeholder="Your pronouns"
                 onChange={changeHandler}
               />
             </div>
             <div className="edit">
-              {/* cancel clears form - new get? */}
-              <button type="submit" className="btn btn-primary UP-edit-btn"> Cancel</button>
+              <button type="button" data-bs-target="#" className="btn btn-primary UP-edit-btn">Cancel</button>
+
               <button type="submit" name="submit" className="btn btn-primary UP-edit-btn"> Save</button>
             </div>
           </form>
         </div>
         <div className="col-sm" />
-      </div>
+      </div >
     </div>
   );
 }

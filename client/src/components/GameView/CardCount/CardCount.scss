@@ -1,0 +1,27 @@
+.discard-pile {
+  .list-group-item {
+    text-align: center;
+    border: none;
+  }
+  .card-img-top {
+    height: 10rem;
+    width: 7rem;
+  }
+  .card {
+    border: none;
+  }
+
+  ul.list-group:after {
+    clear: both;
+    display: block;
+    content: "";
+  }
+
+  .list-group-item {
+    float: left;
+  }
+
+  .list-group {
+    flex-direction: row;
+  }
+}
