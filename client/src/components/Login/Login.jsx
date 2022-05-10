@@ -59,7 +59,6 @@ function Login() {
       <button
         type="button"
         className="btn btn-primary btn-sm"
-        id="login-btn"
         onClick={validatesLogin}
       >
         Submit
