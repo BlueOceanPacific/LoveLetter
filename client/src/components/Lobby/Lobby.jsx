@@ -38,7 +38,7 @@ function Lobby() {
       <div className="chat-wrapper">
         <div className="lobby-chat">
           {/* Socket IO logic needs to be updated so that chat can load in the lobby */}
-          {/* <Chat /> */ }  
+          <Chat />  
         </div>
       </div>
       <button type="button" className="lobby-btn-leave btn-primary btn-lg" onClick={leaveLobbyHandler}>
