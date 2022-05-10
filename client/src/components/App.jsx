@@ -22,12 +22,12 @@ function App() {
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/chat" element={<Chat />} />
+        <Route path="/chat" element={'DEPRECATED: Chat component can only be rendered in Game'} />
         <Route path="/create" element={<CreateGame />} />
-        <Route path="/game/:id" element={<GameView />} />
+        <Route path="/play/game/:id" element={<GameView />} />
         <Route path="/join" element={<JoinGame />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/lobby" element={<Lobby />} />
+        <Route path="/play/lobby/:id" element={<Lobby />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route

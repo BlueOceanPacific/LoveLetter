@@ -3,6 +3,7 @@ import axios from 'axios';
 import io from 'socket.io-client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { useParams } from 'react-router-dom';
 import Chat from '../Chat/Chat';
 import OpponentsHand from './Hands/OpponentsHand';
 import MyHand from './Hands/MyHand';
@@ -12,12 +13,10 @@ import LocalLeaderboard from './LocalLeaderboard/LocalLeaderboard';
 import CardCount from './CardCount/CardCount';
 
 import './GameView.scss';
-import { useParams } from 'react-router-dom';
 
-function GameView() {
+function GameView({ socket }) {
   const [game, setGame] = useState(null);
   const { id } = useParams();
-  const [socket, setSocket] = useState(io('/game',{query: {id}}));
 
   useEffect(() => {
     axios.get(`/games/${id}`).then(({ data }) => {
@@ -25,7 +24,6 @@ function GameView() {
     });
   }, []);
 
-  const style = { height: '100vh', width: '100vw' };
   return (
     <>
       <div className="modal" tabIndex="-1">
@@ -98,7 +96,7 @@ function GameView() {
               </div>
               <div className="col-4 card-count">
                 {/** ******************* CardCount.jsx ************************** */}
-                <CardCount />
+                <CardCount game={game} />
               </div>
             </div>
             <div className="row justify-content-between align-items-center">
