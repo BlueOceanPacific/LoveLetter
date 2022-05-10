@@ -1,11 +1,13 @@
+import React, { useState } from 'react';
 /* eslint-disable prefer-const */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable object-curly-newline */
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUp.scss';
+
+// TODO: form validation, add pronoun input
 
 function SignUp() {
   let navigate = useNavigate();
@@ -84,8 +86,8 @@ function SignUp() {
             type="password"
           />
           <div id="passwordHelp" className="form-text">
-            Use 8 or more characters with a mix of letters, numbers, and symbols to build the
-            strongest castle in all of England.
+            Use 8 or more characters with a mix of letters, numbers, and symbols
+            to build the strongest castle in all of England.
           </div>
         </div>
 
@@ -136,7 +138,7 @@ function SignUp() {
                 aria-describedby="avatarHelp"
                 id="avatar"
                 name="avatar"
-                onChange={changeHandler}
+                // onChange={changeHandler}
                 type="file"
               />
             </div>
@@ -150,7 +152,11 @@ function SignUp() {
           <button type="button" className="btn btn-primary">
             Back
           </button>
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            // onClick={signUpHandler}
+          >
             Submit
           </button>
         </div>

@@ -1,11 +1,28 @@
 const db = require('../../db');
+const Game = require('../../db/gameModel');
+const fullDeck = require('../../db/fullDeck');
 
 module.exports = function (app) {
   // Create game with {name, privacy, prize, user}
   // Return the MongoDB _id of the created game
   app.post('/games', (req, res) => {
-    console.log('Game created: ', req.body);
-    res.send(201);
+    const newGame = new Game(req.body);
+    newGame.state = 'building';
+    newGame.host = req.body.user;
+    newGame.players = [this.host?.user || 'user'];
+    newGame.roundWins = { [this.host?.username || 'user']: 0 };
+    newGame.currentRound = {
+      roundNumber: 1,
+      turnNumber: 1,
+      currentPlayer: this.host?.username || 'user', // current player is always the host, maybe update this to be random later on
+      activeHands: { [this.host?.username || 'user']: { value: 0, hand: [] } },
+      discardPiles: { [this.host?.username || 'user']: []},
+      deck: structuredClone(fullDeck),
+    };
+    console.log('Game created: ', newGame);
+    newGame.save()
+      .then(() => res.send(201))
+      .catch((err) => res.status(500).send(err));
   });
 
   // need to add a join game route and communicate with Nick
@@ -13,7 +30,8 @@ module.exports = function (app) {
   // Get current game state - needs refactor to filter out fields for relevant users
   app.get('/games/:id', (req, res) => {
     console.log('Game requested: ', req.params.id);
-    db.Game.find({ name: 'demo-playing' }).exec()
+    Game.find({ name: req.params.id })
+      .exec()
       .then((results) => res.send(results))
       .catch((err) => res.status(500).send(err));
   });
