@@ -58,7 +58,7 @@ module.exports = function (app) {
           username, email, pronouns, avatar, gamesPlayed, gamesWon,
         });
       })
-      .catch((err) => res.status(500).send(err));
+      .catch((err) => res.sendStatus(500).send(err));
   });
 
   // Updates a user profile - only allows pronoun and avatar updates
@@ -67,7 +67,7 @@ module.exports = function (app) {
       pronouns: req.body.pronouns[0],
       avatar: req.body.avatar,
     }).exec()
-      .then(() => res.send(200))
-      .catch((err) => res.status(500).send(err));
+      .then(() => res.sendStatus(200))
+      .catch((err) => res.sendStatus(500).send(err));
   });
 };

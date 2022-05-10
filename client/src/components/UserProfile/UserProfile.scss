@@ -22,7 +22,10 @@
   text-align:right;
 }
 
-
+.middle {
+  background-color: white;
+  padding: 20px;
+}
 .closebtn {
   border-radius: 50%;
   height: 30px;
@@ -53,8 +56,12 @@
   margin-top: 10px;
 }
 
-.UP-username-msg{
-  font-style: italic;
+.UP-username-hello {
+  font-size: 2em;
+}
+
+.UP-username-pronouns {
+  font-size: 1.5em;
 }
 
 .pronouns {

@@ -5,7 +5,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import ReactUIDropdown from "react-ui-dropdown";
 import axios from 'axios';
 import useStore from '../Store/store';
 import './UserProfile.scss';
@@ -13,8 +12,37 @@ import './UserProfile.scss';
 function UserProfile() {
   const user = useStore((state) => state.user);
 
+  const avatarOptions = [
+    {
+      id: '1',
+      title: "blue",
+      image: '/images/avatars/blueFlowersCat.png'
+    },
+    {
+      id: '2',
+      title: "disgusted",
+      image: '/images/avatars/disgustedCat.png'
+    },
+    {
+      id: '3',
+      title: "red",
+      image: '/images/avatars/redHatCat.png'
+    },
+    {
+      id: '4',
+      title: "scared",
+      image: '/images/avatars/underBlanketCat.png'
+    },
+    {
+      id: '5',
+      title: "void",
+      image: '/images/avatars/voidCat.png'
+    },
+  ]
+
+
   const [data, setData] = useState({
-    pronouns:user.pronouns,
+    pronouns: user.pronouns,
     avatar: user.avatar
   })
 
@@ -34,6 +62,7 @@ function UserProfile() {
       .catch((err) => console.log(err));
   };
 
+
   return (
     <div>
       <div className="userprofile-main">
@@ -41,8 +70,8 @@ function UserProfile() {
         <div className="col-lg middle">
           <form onSubmit={submitHandler}>
             <div className="username">
-              <p className="UP-username-msg">{`Hello ${user.username}!`}</p>
-              <p className="UP-username-msg">{user.pronouns}</p>
+              <p className="UP-username-hello">{`Hello ${user.username}!`}</p>
+              <p className="UP-username-pronouns">{`[${user.pronouns}]`}</p>
             </div>
             <div className="avatar">
               <div>
@@ -53,11 +82,8 @@ function UserProfile() {
               </div>
               {/* add drop down menu */}
               {/* conditional view of dropdown? */}
-              <span>Choose your avatar:</span>
-              <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
+              <p>Choose your avatar:</p>
+
             </div>
 
             <div className="pronouns">
@@ -77,8 +103,8 @@ function UserProfile() {
           </form>
         </div>
         <div className="col-sm" />
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 
