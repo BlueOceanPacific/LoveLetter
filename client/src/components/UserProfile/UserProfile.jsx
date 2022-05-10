@@ -12,7 +12,7 @@ import './UserProfile.scss';
 
 function UserProfile() {
   const user = useStore((state) => state.user);
-  const [showDropdown, setShowDropdown] = useState(false);
+  // const [showDropdown, setShowDropdown] = useState(false);
   const [data, setData] = useState({
     pronouns: user.pronouns,
     avatar: user.avatar,
@@ -20,18 +20,17 @@ function UserProfile() {
   const { pronouns, avatar } = data;
 
   const changeHandler = (e) => {
-    console.log('clicked', e.target);
+    // console.log('clicked', e.target);
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('updated data', data.pronouns, data.avatar);
-    axios.put('/user/profile', data)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => console.log(err));
+    // console.log('updated data', data.pronouns, data.avatar);
+    axios.put('/user/profile', data).then(() => {
+      // console.log(result);
+    });
+    // .catch((err) => console.log(err));
   };
 
   return (
@@ -46,10 +45,16 @@ function UserProfile() {
             </div>
             <div className="avatar">
               <div>
-                <img className="avatarRound" src={`${user.avatar}`} alt="avatar" />
+                <img className="avatarRound" src={`${user.avatar}`} alt="Avatar" />
               </div>
               <div className="dropdown">
-                <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <button
+                  className="btn btn-primary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
                   Choose your avatar
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -164,8 +169,13 @@ function UserProfile() {
               />
             </div>
             <div className="edit">
-              <button type="button" data-bs-target="#" className="btn btn-primary UP-edit-btn">Cancel</button>
-              <button type="submit" name="submit" className="btn btn-primary UP-edit-btn"> Save</button>
+              <button type="button" data-bs-target="#" className="btn btn-primary UP-edit-btn">
+                Cancel
+              </button>
+              <button type="submit" name="submit" className="btn btn-primary UP-edit-btn">
+                {' '}
+                Save
+              </button>
             </div>
           </form>
         </div>

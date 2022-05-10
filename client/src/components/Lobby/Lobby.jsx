@@ -1,30 +1,52 @@
-import React, { useState } from 'react';
-import Navbar from '../Navbar/Navbar';
+// 1. package imports
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import io from 'socket.io-client';
+// 2. component imports
+import useStore from '../Store/store';
+import GameView from '../GameView/GameView';
 import Chat from '../Chat/Chat';
+import LoadingSpinner from '../../util/LoadingSpinner';
+// 3. css
 import './Lobby.scss';
 
 function Lobby() {
   const [players, setPlayers] = useState(['twheeler', 'lcosta', 'mteran']);
+  const [game, setGame] = useState(null);
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [socket, setSocket] = useState(io('/play', { query: { id } }));
+  const user = useStore((state) => state.user);
 
-  // useEffect(() => {
+  useEffect(() => {
+    socket.emit('join', user);
+    socket.on('join', () => {
+      console.log('someone connected');
+    });
+    axios
+      .get(`/games/${id}`)
+      .then(({ data }) => setGame(data[0]))
+      .catch((err) => console.log(err));
+  }, []);
 
-  // }, []);
-
-  const createStartGameButton = () => {
-    let buttons = <button type="button" className="lobby-btn-start btn-primary btn-lg">Start Game</button>;
-    if (players.length < 2) {
-      buttons = <button type="button" className="lobby-btn-start btn-primary btn-lg" disabled>Start Game</button>;
-    }
-
-    return buttons;
+  const leaveLobbyHandler = () => {
+    // add logic to disconnect from socket io connection
+    navigate('/');
   };
 
   const populatePlayers = () => players.map((player) => (
-    <li className="list-group-item">
-      <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon"/>
+    <li className="list-group-item" key={player}>
+      <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon" />
       {player}
     </li>
   ));
+
+  if (!game) return <LoadingSpinner />;
+
+  if (game.state === 'playing') {
+    return <GameView socket={socket} />;
+  }
 
   return (
     <div className="lobby-container">
@@ -33,17 +55,29 @@ function Lobby() {
       </div> */}
       <div className="lobby-player-list-container">
         <h4 className="lobby-player-list-title">Current Players</h4>
-        <ul className="lobby-list-group">
-          {populatePlayers()}
-        </ul>
+        <ul className="lobby-list-group">{populatePlayers()}</ul>
       </div>
       <div className="chat-wrapper">
         <div className="lobby-chat">
-          <Chat />
+          {/* Socket IO logic needs to be updated so that chat can load in the lobby */}
+          <Chat socket={socket} />
         </div>
       </div>
-      <button type="button" className="lobby-btn-leave btn-primary btn-lg">Leave Lobby</button>
-      {createStartGameButton()}
+      <button
+        type="button"
+        className="lobby-btn-leave btn-primary btn-lg"
+        onClick={leaveLobbyHandler}
+      >
+        Leave Lobby
+      </button>
+      <button
+        type="button"
+        className="lobby-btn-start btn-primary btn-lg"
+        disabled={players.length < 2}
+      >
+        Start Game
+      </button>
+      ;
     </div>
   );
 }

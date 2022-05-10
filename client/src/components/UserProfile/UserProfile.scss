@@ -1,13 +1,13 @@
-
 .userprofile-main {
   display: grid;
-  gap:10px;
-  grid-template-areas: "left username right"
-                       "left avatar right"
-                       "left dropdown-toggle right"
-                       "left dropdown-menu right"
-                       "left pronouns right"
-                       "left edit right" ;
+  gap: 10px;
+  grid-template-areas:
+    'left username right'
+    'left avatar right'
+    'left dropdown-toggle right'
+    'left dropdown-menu right'
+    'left pronouns right'
+    'left edit right';
   grid-template-columns: 4fr 10fr 4fr;
   /* border: solid red; */
   margin-top: 20px;
@@ -30,7 +30,7 @@
 }
 
 .dropdown-toggle {
-  grid-area:dropdown-toggle;
+  grid-area: dropdown-toggle;
   margin-top: 20px;
 }
 
@@ -50,7 +50,6 @@
 .dd-btn {
   border: none;
   background-color: white;
-
 }
 
 .avatarRound {
@@ -96,14 +95,11 @@
   margin-top: 20px;
 }
 
-.UP-textinput{
+.UP-textinput {
   text-align: center;
-
 }
 
 .UP-edit-btn {
-  margin:10px 10px;
+  margin: 10px 10px;
   min-width: 200px;
 }
-
-
