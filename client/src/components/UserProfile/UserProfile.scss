@@ -1,55 +1,52 @@
 
-
 .userprofile-main {
   display: grid;
   gap:10px;
   grid-template-areas: "left username right"
-                       "left close right"
                        "left avatar right"
+                       "left dropdown-toggle right"
+                       "left dropdown-menu right"
                        "left pronouns right"
                        "left edit right" ;
-  grid-template-columns: 4fr 6fr 4fr;
+  grid-template-columns: 4fr 10fr 4fr;
   /* border: solid red; */
   margin-top: 20px;
-
-  margin: 4em;
 }
 
-.middle {
-  background-color: rgba($color: white, $alpha:0.6);
-  padding: 2em;
-}
 .userprofile-main .btn {
   min-width: 100px;
-}
-
-.close {
-  grid-area: close;
-  text-align:right;
 }
 
 .middle {
   background-color: white;
   padding: 20px;
 }
-.closebtn {
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
-}
-
-.closebtn:hover {
-  background-color: rgb(187, 7, 31);
-  border: rgb(187, 7, 31);
-
-}
 
 .avatar {
   grid-area: avatar;
-  height: 300px;
+  // height: 300px;
   text-align: center;
   margin-top: 20px;
 }
+
+.dropdown-toggle {
+  grid-area:dropdown-toggle;
+  margin-top: 20px;
+}
+
+.dropdown-menu {
+  grid-area: dropdown-menu;
+  min-width: 200px;;
+}
+
+.dropdown-menu li {
+  margin: 10px 0;
+}
+
+.dropdown-menu span {
+  margin-left: 10px;
+}
+
 
 .avatarRound {
   border-radius: 50%;
@@ -60,6 +57,11 @@
 
 .avatarEditBtn {
   margin-top: 10px;
+}
+
+.dd-thumbnail{
+  height:50px;
+  width:50px;
 }
 
 .UP-username-hello {
@@ -97,4 +99,5 @@
   margin:10px 10px;
   min-width: 200px;
 }
+
 
