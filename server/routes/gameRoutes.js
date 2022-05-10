@@ -1,4 +1,5 @@
 const db = require('../../db');
+const GameEngine = require('./gameEngine');
 
 module.exports = function (app) {
   // Create game with {name, privacy, prize, user}
@@ -22,8 +23,12 @@ module.exports = function (app) {
   app.post('/games/:id', (req, res) => {
     console.log('Game posted: ', req.params.id);
     console.log('Posted data: ', req.body);
-    // send to the game engine
-    res.send(200);
+    GameEngine.process(req.params.id, req.body.user, req.body.move)
+      .then(() => res.send(201))
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send(err);
+      });
   });
 
   // Submit a chat
