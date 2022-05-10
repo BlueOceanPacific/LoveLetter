@@ -8,7 +8,7 @@ function Navbar() {
 
   let logInDisplay = null;
 
-  let logOutButton = <a class="nav-link" href="./#/Login">Log In</a>;
+  let logOutButton = <a className="nav-link" href="./#/Login">Log In</a>;
   let joinGame = null;
   let createGame = null;
   let gameDisplay = null;
@@ -30,6 +30,25 @@ function Navbar() {
       </li>
     );
   };
+
+  const changeBackground = function(e) {
+    let lakeUrl = 'images/backgrounds/lake.png';
+    let fireflyUrl = 'images/backgrounds/fireflies.png';
+    let blueSkiesUrl = 'images/backgrounds/blueSkiesAnime.jpg';
+
+
+    switch(e.target.text) {
+      case 'Scenic Lake':
+        document.body.style.backgroundImage = `url(${lakeUrl})`;
+        break;
+      case 'Fireflies':
+        document.body.style.backgroundImage = `url(${fireflyUrl})`;
+        break;
+      case 'Blue Skies':
+        document.body.style.backgroundImage = `url(${blueSkiesUrl})`;
+        break
+    }
+  }
 
   // if logged in
   if (loggedInStatus) {
@@ -67,8 +86,9 @@ function Navbar() {
               Themes
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">Cat Cafe</a>
-              <a className="dropdown-item" href="#">Picnic</a>
+              <a className="dropdown-item" onClick={changeBackground}>Scenic Lake</a>
+              <a className="dropdown-item" onClick={changeBackground}>Fireflies</a>
+              <a className="dropdown-item" onClick={changeBackground}>Blue Skies</a>
             </div>
           </li>
         </ul>

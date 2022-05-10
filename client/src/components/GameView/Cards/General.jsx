@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
+import useStore from '../../Store/store';
 
 function General({ players, target, targetChangeHandler, showModal }) {
+  const user = useStore(store => store.user);
+
   useEffect(() => {
     showModal && targetChangeHandler("0");
   }, [showModal])
@@ -15,7 +18,7 @@ function General({ players, target, targetChangeHandler, showModal }) {
       <option defaultValue value="0">
         Choose a target player
       </option>
-      {players.map(({ username }) => (
+      {players.filter(({ username }) => username !== user.username).map(({ username }) => (
         <option key={username} value={username}>
           {username}
         </option>

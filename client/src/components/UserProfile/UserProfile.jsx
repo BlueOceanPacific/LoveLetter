@@ -6,75 +6,99 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import useStore from '../Store/store.js';
+import useStore from '../Store/store';
 import './UserProfile.scss';
 
-// identify user (id sent in props)
-// do get request when opening?
-function UserProfile({
-  username, pronouns, avatar, showUserProfile,
-}) {
+function UserProfile() {
+  const user = useStore((state) => state.user);
+  const [showDropdown, setShowDropdown] = useState(false);
   const [data, setData] = useState({
-    username: { username },
-    pronouns: { pronouns },
-    avatar: { avatar },
-  });
+    pronouns: user.pronouns,
+    avatar: user.avatar
+  })
+  const { pronouns, avatar } = data;
+
 
   const changeHandler = (e) => {
-    setData({ ...data, [e.target.name]: [e.target.value] });
+    console.log('clicked', e.target);
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(data);
+    console.log('updated data', data.pronouns, data.avatar);
+    axios.put('/user/profile', data)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.log(err));
   };
+
 
   return (
     <div>
       <div className="userprofile-main">
         <div className="col-sm" />
-        <div className="col-lg">
+        <div className="col-lg middle">
           <form onSubmit={submitHandler}>
-            <div className="close">
-              {/* add functionality: close modal >> conditional at origin? */}
-              <button type="button" className="btn-primary closebtn">X</button>
-            </div>
             <div className="username">
-              <span className="UP-username-msg">USERNAME</span>
+              <p className="UP-username-hello">{`Hello ${user.username}!`}</p>
+              <p className="UP-username-pronouns">{`[${user.pronouns}]`}</p>
             </div>
             <div className="avatar">
               <div>
-                {/* add url to chosen avatar {avatar}  */}
-                <img className="avatarRound" src="/images/avatars/disgustedCat.png" alt="avatar" />
+                <img className="avatarRound" src={`${user.avatar}`} alt="avatar" />
               </div>
-              {/* add drop down menu */}
-              {/* conditional view of dropdown? */}
-              <span>Choose your avatar:</span>
-              <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
-            </div>
+              <div className="dropdown">
+                <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Choose your avatar
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <div className="row"  value="/images/avatars/blueFlowersCat.png">
+                    <button type="button"  name="avatar" id="blueCat"  className="dd-btn"  value="/images/avatars/blueFlowersCat.png" onClick={() =>  changeHandler (
+                      {target:{
+                          name: 'avatar',
+                          value: "/images/avatars/blueFlowersCat.png"}})}><img
 
+                    className="dd-thumbnail" src="/images/avatars/blueFlowersCat.png" /><span>Blue</span></button>
+                  </div>
+                  <div className="row">
+                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/redHatCat.png"  onClick={() =>  changeHandler (
+                      {target:{
+                          name: 'avatar',
+                          value: "/images/avatars/redHatCat.png"}})}><img className="dd-thumbnail" src="/images/avatars/redHatCat.png" />
+                      <span> Red</span></button>
+                  </div>
+                  <div className="row">
+                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/underBlanketCat.png"  onClick={() =>  changeHandler (
+                      {target:{
+                          name: 'avatar',
+                          value: "/images/avatars/underBlanketCat.png"}})}><img className="dd-thumbnail" src="/images/avatars/underBlanketCat.png" />
+                      <span>Grey</span></button>
+                  </div>
+                  <div className="row">
+                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/voidCat.png"  onClick={() =>  changeHandler (
+                      {target:{
+                          name: 'avatar',
+                          value: "/images/avatars/voidCat.png"}})}><img className="dd-thumbnail" src="/images/avatars/voidCat.png" />
+                      <span>Black</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="pronouns">
               <input
-                type="text"
-                className="form-control UP-textinput"
-                name="pronouns"
-                placeholder="to add: variable current pronouns"
-                value={pronouns}
-                onChange={changeHandler}
+                type="text" className="form-control UP-textinput" name="pronouns" placeholder="Your pronouns" onChange={changeHandler}
               />
             </div>
             <div className="edit">
-              {/* cancel clears form - new get? */}
-              <button type="submit" className="btn btn-primary UP-edit-btn"> Cancel</button>
+              <button type="button" data-bs-target="#" className="btn btn-primary UP-edit-btn">Cancel</button>
               <button type="submit" name="submit" className="btn btn-primary UP-edit-btn"> Save</button>
             </div>
           </form>
         </div>
         <div className="col-sm" />
-      </div>
+      </div >
     </div>
   );
 }

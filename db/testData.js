@@ -16,12 +16,12 @@ module.exports.demoPlaying = {
         hand: [{
           card: 'Clown',
           value: 2,
-          image: 'imageUrlHere',
+          image: '/images/cards/Clown_Card.png',
         },
         {
           card: 'Soldier',
           value: 1,
-          image: 'imageUrlHere',
+          image: '/images/cards/Soldier_Card.png',
         }],
       },
       mteran: {
@@ -29,7 +29,7 @@ module.exports.demoPlaying = {
         hand: [{
           card: 'Priestess',
           value: 4,
-          image: 'imageUrlHere',
+          image: '/images/cards/Priestess_Card.png',
         }],
       },
     },
@@ -37,40 +37,40 @@ module.exports.demoPlaying = {
       twheeler: [{
         card: 'Minister',
         value: 7,
-        image: 'imageUrlHere',
+        image: '/images/cards/Minister_Card.png',
       }],
       lcosta: [{
         card: 'Prince',
         value: 8,
-        image: 'imageUrlHere',
+        image: '/images/cards/Prince_Card.png',
       }],
       mteran: [{
         card: 'Knight',
         value: 3,
-        image: 'imageUrlHere',
+        image: '/images/cards/Knight_Card.png',
       }],
     },
     deck: [{
       card: 'General',
       value: 6,
-      image: 'imageUrlHere',
+      image: '/images/cards/General_Card.png',
     }, {
       card: 'Minister',
       value: 7,
-      image: 'imageUrlHere',
+      image: '/images/cards/Minister_Card.png',
     }, {
       card: 'Clown',
       value: 2,
-      image: 'imageUrlHere',
+      image: '/images/cards/Clown_Card.png',
     },
     {
       card: 'Soldier',
       value: 1,
-      image: 'imageUrlHere',
+      image: '/images/cards/Soldier_Card.png',
     }, {
       card: 'Wizard',
       value: 5,
-      image: 'imageUrlHere',
+      image: '/images/cards/Wizard_Card.png',
     }], // rewrite deck as array of objects
   },
   roundWins: {
@@ -176,3 +176,34 @@ module.exports.demoBuilding = {
     },
   ],
 };
+
+
+module.exports.usersDraft = [
+  {
+  "username": "twheeler",
+    "password": "twheeler",
+      "email": "twheeler@tw.com",
+        "pronouns": "Your Grace",
+          "avatar": "/images/avatars/redHatCat.png",
+            "gamesPlayed": 37,
+              "gamesWon": 30,
+  },
+  {
+    "username": "lcosta",
+      "password": "lcosta",
+        "email": "lcosta@lc.com",
+          "pronouns": "peasant",
+            "avatar": "/images/avatars/blueFlowersCat.png",
+              "gamesPlayed": 3,
+                "gamesWon": 0,
+    },
+    {
+      "username": ",mteran",
+        "password": "mteran",
+          "email": "mteran@mt.com",
+            "pronouns": "My Lord",
+              "avatar": "/images/avatars/underBlanketCat.png",
+                "gamesPlayed": 37,
+                  "gamesWon": 30,
+      },
+    ]

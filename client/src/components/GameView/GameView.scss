@@ -1,6 +1,11 @@
+@import '/node_modules/bootstrap/scss/_functions.scss';
+@import '/node_modules/bootstrap/scss/_variables.scss';
+
 .gameview {
-  // border: 1px solid black;
   padding-inline: 5%;
+  height: calc(100vh - ($navbar-padding-y * 2) - $navbar-brand-height - ($navbar-brand-padding-y * 2));
+  width: 100vw;
+  background-color: rgba(33, 37, 41, 0.5);
   .top-row {
     height: 35%;
 
@@ -20,7 +25,7 @@
       min-height: 70%;
     }
     .my-hand {
-      width: 25vw;
+      width: 20vw;
 
       .love-letter-card {
         width: 50%;
@@ -38,14 +43,10 @@
     width: 11vw;
   }
   .card-art-image {
-    -webkit-filter: brightness(100%);
+    filter: brightness(100%);
 
     &:hover {
-      -webkit-filter: brightness(70%);
-      -webkit-transition: all 1s ease;
-      -moz-transition: all 1s ease;
-      -o-transition: all 1s ease;
-      -ms-transition: all 1s ease;
+      filter: brightness(70%);
       transition: all 1s ease;
     }
   }
