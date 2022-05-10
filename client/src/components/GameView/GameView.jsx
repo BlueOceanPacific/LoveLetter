@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import io from 'socket.io-client';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Chat from '../Chat/Chat';
 import OpponentsHand from './Hands/OpponentsHand';
@@ -16,6 +17,7 @@ import { useParams } from 'react-router-dom';
 function GameView() {
   const [game, setGame] = useState(null);
   const { id } = useParams();
+  const [socket, setSocket] = useState(io('/game',{query: {id}}));
 
   useEffect(() => {
     axios.get(`/games/${id}`).then(({ data }) => {
@@ -78,7 +80,7 @@ function GameView() {
         <div className="row bottom-row">
           {/** ******************* Chat.jsx ************************** */}
           <div className="col-3 chat" style={{ backgroundColor: 'white' }}>
-            <Chat />
+            <Chat socket={socket} />
           </div>
           <div className="col">
             <div className="row justify-content-between align-items-center">
