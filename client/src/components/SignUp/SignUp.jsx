@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import './SignUp.scss';
 
 function SignUp() {
+  const [username, setUsername] = useState('matt');
+  const [password, setPassword] = useState('12341234');
+
+  const signUpHandler = (ev) => {
+    ev.preventDefault();
+    console.log('log');
+    axios.post('/user/signup', { username, password }).then(res => console.log(res));
+  };
   return (
     <div className="container" id="su-container">
       <h3> Create an Account </h3>
@@ -15,7 +24,7 @@ function SignUp() {
             className="form-control"
             id="SignUpInputEmail"
             placeholder="Email Address"
-            requried
+            required
             aria-describedby="emailHelp"
           />
           <div id="emailHelp" className="form-text">
@@ -35,8 +44,8 @@ function SignUp() {
             aria-describedby="passwordHelp"
           />
           <div id="passwordHelp" className="form-text">
-            Use 8 or more characters with a mix of letters, numbers, and symbols to build the
-            strongest castle in all of England.
+            Use 8 or more characters with a mix of letters, numbers, and symbols
+            to build the strongest castle in all of England.
           </div>
         </div>
         <div className="mb-3">
@@ -62,7 +71,12 @@ function SignUp() {
           </label>
           <div className="kv-avatar">
             <div className="choose-avatar">
-              <input id="avatar" name="avatar" type="file" aria-describedby="avatarHelp" />
+              <input
+                id="avatar"
+                name="avatar"
+                type="file"
+                aria-describedby="avatarHelp"
+              />
             </div>
           </div>
           <div id="avatarHelp" className="form-text">
@@ -74,7 +88,11 @@ function SignUp() {
           <button type="button" className="btn btn-primary">
             Back
           </button>
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={signUpHandler}
+          >
             Submit
           </button>
         </div>

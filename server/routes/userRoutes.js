@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const bcrypt = require('bcryptjs');
 const db = require('../../db');
+const User = require('../../db/userModel');
 
 module.exports = function (app) {
   app.get('/authTest', (req, res) => {
@@ -14,7 +15,7 @@ module.exports = function (app) {
   * Will sends an error in any other case
   */
   app.post('/user/login', (req, res) => {
-    db.User.findOne({ username: req.body.username }).exec()
+    User.findOne({ username: req.body.username }).exec()
       .then((user) => {
         bcrypt.compare(req.body.password, user.password, (error, isMatch) => {
           const { session } = req;
@@ -40,7 +41,7 @@ module.exports = function (app) {
   // Saves new user with {username: username, password: password} to the db
   // Uses bcrypt middleware to encrypt and store their password
   app.post('/user/signup', (req, res) => {
-    const newUser = new db.User(req.body);
+    const newUser = new User(req.body);
     newUser.save()
       .then(() => res.send(201))
       .catch((err) => res.status(500).send(err));
