@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
-import { Link } from 'react-router-dom';
-=======
 import { Link, useNavigate } from 'react-router-dom';
->>>>>>> main
 import './Login.scss';
 import useStore from '../Store/store';
 
@@ -21,36 +17,20 @@ function Login() {
 
   const validatesLogin = () => {
     axios
-<<<<<<< HEAD
-      .post('user/login', { username, password })
-      .then((result) => {
-        if (result.data.username) {
-          logIn(result.data.user);
-          setRoute('/');
-        }
-      })
-      .catch(() => alert('Invalid username or password'));
-  };
-
-  if (route === '/') {
-    return <Redirect to="/" />;
-  }
-=======
       .post('/user/login', { username, password })
       .then(({ data }) => {
         console.log('logged in as: ', data);
         if (data.user) {
           logIn(data.user);
-          return navigate('/')
         }
+        return navigate('/');
       })
       .catch((err) => {
         console.log(err);
         alert('Invalid username or password');
       });
   };
-  
->>>>>>> main
+
   return (
     <div className="d-flex justify-content-center" id="login">
       <h1>Welcome!</h1>
