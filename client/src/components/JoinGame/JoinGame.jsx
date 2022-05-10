@@ -21,11 +21,7 @@ function JoinGame() {
   }, games);
 
   const handleAutoJoin = () => {
-    games.map((game) => {
-      if (game.id && game.currentPlayers < 4) {
-        navigate(`/games/${game.id}`);
-      }
-    });
+    navigate(`/games/${games[0].id}`);
   };
 
   return (

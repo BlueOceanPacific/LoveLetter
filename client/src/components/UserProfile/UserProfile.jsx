@@ -33,6 +33,7 @@ function UserProfile() {
       .catch((err) => console.log(err));
   };
 
+
   return (
     <div>
       <div className="userprofile-main">
@@ -40,23 +41,20 @@ function UserProfile() {
         <div className="col-lg middle">
           <form onSubmit={submitHandler}>
             <div className="username">
-              <p className="UP-username-msg">{`Hello ${user.username}!`}</p>
-              <p className="UP-username-msg">{user.pronouns}</p>
+              <p className="UP-username-hello">{`Hello ${user.username}!`}</p>
+              <p className="UP-username-pronouns">{`[${user.pronouns}]`}</p>
             </div>
             <div className="avatar">
               <div>
                 {/* add url to chosen avatar {avatar}
                 "/images/avatars/disgustedCat.png" */}
-                <p> {`${user.avatar}`}</p>
+
                 <img className="avatarRound" src={`${user.avatar}`} alt="avatar" />
               </div>
               {/* add drop down menu */}
               {/* conditional view of dropdown? */}
-              <span>Choose your avatar:</span>
-              <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
+              <p>Choose your avatar:</p>
+
             </div>
 
             <div className="pronouns">
@@ -76,8 +74,8 @@ function UserProfile() {
           </form>
         </div>
         <div className="col-sm" />
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 
