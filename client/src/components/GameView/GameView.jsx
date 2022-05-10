@@ -17,7 +17,7 @@ import { useParams } from 'react-router-dom';
 function GameView() {
   const [game, setGame] = useState(null);
   const { id } = useParams();
-  const [socket, setSocket] = useState(io({query: {id}}));
+  const [socket, setSocket] = useState(io('/game',{query: {id}}));
 
   useEffect(() => {
     axios.get(`/games/${id}`).then(({ data }) => {

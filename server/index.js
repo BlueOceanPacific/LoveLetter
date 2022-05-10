@@ -33,7 +33,15 @@ require('./routes/baseRoutes')(app);// "base" routes like create game, get leade
 require('./routes/gameRoutes')(app);// routes for actual gameplay
 
 // ----------------- Listen for Socket IO Connections -------------------------
-io.on('connection', (socket) => {
+const gameNamespace = io.of('/game');
+
+gameNamespace.use((socket, next) => {
+  // if i knew how, i'd verify that the user connecting is authenticated,
+  // then invoke the next function if they were =)
+  next();
+})
+
+gameNamespace.on('connection', (socket) => {
   const room = socket.handshake.query.id;
   socket.join(room);
 
