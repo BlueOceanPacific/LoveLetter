@@ -22,7 +22,7 @@ module.exports = function (app) {
           if (error) {
             throw error;
           } else if (!isMatch) {
-            res.send();
+            res.sendStatus(403);
           } else {
             session.username = req.body.username;
             session.loggedIn = true;
