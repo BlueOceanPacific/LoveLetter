@@ -51,7 +51,11 @@ function processMove(state, user, move) {
   return true;
 }
 
+// Find the next active player and draw a card into their hand
 function processDraw(state) {
+  if (!state.currentRound.deck.length) {
+    return;
+  }
   const nextCard = state.currentRound.deck.pop();
   const { currentPlayer } = state.currentRound;
   let playerPos;
@@ -62,21 +66,29 @@ function processDraw(state) {
   }
   let nextPlayer = null;
   while (!nextPlayer) {
-    playerPos = (playerPos + 1) % (state.players.length - 1);
+    playerPos = (playerPos + 1) % (state.players.length);
     const playerName = state.players[playerPos].username;
+
     if (state.currentRound.activeHands[playerName]) {
       nextPlayer = playerName;
     }
   }
-  console.log('CurrentPlayer: ', currentPlayer);
-  console.log('Next player: ', nextPlayer);
   state.currentRound.currentPlayer = nextPlayer;
   state.currentRound.activeHands[nextPlayer].hand.push(nextCard);
+  state.currentRound.activeHands[nextPlayer].value += nextCard.value;
 }
 // check if the round has ended
 function checkRoundEnd(state) {
   // only one user remains, or the deck is out of cards
-  return false;
+  if(Object.keys(state.currentRound.activeHands).length <=1 || state.currentRound.deck.length === 0) {
+    endRound
+  } else {
+    return;
+  }
+}
+
+function endRound(state) {
+
 }
 
 // check if the round has ended
