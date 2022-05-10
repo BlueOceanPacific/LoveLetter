@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable comma-dangle */
+/* eslint-disable object-curly-newline */
 /* eslint-disable no-console */
 const bcrypt = require('bcryptjs');
 const db = require('../../db');
@@ -6,14 +9,14 @@ const User = require('../../db/userModel');
 module.exports = function (app) {
   app.get('/authTest', (req, res) => {
     const { session } = req;
-    console.log(session);
+    // console.log(session);
     res.send(200);
   });
   /*
-  * Compares password submitted by user with hashed password stored in DB
-  * Sends back user object if login is correct
-  * Will sends an error in any other case
-  */
+   * Compares password submitted by user with hashed password stored in DB
+   * Sends back user object if login is correct
+   * Will sends an error in any other case
+   */
   app.post('/user/login', (req, res) => {
     User.findOne({ username: req.body.username }).exec()
       .then((user) => {
@@ -26,12 +29,15 @@ module.exports = function (app) {
           } else {
             session.username = req.body.username;
             session.loggedIn = true;
-            const {
-              username, email, pronouns, avatar,
-            } = user;
-            res.send({user: {
-              username, email, pronouns, avatar,
-            }});
+            const { username, email, pronouns, avatar } = user;
+            res.send({
+              user: {
+                username,
+                email,
+                pronouns,
+                avatar,
+              },
+            });
           }
         });
       })
@@ -49,14 +55,17 @@ module.exports = function (app) {
 
   // Returns a user profile (all fields excluding password)
   app.get('/user/profile', (req, res) => {
-    console.log('get req user profile', req.body);
-    db.User.findOne({ username: req.body.username }).exec()
+    db.User.findOne({ username: req.body.username })
+      .exec()
       .then((user) => {
-        const {
-          username, email, pronouns, avatar, gamesPlayed, gamesWon,
-        } = user;
+        const { username, email, pronouns, avatar, gamesPlayed, gamesWon } = user;
         res.send({
-          username, email, pronouns, avatar, gamesPlayed, gamesWon,
+          username,
+          email,
+          pronouns,
+          avatar,
+          gamesPlayed,
+          gamesWon,
         });
       })
       .catch((err) => res.sendStatus(500).send(err));
@@ -64,9 +73,9 @@ module.exports = function (app) {
 
   // Updates a user profile - only allows pronoun and avatar updates
   app.put('/user/profile', (req, res) => {
-    console.log('put req.', req.body)
+    console.log('put req for user:', req.body.username, ' new pronouns: ', req.body.pronouns, ' new avatar:', req.body.avatar);
     db.User.updateOne({ username: req.body.username }, {
-      pronouns: req.body.pronouns[0],
+      pronouns: req.body.pronouns,
       avatar: req.body.avatar,
     }).exec()
       .then(() => res.sendStatus(200))
