@@ -50,10 +50,10 @@ function Home() {
           <Link to="/userprofile">User Profile</Link>
         </li>
         <li key="lobby" className="list-group-item">
-          <Link to="/play/lobby/:id">Lobby</Link>
+          <Link to="/play/lobby/demo-building">Lobby</Link>
         </li>
         <li key="game" className="list-group-item">
-          <Link to="/play/game/:id">/game/:id</Link>
+          <Link to="/play/game/demo-playing">/game/:id</Link>
         </li>
         <li key="chat" className="list-group-item">
           <Link to="/chat">Chat</Link>

@@ -1,10 +1,13 @@
+// 1. package imports
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
-import Chat from '../Chat/Chat';
-import './Lobby.scss';
 import axios from 'axios';
+// 2. component imports
+import GameView from '../GameView/GameView';
+import Chat from '../Chat/Chat';
 import LoadingSpinner from '../../util/LoadingSpinner';
+// 3. css
+import './Lobby.scss';
 
 function Lobby() {
   const [players, setPlayers] = useState(['twheeler', 'lcosta', 'mteran']);
@@ -33,6 +36,10 @@ function Lobby() {
     ));
 
   if (!game) return <LoadingSpinner/>;
+
+  if (game.state === 'playing') {
+    return <GameView />;
+  }
 
   return (
     <div className="lobby-container">
