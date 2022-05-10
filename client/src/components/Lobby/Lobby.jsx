@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import Chat from '../Chat/Chat';
 import './Lobby.scss';
 
 function Lobby() {
   const [players, setPlayers] = useState(['twheeler', 'lcosta', 'mteran']);
+  const navigate = useNavigate();
 
   // useEffect(() => {
 
   // }, []);
 
-  const createStartGameButton = () => {
-    let buttons = <button type="button" className="lobby-btn-start btn-primary btn-lg">Start Game</button>;
-    if (players.length < 2) {
-      buttons = <button type="button" className="lobby-btn-start btn-primary btn-lg" disabled>Start Game</button>;
-    }
-
-    return buttons;
+  const leaveLobbyHandler = () => {
+    // add logic to disconnect from socket io connection
+    navigate('/');
   };
 
   const populatePlayers = () => players.map((player) => (
-    <li className="list-group-item">
+    <li className="list-group-item" key={player}>
       <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon"/>
       {player}
     </li>
@@ -39,11 +37,14 @@ function Lobby() {
       </div>
       <div className="chat-wrapper">
         <div className="lobby-chat">
-          <Chat />
+          {/* Socket IO logic needs to be updated so that chat can load in the lobby */}
+          {/* <Chat /> */ }  
         </div>
       </div>
-      <button type="button" className="lobby-btn-leave btn-primary btn-lg">Leave Lobby</button>
-      {createStartGameButton()}
+      <button type="button" className="lobby-btn-leave btn-primary btn-lg" onClick={leaveLobbyHandler}>
+        Leave Lobby
+      </button>
+      <button type="button" className="lobby-btn-start btn-primary btn-lg" disabled={players.length < 2}>Start Game</button>;
     </div>
   );
 }
