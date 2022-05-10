@@ -22,19 +22,19 @@ function Login() {
         console.log('logged in as: ', data);
         if (data.user) {
           logIn(data.user);
-          return navigate('/')
         }
+        return navigate('/');
       })
       .catch((err) => {
         console.log(err);
         alert('Invalid username or password');
       });
   };
-  
+
   return (
     <div className="d-flex justify-content-center" id="login">
       <h1>Welcome!</h1>
-      <br></br>
+      <br />
 
       <form className="form">
         <input
@@ -43,19 +43,19 @@ function Login() {
           placeholder="username"
           id="login-input"
           onChange={(event) => setUsername(event.target.value)}
-        ></input>
-        <br></br>
-        <br></br>
+        />
+        <br />
+        <br />
         <input
           className="input"
           type="text"
           placeholder="password"
           id="login-input"
           onChange={(event) => setPassword(event.target.value)}
-        ></input>
+        />
       </form>
 
-      <br></br>
+      <br />
       <button
         type="button"
         className="btn btn-primary btn-sm"
@@ -64,13 +64,13 @@ function Login() {
       >
         Submit
       </button>
-      <br></br>
+      <br />
       <Link to="/signup">
         <button type="button" className="btn btn-secondary btn-sm">
           Sign Up
         </button>
       </Link>
-      <br></br>
+      <br />
       <button
         type="button"
         className="btn btn-secondary btn-sm"

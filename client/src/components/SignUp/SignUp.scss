@@ -1,14 +1,62 @@
 #su-container {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 10px;
+  background-color: white;
 }
 
 #su-buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 'left back submit right';
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-items: center;
-  margin-top: 30px;
+}
+
+#su-back-button {
+  grid-area: back;
+  min-width: 200px;
+  margin: 10px;
+}
+
+#su-submit-button {
+  grid-area: submit;
+  min-width: 200px;
+  margin: 10px;
+}
+
+#dropdownMenuButton1 {
+  min-width: 200px;
+  margin: 10px;
+}
+
+.dropdown-toggle {
+  grid-area: dropdown-toggle;
+  margin-top: 20px;
+}
+
+.dropdown-menu {
+  grid-area: dropdown-menu;
+  min-width: 200px;
+}
+
+.dropdown-menu .row {
+  margin: 20px 0;
+}
+
+.dropdown-menu span {
+  margin-left: 10px;
+}
+
+.dd-btn {
+  border: none;
+  background-color: white;
+}
+
+.avatarRound {
+  border-radius: 50%;
+  max-height: 200px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.dd-thumbnail {
+  height: 60px;
+  width: 60px;
 }
