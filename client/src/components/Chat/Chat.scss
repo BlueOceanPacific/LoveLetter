@@ -3,18 +3,19 @@
 }
 
 .chat-messages {
-  max-height: 250px;
+  max-height: 43vh;
   overflow: auto;
-  height: 100%;
+  // max-width: 15vh;
+  overflow-wrap: break-word;
 }
 
-.chat-timestamp {
-  display: inline-block;
-  margin-right: 1%;
-  margin-left: 1%;
-  font-size: x-small;
-  width: 25px;
-}
+// .chat-timestamp {
+//   display: inline-block;
+//   margin-right: 1%;
+//   margin-left: 1%;
+//   font-size: x-small;
+//   width: 25px;
+// }
 
 .chat-username {
   margin-right: 0.5%;
@@ -23,4 +24,9 @@
 
 .chat-message-body {
   font-size: small;
+}
+
+.chat-input {
+  position: relative;
+  bottom: 0;
 }
