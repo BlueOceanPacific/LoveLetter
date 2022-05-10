@@ -10,21 +10,21 @@ const fakeData = {
   messages: [
     {
       id: '1',
-      username: 'user12947192049',
+      username: 'user19',
       messageBody: 'some fake texttttt',
       timestamp: '01:21',
       photo: 'dont know if i need this yet',
     },
     {
       id: '2',
-      username: 'user74398498341',
+      username: 'user71',
       messageBody: 'some fake texttttt fadssdf sadfadsafadfs',
       timestamp: '01:22',
       photo: 'dont know if i need this yet',
     },
     {
       id: '3',
-      username: 'user3812840981092480',
+      username: 'user30',
       messageBody: 'some fake textttttasdfdsafa asdfsafasdfdfasasdf asdfasd sadfadsafadfs',
       timestamp: '10:55',
       photo: 'dont know if i need this yet',
