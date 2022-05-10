@@ -1,14 +1,10 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-/* eslint-disable object-curly-newline */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUp.scss';
 
 function SignUp() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [usernameHelper, setUsernameHelper] = useState(() => 'Please choose a username my lord.');
 
   const [formData, setFormData] = useState({
@@ -27,8 +23,7 @@ function SignUp() {
     event.preventDefault();
     axios
       .post('/user/signup', formData)
-      .then((response) => {
-        const status = JSON.parse(response.status);
+      .then(() => {
         document.getElementById('usernameHelp').style.color = '#ff0000';
         setUsernameHelper('username added');
         navigate('/login');

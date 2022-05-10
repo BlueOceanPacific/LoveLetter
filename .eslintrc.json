@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb"],
+  "extends": ["airbnb", "prettier"],
   "plugins": ["react"],
   "rules": {
     "func-names": "off",
