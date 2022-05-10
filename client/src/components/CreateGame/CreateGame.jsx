@@ -27,7 +27,7 @@ export default function CreateGame() {
 
           <div className="col">
             <select className="form-select form-select-lg">
-              <option selected>Select Prize</option>
+              <option defaultValue>Select Prize</option>
               <option value="1">Prince</option>
               <option value="2">Princess</option>
               <option value="3">My Liege</option>
