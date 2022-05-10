@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-// import { useQuery } from 'react-query';
 import useStore from '../Store/store';
 import './SignUp.scss';
 
-//3. if fields are valid, the front end will allow the submission to run a post on the signup route
-// POST all fields in a single object
+// import { Redirect } from 'react-router-dom';
+// import { useQuery } from 'react-query';
 
 function SignUp() {
+  // let history = useHistory();
+  const [usernameHelper, setUsernameHelper] = useState(() => 'Please choose a username my lord.');
+
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -29,17 +31,35 @@ function SignUp() {
     event.preventDefault();
     axios
       .post('/user/signup', formData)
-      .then(function (response) {
+      .then((response) => {
         console.log(response);
+        const status = JSON.parse(response.data.response.status);
+        console.log('response:');
+        console.log(response);
+        if (status === '200' || status === '201') {
+          console.log('username added');
+          setUsernameHelper('username added');
+          // history.push('/login');
+          // return <Redirect to="/login" />;
+        }
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        console.log('error: ', error);
+        const errorCode = error.code;
+        console.log(errorCode);
+        if (errorCode === '11000') {
+          console.log('this username already exists my lord');
+          setUsernameHelper('this username already exists my lord');
+        } else if (errorCode === 'ERR_BAD_RESPONSE') {
+          console.log('error creating an account, please refresh and try again later');
+          setUsernameHelper('error creating an account, please refresh and try again later');
+        }
       });
   };
 
   return (
     <div className="container" id="su-container">
-      <h3>{` Create an Account ${formData.password}`}</h3>
+      <h3>{' Create an Account '}</h3>
       <form className="su-form" onSubmit={submitHandler}>
         <div className="mb-3 su-username">
           <label htmlFor="InputUsername" className="form-label">
@@ -56,7 +76,7 @@ function SignUp() {
             required
           />
           <div id="usernameHelp" className="form-text">
-            Please choose a username my lord.
+            {usernameHelper}
           </div>
         </div>
 
@@ -65,13 +85,14 @@ function SignUp() {
             Password
           </label>
           <input
-            type="password"
+            aria-describedby="passwordHelp"
             className="form-control"
             id="SignUpInputPassword"
-            placeholder="Password"
-            aria-describedby="passwordHelp"
             name="password"
             onChange={changeHandler}
+            placeholder="Password"
+            required
+            type="password"
           />
           <div id="passwordHelp" className="form-text">
             Use 8 or more characters with a mix of letters, numbers, and symbols to build the
@@ -84,12 +105,14 @@ function SignUp() {
             Email address
           </label>
           <input
-            type="email"
+            aria-describedby="emailHelp"
             className="form-control"
             id="SignUpInputEmail"
-            placeholder="Email Address"
-            aria-describedby="emailHelp"
+            name="email"
             onChange={changeHandler}
+            placeholder="Email Address"
+            type="email"
+            required
           />
           <div id="emailHelp" className="form-text">
             We&apos;ll never share your email with anyone else my liege.
@@ -101,12 +124,13 @@ function SignUp() {
             Pronouns
           </label>
           <input
-            type="input"
+            aria-describedby="pronounHelp"
             className="form-control"
             id="SignUpInputPronoun"
-            placeholder="Pronouns"
-            aria-describedby="pronounHelp"
+            name="pronouns"
             onChange={changeHandler}
+            placeholder="Pronouns"
+            type="input"
           />
           <div id="pronounHelp" className="form-text">
             How would you like to be addressed my liege.
@@ -120,11 +144,11 @@ function SignUp() {
           <div className="kv-avatar">
             <div className="choose-avatar">
               <input
+                aria-describedby="avatarHelp"
                 id="avatar"
                 name="avatar"
-                type="file"
-                aria-describedby="avatarHelp"
                 onChange={changeHandler}
+                type="file"
               />
             </div>
           </div>
