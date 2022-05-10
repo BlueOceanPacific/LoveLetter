@@ -63,7 +63,7 @@ function UserProfile() {
                   Choose your avatar
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><img className="dd-thumbnail" src="/images/avatars/blueFlowersCat.png" /><span>Blue</span></li>
+                  <li><img className="dd-thumbnail" src="/images/avatars/blueFlowersCat.png" name="avatar"/><span >Blue</span></li>
                   <li><img className="dd-thumbnail" src="/images/avatars/redHatCat.png" />
                     <span> Red</span></li>
                   <li><img className="dd-thumbnail" src="/images/avatars/underBlanketCat.png" />
@@ -84,7 +84,6 @@ function UserProfile() {
               />
             </div>
             <div className="edit">
-              {/* cancel clears form - new get? */}
               <button type="button" data-bs-target="#" className="btn btn-primary UP-edit-btn">Cancel</button>
 
               <button type="submit" name="submit" className="btn btn-primary UP-edit-btn"> Save</button>
