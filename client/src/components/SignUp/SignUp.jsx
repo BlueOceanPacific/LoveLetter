@@ -2,15 +2,26 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './SignUp.scss';
 
+// TODO: form validation, add pronoun input
+
 function SignUp() {
-  const [username, setUsername] = useState('matt');
-  const [password, setPassword] = useState('12341234');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [pronouns, setPronouns] = useState('he/him/his');
+
+  const usernameChangeHandler = (ev) => setUsername(ev.target.value);
+  const passwordChangeHandler = (ev) => setPassword(ev.target.value);
+  const emailChangeHandler = (ev) => setEmail(ev.target.value);
 
   const signUpHandler = (ev) => {
     ev.preventDefault();
-    console.log('log');
-    axios.post('/user/signup', { username, password }).then(res => console.log(res));
+    axios
+      .post('/user/signup', { username, password, email, pronouns })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
+
   return (
     <div className="container" id="su-container">
       <h3> Create an Account </h3>
@@ -26,6 +37,7 @@ function SignUp() {
             placeholder="Email Address"
             required
             aria-describedby="emailHelp"
+            onChange={emailChangeHandler}
           />
           <div id="emailHelp" className="form-text">
             We&apos;ll never share your email with anyone else my liege.
@@ -42,6 +54,7 @@ function SignUp() {
             placeholder="Password"
             required
             aria-describedby="passwordHelp"
+            onChange={passwordChangeHandler}
           />
           <div id="passwordHelp" className="form-text">
             Use 8 or more characters with a mix of letters, numbers, and symbols
@@ -59,6 +72,7 @@ function SignUp() {
             placeholder="Username"
             required
             aria-describedby="usernameHelp"
+            onChange={usernameChangeHandler}
           />
           <div id="usernameHelp" className="form-text">
             Use 4 or more characters my lord.
