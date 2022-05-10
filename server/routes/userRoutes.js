@@ -7,7 +7,7 @@ const db = require('../../db');
 module.exports = function (app) {
   app.get('/authTest', (req, res) => {
     const { session } = req;
-    console.log(session);
+    // console.log(session);
     res.send(200);
   });
   /*
@@ -47,7 +47,6 @@ module.exports = function (app) {
   // Uses bcrypt middleware to encrypt and store their password
   app.post('/user/signup', (req, res) => {
     const newUser = new db.User(req.body);
-    console.log('req body at route user/signup: ', req.body);
     newUser
       .save()
       .then(() => res.send(201))
@@ -56,7 +55,6 @@ module.exports = function (app) {
 
   // Returns a user profile (all fields excluding password)
   app.get('/user/profile', (req, res) => {
-    console.log('get req user profile', req.body);
     db.User.findOne({ username: req.body.username })
       .exec()
       .then((user) => {
@@ -75,7 +73,6 @@ module.exports = function (app) {
 
   // Updates a user profile - only allows pronoun and avatar updates
   app.put('/user/profile', (req, res) => {
-    console.log('put req.', req.body);
     db.User.updateOne(
       { username: req.body.username },
       {

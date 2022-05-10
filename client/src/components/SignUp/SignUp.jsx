@@ -19,8 +19,6 @@ function SignUp() {
     avatar: '',
   });
 
-  // const { username, password, email, pronouns, avatar } = formData;
-
   const changeHandler = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -36,16 +34,13 @@ function SignUp() {
         navigate('/login');
       })
       .catch((error) => {
-        console.log('error: ', error);
         const errorCode = error.code;
-        console.log(errorCode);
         if (errorCode === '11000') {
-          console.log('this username already exists my lord');
           document.getElementById('usernameHelp').style.color = '#ff0000';
           setUsernameHelper('this username already exists my lord');
         } else if (errorCode === 'ERR_BAD_RESPONSE') {
           document.getElementById('usernameHelp').style.color = '#ff0000';
-          console.log('error creating an account, please refresh and try again later');
+
           setUsernameHelper('error creating an account, please refresh and try again later');
         }
       });
