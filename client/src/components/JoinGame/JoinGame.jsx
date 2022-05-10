@@ -18,7 +18,7 @@ function JoinGame() {
       }
     };
     getGames();
-  }, games);
+  }, [games]);
 
   const handleAutoJoin = () => {
     navigate(`/games/${games[0].id}`);
@@ -45,7 +45,7 @@ function JoinGame() {
           </thead>
           <tbody>
             {games.map((game) => (
-              <tr key={game.id}>
+              <tr key={game._id}>
                 <th scope="row">{game.name}</th>
                 <td colSpan="2">
                   {game.currentPlayers}

@@ -1,13 +1,40 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useStore from '../Store/store';
 import './CreateGame.css';
 
+// TODO: validate form inputs
+
 export default function CreateGame() {
+  const [lobbyName, setLobbyName] = useState('');
+  const [prize, setPrize] = useState('');
+  const [isPublic, setIsPublic] = useState(true);
   const navigate = useNavigate();
-  function handleClick() {
-    navigate('/');
-  }
+  const user = useStore((state) => state.user);
+
+  const lobbyNameChangeHandler = (ev) => setLobbyName(ev.target.value);
+  const prizeChangeHandler = (ev) => setPrize(ev.target.value);
+  const isPublicChangeHandler = (ev) => setIsPublic(ev.target.value);
+
+  const createLobbyHandler = (event) => {
+    event.preventDefault();
+    axios
+      .post('/games', {
+        name: lobbyName,
+        privacy: isPublic ? 'public' : 'private',
+        prize,
+        user,
+      })
+      .then(({data}) => {
+        navigate(`/play/lobby/${lobbyName}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="container creategame-box my-auto ">
       <div className="row">
@@ -21,13 +48,17 @@ export default function CreateGame() {
             <input
               className="form-control form-control-lg"
               type="text"
-              placeholder="Lobby name"
+              placeholder="Lobby Name"
+              onChange={lobbyNameChangeHandler}
             />
           </div>
 
           <div className="col">
-            <select className="form-select form-select-lg">
-              <option selected>Select Prize</option>
+            <select
+              className="form-select form-select-lg"
+              onChange={prizeChangeHandler}
+            >
+              <option defaultValue>Select Prize</option>
               <option value="1">Prince</option>
               <option value="2">Princess</option>
               <option value="3">My Liege</option>
@@ -40,8 +71,10 @@ export default function CreateGame() {
             className="form-check-input "
             type="radio"
             name="flexRadioDefault"
-            value="Public"
+            value={true}
             id="defaultCheck1"
+            defaultChecked
+            onChange={isPublicChangeHandler}
           />
           <label className="form-check-label " htmlFor="defaultCheck1">
             Public
@@ -52,8 +85,9 @@ export default function CreateGame() {
             className="form-check-input"
             type="radio"
             name="flexRadioDefault"
-            value="Private"
+            value={false}
             id="defaultCheck1"
+            onChange={isPublicChangeHandler}
           />
           <label className="form-check-label" htmlFor="defaultCheck1">
             Private
@@ -66,6 +100,7 @@ export default function CreateGame() {
             <button
               className="btn btn-primary btn-lg createlobby-btn mt-5"
               type="submit"
+              onClick={createLobbyHandler}
             >
               Create Lobby
             </button>

@@ -17,7 +17,7 @@ function MessagesList({ messages }) {
     <div>
       {messages.map((message) => (
         <Message
-          messageBody={message.messageBody}
+          messageBody={message.message}
           username={message.username}
           timestamp={message.timestamp}
           key={message.id}
