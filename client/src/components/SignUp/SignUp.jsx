@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+/* eslint-disable prefer-const */
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable object-curly-newline */
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUp.scss';
@@ -6,7 +10,7 @@ import './SignUp.scss';
 // TODO: form validation, add pronoun input
 
 function SignUp() {
-  const navigate = useNavigate();
+  let navigate = useNavigate();
   const [usernameHelper, setUsernameHelper] = useState(() => 'Please choose a username my lord.');
 
   const [formData, setFormData] = useState({
@@ -14,7 +18,7 @@ function SignUp() {
     password: '',
     email: '',
     pronouns: '',
-    avatar: '/images/avatars/blueFlowersCat.png',
+    avatar: '',
   });
 
   const changeHandler = (event) => {
@@ -23,10 +27,10 @@ function SignUp() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
     axios
       .post('/user/signup', formData)
-      .then(() => {
+      .then((response) => {
+        const status = JSON.parse(response.status);
         document.getElementById('usernameHelp').style.color = '#ff0000';
         setUsernameHelper('username added');
         navigate('/login');
@@ -82,8 +86,8 @@ function SignUp() {
             type="password"
           />
           <div id="passwordHelp" className="form-text">
-            Use 8 or more characters with a mix of letters, numbers, and symbols to build the
-            strongest castle in all of England.
+            Use 8 or more characters with a mix of letters, numbers, and symbols
+            to build the strongest castle in all of England.
           </div>
         </div>
 
@@ -124,120 +128,35 @@ function SignUp() {
           </div>
         </div>
 
-        <div className="mb-3 su-avatar avatar">
-          <div>
-            <img className="avatarRound" src={`${formData.avatar}`} alt="Avatar" />
-          </div>
-
-          <div className="dropdown">
-            <button
-              className="btn btn-primary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Choose your avatar
-            </button>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <div className="row" value="/images/avatars/blueFlowersCat.png">
-                <button
-                  type="button"
-                  name="avatar"
-                  id="blueCat"
-                  className="dd-btn"
-                  value="/images/avatars/blueFlowersCat.png"
-                  onClick={() =>
-                    changeHandler({
-                      target: {
-                        name: 'avatar',
-                        value: '/images/avatars/blueFlowersCat.png',
-                      },
-                    })
-                  }
-                >
-                  <img
-                    className="dd-thumbnail"
-                    src="/images/avatars/blueFlowersCat.png"
-                    alt="Blue Flowers Cat"
-                  />
-                  <span>Blue</span>
-                </button>
-              </div>
-              <div className="row">
-                <button
-                  type="button"
-                  className="dd-btn"
-                  name="avatar"
-                  value="/images/avatars/redHatCat.png"
-                  onClick={() =>
-                    changeHandler({
-                      target: {
-                        name: 'avatar',
-                        value: '/images/avatars/redHatCat.png',
-                      },
-                    })
-                  }
-                >
-                  <img
-                    className="dd-thumbnail"
-                    src="/images/avatars/redHatCat.png"
-                    alt="Red Hat Cat"
-                  />
-                  <span> Red</span>
-                </button>
-              </div>
-              <div className="row">
-                <button
-                  type="button"
-                  className="dd-btn"
-                  name="avatar"
-                  value="/images/avatars/underBlanketCat.png"
-                  onClick={() =>
-                    changeHandler({
-                      target: {
-                        name: 'avatar',
-                        value: '/images/avatars/underBlanketCat.png',
-                      },
-                    })
-                  }
-                >
-                  <img
-                    className="dd-thumbnail"
-                    src="/images/avatars/underBlanketCat.png"
-                    alt="Under Blanket Cat"
-                  />
-                  <span>Grey</span>
-                </button>
-              </div>
-              <div className="row">
-                <button
-                  type="button"
-                  className="dd-btn"
-                  name="avatar"
-                  value="/images/avatars/voidCat.png"
-                  onClick={() =>
-                    changeHandler({
-                      target: {
-                        name: 'avatar',
-                        value: '/images/avatars/voidCat.png',
-                      },
-                    })
-                  }
-                >
-                  <img className="dd-thumbnail" src="/images/avatars/voidCat.png" alt="Void Cat" />
-                  <span>Black</span>
-                </button>
-              </div>
+        <div className="mb-3 su-avatar">
+          <label htmlFor="choose-avatar" className="form-label">
+            Choose Avatar
+          </label>
+          <div className="kv-avatar">
+            <div className="choose-avatar">
+              <input
+                aria-describedby="avatarHelp"
+                id="avatar"
+                name="avatar"
+                // onChange={changeHandler}
+                type="file"
+              />
             </div>
+          </div>
+          <div id="avatarHelp" className="form-text">
+            Choose your avatar or be seen as a peasant.
           </div>
         </div>
 
         <div className="su-buttons" id="su-buttons">
-          <button type="button" className="btn btn-primary" id="su-back-button">
+          <button type="button" className="btn btn-primary">
             Back
           </button>
-          <button type="submit" className="btn btn-primary" id="su-submit-button">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            // onClick={signUpHandler}
+          >
             Submit
           </button>
         </div>
