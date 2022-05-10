@@ -2,3 +2,4 @@ package-lock.json
 bundle.js
 node_modules
 *.DS_Store
+client/src/components/SignUp/**Sign up**.md
