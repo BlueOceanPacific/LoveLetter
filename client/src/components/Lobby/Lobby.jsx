@@ -1,28 +1,38 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import Chat from '../Chat/Chat';
 import './Lobby.scss';
+import axios from 'axios';
+import LoadingSpinner from '../../util/LoadingSpinner';
 
 function Lobby() {
   const [players, setPlayers] = useState(['twheeler', 'lcosta', 'mteran']);
+  const [game, setGame] = useState(null);
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  // useEffect(() => {
-
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(`/games/${id}`)
+      .then(({ data }) => setGame(data[0]))
+      .catch((err) => console.log(err));
+  }, []);
 
   const leaveLobbyHandler = () => {
     // add logic to disconnect from socket io connection
     navigate('/');
   };
 
-  const populatePlayers = () => players.map((player) => (
-    <li className="list-group-item" key={player}>
-      <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon"/>
-      {player}
-    </li>
-  ));
+  const populatePlayers = () =>
+    players.map((player) => (
+      <li className="list-group-item" key={player}>
+        <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon" />
+        {player}
+      </li>
+    ));
+
+  if (!game) return <LoadingSpinner/>;
 
   return (
     <div className="lobby-container">
@@ -31,20 +41,29 @@ function Lobby() {
       </div> */}
       <div className="lobby-player-list-container">
         <h4 className="lobby-player-list-title">Current Players</h4>
-        <ul className="lobby-list-group">
-          {populatePlayers()}
-        </ul>
+        <ul className="lobby-list-group">{populatePlayers()}</ul>
       </div>
       <div className="chat-wrapper">
         <div className="lobby-chat">
           {/* Socket IO logic needs to be updated so that chat can load in the lobby */}
-          <Chat />  
+          <Chat />
         </div>
       </div>
-      <button type="button" className="lobby-btn-leave btn-primary btn-lg" onClick={leaveLobbyHandler}>
+      <button
+        type="button"
+        className="lobby-btn-leave btn-primary btn-lg"
+        onClick={leaveLobbyHandler}
+      >
         Leave Lobby
       </button>
-      <button type="button" className="lobby-btn-start btn-primary btn-lg" disabled={players.length < 2}>Start Game</button>;
+      <button
+        type="button"
+        className="lobby-btn-start btn-primary btn-lg"
+        disabled={players.length < 2}
+      >
+        Start Game
+      </button>
+      ;
     </div>
   );
 }

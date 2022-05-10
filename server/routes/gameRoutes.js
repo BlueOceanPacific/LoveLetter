@@ -20,7 +20,9 @@ module.exports = function (app) {
       deck: structuredClone(fullDeck),
     };
     console.log('Game created: ', newGame);
-    res.send(201);
+    newGame.save()
+      .then(() => res.send(201))
+      .catch((err) => res.status(500).send(err));
   });
 
   // need to add a join game route and communicate with Nick
@@ -28,7 +30,7 @@ module.exports = function (app) {
   // Get current game state - needs refactor to filter out fields for relevant users
   app.get('/games/:id', (req, res) => {
     console.log('Game requested: ', req.params.id);
-    db.Game.find({ name: 'demo-playing' })
+    Game.find({ name: req.params.id })
       .exec()
       .then((results) => res.send(results))
       .catch((err) => res.status(500).send(err));

@@ -28,8 +28,7 @@ export default function CreateGame() {
         user,
       })
       .then(({data}) => {
-        console.log(data);
-        // navigate('/lobby')
+        navigate(`/play/lobby/${lobbyName}`);
       })
       .catch((err) => {
         console.log(err);
