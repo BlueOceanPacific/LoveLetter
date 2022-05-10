@@ -21,6 +21,10 @@ function Home() {
       <Link to="/signup">signup</Link>
       <br />
       <Link to="/userprofile">userprofile</Link>
+      <div id="baloon">
+        {' '}
+        <img src="images/backgrounds/heartBaloon.png" alt="heart baloon flying" />
+      </div>
     </div>
   );
 }

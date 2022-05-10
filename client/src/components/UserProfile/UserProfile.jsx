@@ -1,10 +1,11 @@
+/* eslint-disable react/jsx-props-no-multi-spaces */
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import useStore from '../Store/store';
 import './UserProfile.scss';
@@ -14,10 +15,9 @@ function UserProfile() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [data, setData] = useState({
     pronouns: user.pronouns,
-    avatar: user.avatar
-  })
+    avatar: user.avatar,
+  });
   const { pronouns, avatar } = data;
-
 
   const changeHandler = (e) => {
     console.log('clicked', e.target);
@@ -33,7 +33,6 @@ function UserProfile() {
       })
       .catch((err) => console.log(err));
   };
-
 
   return (
     <div>
@@ -54,41 +53,114 @@ function UserProfile() {
                   Choose your avatar
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <div className="row"  value="/images/avatars/blueFlowersCat.png">
-                    <button type="button"  name="avatar" id="blueCat"  className="dd-btn"  value="/images/avatars/blueFlowersCat.png" onClick={() =>  changeHandler (
-                      {target:{
-                          name: 'avatar',
-                          value: "/images/avatars/blueFlowersCat.png"}})}><img
+                  <div className="row" value="/images/avatars/blueFlowersCat.png">
+                    <button
+                      type="button"
+                      name="avatar"
+                      id="blueCat"
+                      className="dd-btn"
+                      value="/images/avatars/blueFlowersCat.png"
+                      onClick={() => changeHandler(
+                        {
+                          target: {
+                            name: 'avatar',
+                            value: '/images/avatars/blueFlowersCat.png',
+                          },
+                        },
+                      )}
+                    >
+                      <img
 
-                    className="dd-thumbnail" src="/images/avatars/blueFlowersCat.png" /><span>Blue</span></button>
+                        className="dd-thumbnail"
+                        src="/images/avatars/blueFlowersCat.png"
+                        alt="avatar cat with blue flowers"
+                      />
+                      <span>Blue</span>
+
+                    </button>
                   </div>
                   <div className="row">
-                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/redHatCat.png"  onClick={() =>  changeHandler (
-                      {target:{
-                          name: 'avatar',
-                          value: "/images/avatars/redHatCat.png"}})}><img className="dd-thumbnail" src="/images/avatars/redHatCat.png" />
-                      <span> Red</span></button>
+                    <button
+                      type="button"
+                      className="dd-btn"
+                      name="avatar"
+                      value="/images/avatars/redHatCat.png"
+                      onClick={() => changeHandler(
+                        {
+                          target: {
+                            name: 'avatar',
+                            value: '/images/avatars/redHatCat.png',
+                          },
+                        },
+                      )}
+                    >
+                      <img
+                        className="dd-thumbnail"
+                        src="/images/avatars/redHatCat.png"
+                        alt="avatar cat with red hat"
+                      />
+                      <span> Red</span>
+
+                    </button>
                   </div>
                   <div className="row">
-                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/underBlanketCat.png"  onClick={() =>  changeHandler (
-                      {target:{
-                          name: 'avatar',
-                          value: "/images/avatars/underBlanketCat.png"}})}><img className="dd-thumbnail" src="/images/avatars/underBlanketCat.png" />
-                      <span>Grey</span></button>
+                    <button
+                      type="button"
+                      className="dd-btn"
+                      name="avatar"
+                      value="/images/avatars/underBlanketCat.png"
+                      onClick={() => changeHandler(
+                        {
+                          target: {
+                            name: 'avatar',
+                            value: '/images/avatars/underBlanketCat.png',
+                          },
+                        },
+                      )}
+                    >
+                      <img
+                        className="dd-thumbnail"
+                        src="/images/avatars/underBlanketCat.png"
+                        alt="avatar cat under blanket"
+                      />
+                      <span>Grey</span>
+
+                    </button>
                   </div>
                   <div className="row">
-                    <button type="button" className="dd-btn" name="avatar" value="/images/avatars/voidCat.png"  onClick={() =>  changeHandler (
-                      {target:{
-                          name: 'avatar',
-                          value: "/images/avatars/voidCat.png"}})}><img className="dd-thumbnail" src="/images/avatars/voidCat.png" />
-                      <span>Black</span></button>
+                    <button
+                      type="button"
+                      className="dd-btn"
+                      name="avatar"
+                      value="/images/avatars/voidCat.png"
+                      onClick={() => changeHandler(
+                        {
+                          target: {
+                            name: 'avatar',
+                            value: '/images/avatars/voidCat.png',
+                          },
+                        },
+                      )}
+                    >
+                      <img
+                        className="dd-thumbnail"
+                        src="/images/avatars/voidCat.png"
+                        alt="avatar black cat"
+                      />
+                      <span>Black</span>
+
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
             <div className="pronouns">
               <input
-                type="text" className="form-control UP-textinput" name="pronouns" placeholder="Your pronouns" onChange={changeHandler}
+                type="text"
+                className="form-control UP-textinput"
+                name="pronouns"
+                placeholder="Your pronouns"
+                onChange={changeHandler}
               />
             </div>
             <div className="edit">
@@ -98,7 +170,7 @@ function UserProfile() {
           </form>
         </div>
         <div className="col-sm" />
-      </div >
+      </div>
     </div>
   );
 }
