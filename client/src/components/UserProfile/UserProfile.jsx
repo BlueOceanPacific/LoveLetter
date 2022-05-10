@@ -12,37 +12,8 @@ import './UserProfile.scss';
 function UserProfile() {
   const user = useStore((state) => state.user);
 
-  const avatarOptions = [
-    {
-      id: '1',
-      title: "blue",
-      image: '/images/avatars/blueFlowersCat.png'
-    },
-    {
-      id: '2',
-      title: "disgusted",
-      image: '/images/avatars/disgustedCat.png'
-    },
-    {
-      id: '3',
-      title: "red",
-      image: '/images/avatars/redHatCat.png'
-    },
-    {
-      id: '4',
-      title: "scared",
-      image: '/images/avatars/underBlanketCat.png'
-    },
-    {
-      id: '5',
-      title: "void",
-      image: '/images/avatars/voidCat.png'
-    },
-  ]
-
-
   const [data, setData] = useState({
-    pronouns: user.pronouns,
+    pronouns:user.pronouns,
     avatar: user.avatar
   })
 

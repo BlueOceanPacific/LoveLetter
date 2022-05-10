@@ -56,7 +56,7 @@ function GameView() {
           </div>
         </div>
       </div>
-      <div className="bg-dark bg-gradient gameview">
+      <div className="bg-gradient gameview">
         <div className="row justify-content-between align-items-center top-row">
           <div className="col-3 leaderboard">
             {/** ******************* LocalLeaderboard.jsx ************************** */}

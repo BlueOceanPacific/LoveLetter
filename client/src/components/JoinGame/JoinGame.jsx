@@ -1,28 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import 'regenerator-runtime/runtime'
 
 function JoinGame() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
+  const [games, setGames] = useState([]);
+  const navigate = useNavigate();
 
-  const incrementCount = () => {
-    if (count < 4) setCount(count + 1);
+  useEffect(() => {
+    const getGames = async () => {
+      try {
+        const res = await axios.get('/games');
+        setGames(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getGames();
+  }, games);
+
+  const handleAutoJoin = () => {
+    navigate(`/games/${games[0].id}`);
   };
-
-  // const createRow = () => {
-  //   const [expandedRows, setExandedRows]
-  //   <tr>
-  //     <th scope="row">{/*this.roomName*/}</th>
-  //     <td colSpan="2">{count}/4</td>
-  //     <td><button type="button" className="btn btn-primary btn-sm" onClick={incrementCount}>Join</button></td>
-  //   </tr>
-  // }
 
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-sm-4">
           <div className="p-4" />
-          <button type="button" className="btn btn-success btn-lg">Auto-Join</button>
+          <button type="button" className="btn btn-success btn-lg" onClick={handleAutoJoin}>Auto-Join</button>
         </div>
         <div className="col-sm-8"><div className="p-4"><h1>List of Open Games</h1></div></div>
       </div>
@@ -34,35 +41,27 @@ function JoinGame() {
               <th scope="col" colSpan="1">Room</th>
               <th scope="col" colSpan="2">Current Number of Players</th>
               <th scope="col">Join</th>
-
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">Friends of Sir Dare the Fair (Url)</th>
-              <td colSpan="2">
-                {count}
-                /4
-              </td>
-              <td><button type="button" className="btn btn-primary btn-sm" onClick={incrementCount}>Join</button></td>
-            </tr>
-            <tr>
-              <th scope="row">Friends of Sir Dareitus the Fairitus (Url)</th>
-              <td colSpan="2">
-                {count}
-                /4
-              </td>
-              <td><button type="button" className="btn btn-primary btn-sm" onClick={incrementCount}>Join</button></td>
-            </tr>
-            <tr>
-              <th className="text-danger" scope="row">Stupid Peasants (BANNED)</th>
-              <td colSpan="2">
-                {count}
-                /4
-              </td>
-              <td><button type="button" className="btn btn-primary btn-sm" onClick={incrementCount}>Join</button></td>
-            </tr>
-            {/* {createRow()} */}
+            {games.map((game) => (
+              <tr key={game.id}>
+                <th scope="row">{game.name}</th>
+                <td colSpan="2">
+                  {game.currentPlayers}
+                  /4
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-sm"
+                    onClick={() => navigate(`/games/${game.id}`)}
+                  >
+                    Join
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -88,4 +87,13 @@ function roomId(length) {
   }
   return result;
 }
+
+// const createRow = () => {
+  //   const [expandedRows, setExandedRows]
+  //   <tr>
+  //     <th scope="row">{this.roomName}</th>
+  //     <td colSpan="2">{count}/4</td>
+  //     <td><button type="button" className="btn btn-primary btn-sm" onClick={incrementCount}>Join</button></td>
+  //   </tr>
+  // }
 */

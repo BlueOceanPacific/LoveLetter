@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import useStore  from '../../Store/store';
+
 import CARD_TYPES from '../../../util/card-types';
 
 function Wizard({
@@ -9,6 +11,7 @@ function Wizard({
   cardTypeChangeHandler,
   showModal,
 }) {
+  const user = useStore(store => store.user);
   useEffect(() => {
     showModal && targetChangeHandler("0");
     showModal && cardTypeChangeHandler("0");
@@ -25,7 +28,7 @@ function Wizard({
         <option defaultValue value={"0"}>
           Choose a target player
         </option>
-        {players.map(({ username }) => (
+        {players.filter(({ username }) => username !== user.username).map(({ username }) => (
           <option key={username} value={username}>
             {username}
           </option>
@@ -40,7 +43,7 @@ function Wizard({
         <option defaultValue value={"0"}>
           Choose a Card Type
         </option>
-        {CARD_TYPES.map(({ name, value }) => (
+        {CARD_TYPES.filter(({value}) => value !== "1").map(({ name, value }) => (
           <option key={value} value={value}>
             {name}
           </option>
