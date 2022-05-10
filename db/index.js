@@ -8,7 +8,7 @@ mongoose.connect(mongoDB);
 
 // ----------------------- Uncomment to Empty DB on Server Restart ------------------------
 // Game.deleteMany({}).then(() => console.log('Games Collection Truncated'));
-// UserModel.deleteMany({}).then(() => console.log('Users Collection Truncated'));
+// User.deleteMany({}).then(() => console.log('Users Collection Truncated'));
 
 // REMOVE BELOW FOR FINAL VERSION
 Game.find({}).exec()
