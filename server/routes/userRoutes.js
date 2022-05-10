@@ -74,14 +74,11 @@ module.exports = function (app) {
 
   // Updates a user profile - only allows pronoun and avatar updates
   app.put('/user/profile', (req, res) => {
-    db.User.updateOne(
-      { username: req.body.username },
-      {
-        pronouns: req.body.pronouns[0],
-        avatar: req.body.avatar,
-      }
-    )
-      .exec()
+    console.log('put req for user:', req.body.username, ' new pronouns: ', req.body.pronouns, ' new avatar:', req.body.avatar);
+    db.User.updateOne({ username: req.body.username }, {
+      pronouns: req.body.pronouns,
+      avatar: req.body.avatar,
+    }).exec()
       .then(() => res.sendStatus(200))
       .catch((err) => res.sendStatus(500).send(err));
   });

@@ -3,7 +3,6 @@
   "plugins": ["react"],
   "rules": {
     "func-names": "off",
-    "react/prop-types": 0,
     "react/jsx-filename-extension": [
       1,
       {
