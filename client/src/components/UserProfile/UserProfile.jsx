@@ -1,3 +1,10 @@
+/* eslint-disable react/jsx-props-no-multi-spaces */
+/* eslint-disable import/extensions */
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import axios from 'axios';
 import useStore from '../Store/store';
@@ -10,7 +17,7 @@ function UserProfile() {
     pronouns: user.pronouns,
     avatar: user.avatar,
   });
-  // const { pronouns, avatar } = data;
+  const { pronouns, avatar } = data;
 
   const changeHandler = (e) => {
     // console.log('clicked', e.target);
@@ -58,21 +65,23 @@ function UserProfile() {
                       id="blueCat"
                       className="dd-btn"
                       value="/images/avatars/blueFlowersCat.png"
-                      onClick={() =>
-                        changeHandler({
+                      onClick={() => changeHandler(
+                        {
                           target: {
                             name: 'avatar',
                             value: '/images/avatars/blueFlowersCat.png',
                           },
-                        })
-                      }
+                        },
+                      )}
                     >
                       <img
+
                         className="dd-thumbnail"
                         src="/images/avatars/blueFlowersCat.png"
-                        alt="Blue Flowers Cat"
+                        alt="avatar cat with blue flowers"
                       />
                       <span>Blue</span>
+
                     </button>
                   </div>
                   <div className="row">
@@ -81,21 +90,22 @@ function UserProfile() {
                       className="dd-btn"
                       name="avatar"
                       value="/images/avatars/redHatCat.png"
-                      onClick={() =>
-                        changeHandler({
+                      onClick={() => changeHandler(
+                        {
                           target: {
                             name: 'avatar',
                             value: '/images/avatars/redHatCat.png',
                           },
-                        })
-                      }
+                        },
+                      )}
                     >
                       <img
                         className="dd-thumbnail"
                         src="/images/avatars/redHatCat.png"
-                        alt="Red Hat Cat"
+                        alt="avatar cat with red hat"
                       />
                       <span> Red</span>
+
                     </button>
                   </div>
                   <div className="row">
@@ -104,21 +114,22 @@ function UserProfile() {
                       className="dd-btn"
                       name="avatar"
                       value="/images/avatars/underBlanketCat.png"
-                      onClick={() =>
-                        changeHandler({
+                      onClick={() => changeHandler(
+                        {
                           target: {
                             name: 'avatar',
                             value: '/images/avatars/underBlanketCat.png',
                           },
-                        })
-                      }
+                        },
+                      )}
                     >
                       <img
                         className="dd-thumbnail"
                         src="/images/avatars/underBlanketCat.png"
-                        alt="Under Blanket Cat"
+                        alt="avatar cat under blanket"
                       />
                       <span>Grey</span>
+
                     </button>
                   </div>
                   <div className="row">
@@ -127,21 +138,22 @@ function UserProfile() {
                       className="dd-btn"
                       name="avatar"
                       value="/images/avatars/voidCat.png"
-                      onClick={() =>
-                        changeHandler({
+                      onClick={() => changeHandler(
+                        {
                           target: {
                             name: 'avatar',
                             value: '/images/avatars/voidCat.png',
                           },
-                        })
-                      }
+                        },
+                      )}
                     >
                       <img
                         className="dd-thumbnail"
                         src="/images/avatars/voidCat.png"
-                        alt="Void Cat"
+                        alt="avatar black cat"
                       />
                       <span>Black</span>
+
                     </button>
                   </div>
                 </div>
