@@ -17,13 +17,13 @@ function Lobby() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [socket, setSocket] = useState(io('/play', { query: { id } }));
-  const user = useStore(state => state.user);
+  const user = useStore((state) => state.user);
 
   useEffect(() => {
     socket.emit('join', user);
     socket.on('join', () => {
       console.log('someone connected');
-    })
+    });
     axios
       .get(`/games/${id}`)
       .then(({ data }) => setGame(data[0]))
@@ -35,15 +35,14 @@ function Lobby() {
     navigate('/');
   };
 
-  const populatePlayers = () =>
-    players.map((player) => (
-      <li className="list-group-item" key={player}>
-        <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon" />
-        {player}
-      </li>
-    ));
+  const populatePlayers = () => players.map((player) => (
+    <li className="list-group-item" key={player}>
+      <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon" />
+      {player}
+    </li>
+  ));
 
-  if (!game) return <LoadingSpinner/>;
+  if (!game) return <LoadingSpinner />;
 
   if (game.state === 'playing') {
     return <GameView socket={socket} />;
