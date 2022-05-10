@@ -12,7 +12,21 @@ import Minister from "../Cards/Minister";
 import Card from "../Hands/Card";
 import "./CardCount.scss";
 
-function CardCount() {
+function CardCount({ game }) {
+  // const { discardPiles } = game;
+  // let cards = [];
+
+  // for (let prop in discardPiles) {
+  //   let currentCard = discardPiles[prop];
+
+  //   cards.push(
+  //     <li className="list-group-item">
+  //       <PlayingCard card={currentCard.card}/>
+  //     </li>
+  //   );
+  //   card
+  // }
+
   let cards = [];
   cards.push(
     <li className="list-group-item">
@@ -32,28 +46,26 @@ function CardCount() {
 
   return (
     <div className="discard-pile">
-      <>
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#rules-modal"
-        >
-          View Discarded Cards
-        </button>
-        <div
-          className="modal fade rules"
-          id="rules-modal"
-          tabIndex="-1"
-          aria-labelledby="rules-modal-label"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-dialog-scrollable modal-lg">
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#discard-modal"
+      >
+        View Discarded Cards
+      </button>
+      <div
+        className="modal fade rules"
+        id="discard-modal"
+        tabIndex="-1"
+        aria-labelledby="discard-modal-label"
+        aria-hidden="true"
+      >
+        <div className="discard-modal" tabIndex="-1" role="dialog">
+          <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="rules-modal-label">
-                  Discarded Cards
-                </h5>
+                <h5 className="modal-title">Modal title</h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -62,21 +74,19 @@ function CardCount() {
                 />
               </div>
               <div className="modal-body">
-                <ul className="list-group flex-md-row">{cards}</ul>
+                <ul className="list-group flex-md-row">
+                  {cards}
+                </ul>
               </div>
               <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
+                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
                   Close
                 </button>
               </div>
             </div>
           </div>
         </div>
-      </>
+      </div>
     </div>
   );
 }
