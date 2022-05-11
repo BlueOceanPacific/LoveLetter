@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-use-before-define */
 const db = require('../../db');
+const fullDeck = require('../../db/fullDeck');
 
 // Questions:
 // Single discard pile, or discard pile per player?
@@ -45,7 +46,7 @@ function discardCard(state, user, move) {
 }
 
 // Process the move based on given rules;
-function processMove(state, user, move) {
+function processMove(state, user, move) { //refactor play messages to be added to chat
   state.currentRound.message = null;
 
   switch (move.card.card) {
@@ -73,8 +74,7 @@ function processMove(state, user, move) {
       state.currentRound.message = `${user} uses the General to change hands with ${move.target}!`;
       break;
     case 'Wizard': // Target player discards hand, draws new card (can target self)
-      state.currentRound.activeHands[move.target].hand = [state.currentRound.deck.pop()];
-      //Need to handle wizard being played on last card, swapping with face down card.
+      state.currentRound.activeHands[move.target].hand = state.currentRound.deck.length ? [state.currentRound.deck.pop()] : [state.currentRound.faceDownCard];
       state.currentRound.message = `${user} plays the Wizard. ${move.target} draws a new hand!`;
       break;
     case 'Priestess': // Cannot be targeted by other players until your next turn NOT SURE HOW TO HANDLE
@@ -116,6 +116,8 @@ function processMove(state, user, move) {
 // Find the next active player and draw a card into their hand
 function processDraw(state) {
   //If deck is empty after a move, end round
+  state.currentRound.turnNumber += 1;
+  state.message = null;
   if (!state.currentRound.deck.length) {
     endRound(state);
   }
@@ -153,8 +155,71 @@ function processDraw(state) {
 
 //increment round counter, scoreboard, and check for 4 wins
 //re-shuffle deck, re-deal
-function endRound(state) { //make room name unique
+function endRound(state) {
+  //determine winner
+  const activePlayers = Object.keys(state.currentRound.activeHands);
+  let winner = activePlayers[0];
+  let highestHand = state.currentRound.activeHands[activePlayers[0]];
+  for (let i = 1; i < activePlayers.length; i++) {
+    if (state.currentRound.activeHands[activePlayers[i]].value > highestHand.value) {
+      highestHand = state.currentRound.activeHands[activePlayers[i]];
+      winner = activePlayers[i];
+    }
+  }
 
+  state.roundWins[winner] += 1;
+  state.markModified('roundWins');
+  if (state.roundWins[winner] === 4) { // end the game
+    state.message = `${winner} has won the game!`;
+    state.markModified('message');
+    state.state = 'ended';
+    state.markModified('state');
+  } else {//end the round
+    state.message = `${winner} has won the round!`;
+    state.markModified('message');
+    state.currentRound.roundNumber += 1;
+    state.currentRound.turnNumber = 1;
+    state.currentRound.currentPlayer = state.host.username;
+    const newDeck = shuffleDeck();
+    state.currentRound.faceDownCard = newDeck.pop();
+    state.currentRound.deck = newDeck;
+    state.currentRound.discardPile = [];
+    let newHands = {};
+    for (let i = 0; i < state.players.length; i++) {
+      const card = state.currentRound.deck.pop();
+      newHands[state.players[i].username] = {
+        hand: [card],
+        value: card.value,
+      }
+    }
+    state.currentRound.activeHands = newHands;
+    //shuffle deck, reset hands,  increment round counter, re-deal
+  }
+}
+
+function shuffleDeck() {
+  const deck = fullDeck.slice();
+
+  function shuffle(array) {
+    let currentIndex = array.length;
+    let randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
+
+  return shuffle(deck);
 }
 
 // check if the round has ended
