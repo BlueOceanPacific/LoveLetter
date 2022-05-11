@@ -16,7 +16,7 @@ module.exports = function (app) {
       turnNumber: 1,
       currentPlayer: this.host?.username || 'user', // current player is always the host, maybe update this to be random later on
       activeHands: { [this.host?.username || 'user']: { value: 0, hand: [] } },
-      discardPiles: { [this.host?.username || 'user']: []},
+      discardPiles: { [this.host?.username || 'user']: [] },
       deck: structuredClone(fullDeck),
     };
     console.log('Game created: ', newGame);
@@ -26,6 +26,12 @@ module.exports = function (app) {
   });
 
   // need to add a join game route and communicate with Nick
+  app.get('/games', (req, res) => {
+    console.log('Game data')
+    Game.find({})
+      .exec()
+      .then((results) => console.log(results));
+  })
 
   // Get current game state - needs refactor to filter out fields for relevant users
   app.get('/games/:id', (req, res) => {

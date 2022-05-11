@@ -12,16 +12,17 @@ function JoinGame() {
     const getGames = async () => {
       try {
         const res = await axios.get('/games');
+        console.log('send get req: ', res);
         setGames(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     getGames();
-  }, [games]);
+  }, []);
 
   const handleAutoJoin = () => {
-    navigate(`/games/${games[0].id}`);
+    navigate(`/games/${games[0].name}`);
   };
 
   return (
@@ -48,14 +49,14 @@ function JoinGame() {
               <tr key={game._id}>
                 <th scope="row">{game.name}</th>
                 <td colSpan="2">
-                  {game.currentPlayers}
+                  {game.players.length + 1}
                   /4
                 </td>
                 <td>
                   <button
                     type="button"
                     className="btn btn-primary btn-sm"
-                    onClick={() => navigate(`/games/${game.id}`)}
+                    onClick={() => navigate(`/games/${game.name}`)}
                   >
                     Join
                   </button>
