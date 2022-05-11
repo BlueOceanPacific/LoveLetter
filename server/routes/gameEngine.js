@@ -6,7 +6,7 @@ const db = require('../../db');
 // Single discard pile, or discard pile per player?
 // Expectations on post (gameID, username, move: {card: {}, target (opt), cardguess(opt)})
 module.exports.process = (gameName, user, move) => new Promise((resolve, reject) => {
-  console.log(gameID, user, move);
+  console.log(gameName, user, move);
   db.Game.findOne({ name: gameName }).exec()
     .then((gameState) => {
       updateState(gameState, user, move);
@@ -45,7 +45,71 @@ function discardCard(state, user, move) {
 }
 
 // Process the move based on given rules;
-function processMove(state, user, move) { //refactor discard to array of cards, no user
+function processMove(state, user, move) {
+  state.currentRound.message = null;
+
+  switch (move.card.card) {
+    case 'Prince': //Out of the match
+      state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
+      delete state.currentRound.activeHands[user];
+      state.currentRound.message = `${user} is out of the round - they played the Prince!`;
+      break;
+    case 'Princess': //Out of the match
+      state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
+      delete state.currentRound.activeHands[user];
+      state.currentRound.message = `${user} is out of the round - they played the Princess!`;
+      break;
+    case 'Liege': //Out of the match
+      state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
+      delete state.currentRound.activeHands[user];
+      state.currentRound.message = `${user} is out of the round - they played the Liege!`;
+      break;
+    case 'Minister': //no effect on discard
+      break;
+    case 'General': //Change hands with target player (must not be self) CURRENTLY NO VALIDATION ON SELF TARGET
+      const tmp = state.currentRound.activeHands[user].hand.slice();
+      state.currentRound.activeHands[user] = state.currentRound.activeHands[move.target].hand.slice();
+      state.currentRound.activeHands[move.target].hand = tmp;
+      state.currentRound.message = `${user} uses the General to change hands with ${move.target}!`;
+      break;
+    case 'Wizard': // Target player discards hand, draws new card (can target self)
+      state.currentRound.activeHands[move.target].hand = [state.currentRound.deck.pop()];
+      //Need to handle wizard being played on last card, swapping with face down card.
+      state.currentRound.message = `${user} plays the Wizard. ${move.target} draws a new hand!`;
+      break;
+    case 'Priestess': // Cannot be targeted by other players until your next turn NOT SURE HOW TO HANDLE
+      state.currentRound.message = `I haven't figured out how to implment Priestess yet!!`
+      break;
+    case 'Knight':
+      // Compare hand value with target player. Lowest value is out of the round, tie = both stay;
+      const handDiff = state.currentRound.activeHands[user].value - state.currentRound.activeHands[move.target].value;
+      if (handDiff > 0) { // user hand is higher value than target hand
+        state.currentRound.discardPile.push(...state.currentRound.activeHands[move.target].hand);
+        delete state.currentRound.activeHands[move.target];
+        state.currentRound.message = `${move.target} is knocked out of the round by a Knight!`;
+      } else if (handDiff < 0) { // user hand is lower value than target hand
+        state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
+        delete state.currentRound.activeHands[user];
+        state.currentRound.message = `${user} is knocked out of the round by a Knight!`;
+      } else {
+        state.currentRound.message = `A knight is played - neither side has an advantage!`;
+      }
+      break;
+    case 'Clown': // Look at target players hand NOT SURE HOW TO HANDLE
+      state.currentRound.message = `I haven't figured out how to implment Clown yet!!`
+      break;
+    case 'Soldier': // Choose a card type other than Soldier. If target player has card, they are out
+      if(state.currentRound.activeHands[move.target].hand[0].card === move.guess) {
+        state.currentRound.discardPile.push(...state.currentRound.activeHands[move.target].hand);
+        delete state.currentRound.activeHands[move.target];
+        state.currentRound.message = `${user}'s Soldier strikes ${move.target} with a fatal blow!`;
+      } else {
+        state.currentRound.message = `${user}'s Soldier misses their mark!`;
+      }
+      break;
+    default:
+      return;
+  }
   return true;
 }
 

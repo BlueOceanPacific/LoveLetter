@@ -10,6 +10,7 @@ const gamesSchema = new Schema({
   host: Object,
   players: [Object],
   currentRound: {
+    message: String,
     roundNumber: Number,
     turnNumber: Number,
     currentPlayer: String,
