@@ -137,6 +137,10 @@ body {
   text-align: left;
 }
 
+/* .main-title {
+  max-height: 300px;
+} */
+
 #cards-carousel {
   padding-top: 20px;
   margin: auto;
@@ -151,7 +155,7 @@ body {
 }
 
 .footer {
-  margin-top: 200px;
+  margin-top: 20px;
   background-color: white;
   min-height: 600px;
   padding: 20px;

@@ -21,7 +21,7 @@ function JoinGame() {
   }, []);
 
   const handleAutoJoin = () => {
-    navigate(`/games/${games[0].name}`);
+    navigate(`/play/lobby/${games[0].name}`);
   };
 
   return (
@@ -58,7 +58,7 @@ function JoinGame() {
                   <button
                     type="button"
                     className="btn btn-primary btn-sm"
-                    onClick={() => navigate(`/games/${game.name}`)}
+                    onClick={() => navigate(`/play/lobby/${game.name}`)}
                   >
                     Join
                   </button>
@@ -73,3 +73,7 @@ function JoinGame() {
 }
 
 export default JoinGame;
+//
+
+
+
