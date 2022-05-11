@@ -78,10 +78,11 @@ function SignUp() {
             placeholder="Password"
             required
             type="password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
           />
           <div id="passwordHelp" className="form-text">
-            Use 8 or more characters with a mix of letters, numbers, and symbols to build the
-            strongest castle in all of England.
+            Use 8 or more characters with a mix of uppercase and lowercase letters, numbers, and
+            symbols to build the strongest castle in all of England.
           </div>
         </div>
 
