@@ -3,7 +3,7 @@
 const db = require('../../db');
 
 // Questions:
-// Single discard pile, or discard pile per player?
+// Single discard pile
 // Expectations on post (gameID, username, move: {card: {}, target (opt), cardguess(opt)})
 module.exports.process = (gameName, user, move) => new Promise((resolve, reject) => {
   console.log(gameID, user, move);
@@ -45,13 +45,13 @@ function discardCard(state, user, move) {
 }
 
 // Process the move based on given rules;
-function processMove(state, user, move) { //refactor discard to array of cards, no user
+function processMove(state, user, move) { // refactor discard to array of cards, no user
   return true;
 }
 
 // Find the next active player and draw a card into their hand
 function processDraw(state) {
-  //If deck is empty after a move, end round
+  // If deck is empty after a move, end round
   if (!state.currentRound.deck.length) {
     endRound(state);
   }
@@ -76,7 +76,7 @@ function processDraw(state) {
   state.currentRound.currentPlayer = nextPlayer;
   state.currentRound.activeHands[nextPlayer].hand.push(nextCard);
   state.currentRound.activeHands[nextPlayer].value += nextCard.value;
-  //check if new player has drawn over 12 with a minister, if so we kick them
+  // check if new player has drawn over 12 with a minister, if so we kick them
   if (state.currentRound.activeHands[nextPlayer].value >= 12 && (state.currentRound.activeHands[nextPlayer].hand[0].card === 'Minister' || state.currentRound.activeHands[nextPlayer].hand[1].card === 'Minister')) {
     state.currentRound.discardPile.push(...state.currentRound.activeHands[nextPlayer].hand);
     delete state.currentRound.activeHands[nextPlayer];
@@ -87,9 +87,9 @@ function processDraw(state) {
   }
 }
 
-//increment round counter, scoreboard, and check for 4 wins
-//re-shuffle deck, re-deal
-function endRound(state) { //make room name unique
+// increment round counter, scoreboard, and check for 4 wins
+// re-shuffle deck, re-deal
+function endRound(state) { // make room name unique
 
 }
 
