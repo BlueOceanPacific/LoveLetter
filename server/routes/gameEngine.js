@@ -5,9 +5,9 @@ const db = require('../../db');
 // Questions:
 // Single discard pile, or discard pile per player?
 // Expectations on post (gameID, username, move: {card: {}, target (opt), cardguess(opt)})
-module.exports.process = (gameID, user, move) => new Promise((resolve, reject) => {
+module.exports.process = (gameName, user, move) => new Promise((resolve, reject) => {
   console.log(gameID, user, move);
-  db.Game.findOne({ _id: gameID }).exec()
+  db.Game.findOne({ name: gameName }).exec()
     .then((gameState) => {
       updateState(gameState, user, move);
       gameState.save()
@@ -89,7 +89,7 @@ function processDraw(state) {
 
 //increment round counter, scoreboard, and check for 4 wins
 //re-shuffle deck, re-deal
-function endRound(state) {
+function endRound(state) { //make room name unique
 
 }
 
