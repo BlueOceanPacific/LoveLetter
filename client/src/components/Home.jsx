@@ -8,7 +8,7 @@ function Home() {
   if (!user) {
     return (
       <div>
-        <img className="baloon" src="images/backgrounds/heartBaloon.png" alt="flying baloon" />
+        <img className="balloon" src="images/backgrounds/heartBalloon.png" alt="flying balloon" />
       <div
         className="card"
         style={{ width: '18rem', margin: '5% auto', textAlign: 'center' }}
@@ -30,7 +30,7 @@ function Home() {
 
   return (
     <div>
-      <img className="baloon"src="images/backgrounds/heartBaloon.png" alt="flying baloon" />
+      <img className="balloon"src="images/backgrounds/heartBalloon.png" alt="flying balloon" />
     <div
       className="card"
       style={{ width: '18rem', margin: '5% auto', textAlign: 'center' }}
