@@ -14,7 +14,7 @@ const gamesSchema = new Schema({
     turnNumber: Number,
     currentPlayer: String,
     activeHands: Object,
-    discardPiles: Object,
+    discardPile: [Object],
     deck: [],
   },
   roundWins: Object,
