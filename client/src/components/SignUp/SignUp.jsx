@@ -47,18 +47,19 @@ function SignUp() {
       <h3>{' Create an Account '}</h3>
       <form className="su-form" onSubmit={submitHandler}>
         <div className="mb-3 su-username">
-          <label htmlFor="InputUsername" className="form-label">
+          <label htmlFor="SignUpInputUsername" className="form-label">
             Username
           </label>
           <input
             type="text"
             className="form-control"
-            id="InputUsername"
+            id="SignUpInputUsername"
             placeholder="Username"
             aria-describedby="usernameHelp"
             onChange={changeHandler}
             name="username"
             required
+            pattern="^[A-Z]{1,15}$"
           />
           <div id="usernameHelp" className="form-text">
             {usernameHelper}
@@ -78,7 +79,7 @@ function SignUp() {
             placeholder="Password"
             required
             type="password"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}"
           />
           <div id="passwordHelp" className="form-text">
             Use 8 or more characters with a mix of uppercase and lowercase letters, numbers, and

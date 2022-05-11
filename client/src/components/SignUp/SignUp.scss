@@ -3,11 +3,19 @@
 }
 
 #SignUpInputPassword:valid {
-  background-color: green;
+  background-color: rgb(195, 224, 195);
 }
 
 #SignUpInputPassword:invalid {
-  background-color: darkred;
+  background-color: lightgoldenrodyellow;
+}
+
+#SignUpInputUsername:valid {
+  background-color: rgb(195, 224, 195);
+}
+
+#SignUpInputUsername:invalid {
+  background-color: lightgoldenrodyellow;
 }
 
 #su-buttons {
