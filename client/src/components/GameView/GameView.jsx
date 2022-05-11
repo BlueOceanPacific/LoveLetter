@@ -1,9 +1,9 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import io from 'socket.io-client';
+import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { useParams } from 'react-router-dom';
 import Chat from '../Chat/Chat';
 import OpponentsHand from './Hands/OpponentsHand';
 import MyHand from './Hands/MyHand';
@@ -21,7 +21,13 @@ function GameView({ socket }) {
 
   useEffect(() => {
     axios.get(`/games/${id}`).then(({ data }) => {
-      setGame(data[0]);
+      setGame(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.on('updateGameState', (updatedGame) => {
+      setGame(updatedGame);
     });
   }, []);
 
@@ -107,7 +113,7 @@ function GameView({ socket }) {
                 <div className="row justify-content-center">
                   <div className="col-5 my-hand">
                     {/** ******************* MyHand.jsx ************************** */}
-                    {game && <MyHand game={game} />}
+                    {game && <MyHand game={game} socket={socket} />}
                   </div>
                 </div>
               </div>
