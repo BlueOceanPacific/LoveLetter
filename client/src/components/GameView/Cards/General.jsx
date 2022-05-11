@@ -1,12 +1,23 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import useStore from '../../Store/store';
 
-function General({ players, target, targetChangeHandler, showModal }) {
+function General({ game, target, targetChangeHandler, showModal, played, socket }) {
   const user = useStore(store => store.user);
 
   useEffect(() => {
     showModal && targetChangeHandler("0");
   }, [showModal])
+
+  useEffect(() => {
+    if (played) {
+      socket.emit('updateGameState', {
+        game: game.name,
+        user: user.username,
+        move: { card: { name: 'general', value: "6" }, target, cardType: null },
+      });
+    }
+  }, [played]);
 
   return (
     <select
@@ -18,7 +29,7 @@ function General({ players, target, targetChangeHandler, showModal }) {
       <option defaultValue value="0">
         Choose a target player
       </option>
-      {players.filter(({ username }) => username !== user.username).map(({ username }) => (
+      {game.players.filter(({ username }) => username !== user.username).map(({ username }) => (
         <option key={username} value={username}>
           {username}
         </option>

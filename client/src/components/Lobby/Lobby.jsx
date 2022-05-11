@@ -59,7 +59,6 @@ function Lobby() {
       </div>
       <div className="chat-wrapper">
         <div className="lobby-chat">
-          {/* Socket IO logic needs to be updated so that chat can load in the lobby */}
           <Chat socket={socket} />
         </div>
       </div>

@@ -17,9 +17,9 @@ module.exports.demoPlaying = {
         value: 3,
         hand: [
           {
-            card: 'Clown',
-            value: 2,
-            image: '/images/cards/Clown_Card.png',
+            card: 'Priestess',
+            value: 4,
+            image: '/images/cards/Priestess_Card.png',
           },
           {
             card: 'Soldier',

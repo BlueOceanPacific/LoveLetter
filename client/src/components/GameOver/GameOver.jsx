@@ -33,7 +33,6 @@ function GameOver({ winner, game }) {
           </div>
         </div>
         <div className='modal-background' />
-
       </div>
     );
   }
