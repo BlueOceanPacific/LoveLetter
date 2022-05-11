@@ -12,10 +12,10 @@ function TestHome() {
       <div className="th-top-container">
         <div className="col-left">
           <div className="intro">
-            <h4> [intro]</h4>
+            {/* <h4> [intro]</h4> */}
           </div>
           <div className="main-title">
-            <img src="images/branding/LoveLetterLogo_2.png" alt="love letter logo" />
+            <img className="main-logo" src="images/branding/LoveLetterLogo_8.png" alt="love letter logo" />
             <h3 className="slogan"> a game of chivalry</h3>
           </div>
 
@@ -81,7 +81,7 @@ function TestHome() {
             </div>
           }
           <div className="get-started">
-            <button type="button" className="btn btn-primary">Get started</button>
+            <button type="button" className="btn btn-ligth">Get started</button>
           </div>
         </div>
       </div>
@@ -90,14 +90,14 @@ function TestHome() {
         <hr />
         <div className="row align-items-start">
           <div className="col" id="project-description">
-            <p> project description </p>
+            <p> the project </p>
           </div>
           <div className="col"
           id="the-team">
            <p> the team </p>
           </div>
           <div className="col">
-           <p> the tech stack</p>
+           <p> the stack</p>
           </div>
         </div>
         </div>

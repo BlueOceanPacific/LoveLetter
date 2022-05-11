@@ -4,6 +4,10 @@ body {
   background-repeat: no-repeat;
 }
 
+/* .navbar {
+  background-color: white;
+} */
+
 .navbar-icon {
   height: 30px;
   width: 30px;
@@ -39,10 +43,11 @@ body {
   display: grid;
   grid-template-areas: "left right";
   grid-template-columns: 3fr 5fr;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,0.5) 0%, rgba(27,214,209,0.5) 43%, rgba(0,212,255,0.5) 67%);
 }
 
 .col-left {
-  background-color: white;
   grid-area: left;
   display: grid;
   grid-template-areas: "e e"
@@ -58,15 +63,18 @@ body {
   grid-area: top;
   vertical-align: bottom;
   padding: 20px;
-  color: aqua;
+  color: white;
+  text-align: center;
 }
+
+
 
 .main-title {
   grid-area:middle;
   margin-left: 20px;
   font-weight: 100;
   text-align: center;
-  color: aqua;
+  color: rgb(243, 75, 103);
 }
 
 .get-started {
@@ -77,17 +85,26 @@ body {
 
 .col-right {
   grid-area: right;
-  background-color: aqua;
+  /* background-color: rgba(0, 255, 255, 0.6); */
+  color: grey;
+  text-decoration: none;
+
+}
+
+.col-right .card li{
+  /* background-color: aqua; */
+}
+
+.col-right a {
   color: grey;
   text-decoration: none;
 }
 
-.col-right .card li{
-  background-color: aqua;
-}
-.col-right a {
-  color: grey;
-  text-decoration: none;
+.col-right button {
+  height: 100px;
+  width: 200px;
+  margin: 20px;
+  background-color: rgb(243, 75, 103);
 }
 
 .footer {
@@ -97,6 +114,7 @@ body {
   padding: 20px;
   font-size: 1.2em;
   text-align: center;
+  color:rgb(243, 75, 103)
 }
 
 #project-description, #the-team {
