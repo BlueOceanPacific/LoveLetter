@@ -21,6 +21,7 @@ function GameView({ socket }) {
 
   useEffect(() => {
     axios.get(`/games/${id}`).then(({ data }) => {
+      // console.log(game);
       setGame(data);
     });
   }, []);
@@ -34,38 +35,7 @@ function GameView({ socket }) {
   if (!game) return <LoadingSpinner />
 
   return (
-    <>
-      <div className="modal" tabIndex="-1">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Modal title</h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              />
-            </div>
-            <div className="modal-body">
-              <p>Modal body text goes here.</p>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-gradient gameview">
+    <div className="bg-gradient gameview">
         <div className="row justify-content-between align-items-center top-row">
           <div className="col-3 leaderboard">
             {/** ******************* LocalLeaderboard.jsx ************************** */}
@@ -113,7 +83,7 @@ function GameView({ socket }) {
                 <div className="row justify-content-center">
                   <div className="col-5 my-hand">
                     {/** ******************* MyHand.jsx ************************** */}
-                    {/* {game && <MyHand game={game} socket={socket} />} */}
+                    {game && <MyHand game={game} socket={socket} />}
                   </div>
                 </div>
               </div>
@@ -133,7 +103,6 @@ function GameView({ socket }) {
           </div>
         </div>
       </div>
-    </>
   );
 }
 
