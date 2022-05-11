@@ -10,7 +10,7 @@ module.exports = function (app) {
   app.get('/authTest', (req, res) => {
     const { session } = req;
     // console.log(session);
-    res.send(200);
+    res.sendStatus(200);
   });
   /*
    * Compares password submitted by user with hashed password stored in DB
@@ -18,7 +18,8 @@ module.exports = function (app) {
    * Will sends an error in any other case
    */
   app.post('/user/login', (req, res) => {
-    User.findOne({ username: req.body.username }).exec()
+    User.findOne({ username: req.body.username })
+      .exec()
       .then((user) => {
         bcrypt.compare(req.body.password, user.password, (error, isMatch) => {
           const { session } = req;
@@ -48,8 +49,9 @@ module.exports = function (app) {
   // Uses bcrypt middleware to encrypt and store their password
   app.post('/user/signup', (req, res) => {
     const newUser = new User(req.body);
-    newUser.save()
-      .then(() => res.send(201))
+    newUser
+      .save()
+      .then(() => res.sendStatus(201))
       .catch((err) => res.status(500).send(err));
   });
 
@@ -73,11 +75,22 @@ module.exports = function (app) {
 
   // Updates a user profile - only allows pronoun and avatar updates
   app.put('/user/profile', (req, res) => {
-    console.log('put req for user:', req.body.username, ' new pronouns: ', req.body.pronouns, ' new avatar:', req.body.avatar);
-    db.User.updateOne({ username: req.body.username }, {
-      pronouns: req.body.pronouns,
-      avatar: req.body.avatar,
-    }).exec()
+    console.log(
+      'put req for user:',
+      req.body.username,
+      ' new pronouns: ',
+      req.body.pronouns,
+      ' new avatar:',
+      req.body.avatar
+    );
+    db.User.updateOne(
+      { username: req.body.username },
+      {
+        pronouns: req.body.pronouns,
+        avatar: req.body.avatar,
+      }
+    )
+      .exec()
       .then(() => res.sendStatus(200))
       .catch((err) => res.sendStatus(500).send(err));
   });
