@@ -5,7 +5,9 @@ import './SignUp.scss';
 
 function SignUp() {
   const navigate = useNavigate();
-  const [usernameHelper, setUsernameHelper] = useState(() => 'Please choose a username my lord.');
+  const [usernameHelper, setUsernameHelper] = useState(
+    () => 'Please choose a username of 5 to 20 characters my lord.'
+  );
 
   const [formData, setFormData] = useState({
     username: '',
@@ -25,19 +27,14 @@ function SignUp() {
     axios
       .post('/user/signup', formData)
       .then(() => {
-        document.getElementById('usernameHelp').style.color = '#ff0000';
-        setUsernameHelper('username added');
         navigate('/login');
       })
       .catch((error) => {
-        const errorCode = error.code;
-        if (errorCode === '11000') {
-          document.getElementById('usernameHelp').style.color = '#ff0000';
-          setUsernameHelper('this username already exists my lord');
-        } else if (errorCode === 'ERR_BAD_RESPONSE') {
-          document.getElementById('usernameHelp').style.color = '#ff0000';
-
-          setUsernameHelper('error creating an account, please refresh and try again later');
+        document.getElementById('usernameHelp').style.color = '#ff0000';
+        if (error.response.data.code === 11000) {
+          setUsernameHelper('This username already exists my lord.');
+        } else {
+          setUsernameHelper('Error creating account, please refresh and try again.');
         }
       });
   };
@@ -47,18 +44,19 @@ function SignUp() {
       <h3>{' Create an Account '}</h3>
       <form className="su-form" onSubmit={submitHandler}>
         <div className="mb-3 su-username">
-          <label htmlFor="InputUsername" className="form-label">
+          <label htmlFor="SignUpInputUsername" className="form-label">
             Username
           </label>
           <input
             type="text"
             className="form-control"
-            id="InputUsername"
+            id="SignUpInputUsername"
             placeholder="Username"
             aria-describedby="usernameHelp"
             onChange={changeHandler}
             name="username"
             required
+            pattern="^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$"
           />
           <div id="usernameHelp" className="form-text">
             {usernameHelper}
@@ -78,10 +76,11 @@ function SignUp() {
             placeholder="Password"
             required
             type="password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}"
           />
           <div id="passwordHelp" className="form-text">
-            Use 8 or more characters with a mix of letters, numbers, and symbols to build the
-            strongest castle in all of England.
+            Use 8 to 30 characters with a mix of uppercase and lowercase letters, numbers, and
+            symbols to build the strongest castle in all of England.
           </div>
         </div>
 

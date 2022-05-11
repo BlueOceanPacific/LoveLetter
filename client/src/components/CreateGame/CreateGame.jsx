@@ -1,15 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useStore from '../Store/store';
-import './CreateGame.css';
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useStore from "../Store/store";
+import "./CreateGame.css";
 
 // TODO: validate form inputs
 
 export default function CreateGame() {
-  const [lobbyName, setLobbyName] = useState('');
-  const [prize, setPrize] = useState('');
+  const [nameTaken, setNameTaken] = useState(false);
+  const [lobbyName, setLobbyName] = useState("");
+  const [prize, setPrize] = useState("");
   const [isPublic, setIsPublic] = useState(true);
   const navigate = useNavigate();
   const user = useStore((state) => state.user);
@@ -21,17 +22,22 @@ export default function CreateGame() {
   const createLobbyHandler = (event) => {
     event.preventDefault();
     axios
-      .post('/games', {
+      .post("/games", {
         name: lobbyName,
-        privacy: isPublic ? 'public' : 'private',
+        privacy: isPublic ? "public" : "private",
         prize,
         user,
       })
-      .then(({data}) => {
-        navigate(`/play/lobby/${lobbyName}`);
+      .then((res) => {
+        // console.log(res.data);
+        navigate(`/play/lobby/${res.data}`);
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response.status === 500) {
+          // show error message
+          setNameTaken(true);
+          console.log("The room name has been taken!");
+        }
       });
   };
 
@@ -51,6 +57,11 @@ export default function CreateGame() {
               placeholder="Lobby Name"
               onChange={lobbyNameChangeHandler}
             />
+            {nameTaken ? (
+              <span style={{ color: "red" }}>
+                This name is already taken, please select a different name
+              </span>
+            ) : null}
           </div>
 
           <div className="col">

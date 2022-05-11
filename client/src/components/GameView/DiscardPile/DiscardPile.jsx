@@ -14,50 +14,28 @@ import "./DiscardPile.scss";
 
 function DiscardPile({ game }) {
   const { discardPile } = game.currentRound;
+  console.log(discardPile);
+  let cards = discardPile.map((card) => <Card currentCard={ card.image }/>)
+  cards.push(
+    <Card currentCard={'/images/cards/Minister_Card.png'}/>
+  )
+  cards.push(
+    <Card currentCard={'/images/cards/Minister_Card.png'}/>
+  )
+  cards.push(
+    <Card currentCard={'/images/cards/Minister_Card.png'}/>
+  )
+  cards.push(
+    <Card currentCard={'/images/cards/Minister_Card.png'}/>
+  )
 
   return (
     <div className="discard-pile">
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#discard-modal"
-      >
-        View Discarded Cards
-      </button>
-      <div
-        className="modal fade rules"
-        id="discard-modal"
-        tabIndex="-1"
-        aria-labelledby="discard-modal-label"
-        aria-hidden="true"
-      >
-        <div className="discard-modal" tabIndex="-1" role="dialog">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Modal title</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                />
-              </div>
-              <div className="modal-body">
-                <ul className="list-group flex-md-row">
-                  {discardPile.map((card) => <Card currentCard={ card.image }/>)}
-                </ul>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div className="discard-header">Discard Pile</div>
+      <ul className="list-group list-group-horizontal">
+        { cards }
+        {/* {discardPile.map((card) => <Card currentCard={ card.image }/>)} */}
+      </ul>
     </div>
   );
 }

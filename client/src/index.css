@@ -15,11 +15,11 @@ body {
 }
 
 
-/* ******** Baloon Animation ********* */
-.baloon {
+/* ******** balloon Animation ********* */
+.balloon {
   width: 100px;
   height: 100px;
-  opacity: 0.6;
+  opacity: 0.0;
   position: relative;
   animation-name: flying;
   animation-duration: 20s;
@@ -29,8 +29,22 @@ body {
   /* animation-direction: alternate; */
 }
 
+.balloon2 {
+  width: 100px;
+  height: 100px;
+  opacity: 0.0;
+  position: relative;
+  animation-name: flying2;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  /* animation-direction: alternate; */
+}
+
 @keyframes flying {
   0% {
+    opacity: 0.6;
     transform: rotate(20deg);
     left: -20px;
     top: 1200px;
@@ -43,6 +57,7 @@ body {
   }
 
   50% {
+    transform: rotate(-15deg);
     transform: scale(1.5);
     left: 600px;
     top: 600px;
@@ -51,12 +66,51 @@ body {
   75% {
     transform: rotate(30deg);
     transform: scale(2);
+    opacity: 0.6;
     left: 900px;
     top: 300px;
   }
 
   100% {
+    transform: scale(0.8);
+    opacity: 0.6;
+    left: 1400px;
+    top: 0px;
+  }
+}
+
+
+@keyframes flying2 {
+  0% {
+    opacity: 0.6;
+    transform: rotate(-30deg);
+    left: -50px;
+    top: 1100px;
+  }
+
+  25% {
+    transform: rotate(-5deg);
+    left: 300px;
+    top: 800px;
+  }
+
+  50% {
+    transform: scale(2);
+    left: 600px;
+    top: 500px;
+  }
+
+  75% {
+    transform: rotate(20deg);
+    transform: scale(0.8);
+    opacity: 0.6;
+    left: 900px;
+    top: 200px;
+  }
+
+  100% {
     transform: scale(0.5);
+    opacity: 0.6;
     left: 1400px;
     top: 0px;
   }
@@ -65,86 +119,62 @@ body {
 /* ******** TestHome ********* */
 
 .th-top-container {
-  display: grid;
-  grid-template-areas: "left right";
-  grid-template-columns: 3fr 5fr;
-  background: rgb(2,0,36);
-  background: linear-gradient(270deg, rgba(2,0,36,0.6) 5%, rgba(27,214,209,0.6) 57%, rgba(0,212,255,0.6) 99%);
-}
-
-.col-left {
-  grid-area: left;
-  display: grid;
-  grid-template-areas: "e e"
-    "top top-right"
-    "middle middle"
-    "bottom bottom-right";
-  grid-template-columns: 6fr 3fr;
-  /* gap: 10px; */
+  /* background: rgb(2,0,36);
+  background: linear-gradient(270deg, rgba(2,0,36,0.6) 5%, rgba(27,214,209,0.6) 57%, rgba(0,212,255,0.6) 99%); */
+  /*  optional background - yellow green theme */
+  background: rgb(84,84,87);
+  background: linear-gradient(270deg, rgba(84,84,87,0.6965379901960784) 5%, rgba(27,214,188,0.6377144607843137) 57%, rgba(248,254,85,0.6825323879551821) 99%);
   padding: 20px;
 }
 
-.intro {
-  grid-area: top;
-  vertical-align: bottom;
-  padding: 20px;
-  color: white;
-  text-align: center;
-}
-
-
-
-.main-title {
-  grid-area: middle;
-  margin-left: 20px;
-  font-weight: 100;
-  text-align: center;
+.get-started button {
+  height: 200px;
+  font-size: 2em;
   color: rgb(243, 75, 103);
+  margin: auto;
+  /* border: solid 2px red; */
+  width: 50%;
+  text-align: left;
 }
 
-.get-started {
-  grid-area: bottom;
-  /* margin-left: 20px; */
-  text-align: center;
-}
+/* .main-title {
+  max-height: 300px;
+} */
 
-.col-right {
-  grid-area: right;
-  /* background-color: rgba(0, 255, 255, 0.6); */
-  color: grey;
-  text-decoration: none;
+#cards-carousel {
+  padding-top: 20px;
+  margin: auto;
+  width: 50%;
+  /* background-color: rgba(248,254,85,0.6825323879551821); */
 
 }
 
-.col-right .card li {
-  /* background-color: aqua; */
-}
-
-.col-right a {
-  color: grey;
-  text-decoration: none;
-}
-
-.col-right button {
-  height: 100px;
-  width: 200px;
-  margin: 20px;
-  background-color: rgb(243, 75, 103);
-  color: white;
+.carousel-card {
+  height: 280px;
+  max-width: 160px;
 }
 
 .footer {
-  margin-top: 200px;
+  margin-top: 20px;
   background-color: white;
   min-height: 600px;
   padding: 20px;
   font-size: 1.2em;
   text-align: center;
-  color: rgb(243, 75, 103)
+  color: rgb(243, 75, 103);
 }
 
 #project-description,
 #the-team {
   border-right: solid 1px grey;
+}
 
+.top-slogan {
+  font-size: 1.5em;
+  padding-left: 35px;
+  color: rgb(243, 75, 103);
+}
+
+.display-5 {
+ text-align: center;
 }
