@@ -22,18 +22,19 @@ module.exports = function (app) {
     };
     newGame.currentRound.faceDownCard = newGame.currentRound.deck.pop();
     console.log('Game created: ', newGame);
-    newGame.save()
-      .then(() => res.send(201))
+    newGame
+      .save()
+      .then(() => res.sendStatus(201))
       .catch((err) => res.status(500).send(err));
   });
 
   // need to add a join game route and communicate with Nick
   app.get('/games', (req, res) => {
-    console.log('Game data')
+    console.log('Game data');
     Game.find({})
       .exec()
       .then((results) => console.log(results));
-  })
+  });
 
   // Get current game state - needs refactor to filter out fields for relevant users
   app.get('/games/:name', (req, res) => {
@@ -49,7 +50,7 @@ module.exports = function (app) {
     console.log('Game posted: ', req.params.name);
     console.log('Posted data: ', req.body);
     GameEngine.process(req.params.name, req.body.user, req.body.move)
-      .then(() => res.send(201))
+      .then(() => res.sendStatus(201))
       .catch((err) => {
         console.log(err);
         res.status(500).send(err);
@@ -61,6 +62,6 @@ module.exports = function (app) {
     console.log('Game posted: ', req.params.name);
     console.log('Chat data: ', req.body);
     demoGame.chat.push(req.body);
-    res.send(201);
+    res.sendStatus(201);
   });
 };
