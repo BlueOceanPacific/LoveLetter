@@ -10,7 +10,8 @@ import MyHand from './Hands/MyHand';
 import Rules from './Rules/Rules';
 import Scoreboard from './Scoreboard/Scoreboard';
 import LocalLeaderboard from './LocalLeaderboard/LocalLeaderboard';
-import CardCount from './CardCount/CardCount';
+import DiscardPile from './DiscardPile/DiscardPile';
+import LoadingSpinner from '../../util/LoadingSpinner';
 
 import './GameView.scss';
 
@@ -23,6 +24,8 @@ function GameView({ socket }) {
       setGame(data[0]);
     });
   }, []);
+
+  if (!game) return <LoadingSpinner />
 
   return (
     <>
@@ -94,9 +97,9 @@ function GameView({ socket }) {
                   </div>
                 </div>
               </div>
-              <div className="col-4 card-count">
-                {/** ******************* CardCount.jsx ************************** */}
-                <CardCount game={game} />
+              <div className="col-4 discard-pile">
+                {/** ******************* DiscardPile.jsx ************************** */}
+                <DiscardPile game={game} />
               </div>
             </div>
             <div className="row justify-content-between align-items-center">
