@@ -5,9 +5,9 @@ const db = require('../../db');
 // Questions:
 // Single discard pile
 // Expectations on post (gameID, username, move: {card: {}, target (opt), cardguess(opt)})
-module.exports.process = (gameID, user, move) => new Promise((resolve, reject) => {
+module.exports.process = (gameName, user, move) => new Promise((resolve, reject) => {
   console.log(gameID, user, move);
-  db.Game.findOne({ _id: gameID }).exec()
+  db.Game.findOne({ name: gameName }).exec()
     .then((gameState) => {
       updateState(gameState, user, move);
       gameState.save()
@@ -30,12 +30,10 @@ function updateState(state, user, move) {
   processMove(state, user, move);
   // pre-process the draw of the next card for the next player, update their hand
   processDraw(state);
-  // check if any user is holding a minister with value of hand 12 or higher
-  checkRoundEnd(state);
 }
 
 function discardCard(state, user, move) {
-  // add card from move to users discard pile
+  // add card from move to users discarded pile
   state.currentRound.discardPile.push(move.card);
   // remove card from move from users hand
   if (state.currentRound.activeHands[user].hand[0].card === move.card.card) {
@@ -47,17 +45,19 @@ function discardCard(state, user, move) {
 }
 
 // Process the move based on given rules;
-function processMove(state, user, move) {
+function processMove(state, user, move) { // refactor discard to array of cards, no user
   return true;
 }
 
 // Find the next active player and draw a card into their hand
 function processDraw(state) {
+  // If deck is empty after a move, end round
   if (!state.currentRound.deck.length) {
-    return;
+    endRound(state);
   }
   const nextCard = state.currentRound.deck.pop();
   const { currentPlayer } = state.currentRound;
+  console.log('CurrentPlayer: ', currentPlayer);
   let playerPos;
   for (let i = 0; i < state.players.length; i += 1) {
     if (state.players[i].username === currentPlayer) {
@@ -68,7 +68,7 @@ function processDraw(state) {
   while (!nextPlayer) {
     playerPos = (playerPos + 1) % (state.players.length);
     const playerName = state.players[playerPos].username;
-
+    console.log('PlayerName: ', playerName);
     if (state.currentRound.activeHands[playerName]) {
       nextPlayer = playerName;
     }
@@ -76,18 +76,20 @@ function processDraw(state) {
   state.currentRound.currentPlayer = nextPlayer;
   state.currentRound.activeHands[nextPlayer].hand.push(nextCard);
   state.currentRound.activeHands[nextPlayer].value += nextCard.value;
-}
-// check if the round has ended
-function checkRoundEnd(state) {
-  // only one user remains, or the deck is out of cards
-  if(Object.keys(state.currentRound.activeHands).length <=1 || state.currentRound.deck.length === 0) {
-    endRound
-  } else {
-    return;
+  // check if new player has drawn over 12 with a minister, if so we kick them
+  if (state.currentRound.activeHands[nextPlayer].value >= 12 && (state.currentRound.activeHands[nextPlayer].hand[0].card === 'Minister' || state.currentRound.activeHands[nextPlayer].hand[1].card === 'Minister')) {
+    state.currentRound.discardPile.push(...state.currentRound.activeHands[nextPlayer].hand);
+    delete state.currentRound.activeHands[nextPlayer];
+  }
+
+  if (Object.keys(state.currentRound.activeHands).length === 1) {
+    endRound(state);
   }
 }
 
-function endRound(state) {
+// increment round counter, scoreboard, and check for 4 wins
+// re-shuffle deck, re-deal
+function endRound(state) { // make room name unique
 
 }
 

@@ -29,18 +29,15 @@ module.exports.demoPlaying = {
         ],
       },
       mteran: {
-        value: 7,
-        hand: [
-          {
-            card: 'Priestess',
-            value: 4,
-            image: '/images/cards/Priestess_Card.png',
-          },
-        ],
+        value: 4,
+        hand: [{
+          card: 'Priestess',
+          value: 4,
+          image: '/images/cards/Priestess_Card.png',
+        }],
       },
     },
-    discardPile: [
-      {
+    discardPile: [{
         card: 'Minister',
         value: 7,
         image: '/images/cards/Minister_Card.png',
@@ -54,35 +51,31 @@ module.exports.demoPlaying = {
         card: 'Knight',
         value: 3,
         image: '/images/cards/Knight_Card.png',
-      },
-    ],
-    deck: [
-      {
-        card: 'General',
-        value: 6,
-        image: '/images/cards/General_Card.png',
-      },
-      {
-        card: 'Minister',
-        value: 7,
-        image: '/images/cards/Minister_Card.png',
-      },
-      {
-        card: 'Clown',
-        value: 2,
-        image: '/images/cards/Clown_Card.png',
-      },
-      {
-        card: 'Soldier',
-        value: 1,
-        image: '/images/cards/Soldier_Card.png',
-      },
-      {
-        card: 'Wizard',
-        value: 5,
-        image: '/images/cards/Wizard_Card.png',
-      },
-    ], // rewrite deck as array of objects
+      }],
+    deck: [{
+      card: 'General',
+      value: 6,
+      image: '/images/cards/General_Card.png',
+    },
+    {
+      card: 'Minister',
+      value: 7,
+      image: '/images/cards/Minister_Card.png',
+    },
+    {
+      card: 'Clown',
+      value: 2,
+      image: '/images/cards/Clown_Card.png',
+    },
+    {
+      card: 'Soldier',
+      value: 1,
+      image: '/images/cards/Soldier_Card.png',
+    },{
+      card: 'Wizard',
+      value: 5,
+      image: '/images/cards/Wizard_Card.png',
+    }],
   },
   roundWins: {
     twheeler: 0,
@@ -128,66 +121,37 @@ module.exports.demoBuilding = {
         ],
       },
       mteran: {
-        value: 7,
-        hand: [
-          {
-            card: 'Priestess',
-            value: 4,
-            image: 'imageUrlHere',
-          },
-        ],
+        value: 4,
+        hand: [{
+          card: 'Priestess',
+          value: 4,
+          image: 'imageUrlHere',
+        }],
       },
     },
-    discardPiles: {
-      twheeler: [
-        {
-          card: 'Minister',
-          value: 7,
-          image: 'imageUrlHere',
-        },
-      ],
-      lcosta: [
-        {
-          card: 'Prince',
-          value: 8,
-          image: 'imageUrlHere',
-        },
-      ],
-      mteran: [
-        {
-          card: 'Knight',
-          value: 3,
-          image: 'imageUrlHere',
-        },
-      ],
+    discardPile: [],
+    deck: [{
+      card: 'General',
+      value: 6,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Minister',
+      value: 7,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Clown',
+      value: 2,
+      image: 'imageUrlHere',
     },
-    deck: [
-      {
-        card: 'General',
-        value: 6,
-        image: 'imageUrlHere',
-      },
-      {
-        card: 'Minister',
-        value: 7,
-        image: 'imageUrlHere',
-      },
-      {
-        card: 'Clown',
-        value: 2,
-        image: 'imageUrlHere',
-      },
-      {
-        card: 'Soldier',
-        value: 1,
-        image: 'imageUrlHere',
-      },
-      {
-        card: 'Wizard',
-        value: 5,
-        image: 'imageUrlHere',
-      },
-    ], // rewrite deck as array of objects
+    {
+      card: 'Soldier',
+      value: 1,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Wizard',
+      value: 5,
+      image: 'imageUrlHere',
+    }], // rewrite deck as array of objects
   },
   roundWins: {
     twheeler: 0,
