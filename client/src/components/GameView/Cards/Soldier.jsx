@@ -3,19 +3,33 @@ import useStore  from '../../Store/store';
 
 import CARD_TYPES from '../../../util/card-types';
 
-function Wizard({
-  players,
+function Soldier({
+  game,
   target,
   targetChangeHandler,
   cardType,
   cardTypeChangeHandler,
   showModal,
+  socket,
+  played
 }) {
+
   const user = useStore(store => store.user);
+
   useEffect(() => {
     showModal && targetChangeHandler("0");
     showModal && cardTypeChangeHandler("0");
   }, [showModal]);
+
+  useEffect(() => {
+    if (played) {
+      socket.emit('updateGameState', {
+        game: game.name,
+        user: user.username,
+        move: { card: { name: 'soldier', value: "1" }, target, cardType },
+      });
+    }
+  }, [played]);
 
   return (
     <>
@@ -25,10 +39,10 @@ function Wizard({
         value={target}
         onChange={({ target }) => targetChangeHandler(target.value)}
       >
-        <option defaultValue value={"0"}>
+        <option defaultValue value="0">
           Choose a target player
         </option>
-        {players.filter(({ username }) => username !== user.username).map(({ username }) => (
+        {game.players.filter(({ username }) => username !== user.username).map(({ username }) => (
           <option key={username} value={username}>
             {username}
           </option>
@@ -40,7 +54,7 @@ function Wizard({
         value={cardType}
         onChange={({ target }) => cardTypeChangeHandler(target.value)}
       >
-        <option defaultValue value={"0"}>
+        <option defaultValue value="0">
           Choose a Card Type
         </option>
         {CARD_TYPES.filter(({value}) => value !== "1").map(({ name, value }) => (
@@ -53,4 +67,4 @@ function Wizard({
   );
 }
 
-export default Wizard;
+export default Soldier;

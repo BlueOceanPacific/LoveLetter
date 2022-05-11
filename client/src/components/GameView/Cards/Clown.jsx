@@ -22,7 +22,7 @@ function Clown({
       socket.emit('updateGameState', {
         game: game.name,
         user: user.username,
-        move: { card: { name: 'clown', value: 2 }, target, cardType: null },
+        move: { card: { name: 'clown', value: "2" }, target, cardType: null },
       });
     }
   }, [played]);
