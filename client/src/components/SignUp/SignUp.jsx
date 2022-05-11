@@ -28,18 +28,15 @@ function SignUp() {
       .post('/user/signup', formData)
       .then(() => {
         document.getElementById('usernameHelp').style.color = '#ff0000';
-        setUsernameHelper('username added');
+        setUsernameHelper('User account created, please login.');
         navigate('/login');
       })
       .catch((error) => {
-        const errorCode = error.code;
-        if (errorCode === '11000') {
-          document.getElementById('usernameHelp').style.color = '#ff0000';
-          setUsernameHelper('this username already exists my lord');
-        } else if (errorCode === 'ERR_BAD_RESPONSE') {
-          document.getElementById('usernameHelp').style.color = '#ff0000';
-
-          setUsernameHelper('error creating an account, please refresh and try again later');
+        document.getElementById('usernameHelp').style.color = '#ff0000';
+        if (error.response.data.code === 11000) {
+          setUsernameHelper('This username already exists my lord.');
+        } else {
+          setUsernameHelper('Error creating account, please refresh and try again.');
         }
       });
   };
