@@ -27,8 +27,6 @@ function SignUp() {
     axios
       .post('/user/signup', formData)
       .then(() => {
-        document.getElementById('usernameHelp').style.color = '#ff0000';
-        setUsernameHelper('User account created, please login.');
         navigate('/login');
       })
       .catch((error) => {
