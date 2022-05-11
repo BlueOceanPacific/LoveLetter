@@ -3,7 +3,7 @@
 const db = require('../../db');
 
 // Questions:
-// Single discard pile, or discard pile per player?
+// Single discard pile
 // Expectations on post (gameID, username, move: {card: {}, target (opt), cardguess(opt)})
 module.exports.process = (gameID, user, move) => new Promise((resolve, reject) => {
   console.log(gameID, user, move);
@@ -35,8 +35,8 @@ function updateState(state, user, move) {
 }
 
 function discardCard(state, user, move) {
-  // add card from move to users discarded pile
-  state.currentRound.discardPiles[user].push(move.card);
+  // add card from move to users discard pile
+  state.currentRound.discardPile.push(move.card);
   // remove card from move from users hand
   if (state.currentRound.activeHands[user].hand[0].card === move.card.card) {
     state.currentRound.activeHands[user].hand = [state.currentRound.activeHands[user].hand[1]];

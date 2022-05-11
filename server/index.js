@@ -43,6 +43,7 @@ playNamespace.use((socket, next) => {
 playNamespace.on('connection', (socket) => {
   const room = socket.handshake.query.id;
   socket.join(room);
+  
   socket.on('join', (user) => {
     console.log(user.username, 'connected in room', room);
   });
