@@ -1,0 +1,23 @@
+.discard-pile {
+  text-align: center;
+
+  .discard-header {
+    text-align: center;
+    background-color: white;
+    margin-block: 0;
+    font-weight: bold;
+  }
+
+  .list-group {
+    overflow-x: scroll;
+  }
+
+  .card-img-top {
+    height: 5rem;
+    width: 5rem;
+  }
+  .card {
+    border: none;
+  }
+
+}

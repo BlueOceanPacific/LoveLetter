@@ -2,7 +2,13 @@ import React, { useState, useRef } from 'react';
 
 function PlayingCard({ card, target = false, cardType = false, children }) {
   const [showModal, setShowModal] = useState(0);
+  const [played, setPlayed] = useState(false);
   const modalElement = useRef();
+
+  const playCardHandler = () => {
+    setShowModal(false);
+    setPlayed(true);
+  }
 
   return (
     <>
@@ -28,7 +34,7 @@ function PlayingCard({ card, target = false, cardType = false, children }) {
               />
             </div>
             <div className="modal-body">
-              {React.cloneElement(children, { showModal })}
+              {React.cloneElement(children, { showModal, played })}
             </div>
             <div className="modal-footer">
               <button
@@ -43,7 +49,7 @@ function PlayingCard({ card, target = false, cardType = false, children }) {
                 type="button"
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
-                onClick={() => setShowModal(false)}
+                onClick={playCardHandler}
                 disabled={!(target !== "0" && cardType !== "0")}
               >
                 Play Card

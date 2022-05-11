@@ -7,6 +7,8 @@ function Home() {
 
   if (!user) {
     return (
+      <div>
+        <img className="balloon" src="images/backgrounds/heartBalloon.png" alt="flying balloon" />
       <div
         className="card"
         style={{ width: '18rem', margin: '5% auto', textAlign: 'center' }}
@@ -21,10 +23,14 @@ function Home() {
           </li>
         </ul>
       </div>
+      <div> </div>
+      </div>
     );
   }
 
   return (
+    <div>
+      <img className="balloon"src="images/backgrounds/heartBalloon.png" alt="flying balloon" />
     <div
       className="card"
       style={{ width: '18rem', margin: '5% auto', textAlign: 'center' }}
@@ -58,7 +64,12 @@ function Home() {
         <li key="chat" className="list-group-item">
           <Link to="/chat">Chat</Link>
         </li>
+        <li key="testhome" className="list-group-item">
+          <Link to="/testhome">testHome</Link>
+        </li>
       </ul>
+    </div>
+
     </div>
   );
 }
