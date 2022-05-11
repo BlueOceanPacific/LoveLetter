@@ -17,7 +17,7 @@ module.exports = function (app) {
       turnNumber: 1,
       currentPlayer: this.host?.username || 'user', // current player is always the host, maybe update this to be random later on
       activeHands: { [this.host?.username || 'user']: { value: 0, hand: [] } },
-      discardPiles: { [this.host?.username || 'user']: []},
+      discardPile: [],
       deck: structuredClone(fullDeck),
     };
     console.log('Game created: ', newGame);
@@ -31,7 +31,7 @@ module.exports = function (app) {
   // Get current game state - needs refactor to filter out fields for relevant users
   app.get('/games/:id', (req, res) => {
     console.log('Game requested: ', req.params.id);
-    Game.find({ _id: req.params.id })
+    Game.findOne({ _id: req.params.id })
       .exec()
       .then((results) => res.send(results))
       .catch((err) => res.status(500).send(err));
