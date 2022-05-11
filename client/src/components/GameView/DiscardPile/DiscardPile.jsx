@@ -9,10 +9,10 @@ import Liege from "../Cards/Liege";
 import General from "../Cards/General";
 import Minister from "../Cards/Minister";
 
-import Card from "../Hands/Card";
-import "./CardCount.scss";
+import Card from "../Cards/Card";
+import "./DiscardPile.scss";
 
-function CardCount({ game }) {
+function DiscardPile({ game }) {
   // const { discardPiles } = game;
   // let cards = [];
 
@@ -75,7 +75,7 @@ function CardCount({ game }) {
               </div>
               <div className="modal-body">
                 <ul className="list-group flex-md-row">
-                  {cards}
+                  {game.currentRound.discardPile.map((card) => <Card />)}
                 </ul>
               </div>
               <div className="modal-footer">
@@ -91,4 +91,4 @@ function CardCount({ game }) {
   );
 }
 
-export default CardCount;
+export default DiscardPile;
