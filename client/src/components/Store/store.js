@@ -13,6 +13,8 @@ const useStore = create((set) => ({
   loggedIn: false,
   logIn: (user) => set({ user, loggedIn: true }),
   logOut: () => set({ user: null, loggedIn: false }),
+  socket: null,
+  setSocket: (socket) => set({ socket })
 }));
 
 export default useStore;
