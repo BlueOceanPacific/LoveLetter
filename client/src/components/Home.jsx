@@ -64,8 +64,8 @@ function Home() {
         <li key="chat" className="list-group-item">
           <Link to="/chat">Chat</Link>
         </li>
-        <li key="testHome" className="list-group-item">
-          <Link to="/testHome">testHome</Link>
+        <li key="testhome" className="list-group-item">
+          <Link to="/testhome">testHome</Link>
         </li>
       </ul>
     </div>

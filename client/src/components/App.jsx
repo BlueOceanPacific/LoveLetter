@@ -2,7 +2,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import testHome from './testHome';
+import TestHome from './TestHome';
 import Home from './Home';
 import Chat from './Chat/Chat';
 import CreateGame from './CreateGame/CreateGame';
@@ -40,8 +40,7 @@ function App() {
           }
         />
         <Route path="/userprofile" element={<UserProfile />} />
-        <Route path="/testHome" element={<testHome />} />
-
+        <Route path="/testhome" element={<TestHome />} />
       </Routes>
     </>
   );

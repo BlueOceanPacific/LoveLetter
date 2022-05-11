@@ -4,6 +4,14 @@ body {
   background-repeat: no-repeat;
 }
 
+.navbar-icon {
+  height: 30px;
+  width: 30px;
+  padding-bottom: 2px;
+}
+
+
+/* ******** Baloon Animation ********* */
 .baloon {
   width: 100px;
   height: 100px;
@@ -24,3 +32,75 @@ body {
   75%  {transform: rotate(30deg); transform: scale(2); left:900px; top:300px;}
   100% {transform: scale(0.5); left:1400px; top:0px;}
 }
+
+/* ******** TestHome ********* */
+
+.th-top-container {
+  display: grid;
+  grid-template-areas: "left right";
+  grid-template-columns: 3fr 5fr;
+}
+
+.col-left {
+  background-color: white;
+  grid-area: left;
+  display: grid;
+  grid-template-areas: "e e"
+                        "top top-right"
+                         "middle middle"
+                        "bottom bottom-right";
+  grid-template-columns: 6fr 3fr;
+  /* gap: 10px; */
+  padding: 20px;
+}
+
+.intro {
+  grid-area: top;
+  vertical-align: bottom;
+  padding: 20px;
+  color: aqua;
+}
+
+.main-title {
+  grid-area:middle;
+  margin-left: 20px;
+  font-weight: 100;
+  text-align: center;
+  color: aqua;
+}
+
+.get-started {
+  grid-area: bottom;
+  /* margin-left: 20px; */
+  text-align: center;
+}
+
+.col-right {
+  grid-area: right;
+  background-color: aqua;
+  color: grey;
+  text-decoration: none;
+}
+
+.col-right .card li{
+  background-color: aqua;
+}
+.col-right a {
+  color: grey;
+  text-decoration: none;
+}
+
+.footer {
+  margin-top: 200px;
+  background-color: white;
+  min-height: 600px;
+  padding: 20px;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+#project-description, #the-team {
+  border-right: solid 1px grey;
+
+}
+
