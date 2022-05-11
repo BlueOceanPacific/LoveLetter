@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Card({ currentCard }) {
-  console.log('current', currentCard);
   return (
       <li className="list-group-item" style={{ padding: 0 }}>
         <button
