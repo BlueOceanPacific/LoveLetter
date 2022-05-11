@@ -5,7 +5,9 @@ import './SignUp.scss';
 
 function SignUp() {
   const navigate = useNavigate();
-  const [usernameHelper, setUsernameHelper] = useState(() => 'Please choose a username my lord.');
+  const [usernameHelper, setUsernameHelper] = useState(
+    () => 'Please choose a username of 5 to 20 characters my lord.'
+  );
 
   const [formData, setFormData] = useState({
     username: '',
@@ -59,7 +61,7 @@ function SignUp() {
             onChange={changeHandler}
             name="username"
             required
-            pattern="^[A-Z]{1,15}$"
+            pattern="^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$"
           />
           <div id="usernameHelp" className="form-text">
             {usernameHelper}
@@ -82,7 +84,7 @@ function SignUp() {
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}"
           />
           <div id="passwordHelp" className="form-text">
-            Use 8 or more characters with a mix of uppercase and lowercase letters, numbers, and
+            Use 8 to 30 characters with a mix of uppercase and lowercase letters, numbers, and
             symbols to build the strongest castle in all of England.
           </div>
         </div>
