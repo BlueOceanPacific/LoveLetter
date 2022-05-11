@@ -13,19 +13,9 @@ import Card from "../Cards/Card";
 import "./DiscardPile.scss";
 
 function DiscardPile({ game }) {
-  // const { discardPiles } = game;
-  // let cards = [];
+  const { discardPile } = game.currentRound;
 
-  // for (let prop in discardPiles) {
-  //   let currentCard = discardPiles[prop];
-
-  //   cards.push(
-  //     <li className="list-group-item">
-  //       <PlayingCard card={currentCard.card}/>
-  //     </li>
-  //   );
-  //   card
-  // }
+  console.log(discardPile);
 
   let cards = [];
   cards.push(
