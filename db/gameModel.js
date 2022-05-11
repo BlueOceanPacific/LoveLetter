@@ -4,19 +4,21 @@ const { Schema } = mongoose;
 
 // User schema is simple for now: just username and password
 const gamesSchema = new Schema({
-  name: String,
+  name: {type: String, unique: true},
   privacy: String,
   state: String,
   host: Object,
   players: [Object],
   currentRound: {
-    roundNumber: Number,
-    turnNumber: Number,
+    roundNumber: {type: Number, default: 1},
+    turnNumber: {type: Number, default: 1},
     currentPlayer: String,
     activeHands: Object,
-    discardPiles: Object,
+    discardPile: [Object],
     deck: [],
+    faceDownCard: Object,
   },
+  message: String,
   roundWins: Object,
   chat: [new Schema({ username: String, message: String })],
 });

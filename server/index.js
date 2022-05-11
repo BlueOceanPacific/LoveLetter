@@ -43,11 +43,16 @@ playNamespace.use((socket, next) => {
 playNamespace.on('connection', (socket) => {
   const room = socket.handshake.query.id;
   socket.join(room);
-  socket.on('join', (user) => {
+  
+  socket.on('join', (user) => { // whenever a player joins a game, this event is fired
     console.log(user.username, 'connected in room', room);
   });
 
-  socket.on('disconnect', () => {
+  socket.on('updateGameState', (updateInfo) => { // whenever a player joins a game, this event is fired
+    console.log(`${updateInfo.user} played ${updateInfo.move.card.name} in ${updateInfo.game}`)
+  });
+
+  socket.on('disconnect', () => { // whenever a player disconnect, this event is fired
     socket.leave(room);
   });
   // on 'chat' events in a room, send chat to clients in room, excluding sender
