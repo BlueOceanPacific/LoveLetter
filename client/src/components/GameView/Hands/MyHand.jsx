@@ -46,7 +46,7 @@ function MyHand({ game, socket }) {
         targetChangeHandler={targetChangeHandler}
       />
     ),
-    Priestess: <Priestess />,
+    Priestess: <Priestess socket={socket} game={game} />,
     Wizard: (
       <Wizard
         socket={socket}
@@ -63,8 +63,8 @@ function MyHand({ game, socket }) {
         targetChangeHandler={targetChangeHandler}
       />
     ),
-    Minister: <Minister />,
-    Liege: <Liege />,
+    Minister: <Minister socket={socket} game={game} />,
+    Liege: <Liege socket={socket} game={game} />,
   };
 
   return (
