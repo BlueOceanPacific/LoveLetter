@@ -10,13 +10,15 @@ const gamesSchema = new Schema({
   host: Object,
   players: [Object],
   currentRound: {
-    roundNumber: Number,
-    turnNumber: Number,
+    roundNumber: {type: Number, default: 1},
+    turnNumber: {type: Number, default: 1},
     currentPlayer: String,
     activeHands: Object,
     discardPile: [Object],
     deck: [],
+    faceDownCard: Object,
   },
+  message: String,
   roundWins: Object,
   chat: [new Schema({ username: String, message: String })],
 });
