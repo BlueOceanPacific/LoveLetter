@@ -10,7 +10,7 @@ function Chat({ socket }) {
   const [newMessageText, setNewMessageText] = useState('');
   const [messages, setMessages] = useState([]);
   const { id } = useParams();
-  
+
   const user = useStore((store) => store.user);
   const filter = new Filter();
 
@@ -19,7 +19,7 @@ function Chat({ socket }) {
       setMessages((prevMessages) => [...prevMessages, chat]);
     });
   }, []);
-  
+
   const sendMessageHandler = () => {
     const chat = {
       id: Date.now(),
@@ -42,7 +42,7 @@ function Chat({ socket }) {
       <div className="chat-messages">
         <MessagesList messages={messages} />
       </div>
-      <div className="input-group mb-3">
+      <div className="input-group mb-3 chat-input">
         <input
           type="text"
           className="form-control"
@@ -54,6 +54,11 @@ function Chat({ socket }) {
               setNewMessageText(e.target.value);
             } else {
               alert('Chat is limited to 100 characters');
+            }
+          }}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              sendMessageHandler();
             }
           }}
         />

@@ -2,7 +2,6 @@ import React from 'react';
 
 function Card() {
   return (
-    <div className="card" style={{ width: '50%' }}>
       <li className="list-group-item" style={{ padding: 0 }}>
         <button
           type="button"
@@ -17,7 +16,6 @@ function Card() {
           />
         </button>
       </li>
-    </div>
   );
 }
 

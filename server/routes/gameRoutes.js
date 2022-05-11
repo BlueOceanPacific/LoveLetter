@@ -1,4 +1,5 @@
 const db = require('../../db');
+const GameEngine = require('./gameEngine');
 const Game = require('../../db/gameModel');
 const fullDeck = require('../../db/fullDeck');
 
@@ -30,7 +31,7 @@ module.exports = function (app) {
   // Get current game state - needs refactor to filter out fields for relevant users
   app.get('/games/:id', (req, res) => {
     console.log('Game requested: ', req.params.id);
-    Game.find({ name: req.params.id })
+    Game.find({ _id: req.params.id })
       .exec()
       .then((results) => res.send(results))
       .catch((err) => res.status(500).send(err));
@@ -40,8 +41,12 @@ module.exports = function (app) {
   app.post('/games/:id', (req, res) => {
     console.log('Game posted: ', req.params.id);
     console.log('Posted data: ', req.body);
-    // send to the game engine
-    res.send(200);
+    GameEngine.process(req.params.id, req.body.user, req.body.move)
+      .then(() => res.send(201))
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send(err);
+      });
   });
 
   // Submit a chat
