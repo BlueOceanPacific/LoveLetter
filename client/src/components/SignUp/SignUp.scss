@@ -2,6 +2,14 @@
   background-color: white;
 }
 
+#SignUpInputPassword:valid {
+  background-color: green;
+}
+
+#SignUpInputPassword:invalid {
+  background-color: darkred;
+}
+
 #su-buttons {
   display: grid;
   grid-template-areas: 'left back submit right';
