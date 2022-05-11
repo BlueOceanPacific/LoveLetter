@@ -7,8 +7,8 @@ const mongoDB = 'mongodb://127.0.0.1/LoveLetter';
 mongoose.connect(mongoDB);
 
 // ----------------------- Uncomment to Empty DB on Server Restart ------------------------
-// Game.deleteMany({}).then(() => console.log('Games Collection Truncated'));
-// User.deleteMany({}).then(() => console.log('Users Collection Truncated'));
+Game.deleteMany({}).then(() => console.log('Games Collection Truncated'));
+User.deleteMany({}).then(() => console.log('Users Collection Truncated'));
 
 // REMOVE BELOW FOR FINAL VERSION
 Game.find({}).exec()

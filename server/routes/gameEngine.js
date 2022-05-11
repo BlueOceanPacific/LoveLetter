@@ -4,7 +4,7 @@ const db = require('../../db');
 const fullDeck = require('../../db/fullDeck');
 
 // Questions:
-// Single discard pile, or discard pile per player?
+// Single discard pile
 // Expectations on post (gameID, username, move: {card: {}, target (opt), cardguess(opt)})
 module.exports.process = (gameName, user, move) => new Promise((resolve, reject) => {
   console.log(gameName, user, move);
@@ -142,7 +142,7 @@ function processDraw(state) {
   state.currentRound.currentPlayer = nextPlayer;
   state.currentRound.activeHands[nextPlayer].hand.push(nextCard);
   state.currentRound.activeHands[nextPlayer].value += nextCard.value;
-  //check if new player has drawn over 12 with a minister, if so we kick them
+  // check if new player has drawn over 12 with a minister, if so we kick them
   if (state.currentRound.activeHands[nextPlayer].value >= 12 && (state.currentRound.activeHands[nextPlayer].hand[0].card === 'Minister' || state.currentRound.activeHands[nextPlayer].hand[1].card === 'Minister')) {
     state.currentRound.discardPile.push(...state.currentRound.activeHands[nextPlayer].hand);
     delete state.currentRound.activeHands[nextPlayer];

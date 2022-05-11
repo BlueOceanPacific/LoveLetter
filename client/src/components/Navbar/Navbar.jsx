@@ -20,7 +20,16 @@ function Navbar() {
 
     return (
       <li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
+        <a
+          className="nav-link dropdown-toggle"
+          href="#" id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          data-bs-toggle="dropdown"
+          style={{ margin: 0 }}
+        >
           Game Actions
         </a>
         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
