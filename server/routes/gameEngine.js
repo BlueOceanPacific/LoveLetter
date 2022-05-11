@@ -47,23 +47,22 @@ function discardCard(state, user, move) {
 
 // Process the move based on given rules;
 function processMove(state, user, move) { //refactor play messages to be added to chat
-  state.currentRound.message = null;
 
   switch (move.card.card) {
     case 'Prince': //Out of the match
       state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
       delete state.currentRound.activeHands[user];
-      state.currentRound.message = `${user} is out of the round - they played the Prince!`;
+      state.chat.push({username: 'system', message:`${user} is out of the round - they played the Prince!`});
       break;
     case 'Princess': //Out of the match
       state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
       delete state.currentRound.activeHands[user];
-      state.currentRound.message = `${user} is out of the round - they played the Princess!`;
+      state.chat.push({username: 'system', message:`${user} is out of the round - they played the Princess!`});
       break;
     case 'Liege': //Out of the match
       state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
       delete state.currentRound.activeHands[user];
-      state.currentRound.message = `${user} is out of the round - they played the Liege!`;
+      state.chat.push({username: 'system', message:`${user} is out of the round - they played the Liege!`});
       break;
     case 'Minister': //no effect on discard
       break;
@@ -71,14 +70,14 @@ function processMove(state, user, move) { //refactor play messages to be added t
       const tmp = state.currentRound.activeHands[user].hand.slice();
       state.currentRound.activeHands[user] = state.currentRound.activeHands[move.target].hand.slice();
       state.currentRound.activeHands[move.target].hand = tmp;
-      state.currentRound.message = `${user} uses the General to change hands with ${move.target}!`;
+      state.chat.push({username: 'system', message:`${user} uses the General to change hands with ${move.target}!`});
       break;
     case 'Wizard': // Target player discards hand, draws new card (can target self)
       state.currentRound.activeHands[move.target].hand = state.currentRound.deck.length ? [state.currentRound.deck.pop()] : [state.currentRound.faceDownCard];
-      state.currentRound.message = `${user} plays the Wizard. ${move.target} draws a new hand!`;
+      state.chat.push({username: 'system', message:`${user} plays the Wizard. ${move.target} draws a new hand!`});
       break;
     case 'Priestess': // Cannot be targeted by other players until your next turn NOT SURE HOW TO HANDLE
-      state.currentRound.message = `I haven't figured out how to implment Priestess yet!!`
+      state.chat.push({username: 'system', message:`I haven't figured out how to implment Priestess yet!!`});
       break;
     case 'Knight':
       // Compare hand value with target player. Lowest value is out of the round, tie = both stay;
@@ -86,25 +85,25 @@ function processMove(state, user, move) { //refactor play messages to be added t
       if (handDiff > 0) { // user hand is higher value than target hand
         state.currentRound.discardPile.push(...state.currentRound.activeHands[move.target].hand);
         delete state.currentRound.activeHands[move.target];
-        state.currentRound.message = `${move.target} is knocked out of the round by a Knight!`;
+        state.chat.push({username: 'system', message:`${move.target} is knocked out of the round by a Knight!`});
       } else if (handDiff < 0) { // user hand is lower value than target hand
         state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
         delete state.currentRound.activeHands[user];
-        state.currentRound.message = `${user} is knocked out of the round by a Knight!`;
+        state.chat.push({username: 'system', message:`${user} is knocked out of the round by a Knight!`});
       } else {
-        state.currentRound.message = `A knight is played - neither side has an advantage!`;
+        state.chat.push({username: 'system', message:`A knight is played - neither side has an advantage!`});
       }
       break;
     case 'Clown': // Look at target players hand NOT SURE HOW TO HANDLE
-      state.currentRound.message = `I haven't figured out how to implment Clown yet!!`
+      state.chat.push({username: 'system', message:`I haven't figured out how to implment Clown yet!!`});
       break;
     case 'Soldier': // Choose a card type other than Soldier. If target player has card, they are out
       if(state.currentRound.activeHands[move.target].hand[0].card === move.guess) {
         state.currentRound.discardPile.push(...state.currentRound.activeHands[move.target].hand);
         delete state.currentRound.activeHands[move.target];
-        state.currentRound.message = `${user}'s Soldier strikes ${move.target} with a fatal blow!`;
+        state.chat.push({username: 'system', message:`${user}'s Soldier strikes ${move.target} with a fatal blow!`});
       } else {
-        state.currentRound.message = `${user}'s Soldier misses their mark!`;
+        state.chat.push({username: 'system', message:`${user}'s Soldier misses their mark!`});
       }
       break;
     default:
