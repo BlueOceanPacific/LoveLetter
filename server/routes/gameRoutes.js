@@ -18,7 +18,7 @@ module.exports = function (app) {
       currentPlayer: this.host?.username || 'user', // current player is always the host, maybe update this to be random later on
       activeHands: { [this.host?.username || 'user']: { value: 0, hand: [] } },
       discardPile: [],
-      deck: structuredClone(fullDeck),
+      deck: fullDeck.slice(),
     };
     newGame.currentRound.faceDownCard = newGame.currentRound.deck.pop();
     console.log('Game created: ', newGame);
