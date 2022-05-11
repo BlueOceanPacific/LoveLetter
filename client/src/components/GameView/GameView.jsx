@@ -113,7 +113,7 @@ function GameView({ socket }) {
                 <div className="row justify-content-center">
                   <div className="col-5 my-hand">
                     {/** ******************* MyHand.jsx ************************** */}
-                    {game && <MyHand game={game} socket={socket} />}
+                    {/* {game && <MyHand game={game} socket={socket} />} */}
                   </div>
                 </div>
               </div>

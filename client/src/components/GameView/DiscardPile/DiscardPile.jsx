@@ -15,25 +15,6 @@ import "./DiscardPile.scss";
 function DiscardPile({ game }) {
   const { discardPile } = game.currentRound;
 
-  console.log(discardPile);
-
-  let cards = [];
-  cards.push(
-    <li className="list-group-item">
-      <Card />
-    </li>
-  );
-  cards.push(
-    <li className="list-group-item">
-      <Card />
-    </li>
-  );
-  cards.push(
-    <li className="list-group-item">
-      <Card />
-    </li>
-  );
-
   return (
     <div className="discard-pile">
       <button
@@ -65,7 +46,7 @@ function DiscardPile({ game }) {
               </div>
               <div className="modal-body">
                 <ul className="list-group flex-md-row">
-                  {game.currentRound.discardPile.map((card) => <Card />)}
+                  {discardPile.map((card) => <Card currentCard={ card.image }/>)}
                 </ul>
               </div>
               <div className="modal-footer">
