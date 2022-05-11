@@ -1,28 +1,42 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-undef */
 import React, { useEffect } from 'react';
 import useStore from '../../Store/store';
 
-function Knight({ players, target, targetChangeHandler, showModal }) {
-  const user = useStore(store => store.user);
+function Knight({ game, target, targetChangeHandler, showModal, played, socket }) {
+  const user = useStore((store) => store.user);
 
   useEffect(() => {
-    showModal && targetChangeHandler("0");
-  }, [showModal])
+    showModal && targetChangeHandler('0');
+  }, [showModal]);
+
+  useEffect(() => {
+    if (played) {
+      socket.emit('updateGameState', {
+        game: game.name,
+        user: user.username,
+        move: { card: { name: 'knight', value: "3" }, target, cardType: null },
+      });
+    }
+  }, [played]);
 
   return (
     <select
       className="form-select"
       aria-label="Choose a target player"
       value={target}
-      onChange={({target}) => targetChangeHandler(target.value)}
+      onChange={({ target }) => targetChangeHandler(target.value)}
     >
       <option defaultValue value="0">
         Choose a target player
       </option>
-      {players.filter(({ username }) => username !== user.username).map(({ username }) => (
-        <option key={username} value={username}>
-          {username}
-        </option>
-      ))}
+      {game.players
+        .filter(({ username }) => username !== user.username)
+        .map(({ username }) => (
+          <option key={username} value={username}>
+            {username}
+          </option>
+        ))}
     </select>
   );
 }
