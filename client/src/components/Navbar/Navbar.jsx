@@ -14,7 +14,7 @@ function Navbar() {
   let gameDisplay = null;
   let signup = <a className="nav-link" href="./#/signup">Signup</a>;
 
-  const createGameDisplay = function() {
+  const createGameDisplay = function () {
     joinGame = <a className="dropdown-item" href="./#/join">Join Game</a>;
     createGame = <a className="dropdown-item" href="./#/create">Create Game</a>;
 
@@ -31,22 +31,26 @@ function Navbar() {
     );
   };
 
-  const changeBackground = function(e) {
-    let lakeUrl = 'images/backgrounds/lake.png';
-    let fireflyUrl = 'images/backgrounds/fireflies.png';
-    let blueSkiesUrl = 'images/backgrounds/blueSkiesAnime.jpg';
+  const changeBackground = function (e) {
+    const lakeUrl = 'images/backgrounds/lake.png';
+    const castleUrl = 'images/backgrounds/castle.png';
+    const catCafeUrl = 'images/backgrounds/catCafe.png';
+    const blueSkiesUrl = 'images/backgrounds/blueSkiesAnime.jpg';
 
 
-    switch(e.target.text) {
+    switch (e.target.text) {
       case 'Scenic Lake':
         document.body.style.backgroundImage = `url(${lakeUrl})`;
         break;
-      case 'Fireflies':
-        document.body.style.backgroundImage = `url(${fireflyUrl})`;
+      case 'Castle':
+        document.body.style.backgroundImage = `url(${castleUrl})`;
+        break;
+      case 'Cat Cafe':
+        document.body.style.backgroundImage = `url(${catCafeUrl})`;
         break;
       case 'Blue Skies':
         document.body.style.backgroundImage = `url(${blueSkiesUrl})`;
-        break
+        break;
     }
   }
 
@@ -65,11 +69,12 @@ function Navbar() {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="#"> <img className="navbar-icon" src="images/branding/heartBaloon_icon.png" alt="heart baloon icon" /> <span className="nav-title"> Love Letter </span></a>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a className="navbar-brand" href="#"> <img className="navbar-icon" src="images/branding/heartBaloon_icon.png" alt="heart baloon icon" /> <span className="nav-title"> Love Letter </span></a>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon" />
+        </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
@@ -82,17 +87,18 @@ function Navbar() {
             </li>
             {gameDisplay}
             <li className="nav-item dropdown dd-bttn">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" style={{margin: 0}}>
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" style={{ margin: 0 }}>
                 Themes
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a className="dropdown-item" onClick={changeBackground}>Scenic Lake</a>
-                <a className="dropdown-item" onClick={changeBackground}>Fireflies</a>
+                <a className="dropdown-item" onClick={changeBackground}>Castle</a>
+                <a className="dropdown-item" onClick={changeBackground}>Cat Cafe</a>
                 <a className="dropdown-item" onClick={changeBackground}>Blue Skies</a>
               </div>
             </li>
             <li>
-            {logOutButton}
+              {logOutButton}
             </li>
             <li>
               {signup}
