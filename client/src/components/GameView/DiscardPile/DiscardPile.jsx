@@ -13,36 +13,7 @@ import Card from "../Cards/Card";
 import "./DiscardPile.scss";
 
 function DiscardPile({ game }) {
-  // const { discardPiles } = game;
-  // let cards = [];
-
-  // for (let prop in discardPiles) {
-  //   let currentCard = discardPiles[prop];
-
-  //   cards.push(
-  //     <li className="list-group-item">
-  //       <PlayingCard card={currentCard.card}/>
-  //     </li>
-  //   );
-  //   card
-  // }
-
-  let cards = [];
-  cards.push(
-    <li className="list-group-item">
-      <Card />
-    </li>
-  );
-  cards.push(
-    <li className="list-group-item">
-      <Card />
-    </li>
-  );
-  cards.push(
-    <li className="list-group-item">
-      <Card />
-    </li>
-  );
+  const { discardPile } = game.currentRound;
 
   return (
     <div className="discard-pile">
@@ -75,7 +46,7 @@ function DiscardPile({ game }) {
               </div>
               <div className="modal-body">
                 <ul className="list-group flex-md-row">
-                  {game.currentRound.discardPile.map((card) => <Card />)}
+                  {discardPile.map((card) => <Card currentCard={ card.image }/>)}
                 </ul>
               </div>
               <div className="modal-footer">
