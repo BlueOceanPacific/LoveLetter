@@ -5,17 +5,14 @@
 .chat-messages {
   max-height: 43vh;
   overflow: auto;
-  // max-width: 15vh;
   overflow-wrap: break-word;
 }
 
-// .chat-timestamp {
-//   display: inline-block;
-//   margin-right: 1%;
-//   margin-left: 1%;
-//   font-size: x-small;
-//   width: 25px;
-// }
+.chat-timestamp {
+  margin-right: 1%;
+  font-size: x-small;
+  width: 7%;
+}
 
 .chat-username {
   margin-right: 0.5%;
