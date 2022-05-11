@@ -2,6 +2,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import TestHome from './TestHome';
 import Home from './Home';
 import Chat from './Chat/Chat';
 import CreateGame from './CreateGame/CreateGame';
@@ -22,12 +23,12 @@ function App() {
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/chat" element={<Chat />} />
+        <Route path="/chat" element={'DEPRECATED: Chat component can only be rendered in Game'} />
         <Route path="/create" element={<CreateGame />} />
-        <Route path="/game/:id" element={<GameView />} />
+        <Route path="/play/game/:id" element={<GameView />} />
         <Route path="/join" element={<JoinGame />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/lobby" element={<Lobby />} />
+        <Route path="/play/lobby/:id" element={<Lobby />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route
@@ -39,6 +40,7 @@ function App() {
           }
         />
         <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/testhome" element={<TestHome />} />
       </Routes>
     </>
   );

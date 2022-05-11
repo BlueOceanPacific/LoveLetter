@@ -1,13 +1,13 @@
-
 .userprofile-main {
   display: grid;
-  gap:10px;
-  grid-template-areas: "left username right"
-                       "left avatar right"
-                       "left dropdown-toggle right"
-                       "left dropdown-menu right"
-                       "left pronouns right"
-                       "left edit right" ;
+  gap: 10px;
+  grid-template-areas:
+    'left username right'
+    'left avatar right'
+    'left dropdown-toggle right'
+    'left dropdown-menu right'
+    'left pronouns right'
+    'left edit right';
   grid-template-columns: 4fr 10fr 4fr;
   /* border: solid red; */
   margin-top: 20px;
@@ -30,23 +30,27 @@
 }
 
 .dropdown-toggle {
-  grid-area:dropdown-toggle;
+  grid-area: dropdown-toggle;
   margin-top: 20px;
 }
 
 .dropdown-menu {
   grid-area: dropdown-menu;
-  min-width: 200px;;
+  min-width: 200px;
 }
 
-.dropdown-menu li {
-  margin: 10px 0;
+.dropdown-menu .row {
+  margin: 20px 0;
 }
 
 .dropdown-menu span {
   margin-left: 10px;
 }
 
+.dd-btn {
+  border: none;
+  background-color: white;
+}
 
 .avatarRound {
   border-radius: 50%;
@@ -55,13 +59,14 @@
   margin-top: 20px;
 }
 
-.avatarEditBtn {
-  margin-top: 10px;
-}
+// .avatarEditBtn {
+//   margin-top: 10px;
+
+// }
 
 .dd-thumbnail{
-  height:50px;
-  width:50px;
+  height:60px;
+  width:60px;
 }
 
 .UP-username-hello {
@@ -90,14 +95,11 @@
   margin-top: 20px;
 }
 
-.UP-textinput{
+.UP-textinput {
   text-align: center;
-  // max-width: 400px;
 }
 
 .UP-edit-btn {
-  margin:10px 10px;
+  margin: 10px 10px;
   min-width: 200px;
 }
-
-
