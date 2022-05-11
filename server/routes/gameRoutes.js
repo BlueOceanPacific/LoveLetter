@@ -27,6 +27,12 @@ module.exports = function (app) {
   });
 
   // need to add a join game route and communicate with Nick
+  app.get('/games', (req, res) => {
+    console.log('Game data')
+    Game.find({})
+      .exec()
+      .then((results) => console.log(results));
+  })
 
   // Get current game state - needs refactor to filter out fields for relevant users
   app.get('/games/:id', (req, res) => {
