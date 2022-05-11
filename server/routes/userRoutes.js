@@ -57,6 +57,7 @@ module.exports = function (app) {
 
   // Returns a user profile (all fields excluding password)
   app.get('/user/profile', (req, res) => {
+    console.log('request at server ', req.body);
     db.User.findOne({ username: req.body.username })
       .exec()
       .then((user) => {

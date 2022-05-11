@@ -3,3 +3,4 @@ bundle.js
 node_modules
 *.DS_Store
 client/src/components/SignUp/**Sign up**.md
+client/dist/images/.DS_Store
