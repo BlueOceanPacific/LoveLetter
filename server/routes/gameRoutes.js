@@ -20,6 +20,7 @@ module.exports = function (app) {
       discardPile: [],
       deck: structuredClone(fullDeck),
     };
+    newGame.currentRound.faceDownCard = newGame.currentRound.deck.pop();
     console.log('Game created: ', newGame);
     newGame.save()
       .then(() => res.send(201))

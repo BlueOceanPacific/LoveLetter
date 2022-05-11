@@ -1,12 +1,13 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-use-before-define */
 const db = require('../../db');
+const fullDeck = require('../../db/fullDeck');
 
 // Questions:
-// Single discard pile, or discard pile per player?
+// Single discard pile
 // Expectations on post (gameID, username, move: {card: {}, target (opt), cardguess(opt)})
 module.exports.process = (gameName, user, move) => new Promise((resolve, reject) => {
-  console.log(gameID, user, move);
+  console.log(gameName, user, move);
   db.Game.findOne({ name: gameName }).exec()
     .then((gameState) => {
       updateState(gameState, user, move);
@@ -45,13 +46,78 @@ function discardCard(state, user, move) {
 }
 
 // Process the move based on given rules;
-function processMove(state, user, move) { //refactor discard to array of cards, no user
+function processMove(state, user, move) { //refactor play messages to be added to chat
+  state.currentRound.message = null;
+
+  switch (move.card.card) {
+    case 'Prince': //Out of the match
+      state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
+      delete state.currentRound.activeHands[user];
+      state.currentRound.message = `${user} is out of the round - they played the Prince!`;
+      break;
+    case 'Princess': //Out of the match
+      state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
+      delete state.currentRound.activeHands[user];
+      state.currentRound.message = `${user} is out of the round - they played the Princess!`;
+      break;
+    case 'Liege': //Out of the match
+      state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
+      delete state.currentRound.activeHands[user];
+      state.currentRound.message = `${user} is out of the round - they played the Liege!`;
+      break;
+    case 'Minister': //no effect on discard
+      break;
+    case 'General': //Change hands with target player (must not be self) CURRENTLY NO VALIDATION ON SELF TARGET
+      const tmp = state.currentRound.activeHands[user].hand.slice();
+      state.currentRound.activeHands[user] = state.currentRound.activeHands[move.target].hand.slice();
+      state.currentRound.activeHands[move.target].hand = tmp;
+      state.currentRound.message = `${user} uses the General to change hands with ${move.target}!`;
+      break;
+    case 'Wizard': // Target player discards hand, draws new card (can target self)
+      state.currentRound.activeHands[move.target].hand = state.currentRound.deck.length ? [state.currentRound.deck.pop()] : [state.currentRound.faceDownCard];
+      state.currentRound.message = `${user} plays the Wizard. ${move.target} draws a new hand!`;
+      break;
+    case 'Priestess': // Cannot be targeted by other players until your next turn NOT SURE HOW TO HANDLE
+      state.currentRound.message = `I haven't figured out how to implment Priestess yet!!`
+      break;
+    case 'Knight':
+      // Compare hand value with target player. Lowest value is out of the round, tie = both stay;
+      const handDiff = state.currentRound.activeHands[user].value - state.currentRound.activeHands[move.target].value;
+      if (handDiff > 0) { // user hand is higher value than target hand
+        state.currentRound.discardPile.push(...state.currentRound.activeHands[move.target].hand);
+        delete state.currentRound.activeHands[move.target];
+        state.currentRound.message = `${move.target} is knocked out of the round by a Knight!`;
+      } else if (handDiff < 0) { // user hand is lower value than target hand
+        state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
+        delete state.currentRound.activeHands[user];
+        state.currentRound.message = `${user} is knocked out of the round by a Knight!`;
+      } else {
+        state.currentRound.message = `A knight is played - neither side has an advantage!`;
+      }
+      break;
+    case 'Clown': // Look at target players hand NOT SURE HOW TO HANDLE
+      state.currentRound.message = `I haven't figured out how to implment Clown yet!!`
+      break;
+    case 'Soldier': // Choose a card type other than Soldier. If target player has card, they are out
+      if(state.currentRound.activeHands[move.target].hand[0].card === move.guess) {
+        state.currentRound.discardPile.push(...state.currentRound.activeHands[move.target].hand);
+        delete state.currentRound.activeHands[move.target];
+        state.currentRound.message = `${user}'s Soldier strikes ${move.target} with a fatal blow!`;
+      } else {
+        state.currentRound.message = `${user}'s Soldier misses their mark!`;
+      }
+      break;
+    default:
+      return;
+  }
   return true;
 }
 
 // Find the next active player and draw a card into their hand
 function processDraw(state) {
   //If deck is empty after a move, end round
+  state.currentRound.turnNumber += 1;
+  state.message = null;
   if (!state.currentRound.deck.length) {
     endRound(state);
   }
@@ -76,7 +142,7 @@ function processDraw(state) {
   state.currentRound.currentPlayer = nextPlayer;
   state.currentRound.activeHands[nextPlayer].hand.push(nextCard);
   state.currentRound.activeHands[nextPlayer].value += nextCard.value;
-  //check if new player has drawn over 12 with a minister, if so we kick them
+  // check if new player has drawn over 12 with a minister, if so we kick them
   if (state.currentRound.activeHands[nextPlayer].value >= 12 && (state.currentRound.activeHands[nextPlayer].hand[0].card === 'Minister' || state.currentRound.activeHands[nextPlayer].hand[1].card === 'Minister')) {
     state.currentRound.discardPile.push(...state.currentRound.activeHands[nextPlayer].hand);
     delete state.currentRound.activeHands[nextPlayer];
@@ -89,8 +155,71 @@ function processDraw(state) {
 
 //increment round counter, scoreboard, and check for 4 wins
 //re-shuffle deck, re-deal
-function endRound(state) { //make room name unique
+function endRound(state) {
+  //determine winner
+  const activePlayers = Object.keys(state.currentRound.activeHands);
+  let winner = activePlayers[0];
+  let highestHand = state.currentRound.activeHands[activePlayers[0]];
+  for (let i = 1; i < activePlayers.length; i++) {
+    if (state.currentRound.activeHands[activePlayers[i]].value > highestHand.value) {
+      highestHand = state.currentRound.activeHands[activePlayers[i]];
+      winner = activePlayers[i];
+    }
+  }
 
+  state.roundWins[winner] += 1;
+  state.markModified('roundWins');
+  if (state.roundWins[winner] === 4) { // end the game
+    state.message = `${winner} has won the game!`;
+    state.markModified('message');
+    state.state = 'ended';
+    state.markModified('state');
+  } else {//end the round
+    state.message = `${winner} has won the round!`;
+    state.markModified('message');
+    state.currentRound.roundNumber += 1;
+    state.currentRound.turnNumber = 1;
+    state.currentRound.currentPlayer = state.host.username;
+    const newDeck = shuffleDeck();
+    state.currentRound.faceDownCard = newDeck.pop();
+    state.currentRound.deck = newDeck;
+    state.currentRound.discardPile = [];
+    let newHands = {};
+    for (let i = 0; i < state.players.length; i++) {
+      const card = state.currentRound.deck.pop();
+      newHands[state.players[i].username] = {
+        hand: [card],
+        value: card.value,
+      }
+    }
+    state.currentRound.activeHands = newHands;
+    //shuffle deck, reset hands,  increment round counter, re-deal
+  }
+}
+
+function shuffleDeck() {
+  const deck = fullDeck.slice();
+
+  function shuffle(array) {
+    let currentIndex = array.length;
+    let randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
+
+  return shuffle(deck);
 }
 
 // check if the round has ended

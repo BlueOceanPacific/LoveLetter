@@ -26,7 +26,7 @@ function Lobby() {
     });
     axios
       .get(`/games/${id}`)
-      .then(({ data }) => setGame(data[0]))
+      .then(({ data }) => setGame(data))
       .catch((err) => console.log(err));
   }, []);
 
@@ -59,7 +59,6 @@ function Lobby() {
       </div>
       <div className="chat-wrapper">
         <div className="lobby-chat">
-          {/* Socket IO logic needs to be updated so that chat can load in the lobby */}
           <Chat socket={socket} />
         </div>
       </div>

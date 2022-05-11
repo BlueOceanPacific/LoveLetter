@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Card() {
+function Card({ currentCard }) {
   return (
       <li className="list-group-item" style={{ padding: 0 }}>
         <button
@@ -9,7 +9,7 @@ function Card() {
           style={{ padding: 0 }}
         >
           <img
-            src="/images/cards/BackCard.png"
+            src={ currentCard }
             className="card-img-top card-art-image"
             alt="..."
             style={{ height: '100%' }}
