@@ -27,11 +27,15 @@ export default function CreateGame() {
         prize,
         user,
       })
-      .then(({data}) => {
-        navigate(`/play/lobby/${lobbyName}`);
+      .then((res) => {
+        // console.log(res.data);
+        navigate(`/play/lobby/${res.data}`);
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response.status === 500) {
+          // show error message
+          console.log('The room name has been taken!');
+        }
       });
   };
 
