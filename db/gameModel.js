@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 // User schema is simple for now: just username and password
 const gamesSchema = new Schema({
-  name: String,
+  name: {type: String, unique: true},
   privacy: String,
   state: String,
   host: Object,
