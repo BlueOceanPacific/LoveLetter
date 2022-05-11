@@ -12,6 +12,7 @@ import Scoreboard from './Scoreboard/Scoreboard';
 import LocalLeaderboard from './LocalLeaderboard/LocalLeaderboard';
 import DiscardPile from './DiscardPile/DiscardPile';
 import LoadingSpinner from '../../util/LoadingSpinner';
+import GameOver from '../GameOver/GameOver';
 
 import './GameView.scss';
 
@@ -21,7 +22,7 @@ function GameView({ socket }) {
 
   useEffect(() => {
     axios.get(`/games/${id}`).then(({ data }) => {
-      setGame(data[0]);
+      setGame(data);
     });
   }, []);
 
@@ -29,6 +30,7 @@ function GameView({ socket }) {
 
   return (
     <>
+      <GameOver />
       <div className="modal" tabIndex="-1">
         <div className="modal-dialog">
           <div className="modal-content">

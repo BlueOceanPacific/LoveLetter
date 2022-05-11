@@ -26,7 +26,7 @@ function Lobby() {
     });
     axios
       .get(`/games/${id}`)
-      .then(({ data }) => setGame(data[0]))
+      .then(({ data }) => setGame(data))
       .catch((err) => console.log(err));
   }, []);
 
