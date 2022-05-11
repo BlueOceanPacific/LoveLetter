@@ -19,13 +19,13 @@ function TestHome() {
           {/* first column */}
           <div className="col">
             <div className="row">
-              <p> lucky in games, lucky in love</p>
+              <div className="top-slogan"> lucky in games, lucky in love</div>
             </div>
             <div className="row">
             <img className="main-title" src="images/branding/Tittle_TypeWriter.png" alt="main logo" />
             </div>
             <div className="row">
-              <p> a game of chivalry</p>
+              <div className="display-5"> a game of chivalry</div>
             </div>
           </div>
 

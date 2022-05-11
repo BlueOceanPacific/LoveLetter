@@ -157,10 +157,20 @@ body {
   padding: 20px;
   font-size: 1.2em;
   text-align: center;
-  color: rgb(243, 75, 103)
+  color: rgb(243, 75, 103);
 }
 
 #project-description,
 #the-team {
   border-right: solid 1px grey;
+}
+
+.top-slogan {
+  font-size: 1.5em;
+  padding-left: 35px;
+  color: rgb(243, 75, 103);
+}
+
+.display-5 {
+ text-align: center;
 }
