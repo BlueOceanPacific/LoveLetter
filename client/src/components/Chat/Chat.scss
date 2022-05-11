@@ -3,7 +3,7 @@
 }
 
 .chat-messages {
-  max-height: 43vh;
+  max-height: 50vh;
   overflow: auto;
   overflow-wrap: break-word;
 }
@@ -24,6 +24,10 @@
 }
 
 .chat-input {
-  position: relative;
+  position: absolute;
   bottom: 0;
+}
+
+.chat-container {
+  position: relative;
 }

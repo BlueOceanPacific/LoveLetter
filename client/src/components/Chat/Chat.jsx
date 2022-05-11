@@ -24,7 +24,7 @@ function Chat({ socket }) {
   const sendMessageHandler = () => {
     const chat = {
       id: Date.now(),
-      username: user.username,
+      username: user.username || 'System',
       message: newMessageText,
       timestamp: new Date().toLocaleTimeString('en-US').slice(0, -6)
     };
