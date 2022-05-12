@@ -21,7 +21,7 @@ function Login() {
         return navigate('/');
       })
       .catch(() => {
-        document.getElementById('login-username-help').style.color = '#ff0000';
+        document.getElementById('login-help').style.color = '#ff0000';
         setUsernameHelper('the credentials you entered did not match our records.');
       });
   };
@@ -52,7 +52,7 @@ function Login() {
             />
           </div>
 
-          <div id="login-username-help" className="form-text">
+          <div id="login-help" className="form-text">
             {usernameHelper}
           </div>
         </form>
