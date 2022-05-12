@@ -67,9 +67,15 @@ module.exports = function (app) {
           console.log('Game saved: ', JSON.stringify(game));
           res.sendStatus(201)
         })
-        .catch((err) => res.status(500).send(err));
+        .catch((err) => {
+          console.log(err)
+          res.status(500).send(err)
+        });
     })
-    .catch((err) => res.status(500).send(err));
+    .catch((err) => {
+      console.log(err);
+    res.status(500).send(err)
+  });
     // If it does, add the input player and send success
     // If it doesnt, send error
   });

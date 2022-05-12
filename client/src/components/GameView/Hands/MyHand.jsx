@@ -75,7 +75,7 @@ function MyHand({ game, socket }) {
       {game &&
         game.currentRound.activeHands[user.username].hand.map((card, i) => (
           <PlayingCard
-            key={card.card}
+            key={`${card.card}${i}`}
             target={target}
             cardType={cardType}
             card={card}

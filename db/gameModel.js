@@ -18,9 +18,9 @@ const gamesSchema = new Schema({
     deck: [],
     faceDownCard: Object,
   },
+  systemChat: String,
   message: String,
   roundWins: Object,
-  chat: [new Schema({ username: String, message: String })],
 });
 
 const GameModel = mongoose.model('Games', gamesSchema);
