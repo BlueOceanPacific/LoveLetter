@@ -2,23 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'regenerator-runtime/runtime';
+import io from 'socket.io-client';
+import useStore from '../Store/store';
 
 function JoinGame() {
   const [games, setGames] = useState([]);
+  const [socket, setSocket] = useState(io('/play', /*{ query: { id } }*/));
+  const user = useStore((state) => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getGames = async () => {
-      try {
-        const res = await axios.get('/games');
-        console.log('send get req: ', res);
-        setGames(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getGames();
+    socket.emit('join', user);
+    socket.on('join', () => {
+      console.log('someone connected');
+    });
+    axios
+      .get('/games')
+      .then(({ data }) => setGames(data))
+      .catch((err) => console.log(err));
   }, []);
+
+
+
+
+  // socket.emit - This method is responsible for sending messages. socket.on - This method is responsible for listening for incoming messages.
 
   const handleAutoJoin = () => {
     navigate(`/play/lobby/${games[0].name}`);
@@ -48,7 +55,7 @@ function JoinGame() {
               <tr key={game._id}>
                 <th scope="row">{game.name}</th>
                 <td colSpan="2">
-                  {game.players.length + 1}
+                  {game.players.length}
                   {' '}
                   /
                   {' '}
@@ -73,7 +80,22 @@ function JoinGame() {
 }
 
 export default JoinGame;
-//
+
+/*
+  useEffect(() => {
+    const getGames = async () => {
+      try {
+        const res = await axios.get('/games');
+        console.log('send get req: ', res);
+        setGames(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getGames();
+  }, []);
+*/
+
 
 
 
