@@ -47,7 +47,8 @@ function discardCard(state, user, move) {
 
 // Process the move based on given rules;
 function processMove(state, user, move) { //refactor play messages to be added to chat
-
+  state.markModified('chat');
+  state.currentRound.activeHands[user].targetable = true; // reset targetable status
   switch (move.card.card) {
     case 'Prince': //Out of the match
       state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
@@ -77,7 +78,8 @@ function processMove(state, user, move) { //refactor play messages to be added t
       state.chat.push({username: 'system', message:`${user} plays the Wizard. ${move.target} draws a new hand!`});
       break;
     case 'Priestess': // Cannot be targeted by other players until your next turn NOT SURE HOW TO HANDLE
-      state.chat.push({username: 'system', message:`I haven't figured out how to implment Priestess yet!!`});
+      state.currentRound.activeHands[user].targetable = false;
+      state.chat.push({username: 'system', message:`${user} is protected by the Priestess - they may not be targeted until the next round!`});
       break;
     case 'Knight':
       // Compare hand value with target player. Lowest value is out of the round, tie = both stay;
@@ -189,6 +191,7 @@ function endRound(state) {
       newHands[state.players[i].username] = {
         hand: [card],
         value: card.value,
+        targetable: true,
       }
     }
     state.currentRound.activeHands = newHands;
