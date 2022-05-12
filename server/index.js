@@ -42,6 +42,7 @@ playNamespace.use((socket, next) => {
 });
 
 playNamespace.on('connection', (socket) => {
+
   const room = socket.handshake.query.id;
   socket.join(room);
   
@@ -52,7 +53,10 @@ playNamespace.on('connection', (socket) => {
   socket.on('updateGameState', ({game, user, move}) => { // whenever a player joins a game, this event is fired
     console.log(`${user} played ${move} in ${game}`)
     gameEngine.process(game, user, move).then(gameState => {
+      // broadcasts update to all other users in room
       socket.to(room).emit("updateGameState", gameState);
+      // broadcasts update to self
+      socket.emit("updateGameState", gameState)
     })
   });
 
