@@ -94,7 +94,6 @@ function Lobby() {
       >
         Start Game
       </button>
-      ;
     </div>
   );
 }
