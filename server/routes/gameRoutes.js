@@ -32,8 +32,6 @@ module.exports = function (app) {
   });
 
   app.post("/games/:name/join", (req, res) => {
-    console.log('Game name: ', req.params.name);
-    console.log('Body: ', req.body);
     //Search for the game, confirm it has less than 4 players
     Game.findOne({ name: req.params.name }).exec()
     .then((game) => {
@@ -48,6 +46,20 @@ module.exports = function (app) {
       }
     })
     .catch(() => res.sendStatus(500));
+    //If it does, add the input player and send success
+    //If it doesnt, send error
+  });
+
+  app.post("/games/:name/start", (req, res) => {
+    //Search for the game, confirm it has less than 4 players
+    Game.findOne({ name: req.params.name }).exec()
+    .then((game) => {
+      game.state = 'playing';
+      game.save()
+        .then(() => res.sendStatus(201))
+        .catch((err) => res.status(500).send(err));
+    })
+    .catch((err) => res.status(500).send(err));
     //If it does, add the input player and send success
     //If it doesnt, send error
   });
