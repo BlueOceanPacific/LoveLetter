@@ -1,8 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useRef } from 'react';
+import useStore from '../../Store/store';
 
 function PlayingCard({ card, target = false, cardType = false, children }) {
   const [showModal, setShowModal] = useState(0);
   const [played, setPlayed] = useState(false);
+  const {game, user} = useStore(state => ({game: state.game, user: state.user}));
   const modalElement = useRef();
 
   const playCardHandler = () => {
@@ -50,7 +53,7 @@ function PlayingCard({ card, target = false, cardType = false, children }) {
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
                 onClick={playCardHandler}
-                disabled={!(target !== "0" && cardType !== "0")}
+                disabled={!(target !== "0" && cardType !== "0") || game.currentRound.currentPlayer !== user.username}
               >
                 Play Card
               </button>
