@@ -21,6 +21,15 @@ function Lobby() {
   const user = useStore((state) => state.user);
 
   useEffect(() => {
+    axios
+      .get(`/games/${id}`)
+      .then(({ data }) => {
+        console.log(data);
+        setGame(data);
+        setPlayers(data.players);
+      })
+      .catch((err) => console.log(err));
+
     setSocket(io('/play', { query: { id } }));
     if (socket) {
       socket.emit('join', user);
@@ -28,12 +37,7 @@ function Lobby() {
         console.log('someone connected');
       });
     }
-    axios
-      .get(`/games/${id}`)
-      .then(({ data }) => setGame(data) && console.log(data))
-      .then((_) => setPlayers(game.players))
-      .catch((err) => console.log(err));
-  }, []);
+  }, players);
 
   const startTheGame = () => {
     if (game) {
@@ -44,20 +48,19 @@ function Lobby() {
 
   const leaveLobbyHandler = () => {
     // add logic to disconnect from socket io connection
-    navigate('/');
+    axios.post(`/games/${game.name}/leave`, { user: user.username })
+      .then((_) => navigate('/'))
   };
 
   const populatePlayers = () => {
-    if (game) {
-      return players.map((player) => (
-        <li className="list-group-item" key={ player.id }>
-          <img src={ player.avatar } className="lobby-icon" alt="icon" />
-          { player.username }
-        </li>
-      ))
-    }
-  }
+    return players.map((player) => (
+      <li className="list-group-item" key={ player.id }>
+        <img src={ player.avatar } className="lobby-icon" alt="icon" />
+        { player.username }
+      </li>
+    ))
 
+  }
 
   if (!game) return <LoadingSpinner />;
 
@@ -99,3 +102,22 @@ function Lobby() {
 }
 
 export default Lobby;
+
+/*
+//remove a player if leave lobby
+  app.post("/games/:name/leave", (req, res) => {
+    //Search for the game, confirm it has less than 4 players
+    Game.updateOne({ name: req.params.name }).exec()
+    .then((game) => {
+      console.log(req.body.user);
+      let index = game.players.indexOf(req.body.user)
+      game.players.splice(index, 1)
+      game.markModified('players');
+      game.save()
+        .then(() => res.sendStatus(201))
+        .catch(()=> res.sendStatus(500));
+    })
+    .catch(() => res.sendStatus(500));
+  });
+
+*/
