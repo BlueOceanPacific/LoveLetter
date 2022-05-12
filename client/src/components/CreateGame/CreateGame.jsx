@@ -19,6 +19,10 @@ export default function CreateGame() {
   const prizeChangeHandler = (ev) => setPrize(ev.target.value);
   const isPublicChangeHandler = (ev) => setIsPublic(ev.target.value);
 
+  const leaveLoobbyHandler = () => {
+    navigate('/');
+  }
+
   const createLobbyHandler = (event) => {
     event.preventDefault();
     axios
@@ -36,7 +40,7 @@ export default function CreateGame() {
         if (err.response.status === 500) {
           // show error message
           setNameTaken(true);
-          console.log("The room name has been taken!");
+          // console.log("The room name has been taken!");
         }
       });
   };
@@ -69,7 +73,7 @@ export default function CreateGame() {
               className="form-select form-select-lg"
               onChange={prizeChangeHandler}
             >
-              <option defaultValue>Select Prize</option>
+              <option defaultValue>Who will you playing for?</option>
               <option value="1">Prince</option>
               <option value="2">Princess</option>
               <option value="3">My Liege</option>
@@ -120,6 +124,7 @@ export default function CreateGame() {
             <button
               className="btn btn-primary btn-lg  back-btn mt-5"
               type="button"
+              onClick={leaveLoobbyHandler}
             >
               Back
             </button>
