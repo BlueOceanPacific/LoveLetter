@@ -47,7 +47,9 @@ function Lobby() {
   const startTheGame = () => {
     if (game) {
       axios.post(`/games/${game.name}/start`)
-        .then((_) => navigate(`/play/game/${game.name}`))
+        .then((_) => {
+          navigate(`/play/game/${game.name}`);
+        });
     }
   }
 
