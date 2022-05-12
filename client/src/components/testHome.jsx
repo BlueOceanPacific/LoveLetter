@@ -25,7 +25,7 @@ function TestHome() {
             <img className="main-title" src="images/branding/Tittle_TypeWriter.png" alt="main logo" />
             </div>
             <div className="row">
-              <div className="display-5"> a game of chivalry</div>
+              <div className="bottom-slogan"> a game of chivalry</div>
             </div>
           </div>
 
@@ -107,6 +107,7 @@ function TestHome() {
         <div className="row align-items-start">
           <div className="col" id="project-description">
             <p> the project </p>
+
           </div>
           <div className="col"
             id="the-team">

@@ -37,7 +37,12 @@ function Lobby() {
         console.log('someone connected');
       });
     }
-  }, players);
+    axios
+      .get(`/games/${id}`)
+      .then(({ data }) => setGame(data) && console.log(data))
+      .then((_) => setPlayers(game.players))
+      .catch((err) => console.log(err));
+  }, players.length);
 
   const startTheGame = () => {
     if (game) {
@@ -59,7 +64,6 @@ function Lobby() {
         { player.username }
       </li>
     ))
-
   }
 
   if (!game) return <LoadingSpinner />;
