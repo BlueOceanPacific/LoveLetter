@@ -33,7 +33,7 @@ function Lobby() {
       .then(({ data }) => setGame(data) && console.log(data))
       .then((_) => setPlayers(game.players))
       .catch((err) => console.log(err));
-  }, []);
+  }, players.length);
 
   const startTheGame = () => {
     if (game) {
@@ -50,7 +50,7 @@ function Lobby() {
   const populatePlayers = () => {
     if (game) {
       return players.map((player) => (
-        <li className="list-group-item" key={ player.id }>
+        <li className="list-group-item" key={ player.username }>
           <img src={ player.avatar } className="lobby-icon" alt="icon" />
           { player.username }
         </li>
