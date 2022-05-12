@@ -4,7 +4,7 @@ import useStore from '../Store/store';
 function Navbar() {
   const logOut = useStore(state => state.logOut);
   const loggedInStatus = useStore(state => state.loggedIn);
-  const username = useStore(state => state.username);
+  const user = useStore((state) => state.user);
 
   let logInDisplay = null;
 
