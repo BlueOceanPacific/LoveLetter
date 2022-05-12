@@ -1,27 +1,23 @@
 .discard-pile {
-  .list-group-item {
+  text-align: center;
+
+  .discard-header {
     text-align: center;
-    border: none;
+    background-color: white;
+    margin-block: 0;
+    font-weight: bold;
   }
+
+  .list-group {
+    overflow-x: scroll;
+  }
+
   .card-img-top {
-    height: 10rem;
-    width: 7rem;
+    height: 5rem;
+    width: 5rem;
   }
   .card {
     border: none;
   }
 
-  ul.list-group:after {
-    clear: both;
-    display: block;
-    content: "";
-  }
-
-  .list-group-item {
-    float: left;
-  }
-
-  .list-group {
-    flex-direction: row;
-  }
 }
