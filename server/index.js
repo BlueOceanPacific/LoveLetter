@@ -54,15 +54,27 @@ playNamespace.on('connection', (socket) => {
     console.log(user.username, 'connected in room', room);
   });
 
-  // socket.on('updateGameState', ({game, user, move}) => { // whenever a player joins a game, this event is fired
-  //   console.log(`${user} played ${move} in ${game}`)
-  //   gameEngine.process(game, user, move).then(gameState => {
-  //     // broadcasts update to all other users in room
-  //     socket.to(room).emit("updateGameState", gameState);
-  //     // broadcasts update to self
-  //     socket.emit("updateGameState", gameState);
-  //   })
-  // });
+  socket.on('updateGameState', ({game, user, move}) => { // whenever a player joins a game, this event is fired
+    console.log(`${user} played ${move} in ${game}`)
+    gameEngine.process(game, user, move).then(gameState => {
+      // broadcasts update to all other users in room
+      socket.to(room).emit("updateGameState", gameState);
+      // broadcast a system message chat
+      if(gameState.systemChat) {
+        console.log('systemChat generated! ', gameState.systemChat, room);
+        //socket.broadcast.to(room).emit('chat', gameState.systemChat);
+        const chat = {
+          id: Date.now(),
+          username: 'system',
+          message: gameState.systemChat,
+          timestamp: new Date().toLocaleTimeString('en-US').slice(0, -6)
+        };
+        socket.emit('chat', chat);
+      }
+      // broadcasts update to self
+      socket.emit("updateGameState", gameState);
+    })
+  });
 
   socket.on('disconnect', () => { // whenever a player disconnect, this event is fired
     socket.leave(room);
