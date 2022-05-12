@@ -124,7 +124,7 @@ body {
   /*  optional background - yellow green theme */
   background: rgb(84,84,87);
   background: linear-gradient(270deg, rgba(84,84,87,0.6965379901960784) 5%, rgba(27,214,188,0.6377144607843137) 57%, rgba(248,254,85,0.6825323879551821) 99%);
-  padding: 20px;
+
 }
 
 .get-started button {
@@ -132,27 +132,36 @@ body {
   font-size: 2em;
   color: rgb(243, 75, 103);
   margin: auto;
-  /* border: solid 2px red; */
-  width: 50%;
-  text-align: left;
+  text-align: center;
 }
 
 .main-title {
   max-width: 500px;
   max-height: 500px;
+  padding-left: 50px;
 }
 
 #cards-carousel {
   padding-top: 20px;
   margin: auto;
-  width: 50%;
-  /* background-color: rgba(248,254,85,0.6825323879551821); */
-
 }
 
 .carousel-card {
   height: 280px;
   max-width: 160px;
+  margin:auto;
+}
+
+.top-slogan {
+  font-size: 1.5em;
+  color: rgb(243, 75, 103);
+  padding-left: 60px;
+}
+
+.bottom-slogan {
+ font-size: 2em;
+ padding-left: 60px;
+ color: rgb(129, 118, 118);
 }
 
 .footer {
@@ -168,14 +177,4 @@ body {
 #project-description,
 #the-team {
   border-right: solid 1px grey;
-}
-
-.top-slogan {
-  font-size: 1.5em;
-  padding-left: 35px;
-  color: rgb(243, 75, 103);
-}
-
-.display-5 {
- text-align: center;
 }
