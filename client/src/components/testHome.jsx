@@ -107,7 +107,7 @@ function TestHome() {
         <div className="row align-items-start">
           <div className="col" id="project-description">
             <p> the project </p>
-
+              <img className="corporate-logo" src="images/branding/blueOceanPacific_logo.png" alt="blue ocean and pacific team logo" />
           </div>
           <div className="col"
             id="the-team">

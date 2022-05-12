@@ -3,16 +3,7 @@ import { devtools } from 'zustand/middleware';
 
 const useStore = create(
   devtools((set) => ({
-    // user: null,
-    user: {
-      username: 'twheeler',
-      password: 'twheeler',
-      email: 'twheeler@tw.com',
-      pronouns: 'Your Grace',
-      avatar: '/images/avatars/redHatCat.png',
-      gamesPlayed: 37,
-      gamesWon: 30,
-    },
+    user: null,
     setUser: (data) => set({ user: data }),
     loggedIn: false,
     logIn: (user) => set({ user, loggedIn: true }),
