@@ -13,20 +13,14 @@ import './UserProfile.scss';
 function UserProfile() {
   const user = useStore((state) => state.user);
 
+  const setUser = useStore((state) => state.setUser);
+
   const [data, setData] = useState({
     pronouns: user.pronouns,
     avatar: user.avatar,
   });
   const { pronouns, avatar } = data;
 
-  // useEffect(() => {
-  //   const body = {username: user.username};
-  //   console.log('get body>>', body);
-  //   axios.get('/user/profile', body)
-  //   .then((res) => {
-  //     console.log('res from new get', res);
-  //   });
-  // }, [user]);
 
 
   const changeHandler = (e) => {
@@ -42,13 +36,11 @@ function UserProfile() {
       pronouns: data.pronouns,
       avatar: data.avatar
     }
-
-    console.log('body', body);
+    // console.log('body', body);
     axios.put('/user/profile', body).then((res) => {
-      axios.get('/user/profile', {username: user.username})
-        .then((result) => {
-          console.log('res from new get', result);
-       });
+      setUser({...data,  username: user.username, pronouns: data.pronouns,
+        avatar: data.avatar});
+      // console.log('put', body);
     })
     .catch((err) => console.log(err));
   };

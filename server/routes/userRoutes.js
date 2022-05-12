@@ -57,7 +57,6 @@ module.exports = function (app) {
 
   // Returns a user profile (all fields excluding password)
   app.get('/user/profile', (req, res) => {
-    console.log('request at server ', req.body);
     db.User.findOne({ username: req.body.username })
       .exec()
       .then((user) => {
@@ -76,14 +75,14 @@ module.exports = function (app) {
 
   // Updates a user profile - only allows pronoun and avatar updates
   app.put('/user/profile', (req, res) => {
-    console.log(
-      'put req for user:',
-      req.body.username,
-      ' new pronouns: ',
-      req.body.pronouns,
-      ' new avatar:',
-      req.body.avatar
-    );
+    // console.log(
+    //   'put req for user:',
+    //   req.body.username,
+    //   ' new pronouns: ',
+    //   req.body.pronouns,
+    //   ' new avatar:',
+    //   req.body.avatar
+    // );
     db.User.updateOne(
       { username: req.body.username },
       {
