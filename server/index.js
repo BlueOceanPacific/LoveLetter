@@ -4,7 +4,6 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const Game = require('../db/gameModel');
 // ------------ Socket.io setup ---------------------
 const httpServer = require('http').createServer(app);
 const { Server } = require('socket.io');
