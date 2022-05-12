@@ -6,7 +6,7 @@ import './SignUp.scss';
 function SignUp() {
   const navigate = useNavigate();
   const [usernameHelper, setUsernameHelper] = useState(
-    () => 'Please choose a username of 5 to 20 characters my lord.'
+    () => 'Please choose a username of 5 to 20 characters, my liege.'
   );
 
   const [formData, setFormData] = useState({
@@ -32,9 +32,11 @@ function SignUp() {
       .catch((error) => {
         document.getElementById('usernameHelp').style.color = '#ff0000';
         if (error.response.data.code === 11000) {
-          setUsernameHelper('This username already exists my lord.');
+          setUsernameHelper('Forgive me, my liege; this username already exists.');
         } else {
-          setUsernameHelper('Error creating account, please refresh and try again.');
+          setUsernameHelper(
+            'Forgive me, my liege; the raven we sent was shot with an arrow during transit and caused an error creating your account; please refresh and try again.'
+          );
         }
       });
   };
@@ -80,7 +82,7 @@ function SignUp() {
           />
           <div id="passwordHelp" className="form-text">
             Use 8 to 30 characters with a mix of uppercase and lowercase letters, numbers, and
-            symbols to build the strongest castle in all of England.
+            symbols to build an impenetrable fortress.
           </div>
         </div>
 

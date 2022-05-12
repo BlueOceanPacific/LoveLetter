@@ -187,7 +187,7 @@ module.exports.usersDraft = [
     gamesWon: 0,
   },
   {
-    username: ',mteran',
+    username: 'mteran',
     password: 'mteran',
     email: 'mteran@mt.com',
     pronouns: 'My Lord',

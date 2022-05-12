@@ -16,14 +16,19 @@ function Lobby() {
   const [game, setGame] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
-  const [socket, setSocket] = useState(io('/play', { query: { id } }));
+  const socket = useStore((state) => state.socket);
+  const setSocket = useStore((state) => state.setSocket);
+  // const [socket, setSocket] = useState(io('/play', { query: { id } }));
   const user = useStore((state) => state.user);
 
   useEffect(() => {
-    socket.emit('join', user);
-    socket.on('join', () => {
-      console.log('someone connected');
-    });
+    setSocket(io('/play', { query: { id } }));
+    if (socket) {
+      socket.emit('join', user);
+      socket.on('join', () => {
+        console.log('someone connected');
+      });
+    }
     axios
       .get(`/games/${id}`)
       .then(({ data }) => setGame(data))
@@ -35,12 +40,13 @@ function Lobby() {
     navigate('/');
   };
 
-  const populatePlayers = () => players.map((player) => (
-    <li className="list-group-item" key={player}>
-      <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon" />
-      {player}
-    </li>
-  ));
+  const populatePlayers = () =>
+    players.map((player) => (
+      <li className="list-group-item" key={player}>
+        <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon" />
+        {player}
+      </li>
+    ));
 
   if (!game) return <LoadingSpinner />;
 
@@ -57,10 +63,8 @@ function Lobby() {
         <h4 className="lobby-player-list-title">Current Players</h4>
         <ul className="lobby-list-group">{populatePlayers()}</ul>
       </div>
-      <div className="chat-wrapper">
-        <div className="lobby-chat">
-          <Chat socket={socket} />
-        </div>
+      <div className="chat-container">
+        <Chat socket={socket} />
       </div>
       <button
         type="button"
