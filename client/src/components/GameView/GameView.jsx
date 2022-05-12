@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import io from 'socket.io-client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Chat from '../Chat/Chat';
@@ -19,26 +18,27 @@ import './GameView.scss';
 import useStore from '../Store/store';
 
 function GameView() {
-  const {game, setGame} = useStore(state => ({game: state.game, setGame: state.setGame}));
-  const {socket, setSocket} = useStore(state => ({socket: state.socket, setSocket: state.setSocket}));
+  const { game, setGame } = useStore((state) => ({
+    game: state.game,
+    setGame: state.setGame,
+  }));
+  const { socket, setSocket } = useStore((state) => ({
+    socket: state.socket,
+    setSocket: state.setSocket,
+  }));
   const { id } = useParams();
 
   useEffect(() => {
-    if (!socket) setSocket(io('/play', { query: { id } }));
-
-    axios.get(`/games/${id}`).then(({ data }) => {
-      setGame(data);
-    });
-    if (socket) {
-      socket.on('updateGameState', (updatedGame) => {
-        console.log(updatedGame);
-        setGame(updatedGame);
+    socket.on('updateGameState', () => {
+      console.log('updatedGame');
+      axios.get(`/games/${id}`).then(({ data }) => {
+        setGame(data);
       });
-    }
-
+    });
   }, []);
 
-  if (!game) return <LoadingSpinner />
+
+  if (!game) return <LoadingSpinner />;
 
   return (
     <div className="bg-gradient gameview">
@@ -52,7 +52,11 @@ function GameView() {
           <div className="row justify-content-center">
             <div className="col-3 hand">
               {/** ******************* OpponentsHand.jsx ************************** */}
-              {game ? <OpponentsHand player={game.players[1]} /> : <LoadingSpinner />}
+              {game ? (
+                <OpponentsHand player={game.players[1]} />
+              ) : (
+                <LoadingSpinner />
+              )}
             </div>
           </div>
         </div>
@@ -72,11 +76,15 @@ function GameView() {
               <div className="row justify-content-evenly">
                 <div className="col-3 hand">
                   {/** ******************* OpponentsHand.jsx ************************** */}
-                  {game.players.length > 2 ? <OpponentsHand player={game.players[2]} /> : null}
+                  {game.players.length > 2 ? (
+                    <OpponentsHand player={game.players[2]} />
+                  ) : null}
                 </div>
                 <div className="col-3 hand">
                   {/** ******************* OpponentsHand.jsx ************************** */}
-                  {game.players.length > 3 ? <OpponentsHand player={game.players[3]} /> : null}
+                  {game.players.length > 3 ? (
+                    <OpponentsHand player={game.players[3]} />
+                  ) : null}
                 </div>
               </div>
             </div>
