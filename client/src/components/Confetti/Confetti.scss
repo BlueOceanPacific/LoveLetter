@@ -1,0 +1,127 @@
+#confettis {
+  overflow: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.confetti {
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  transform-origin: left top;
+  animation: confetti 5s ease-in-out -2s infinite;
+}
+@keyframes confetti {
+  0% {
+    transform: rotateZ(15deg) rotateY(0deg) translate(0, 0);
+  }
+  25% {
+    transform: rotateZ(5deg) rotateY(360deg) translate(-5vw, 20vh);
+  }
+  50% {
+    transform: rotateZ(15deg) rotateY(720deg) translate(5vw, 60vh);
+  }
+  75% {
+    transform: rotateZ(5deg) rotateY(1080deg) translate(-10vw, 80vh);
+  }
+  100% {
+    transform: rotateZ(15deg) rotateY(1440deg) translate(10vw, 110vh);
+  }
+}
+
+.confetti:nth-child(1) {
+  left: 5%;
+  animation-delay: 0;
+  background-color: #fc0120;
+}
+.confetti:nth-child(2) {
+  left: 10%;
+  animation-delay: -5s;
+  background-color: #8257e6;
+}
+.confetti:nth-child(3) {
+  left: 15%;
+  animation-delay: -3s;
+  background-color: #ffbf4d;
+}
+.confetti:nth-child(4) {
+  left: 20%;
+  animation-delay: -2.5s;
+  background-color: #fe5d7a;
+}
+.confetti:nth-child(5) {
+  left: 30%;
+  animation-delay: -4s;
+  background-color: #45ec9c;
+}
+.confetti:nth-child(6) {
+  left: 35%;
+  animation-delay: -6s;
+  background-color: #f6e327;
+}
+.confetti:nth-child(7) {
+  left: 40%;
+  animation-delay: -1.5s;
+  background-color: #f769ce;
+}
+.confetti:nth-child(8) {
+  left: 45%;
+  animation-delay: -2s;
+  background-color: #007de7;
+}
+.confetti:nth-child(9) {
+  left: 50%;
+  animation-delay: -3.5s;
+  background-color: #63b4fc;
+}
+.confetti:nth-child(10) {
+  left: 55%;
+  animation-delay: -2.5s;
+  background-color: #f9c4ea;
+}
+.confetti:nth-child(11) {
+  left: 60%;
+  animation-delay: -4.5s;
+  background-color: #4a3488;
+}
+.confetti:nth-child(12) {
+  left: 65%;
+  animation-delay: -5.5s;
+  background-color: #0ea6b1;
+}
+.confetti:nth-child(13) {
+  left: 70%;
+  animation-delay: -6.5s;
+  background-color: #f20cb1;
+}
+.confetti:nth-child(14) {
+  left: 75%;
+  animation-delay: -7.5s;
+  background-color: #7c7b1d;
+}
+.confetti:nth-child(15) {
+  left: 80%;
+  animation-delay: -8s;
+  background-color: #18b31d;
+}
+.confetti:nth-child(16) {
+  left: 85%;
+  animation-delay: -9s;
+  background-color: #620b49;
+}
+.confetti:nth-child(17) {
+  left: 90%;
+  animation-delay: -10s;
+  background-color: #edbe7c;
+}
+.confetti:nth-child(18) {
+  left: 95%;
+  animation-delay: -11s;
+  background-color: #e6f9c4;
+}
+.confetti:nth-child(19) {
+  left: 100%;
+  animation-delay: -12s;
+  background-color: #075db9;
+}

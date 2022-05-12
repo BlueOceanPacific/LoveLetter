@@ -36,6 +36,7 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
+    "@reonomy/react-confetti-explosion": "^1.0.32",
     "axios": "^0.27.2",
     "bad-words": "^3.0.4",
     "bcryptjs": "^2.4.3",
@@ -47,7 +48,6 @@
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-dom-confetti": "^0.2.0",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "socket.io": "^4.5.0",

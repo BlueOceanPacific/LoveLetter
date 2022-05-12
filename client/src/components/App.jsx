@@ -16,7 +16,7 @@ import AuthWrapper from './Auth/AuthWrapper';
 import AuthTest from './Auth/AuthTest';
 import UserProfile from './UserProfile/UserProfile';
 import Navbar from './Navbar/Navbar';
-import Celebration from './Celebration';
+import Confetti from './Confetti/Confetti';
 
 function App() {
   return (
@@ -42,7 +42,7 @@ function App() {
         />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/testhome" element={<TestHome />} />
-        <Route path="/celebration" element={<Celebration />} />
+        <Route path="/confetti" element={<Confetti />} />
       </Routes>
     </>
   );
