@@ -36,13 +36,14 @@ export default function CreateGame() {
         if (err.response.status === 500) {
           // show error message
           setNameTaken(true);
-          console.log("The room name has been taken!");
+          // console.log("The room name has been taken!");
         }
       });
   };
 
   const leaveCreateGameHandler = () => {
-    navigate('/');
+    // stay when
+    navigate("/");
   };
 
   return (
@@ -73,7 +74,7 @@ export default function CreateGame() {
               className="form-select form-select-lg"
               onChange={prizeChangeHandler}
             >
-              <option defaultValue>Select Prize</option>
+              <option defaultValue>Who will you playing for?</option>
               <option value="1">Prince</option>
               <option value="2">Princess</option>
               <option value="3">My Liege</option>
