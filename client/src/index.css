@@ -129,7 +129,7 @@ body {
 
 .get-started button {
   height: 200px;
-  font-size: 2em;
+  font-size: 3em;
   color: rgb(243, 75, 103);
   margin: auto;
   text-align: center;
@@ -165,7 +165,7 @@ body {
 }
 
 .footer {
-  margin-top: 20px;
+  margin-top: 150px;
   background-color: white;
   min-height: 600px;
   padding: 20px;
@@ -182,7 +182,8 @@ body {
 }
 
 .footer p {
-  padding-top:10px;
+  margin-top:30px;
+  padding-top:30px;
   text-align: left;
   font-size: 0.7em;
 }
