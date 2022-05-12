@@ -41,13 +41,13 @@ function GameView({ socket }) {
       <div className="row justify-content-between align-items-center top-row">
         <div className="col-3 leaderboard">
           {/** ******************* LocalLeaderboard.jsx ************************** */}
-          <LocalLeaderboard />
+          {game ? <LocalLeaderboard /> : <LoadingSpinner />}
         </div>
         <div className="col">
           <div className="row justify-content-center">
             <div className="col-3 hand">
               {/** ******************* OpponentsHand.jsx ************************** */}
-              <OpponentsHand />
+              {game ? <OpponentsHand player={game.players[1]} /> : <LoadingSpinner />}
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@ function GameView({ socket }) {
       <div className="row bottom-row">
         {/** ******************* Chat.jsx ************************** */}
         <div className="col-3 chat" style={{ backgroundColor: 'white' }}>
-          <Chat socket={socket} />
+          {game ? <Chat /> : <LoadingSpinner />}
         </div>
         <div className="col">
           <div className="row justify-content-between align-items-center">
@@ -67,17 +67,17 @@ function GameView({ socket }) {
               <div className="row justify-content-evenly">
                 <div className="col-3 hand">
                   {/** ******************* OpponentsHand.jsx ************************** */}
-                  <OpponentsHand />
+                  {game.players.length > 2 ? <OpponentsHand player={game.players[2]} /> : null}
                 </div>
                 <div className="col-3 hand">
                   {/** ******************* OpponentsHand.jsx ************************** */}
-                  <OpponentsHand />
+                  {game.players.length > 3 ? <OpponentsHand player={game.players[3]} /> : null}
                 </div>
               </div>
             </div>
             <div className="col-4 discard-pile">
               {/** ******************* DiscardPile.jsx ************************** */}
-              <DiscardPile game={game} />
+              {game ? <DiscardPile /> : <LoadingSpinner />}
             </div>
           </div>
           <div className="row justify-content-between align-items-center">
