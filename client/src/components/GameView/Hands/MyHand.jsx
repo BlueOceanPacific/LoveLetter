@@ -73,7 +73,7 @@ function MyHand({ game, socket }) {
       style={{ justifyContent: 'center' }}
     >
       {game &&
-        game.currentRound.activeHands.twheeler.hand.map((card, i) => (
+        game.currentRound.activeHands[user.username].hand.map((card, i) => (
           <PlayingCard
             key={card.card}
             target={target}
