@@ -47,6 +47,8 @@ function discardCard(state, user, move) {
 
 // Process the move based on given rules;
 function processMove(state, user, move) { //refactor play messages to be added to chat
+  state.message = null;
+  state.markModified('message');
   state.markModified('chat');
   state.currentRound.activeHands[user].targetable = true; // reset targetable status
   state.currentRound.activeHands[user].canSee = null; // reset targetable status
@@ -172,10 +174,10 @@ function endRound(state) {
   state.markModified('roundWins');
   if (state.roundWins[winner] === 4) { // end the game
     state.message = `${winner} has won the game!`;
-    state.markModified('message');
     state.state = 'ended';
     state.markModified('state');
   } else {// end the round
+    state.chat.push(`${winner} has won the round!`);
     module.exports.nextRound(state);
     // shuffle deck, reset hands,  increment round counter, re-deal
   }
@@ -193,7 +195,7 @@ module.exports.nextRound = (state) => {
   state.currentRound.discardPile = [];
   state.roundWins = state.roundWins || {};
   let newHands = {};
-  for (let i = 0; i < state.players.length; i++) {
+  for (let i = 0; i < state.players.length; i+= 1) {
     const card = state.currentRound.deck.pop();
     newHands[state.players[i].username] = {
       hand: [card],
@@ -228,16 +230,4 @@ module.exports.nextRound = (state) => {
 
     return shuffle(deck);
   }
-}
-
-
-
-// check if the round has ended
-function checkGameEnd(state) {
-  return false;
-}
-
-// ends a game
-function endGame(state) {
-  return true;
 }
