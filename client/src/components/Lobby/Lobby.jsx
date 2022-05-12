@@ -5,7 +5,6 @@ import axios from 'axios';
 import io from 'socket.io-client';
 // 2. component imports
 import useStore from '../Store/store';
-import GameView from '../GameView/GameView';
 import Chat from '../Chat/Chat';
 import LoadingSpinner from '../../util/LoadingSpinner';
 // 3. css
@@ -15,7 +14,10 @@ function Lobby() {
   const [players, setPlayers] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
-  const { game, setGame } = useStore((state) => ({ game: state.game, setGame: state.setGame }));
+  const { game, setGame } = useStore((state) => ({
+    game: state.game,
+    setGame: state.setGame,
+  }));
   const socket = useStore((state) => state.socket);
   const setSocket = useStore((state) => state.setSocket);
   const user = useStore((state) => state.user);
@@ -24,50 +26,53 @@ function Lobby() {
     axios
       .get(`/games/${id}`)
       .then(({ data }) => {
-        console.log(data);
         setGame(data);
         setPlayers(data.players);
       })
       .catch((err) => console.log(err));
-
     setSocket(io('/play', { query: { id } }));
+  }, []);
+
+  useEffect(() => {
     if (socket) {
-      socket.emit('join', user);
-      socket.on('join', () => {
-        console.log('someone connected');
+      if (!players.map((player) => player.username).includes(user.username)) {
+        socket.emit('lobbyUpdate');
+      }
+      socket.on('lobbyUpdate', () => {
+        axios
+          .get(`/games/${id}`)
+          .then(({ data }) => {
+            setGame(data);
+            setPlayers(data.players);
+          })
+          .catch((err) => console.log(err));
       });
     }
-    axios
-      .get(`/games/${id}`)
-      .then(({ data }) => setGame(data))
-      .then((_) => setPlayers(game.players))
-      .catch((err) => console.log(err));
-  }, players.length);
+  }, [socket]);
 
   const startTheGame = () => {
     if (game) {
-      axios.post(`/games/${game.name}/start`)
-        .then((_) => {
-          navigate(`/play/game/${game.name}`);
-        });
+      axios.post(`/games/${game.name}/start`).then(() => {
+        socket.emit('lobbyUpdate');
+        navigate(`/play/game/${game.name}`);
+      });
     }
-  }
+  };
 
   const leaveLobbyHandler = () => {
     // add logic to disconnect from socket io connection
-    axios.post(`/games/${game.name}/leave`, { user: user.username })
-      // .then((_) => navigate('/'))
+    axios.post(`/games/${game.name}/leave`, { user: user.username });
+    // .then((_) => navigate('/'))
     navigate('/');
   };
 
   const populatePlayers = () =>
     players.map((player) => (
-      <li className="list-group-item" key={ player.id }>
-        <img src={ player.avatar } className="lobby-icon" alt="icon" />
-        { player.username }
+      <li className="list-group-item" key={player.username}>
+        <img src={player.avatar} className="lobby-icon" alt="icon" />
+        {player.username}
       </li>
-    ))
-
+    ));
 
   if (!game) return <LoadingSpinner />;
 
@@ -79,9 +84,7 @@ function Lobby() {
     <div className="lobby-container">
       <div className="lobby-player-list-container">
         <h4 className="lobby-player-list-title">Current Players</h4>
-        <ul className="lobby-list-group">
-          {populatePlayers()}
-        </ul>
+        <ul className="lobby-list-group">{populatePlayers()}</ul>
       </div>
       <div className="chat-container">
         <Chat socket={socket} />
