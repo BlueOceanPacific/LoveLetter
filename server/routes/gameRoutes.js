@@ -62,7 +62,10 @@ module.exports = function (app) {
       game.state = 'playing';
       GameEngine.nextRound(game);
       game.save()
-        .then(() => res.sendStatus(201))
+        .then(() => {
+          console.log('Game saved: ', JSON.stringify(game));
+          res.sendStatus(201)
+        })
         .catch((err) => res.status(500).send(err));
     })
     .catch((err) => res.status(500).send(err));

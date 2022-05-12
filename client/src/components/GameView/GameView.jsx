@@ -23,21 +23,23 @@ function GameView() {
   const { id } = useParams();
 
   useEffect(() => {
-    // socket.on('updateGameState', () => {
-    //   console.log('updatedGame');
-    //   axios.get(`/games/${id}`).then(({ data }) => {
-    //     setGame(data);
-    //   });
-    // });
-
-    //TEST, remove
-    axios.get(`/games/${id}`).then(({ data }) => {
-      setGame(data);
+    if (!game.activeHands) {
+      console.log('No active hands found!')
+      axios.get(`/games/${id}`).then(({ data }) => {
+        console.log('Settign data to: ', data)
+        setGame(data);
+      });
+    }
+    socket.on('updateGameState', () => {
+      console.log('updatedGame');
+      axios.get(`/games/${id}`).then(({ data }) => {
+        setGame(data);
+      });
     });
-  }, []);
+  });
 
 
-  if (!game) return <LoadingSpinner />;
+  if (!game.activeHands) return <LoadingSpinner />;
 
   return (
     <div className="bg-gradient gameview">
