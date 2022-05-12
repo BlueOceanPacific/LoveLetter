@@ -32,12 +32,8 @@ export default function LocalLeaderboard() {
   }, []);
   // --------------------- Map this data when server sends 404 -------------------------
 
-  // MAKE CONNDITIONNAL STATEMENT CHECKINNG IF playerArray IS VALID OR NOT
-  // IF VALID, MAKE inOrder = playerArray
-  // ELSE, MAKE inOrder = users
-
   let inOrder = users;
-  if (playerArray.length > 1) inOrder = playerArray;
+  if (Array.isArray(playerArray) && playerArray.length > 1) inOrder = playerArray;
   for (let i = 0; i < inOrder.length; i += 1) {
     const currentPlayer = inOrder[i];
     currentPlayer.percentage = (
