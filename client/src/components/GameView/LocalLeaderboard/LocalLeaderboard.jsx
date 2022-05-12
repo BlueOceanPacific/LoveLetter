@@ -17,23 +17,18 @@ export default function LocalLeaderboard() {
   }
 
   Promise.all(playerPromises)
-    .then((result) => setplayerArray(result.data))
+    .then((result) => {
+      const playerData = [];
+      for (let i = 0; i < result.length; i += 1) {
+        const currentPlayer = result[i];
+        playerData.push(currentPlayer.data);
+      }
+      setplayerArray(playerData);
+    })
     .catch((err) => console.log(err));
 
-  // --------------------- Map this data when server sends 404 -------------------------
-  const [users, setUsers] = useState(() => []);
+  const inOrder = playerArray;
 
-  useEffect(() => {
-    axios.get('/leaderboards')
-      .then((result) => {
-        setUsers(result.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-  // --------------------- Map this data when server sends 404 -------------------------
-
-  let inOrder = users;
-  if (Array.isArray(playerArray) && playerArray.length > 1) inOrder = playerArray;
   for (let i = 0; i < inOrder.length; i += 1) {
     const currentPlayer = inOrder[i];
     currentPlayer.percentage = (
