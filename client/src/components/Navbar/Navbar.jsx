@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import useStore from '../Store/store';
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Navbar() {
   const logOut = useStore(state => state.logOut);
   const loggedInStatus = useStore(state => state.loggedIn);
   const user = useStore((state) => state.user);
+  const navigate = useNavigate();
   const { game, setGame } = useStore((state) => ({ game: state.game, setGame: state.setGame }));
 
   let logInDisplay = null;
@@ -18,7 +20,7 @@ function Navbar() {
 
   const leaveHomeHandler = () => {
     // add logic to disconnect from socket io connection
-    if (game) {
+    if (game.name) {
       axios.post(`/games/${game.name}/leave`, { user: user.username })
     }
       // .then((_) => navigate('/'))

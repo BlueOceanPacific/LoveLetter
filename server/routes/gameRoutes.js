@@ -25,9 +25,8 @@ module.exports = function (app) {
     // Search for the game, confirm it has less than 4 players
     Game.findOne({ name: req.params.name }).exec()
     .then((game) => {
-      if(game.players.length < 4) {
+      if (game.players.length < 4) {
         game.players.push(req.body.user);
-        game.players = game.players.filter((elem, idx, arr) => arr.indexOf(elem) === idx);
         game.markModified('players');
         game.save()
           .then(() => res.sendStatus(201))

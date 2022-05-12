@@ -72,6 +72,7 @@ function Lobby() {
   if (!game) return <LoadingSpinner />;
 
   if (game.state === 'playing') {
+    console.log('here', game)
     navigate(`/play/game/${id}`);
   }
 
