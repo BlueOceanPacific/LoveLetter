@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,11 +22,12 @@ function GameView() {
   const { socket, setSocket } = useStore(state => ({ socket: state.socket, setSocket: state.setSocket }));
   const { id } = useParams();
 
+
   useEffect(() => {
-    if (!game.activeHands) {
+    if (!game.currentRound.activeHands) {
       console.log('No active hands found!')
       axios.get(`/games/${id}`).then(({ data }) => {
-        console.log('Settign data to: ', data)
+        console.log('Setting data to: ', data)
         setGame(data);
       });
     }
@@ -36,18 +37,18 @@ function GameView() {
         setGame(data);
       });
     });
-  });
+  }, []);
 
 
-  if (!game.activeHands) return <LoadingSpinner />;
+  if (!game.currentRound.activeHands) return <LoadingSpinner />;
 
   return (
     <div className="bg-gradient gameview">
       {(game.state !== 'playing') && <GameOver winner='winner' />} {/* -- STILL NEED TO FIGURE OUT HOW TO ACCESS THE GAME WINNER -- */}
       <div className="row justify-content-between align-items-center top-row">
         <div className="col-3 leaderboard">
-          {/** ******************* LocalLeaderboard.jsx ************************** */}
-          {game ? <LocalLeaderboard /> : <LoadingSpinner />}
+          {/* * ******************* LocalLeaderboard.jsx **************************
+          {game ? <LocalLeaderboard /> : <LoadingSpinner />} */}
         </div>
         <div className="col">
           <div className="row justify-content-center">
