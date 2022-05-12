@@ -45,10 +45,7 @@ module.exports = function (app) {
     //Search for the game, confirm it has less than 4 players
     Game.findOne({ name: req.params.name }).exec()
     .then((game) => {
-      console.log('game', game);
-      console.log('user', req.body.user);
       const index = game.players.indexOf(req.body.user)
-      console.log('index', index)
       game.players.splice(index, 1)
       game.markModified('players');
       game.save()
