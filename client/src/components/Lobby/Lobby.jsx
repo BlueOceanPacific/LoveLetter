@@ -37,11 +37,11 @@ function Lobby() {
         console.log('someone connected');
       });
     }
-    // axios
-    //   .get(`/games/${id}`)
-    //   .then(({ data }) => setGame(data) && console.log(data))
-    //   .then((_) => setPlayers(game.players))
-    //   .catch((err) => console.log(err));
+    axios
+      .get(`/games/${id}`)
+      .then(({ data }) => setGame(data))
+      .then((_) => setPlayers(game.players))
+      .catch((err) => console.log(err));
   }, players.length);
 
   const startTheGame = () => {
@@ -54,7 +54,8 @@ function Lobby() {
   const leaveLobbyHandler = () => {
     // add logic to disconnect from socket io connection
     axios.post(`/games/${game.name}/leave`, { user: user.username })
-      .then((_) => navigate('/'))
+      // .then((_) => navigate('/'))
+    navigate('/');
   };
 
   const populatePlayers = () => {
@@ -106,22 +107,3 @@ function Lobby() {
 }
 
 export default Lobby;
-
-/*
-//remove a player if leave lobby
-  app.post("/games/:name/leave", (req, res) => {
-    //Search for the game, confirm it has less than 4 players
-    Game.updateOne({ name: req.params.name }).exec()
-    .then((game) => {
-      console.log(req.body.user);
-      let index = game.players.indexOf(req.body.user)
-      game.players.splice(index, 1)
-      game.markModified('players');
-      game.save()
-        .then(() => res.sendStatus(201))
-        .catch(()=> res.sendStatus(500));
-    })
-    .catch(() => res.sendStatus(500));
-  });
-
-*/

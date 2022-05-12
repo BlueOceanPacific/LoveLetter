@@ -40,6 +40,21 @@ module.exports = function (app) {
     // If it doesnt, send error
   });
 
+  //remove a player if leave lobby
+  app.post("/games/:name/leave", (req, res) => {
+    //Search for the game, confirm it has less than 4 players
+    Game.findOne({ name: req.params.name }).exec()
+    .then((game) => {
+      const index = game.players.indexOf(req.body.user)
+      game.players.splice(index, 1)
+      game.markModified('players');
+      game.save()
+        .then(() => res.sendStatus(201))
+        .catch(()=> res.sendStatus(500));
+    })
+    .catch(() => res.sendStatus(500));
+  });
+
   app.post("/games/:name/start", (req, res) => {
     // Search for the game, confirm it has less than 4 players
     Game.findOne({ name: req.params.name }).exec()
