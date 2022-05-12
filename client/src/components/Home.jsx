@@ -67,6 +67,9 @@ function Home() {
         <li key="testhome" className="list-group-item">
           <Link to="/testhome">testHome</Link>
         </li>
+        <li key="celebration" className="list-group-item">
+          <Link to="/celebration">Celebration</Link>
+        </li>
       </ul>
     </div>
 
