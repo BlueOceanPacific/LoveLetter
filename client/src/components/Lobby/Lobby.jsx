@@ -63,10 +63,8 @@ function Lobby() {
         <h4 className="lobby-player-list-title">Current Players</h4>
         <ul className="lobby-list-group">{populatePlayers()}</ul>
       </div>
-      <div className="chat-wrapper">
-        <div className="lobby-chat">
-          <Chat socket={socket} />
-        </div>
+      <div className="chat-container">
+        <Chat socket={socket} />
       </div>
       <button
         type="button"
