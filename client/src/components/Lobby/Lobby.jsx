@@ -48,6 +48,7 @@ function Lobby() {
     if (game) {
       axios.post(`/games/${game.name}/start`)
         .then((_) => {
+          console.log('Line 51 navigation');
           navigate(`/play/game/${game.name}`);
         });
     }
@@ -72,6 +73,7 @@ function Lobby() {
   if (!game) return <LoadingSpinner />;
 
   if (game.state === 'playing') {
+    console.log('Line 75 navigation');
     navigate(`/play/game/${id}`);
   }
 
