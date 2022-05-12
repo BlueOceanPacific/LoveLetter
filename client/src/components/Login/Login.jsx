@@ -42,10 +42,6 @@ function Login() {
             />
           </div>
 
-          <div id="login-username-help" className="form-text">
-            {usernameHelper}
-          </div>
-
           <div className="row">
             <input
               className="input"
@@ -54,6 +50,10 @@ function Login() {
               id="password-input"
               onChange={(event) => setPassword(event.target.value)}
             />
+          </div>
+
+          <div id="login-username-help" className="form-text">
+            {usernameHelper}
           </div>
         </form>
 
