@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import io from 'socket.io-client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Chat from '../Chat/Chat';
@@ -15,22 +16,26 @@ import LoadingSpinner from '../../util/LoadingSpinner';
 import GameOver from '../GameOver/GameOver';
 
 import './GameView.scss';
+import useStore from '../Store/store';
 
-function GameView({ socket }) {
-  const [game, setGame] = useState(null);
+function GameView() {
+  const {game, setGame} = useStore(state => ({game: state.game, setGame: state.setGame}));
+  const {socket, setSocket} = useStore(state => ({socket: state.socket, setSocket: state.setSocket}));
   const { id } = useParams();
 
   useEffect(() => {
+    if (!socket) setSocket(io('/play', { query: { id } }));
+
     axios.get(`/games/${id}`).then(({ data }) => {
-      // console.log(game);
       setGame(data);
     });
-  }, []);
+    if (socket) {
+      socket.on('updateGameState', (updatedGame) => {
+        console.log(updatedGame);
+        setGame(updatedGame);
+      });
+    }
 
-  useEffect(() => {
-    socket.on('updateGameState', (updatedGame) => {
-      setGame(updatedGame);
-    });
   }, []);
 
   if (!game) return <LoadingSpinner />
@@ -41,13 +46,13 @@ function GameView({ socket }) {
       <div className="row justify-content-between align-items-center top-row">
         <div className="col-3 leaderboard">
           {/** ******************* LocalLeaderboard.jsx ************************** */}
-          <LocalLeaderboard />
+          {game ? <LocalLeaderboard /> : <LoadingSpinner />}
         </div>
         <div className="col">
           <div className="row justify-content-center">
             <div className="col-3 hand">
               {/** ******************* OpponentsHand.jsx ************************** */}
-              <OpponentsHand />
+              {game ? <OpponentsHand player={game.players[1]} /> : <LoadingSpinner />}
             </div>
           </div>
         </div>
@@ -59,7 +64,7 @@ function GameView({ socket }) {
       <div className="row bottom-row">
         {/** ******************* Chat.jsx ************************** */}
         <div className="col-3 chat" style={{ backgroundColor: 'white' }}>
-          <Chat socket={socket} />
+          {game ? <Chat /> : <LoadingSpinner />}
         </div>
         <div className="col">
           <div className="row justify-content-between align-items-center">
@@ -67,17 +72,17 @@ function GameView({ socket }) {
               <div className="row justify-content-evenly">
                 <div className="col-3 hand">
                   {/** ******************* OpponentsHand.jsx ************************** */}
-                  <OpponentsHand />
+                  {game.players.length > 2 ? <OpponentsHand player={game.players[2]} /> : null}
                 </div>
                 <div className="col-3 hand">
                   {/** ******************* OpponentsHand.jsx ************************** */}
-                  <OpponentsHand />
+                  {game.players.length > 3 ? <OpponentsHand player={game.players[3]} /> : null}
                 </div>
               </div>
             </div>
             <div className="col-4 discard-pile">
               {/** ******************* DiscardPile.jsx ************************** */}
-              <DiscardPile game={game} />
+              {game ? <DiscardPile /> : <LoadingSpinner />}
             </div>
           </div>
           <div className="row justify-content-between align-items-center">
