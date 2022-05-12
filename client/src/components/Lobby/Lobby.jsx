@@ -50,7 +50,7 @@ function Lobby() {
   if (!game) return <LoadingSpinner />;
 
   if (game.state === 'playing') {
-    return <GameView socket={socket} />;
+    navigate(`/play/game/${id}`);
   }
 
   return (
