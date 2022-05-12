@@ -1,3 +1,23 @@
+#login-container {
+  background-color: white;
+  border-radius: 1%;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  max-width: 400px;
+}
+
+#login-container .btn {
+  min-width: 150px;
+}
+
+#login-container .row {
+  padding: 12px 0px;
+}
+
+#login-help {
+  max-width: 200px;
+}
+
 #login {
   flex-direction: column;
   text-align: center;
@@ -9,12 +29,21 @@
 }
 
 #login-btn {
-  width: 20%;
   text-align: center;
 }
 
 #login-pw-btn {
-  width: 20%;
   text-align: center;
-  font-size: 70%;
+}
+
+input {
+  text-align: center;
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+}
+
+:-moz-placeholder {
+  text-align: center;
 }
