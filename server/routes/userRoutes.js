@@ -56,21 +56,32 @@ module.exports = function (app) {
   });
 
   // Returns a user profile (all fields excluding password)
-  app.get('/user/profile', (req, res) => {
-    db.User.findOne({ username: req.body.username })
+  app.get('/user/profile/:username', (req, res) => {
+    db.User.findOne({ username: req.params.username })
       .exec()
       .then((user) => {
-        const { username, email, pronouns, avatar, gamesPlayed, gamesWon } = user;
-        res.send({
-          username,
-          email,
-          pronouns,
-          avatar,
-          gamesPlayed,
-          gamesWon,
-        });
+        if(user) {
+          const { username, email, pronouns, avatar, gamesPlayed, gamesWon } = user;
+          res.send({
+            username,
+            email,
+            pronouns,
+            avatar,
+            gamesPlayed,
+            gamesWon,
+          });
+        } else {
+          res.sendStatus(404)
+        }
       })
+<<<<<<< HEAD
       .catch((err) => res.status(500).send(err));
+=======
+      .catch((err) => {
+        console.log(err)
+        res.status(500).send(err)
+      });
+>>>>>>> db401f4c8c19442c7d665e7e1c5f1a97cc260693
   });
 
   // Updates a user profile - only allows pronoun and avatar updates

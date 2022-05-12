@@ -19,8 +19,8 @@ import './GameView.scss';
 import useStore from '../Store/store';
 
 function GameView() {
-  const {game, setGame} = useStore(state => ({game: state.game, setGame: state.setGame}));
-  const {socket, setSocket} = useStore(state => ({socket: state.socket, setSocket: state.setSocket}));
+  const { game, setGame } = useStore(state => ({ game: state.game, setGame: state.setGame }));
+  const { socket, setSocket } = useStore(state => ({ socket: state.socket, setSocket: state.setSocket }));
   const { id } = useParams();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ function GameView() {
 
   return (
     <div className="bg-gradient gameview">
-      <GameOver />
+      {(game.state !== 'playing') && <GameOver winner='winner' />} {/* -- STILL NEED TO FIGURE OUT HOW TO ACCESS THE GAME WINNER -- */}
       <div className="row justify-content-between align-items-center top-row">
         <div className="col-3 leaderboard">
           {/** ******************* LocalLeaderboard.jsx ************************** */}
