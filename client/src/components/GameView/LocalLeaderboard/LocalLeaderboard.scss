@@ -1,23 +1,17 @@
-.leaderboard-component {
+.local-leaderboard {
   text-align: center;
   font-weight: 100;
-  background-color: tan;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 70%;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-weight: 100;
+  font-size: 90%;
+  overflow-y: scroll;
 }
 
-#local-leaderboard-txt {
-  font-size: 90%;
-}
 .game-view {
   .leaderboard {
     padding: 0;
   }
-}
-.local-leaderboard-title {
-  text-align: center;
-  background-color: #fff3cd;
-  margin-block: 0;
-  font-weight: bold;
 }

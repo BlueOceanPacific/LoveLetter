@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import useStore from '../../Store/store';
 import axios from 'axios';
+import useStore from '../../Store/store';
+import './LocalLeaderboard.scss';
 
 export default function LocalLeaderboard() {
   const [playerArray, setplayerArray] = useState([]);
 
   const { game } = useStore(state => ({ game: state.game }));
   const { players } = game;
-  console.log(players); // DELETE ME
 
   const playerPromises = [];
 
@@ -17,49 +17,61 @@ export default function LocalLeaderboard() {
   }
 
   Promise.all(playerPromises)
-    .then((result) => console.log('promise all is working ', result))
+    .then((result) => setplayerArray(result.data))
     .catch((err) => console.log(err));
 
+  // --------------------- Map this data when server sends 404 -------------------------
+  const [users, setUsers] = useState(() => []);
+
+  useEffect(() => {
+    axios.get('/leaderboards')
+      .then((result) => {
+        setUsers(result.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  // --------------------- Map this data when server sends 404 -------------------------
+
+  // MAKE CONNDITIONNAL STATEMENT CHECKINNG IF playerArray IS VALID OR NOT
+  // IF VALID, MAKE inOrder = playerArray
+  // ELSE, MAKE inOrder = users
+
+  let inOrder = users;
+  if (playerArray.length > 1) inOrder = playerArray;
+  for (let i = 0; i < inOrder.length; i += 1) {
+    const currentPlayer = inOrder[i];
+    currentPlayer.percentage = (
+      Math.round((100 * (currentPlayer.gamesWon / currentPlayer.gamesPlayed)))
+    ) || 0;
+  }
+  inOrder.sort((a, b) => b.percentage - a.percentage);
+
   return (
-    <div className="container"> Local Leaderboard </div>
+    <div className="local-leaderboard">
+      <h6>Local Leaderboard</h6>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Player</th>
+            <th scope="col">Total Wins</th>
+            <th scope="col">Win %</th>
+          </tr>
+        </thead>
+        <tbody>
+          {inOrder.map((obj, index) => (
+            <tr key={JSON.stringify(obj)}>
+              <td>{index + 1}</td>
+              <td>{obj.username}</td>
+              <td>{obj.gamesWon}</td>
+              <td>
+                {obj.percentage}
+                %
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
-
-// import LocalLeaderboardRow from './LocalLeaderboardRow';
-
-// import './LocalLeaderboard.scss';
-
-// import players from './db';
-
-// function LocalLeaderboard() {
-//   return (
-//     <div className="card leaderboard">
-//       <div className="card-header local-leaderboard-title">Leaderboard</div>
-//       <div className="card-body" style={{ padding: 0 }}>
-//         <table className="table table-sm table-warning">
-//           <thead>
-//             <tr>
-//               <th scope="col">#</th>
-//               <th scope="col">Player</th>
-//               <th scope="col">Total Wins</th>
-//               <th scope="col">Wins %</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {players
-//               .sort((a, b) => b.score - a.score)
-//               .map((player, i) => (
-//                 <LocalLeaderboardRow
-//                   key={player.player}
-//                   i={i + 1}
-//                   player={player}
-//                 />
-//               ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default LocalLeaderboard;

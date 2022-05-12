@@ -74,14 +74,10 @@ module.exports = function (app) {
           res.sendStatus(404)
         }
       })
-<<<<<<< HEAD
-      .catch((err) => res.status(500).send(err));
-=======
       .catch((err) => {
         console.log(err)
         res.status(500).send(err)
       });
->>>>>>> db401f4c8c19442c7d665e7e1c5f1a97cc260693
   });
 
   // Updates a user profile - only allows pronoun and avatar updates
