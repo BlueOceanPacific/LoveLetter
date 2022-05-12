@@ -41,6 +41,10 @@ export default function CreateGame() {
       });
   };
 
+  const leaveCreateGameHandler = () => {
+    navigate('/');
+  };
+
   return (
     <div className="container creategame-box my-auto ">
       <div className="row">
@@ -120,6 +124,7 @@ export default function CreateGame() {
             <button
               className="btn btn-primary btn-lg  back-btn mt-5"
               type="button"
+              onClick={leaveCreateGameHandler}
             >
               Back
             </button>
