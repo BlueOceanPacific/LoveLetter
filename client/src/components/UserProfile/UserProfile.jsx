@@ -48,6 +48,7 @@ function UserProfile() {
     .catch((err) => console.log(err));
   };
 
+
   return (
     <div>
       <div className="userprofile-main">
@@ -56,7 +57,7 @@ function UserProfile() {
           <form onSubmit={submitHandler}>
             <div className="username">
               <p className="UP-username-hello">{`Hello ${user.username}!`}</p>
-              <p className="UP-username-pronouns">{`[${user.pronouns}]`}</p>
+              <p className="UP-username-pronouns">{`[${user.pronouns || 'No pronouns specified'}]`}</p>
             </div>
             <div className="avatar">
               <div>
