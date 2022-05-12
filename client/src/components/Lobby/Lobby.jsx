@@ -12,7 +12,7 @@ import LoadingSpinner from '../../util/LoadingSpinner';
 import './Lobby.scss';
 
 function Lobby() {
-  const [players, setPlayers] = useState(['twheeler', 'lcosta', 'mteran']);
+  const [players, setPlayers] = useState(['twheeler']);
   const [game, setGame] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -32,21 +32,32 @@ function Lobby() {
     axios
       .get(`/games/${id}`)
       .then(({ data }) => setGame(data))
+      .then((_) => setPlayers(game.players))
       .catch((err) => console.log(err));
   }, []);
+
+  const startTheGame = () => {
+    if (game) {
+      axios.post(`/games/${game.name}/start`)
+    }
+  }
 
   const leaveLobbyHandler = () => {
     // add logic to disconnect from socket io connection
     navigate('/');
   };
 
-  const populatePlayers = () =>
-    players.map((player) => (
-      <li className="list-group-item" key={player}>
-        <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon" />
-        {player}
-      </li>
-    ));
+  // const populatePlayers = () => {
+  //   let thePlayers = players;
+  //   if (game) {
+  //     (players.map((player) => (
+  //       <li className="list-group-item" key={ player.id }>
+  //         <img src={ player.avatar } className="lobby-icon" alt="icon" />
+  //         { player.username }
+  //       </li>
+  //     )
+  //   }
+
 
   if (!game) return <LoadingSpinner />;
 
@@ -61,7 +72,9 @@ function Lobby() {
       </div> */}
       <div className="lobby-player-list-container">
         <h4 className="lobby-player-list-title">Current Players</h4>
-        <ul className="lobby-list-group">{populatePlayers()}</ul>
+        <ul className="lobby-list-group">
+          {populatePlayers()}
+        </ul>
       </div>
       <div className="chat-container">
         <Chat socket={socket} />
@@ -76,6 +89,7 @@ function Lobby() {
       <button
         type="button"
         className="lobby-btn-start btn-primary btn-lg"
+        onClick={startTheGame}
         disabled={players.length < 2}
       >
         Start Game
