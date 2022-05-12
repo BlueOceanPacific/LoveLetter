@@ -6,13 +6,14 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import useStore from '../Store/store';
 import './UserProfile.scss';
 
 function UserProfile() {
   const user = useStore((state) => state.user);
-
+  const navigate = useNavigate();
   const setUser = useStore((state) => state.setUser);
 
   const [data, setData] = useState({
@@ -21,7 +22,9 @@ function UserProfile() {
   });
   const { pronouns, avatar } = data;
 
-
+  const handleLeaveUserProfile = () => {
+    navigate('/');
+  }
 
   const changeHandler = (e) => {
     // console.log('clicked', e.target);
@@ -181,7 +184,7 @@ function UserProfile() {
               />
             </div>
             <div className="edit">
-              <button type="button" data-bs-target="#" className="btn btn-primary UP-edit-btn">
+              <button type="button" data-bs-target="#" onClick={handleLeaveUserProfile}className="btn btn-primary UP-edit-btn">
                 Cancel
               </button>
               <button type="submit" name="submit" className="btn btn-primary UP-edit-btn">
