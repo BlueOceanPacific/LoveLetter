@@ -23,11 +23,16 @@ function GameView() {
   const { id } = useParams();
 
   useEffect(() => {
-    socket.on('updateGameState', () => {
-      console.log('updatedGame');
-      axios.get(`/games/${id}`).then(({ data }) => {
-        setGame(data);
-      });
+    // socket.on('updateGameState', () => {
+    //   console.log('updatedGame');
+    //   axios.get(`/games/${id}`).then(({ data }) => {
+    //     setGame(data);
+    //   });
+    // });
+
+    //TEST, remove
+    axios.get(`/games/${id}`).then(({ data }) => {
+      setGame(data);
     });
   }, []);
 

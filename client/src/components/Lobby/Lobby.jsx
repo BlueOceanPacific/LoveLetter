@@ -21,9 +21,6 @@ function Lobby() {
   const user = useStore((state) => state.user);
 
   useEffect(() => {
-<<<<<<< HEAD
-    console.log('Id: ', id)
-=======
     axios
       .get(`/games/${id}`)
       .then(({ data }) => {
@@ -33,7 +30,6 @@ function Lobby() {
       })
       .catch((err) => console.log(err));
 
->>>>>>> f0bc1b2621904647d1e77d6c85fde30d7d93a1a4
     setSocket(io('/play', { query: { id } }));
     if (socket) {
       socket.emit('join', user);
@@ -41,11 +37,11 @@ function Lobby() {
         console.log('someone connected');
       });
     }
-    axios
-      .get(`/games/${id}`)
-      .then(({ data }) => setGame(data) && console.log(data))
-      .then((_) => setPlayers(game.players))
-      .catch((err) => console.log(err));
+    // axios
+    //   .get(`/games/${id}`)
+    //   .then(({ data }) => setGame(data) && console.log(data))
+    //   .then((_) => setPlayers(game.players))
+    //   .catch((err) => console.log(err));
   }, players.length);
 
   const startTheGame = () => {
