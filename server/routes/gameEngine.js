@@ -47,7 +47,9 @@ function discardCard(state, user, move) {
 
 // Process the move based on given rules;
 function processMove(state, user, move) { //refactor play messages to be added to chat
-
+  state.markModified('chat');
+  state.currentRound.activeHands[user].targetable = true; // reset targetable status
+  state.currentRound.activeHands[user].canSee = null; // reset targetable status
   switch (move.card.card) {
     case 'Prince': //Out of the match
       state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
@@ -77,7 +79,8 @@ function processMove(state, user, move) { //refactor play messages to be added t
       state.chat.push({username: 'system', message:`${user} plays the Wizard. ${move.target} draws a new hand!`});
       break;
     case 'Priestess': // Cannot be targeted by other players until your next turn NOT SURE HOW TO HANDLE
-      state.chat.push({username: 'system', message:`I haven't figured out how to implment Priestess yet!!`});
+      state.currentRound.activeHands[user].targetable = false;
+      state.chat.push({username: 'system', message:`${user} is protected by the Priestess - they may not be targeted until the next round!`});
       break;
     case 'Knight':
       // Compare hand value with target player. Lowest value is out of the round, tie = both stay;
@@ -94,8 +97,9 @@ function processMove(state, user, move) { //refactor play messages to be added t
         state.chat.push({username: 'system', message:`A knight is played - neither side has an advantage!`});
       }
       break;
-    case 'Clown': // Look at target players hand NOT SURE HOW TO HANDLE
-      state.chat.push({username: 'system', message:`I haven't figured out how to implment Clown yet!!`});
+    case 'Clown': // Look at target players hand. Can see prop is rendered in OpponenetsHand.jsx
+      state.currentRound.activeHands[user].canSee = move.target;
+      state.chat.push({username: 'system', message:`A clown is played - someones hand is visible!`});
       break;
     case 'Soldier': // Choose a card type other than Soldier. If target player has card, they are out
       if(state.currentRound.activeHands[move.target].hand[0].card === move.guess) {
@@ -107,14 +111,12 @@ function processMove(state, user, move) { //refactor play messages to be added t
       }
       break;
     default:
-      return;
   }
-  return true;
 }
 
 // Find the next active player and draw a card into their hand
 function processDraw(state) {
-  //If deck is empty after a move, end round
+  // If deck is empty after a move, end round
   state.currentRound.turnNumber += 1;
   state.message = null;
   if (!state.currentRound.deck.length) {
@@ -152,14 +154,14 @@ function processDraw(state) {
   }
 }
 
-//increment round counter, scoreboard, and check for 4 wins
-//re-shuffle deck, re-deal
+// increment round counter, scoreboard, and check for 4 wins
+// re-shuffle deck, re-deal
 function endRound(state) {
-  //determine winner
+  // determine winner
   const activePlayers = Object.keys(state.currentRound.activeHands);
   let winner = activePlayers[0];
   let highestHand = state.currentRound.activeHands[activePlayers[0]];
-  for (let i = 1; i < activePlayers.length; i++) {
+  for (let i = 1; i < activePlayers.length; i+= 1) {
     if (state.currentRound.activeHands[activePlayers[i]].value > highestHand.value) {
       highestHand = state.currentRound.activeHands[activePlayers[i]];
       winner = activePlayers[i];
@@ -173,53 +175,62 @@ function endRound(state) {
     state.markModified('message');
     state.state = 'ended';
     state.markModified('state');
-  } else {//end the round
-    state.message = `${winner} has won the round!`;
-    state.markModified('message');
-    state.currentRound.roundNumber += 1;
-    state.currentRound.turnNumber = 1;
-    state.currentRound.currentPlayer = state.host.username;
-    const newDeck = shuffleDeck();
-    state.currentRound.faceDownCard = newDeck.pop();
-    state.currentRound.deck = newDeck;
-    state.currentRound.discardPile = [];
-    let newHands = {};
-    for (let i = 0; i < state.players.length; i++) {
-      const card = state.currentRound.deck.pop();
-      newHands[state.players[i].username] = {
-        hand: [card],
-        value: card.value,
+  } else {// end the round
+    module.exports.nextRound(state);
+    // shuffle deck, reset hands,  increment round counter, re-deal
+  }
+}
+
+module.exports.nextRound = (state) => {
+  state.markModified('currentRound');
+  state.markModified('roundWins');
+  state.currentRound.roundNumber += 1;
+  state.currentRound.turnNumber = 1;
+  state.currentRound.currentPlayer = state.host.username;
+  const newDeck = shuffleDeck();
+  state.currentRound.faceDownCard = newDeck.pop();
+  state.currentRound.deck = newDeck;
+  state.currentRound.discardPile = [];
+  state.roundWins = state.roundWins || {};
+  let newHands = {};
+  for (let i = 0; i < state.players.length; i++) {
+    const card = state.currentRound.deck.pop();
+    newHands[state.players[i].username] = {
+      hand: [card],
+      value: card.value,
+      targetable: true,
+    }
+    state.roundWins[state.players[i].username] = state.roundWins[state.players[i].username] || 0;
+  }
+  state.currentRound.activeHands = newHands;
+  // shuffle deck, reset hands,  increment round counter, re-deal
+  function shuffleDeck() {
+    const deck = fullDeck.slice();
+
+    function shuffle(array) {
+      let currentIndex = array.length;
+      let randomIndex;
+
+      // While there remain elements to shuffle.
+      while (currentIndex !== 0) {
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
       }
+
+      return array;
     }
-    state.currentRound.activeHands = newHands;
-    //shuffle deck, reset hands,  increment round counter, re-deal
+
+    return shuffle(deck);
   }
 }
 
-function shuffleDeck() {
-  const deck = fullDeck.slice();
 
-  function shuffle(array) {
-    let currentIndex = array.length;
-    let randomIndex;
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-
-    return array;
-  }
-
-  return shuffle(deck);
-}
 
 // check if the round has ended
 function checkGameEnd(state) {

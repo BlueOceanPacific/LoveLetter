@@ -2,26 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'regenerator-runtime/runtime';
+import io from 'socket.io-client';
+import useStore from '../Store/store';
 
 function JoinGame() {
   const [games, setGames] = useState([]);
+  // const [socket, setSocket] = useState(io('/play', /*{ query: { id } }*/));
+  const user = useStore((state) => state.user);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getGames = async () => {
-      try {
-        const res = await axios.get('/games');
-        console.log('send get req: ', res);
-        setGames(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getGames();
-  }, []);
 
-  const handleAutoJoin = () => {
-    navigate(`/play/lobby/${games[0].name}`);
+  const updateGames = () => {
+    // can be refactored to listen on a socket
+    axios
+    .get('/games')
+    .then(({ data }) => setGames(data))
+    .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    updateGames();
+  }, []);
+  // socket.emit - This method is responsible for sending messages. socket.on - This method is responsible for listening for incoming messages.
+
+  const handleJoin = (gameName = games[0].name) => {
+    axios.post(`/games/${gameName}/join`, {user})
+      .then(() => navigate(`/play/lobby/${gameName}`))
+      .catch(() => {
+        alert('Game is full, try another!'); // Could be updated as a tool tip
+        updateGames();
+      });
   };
 
   return (
@@ -29,7 +39,7 @@ function JoinGame() {
       <div className="row">
         <div className="col-sm-4">
           <div className="p-2" />
-          <button type="button" className="btn btn-success btn-lg" onClick={handleAutoJoin}>Auto-Join</button>
+          <button type="button" className="btn btn-success btn-lg" onClick={handleJoin}>Auto-Join</button>
         </div>
         <div className="col-sm-8"><div className="p-4"><h1>Join a Game</h1></div></div>
       </div>
@@ -48,7 +58,7 @@ function JoinGame() {
               <tr key={game._id}>
                 <th scope="row">{game.name}</th>
                 <td colSpan="2">
-                  {game.players.length + 1}
+                  {game.players.length}
                   {' '}
                   /
                   {' '}
@@ -58,7 +68,7 @@ function JoinGame() {
                   <button
                     type="button"
                     className="btn btn-primary btn-sm"
-                    onClick={() => navigate(`/play/lobby/${game.name}`)}
+                    onClick={() => handleJoin(game.name)}
                   >
                     Join
                   </button>
@@ -73,7 +83,22 @@ function JoinGame() {
 }
 
 export default JoinGame;
-//
+
+/*
+  useEffect(() => {
+    const getGames = async () => {
+      try {
+        const res = await axios.get('/games');
+        console.log('send get req: ', res);
+        setGames(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getGames();
+  }, []);
+*/
+
 
 
 

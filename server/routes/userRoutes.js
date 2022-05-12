@@ -56,33 +56,40 @@ module.exports = function (app) {
   });
 
   // Returns a user profile (all fields excluding password)
-  app.get('/user/profile', (req, res) => {
-    db.User.findOne({ username: req.body.username })
+  app.get('/user/profile/:username', (req, res) => {
+    db.User.findOne({ username: req.params.username })
       .exec()
       .then((user) => {
-        const { username, email, pronouns, avatar, gamesPlayed, gamesWon } = user;
-        res.send({
-          username,
-          email,
-          pronouns,
-          avatar,
-          gamesPlayed,
-          gamesWon,
-        });
+        if(user) {
+          const { username, email, pronouns, avatar, gamesPlayed, gamesWon } = user;
+          res.send({
+            username,
+            email,
+            pronouns,
+            avatar,
+            gamesPlayed,
+            gamesWon,
+          });
+        } else {
+          res.sendStatus(404)
+        }
       })
-      .catch((err) => res.sendStatus(500).send(err));
+      .catch((err) => {
+        console.log(err)
+        res.status(500).send(err)
+      });
   });
 
   // Updates a user profile - only allows pronoun and avatar updates
   app.put('/user/profile', (req, res) => {
-    console.log(
-      'put req for user:',
-      req.body.username,
-      ' new pronouns: ',
-      req.body.pronouns,
-      ' new avatar:',
-      req.body.avatar
-    );
+    // console.log(
+    //   'put req for user:',
+    //   req.body.username,
+    //   ' new pronouns: ',
+    //   req.body.pronouns,
+    //   ' new avatar:',
+    //   req.body.avatar
+    // );
     db.User.updateOne(
       { username: req.body.username },
       {

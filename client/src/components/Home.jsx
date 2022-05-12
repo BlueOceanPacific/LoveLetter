@@ -59,13 +59,16 @@ function Home() {
           <Link to="/play/lobby/demo-building">Lobby</Link>
         </li>
         <li key="game" className="list-group-item">
-          <Link to="/play/game/demo-playing">/game/:id</Link>
+          <Link to="/play/lobby/demo-playing">/game/:id</Link>
         </li>
         <li key="chat" className="list-group-item">
           <Link to="/chat">Chat</Link>
         </li>
         <li key="testhome" className="list-group-item">
           <Link to="/testhome">testHome</Link>
+        </li>
+        <li key="confetti" className="list-group-item">
+          <Link to="/confetti">confetti</Link>
         </li>
       </ul>
     </div>

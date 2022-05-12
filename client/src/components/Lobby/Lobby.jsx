@@ -12,13 +12,12 @@ import LoadingSpinner from '../../util/LoadingSpinner';
 import './Lobby.scss';
 
 function Lobby() {
-  const [players, setPlayers] = useState(['twheeler', 'lcosta', 'mteran']);
-  const [game, setGame] = useState(null);
+  const [players, setPlayers] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
+  const { game, setGame } = useStore((state) => ({ game: state.game, setGame: state.setGame }));
   const socket = useStore((state) => state.socket);
   const setSocket = useStore((state) => state.setSocket);
-  // const [socket, setSocket] = useState(io('/play', { query: { id } }));
   const user = useStore((state) => state.user);
 
   useEffect(() => {
@@ -31,27 +30,39 @@ function Lobby() {
     }
     axios
       .get(`/games/${id}`)
-      .then(({ data }) => setGame(data))
+      .then(({ data }) => setGame(data) && console.log(data))
+      .then((_) => setPlayers(game.players))
       .catch((err) => console.log(err));
-  }, []);
+  }, players.length);
+
+  const startTheGame = () => {
+    if (game) {
+      axios.post(`/games/${game.name}/start`)
+        .then((_) => navigate(`/play/game/${game.name}`))
+    }
+  }
 
   const leaveLobbyHandler = () => {
     // add logic to disconnect from socket io connection
     navigate('/');
   };
 
-  const populatePlayers = () =>
-    players.map((player) => (
-      <li className="list-group-item" key={player}>
-        <img src="https://bit.ly/3sGYwz5" className="lobby-icon" alt="icon" />
-        {player}
-      </li>
-    ));
+  const populatePlayers = () => {
+    if (game) {
+      return players.map((player) => (
+        <li className="list-group-item" key={ player.username }>
+          <img src={ player.avatar } className="lobby-icon" alt="icon" />
+          { player.username }
+        </li>
+      ))
+    }
+  }
+
 
   if (!game) return <LoadingSpinner />;
 
   if (game.state === 'playing') {
-    return <GameView socket={socket} />;
+    navigate(`/play/game/${id}`);
   }
 
   return (
@@ -61,12 +72,12 @@ function Lobby() {
       </div> */}
       <div className="lobby-player-list-container">
         <h4 className="lobby-player-list-title">Current Players</h4>
-        <ul className="lobby-list-group">{populatePlayers()}</ul>
+        <ul className="lobby-list-group">
+          {populatePlayers()}
+        </ul>
       </div>
-      <div className="chat-wrapper">
-        <div className="lobby-chat">
-          <Chat socket={socket} />
-        </div>
+      <div className="chat-container">
+        <Chat socket={socket} />
       </div>
       <button
         type="button"
@@ -78,6 +89,7 @@ function Lobby() {
       <button
         type="button"
         className="lobby-btn-start btn-primary btn-lg"
+        onClick={startTheGame}
         disabled={players.length < 2}
       >
         Start Game

@@ -137,9 +137,10 @@ body {
   text-align: left;
 }
 
-/* .main-title {
-  max-height: 300px;
-} */
+.main-title {
+  max-width: 500px;
+  max-height: 500px;
+}
 
 #cards-carousel {
   padding-top: 20px;

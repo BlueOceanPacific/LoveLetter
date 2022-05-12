@@ -45,6 +45,10 @@ export default function CreateGame() {
       });
   };
 
+  const leaveCreateGameHandler = () => {
+    navigate('/');
+  };
+
   return (
     <div className="container creategame-box my-auto ">
       <div className="row">
