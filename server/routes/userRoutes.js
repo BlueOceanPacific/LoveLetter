@@ -70,7 +70,7 @@ module.exports = function (app) {
           gamesWon,
         });
       })
-      .catch((err) => res.sendStatus(500).send(err));
+      .catch((err) => res.status(500).send(err));
   });
 
   // Updates a user profile - only allows pronoun and avatar updates

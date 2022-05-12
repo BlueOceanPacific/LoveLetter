@@ -12,7 +12,7 @@ export default [
   {
     player: 'tw',
     score: '6',
-    winRatio: '43%',
+    winRatio: '0%',
   },
   {
     player: 'ns',
