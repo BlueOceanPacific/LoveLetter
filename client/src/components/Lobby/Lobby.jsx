@@ -21,6 +21,7 @@ function Lobby() {
   const user = useStore((state) => state.user);
 
   useEffect(() => {
+    console.log('Id: ', id)
     setSocket(io('/play', { query: { id } }));
     if (socket) {
       socket.emit('join', user);
