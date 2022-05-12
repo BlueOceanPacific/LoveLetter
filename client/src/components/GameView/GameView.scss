@@ -6,6 +6,7 @@
   height: calc(100vh - ($navbar-padding-y * 2) - $navbar-brand-height - ($navbar-brand-padding-y * 2));
   width: 100vw;
   background-color: rgba(33, 37, 41, 0.5);
+
   .top-row {
     height: 35%;
 
@@ -14,16 +15,20 @@
       min-height: 70%;
       padding: 0;
     }
+
     .scoreboard {
       min-height: 30vh;
     }
   }
+
   .bottom-row {
     height: 55%;
+
     .discard-pile {
       height: 25vh;
       min-height: 70%;
     }
+
     .my-hand {
       width: 20vw;
 
@@ -32,6 +37,7 @@
       }
     }
   }
+
   // This class is applied to all components in GameView. If you need to make a change to this,
   // create a new unique class on the component as to only change the component you're working on.
   .component {
@@ -39,9 +45,11 @@
     height: 100%;
     width: 100%;
   }
+
   .hand {
     width: 11vw;
   }
+
   .card-art-image {
     filter: brightness(100%);
 
@@ -50,10 +58,22 @@
       transition: all 1s ease;
     }
   }
-  .chat-container {
-    height: 100%;
-    .chat-messages {
-      height: 90%;
+
+  .chat {
+    border-radius: 1%;
+
+    .chat-container {
+      height: 100%;
+
+      .chat-messages {
+        height: 90%;
+        padding: 3%;
+      }
+
+      .chat-input {
+        position: absolute;
+        bottom: -2%;
+      }
     }
   }
 }

@@ -35,21 +35,26 @@
     margin-left: 3rem;
   }
 
-  .lobby-chat {
-    width: auto;
-    height: auto;
+  .chat-container {
+    max-width: 25vw;
+    width: 100%;
     position: absolute;
     right: 5rem;
-    top: -10rem;
-    margin-left: 25rem;
+    top: 5rem;
+    height: 40vh;
   }
 
-  .chat-wrapper {
-    width: auto;
-    height: auto;
-    margin: 1rem;
+  .chat-messages {
+    background-color: white;
+    width: 100%;
+    height: 43vh;
     position: relative;
+    border-radius: 1%;
+    padding: 3%;
+  }
+
+  .chat-input {
+    position: absolute;
+    bottom: -25%;
   }
 }
-
-
