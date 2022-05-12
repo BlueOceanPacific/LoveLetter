@@ -33,7 +33,7 @@ function Lobby() {
       .then(({ data }) => setGame(data) && console.log(data))
       .then((_) => setPlayers(game.players))
       .catch((err) => console.log(err));
-  }, []);
+  }, players.length);
 
   const startTheGame = () => {
     if (game) {
