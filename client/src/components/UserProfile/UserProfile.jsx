@@ -5,19 +5,23 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useStore from '../Store/store';
 import './UserProfile.scss';
 
 function UserProfile() {
   const user = useStore((state) => state.user);
-  // const [showDropdown, setShowDropdown] = useState(false);
+
+  const setUser = useStore((state) => state.setUser);
+
   const [data, setData] = useState({
     pronouns: user.pronouns,
     avatar: user.avatar,
   });
   const { pronouns, avatar } = data;
+
+
 
   const changeHandler = (e) => {
     // console.log('clicked', e.target);
@@ -26,11 +30,19 @@ function UserProfile() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log('updated data', data.pronouns, data.avatar);
-    axios.put('/user/profile', data).then(() => {
-      // console.log(result);
-    });
-    // .catch((err) => console.log(err));
+
+    const body = {
+      username: user.username,
+      pronouns: data.pronouns,
+      avatar: data.avatar
+    }
+    // console.log('body', body);
+    axios.put('/user/profile', body).then((res) => {
+      setUser({...data,  username: user.username, pronouns: data.pronouns,
+        avatar: data.avatar});
+      // console.log('put', body);
+    })
+    .catch((err) => console.log(err));
   };
 
   return (
