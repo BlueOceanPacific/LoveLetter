@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import useStore from '../Store/store';
+import axios from 'axios';
 
 function Navbar() {
   const logOut = useStore(state => state.logOut);
   const loggedInStatus = useStore(state => state.loggedIn);
   const user = useStore((state) => state.user);
+  const { game, setGame } = useStore((state) => ({ game: state.game, setGame: state.setGame }));
 
   let logInDisplay = null;
 
@@ -13,6 +15,15 @@ function Navbar() {
   let createGame = null;
   let gameDisplay = null;
   let signup = <a className="nav-link" href="./#/signup">Signup</a>;
+
+  const leaveHomeHandler = () => {
+    // add logic to disconnect from socket io connection
+    if (game) {
+      axios.post(`/games/${game.name}/leave`, { user: user.username })
+    }
+      // .then((_) => navigate('/'))
+    navigate('/');
+  };
 
   const createGameDisplay = function () {
     joinGame = <a className="dropdown-item" href="./#/join">Join Game</a>;
@@ -80,7 +91,7 @@ function Navbar() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#"> <img className="navbar-icon" src="images/branding/heartBaloon_icon.png" alt="heart baloon icon" /> <span className="nav-title"> Love Letter </span></a>
+        <a className="navbar-brand" href="#"> <img className="navbar-icon" src="images/branding/heartBaloon_icon.png" alt="heart baloon icon" /> <span className="nav-title" onClick={leaveHomeHandler}> Love Letter </span></a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
         </button>
@@ -88,7 +99,7 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="#">Home</a>
+              <a className="nav-link" href="#" onClick={leaveHomeHandler}>Home</a>
             </li>
             {logInDisplay}
             <li className="nav-item">
