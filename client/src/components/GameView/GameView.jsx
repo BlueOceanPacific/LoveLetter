@@ -24,7 +24,7 @@ function GameView() {
 
 
   useEffect(() => {
-    if (!game.currentRound.activeHands) {
+    if (!game.currentRound.activeHands && game.state !== 'building') {
       console.log('No active hands found!')
       axios.get(`/games/${id}`).then(({ data }) => {
         console.log('Setting data to: ', data)

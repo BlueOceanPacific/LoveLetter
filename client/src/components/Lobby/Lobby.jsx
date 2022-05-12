@@ -28,6 +28,16 @@ function Lobby() {
         setGame(data);
         setPlayers(data.players);
       })
+      .then((_) => {
+        if (game.state === 'building') {
+          navigate(`/play/lobby/${id}`);
+        }
+
+
+        if (game.state === 'playing') {
+          navigate(`/play/game/${id}`);
+        }
+      })
       .catch((err) => console.log(err));
 
     setSocket(io('/play', { query: { id } }));
@@ -37,11 +47,6 @@ function Lobby() {
         console.log('someone connected');
       });
     }
-    axios
-      .get(`/games/${id}`)
-      .then(({ data }) => setGame(data))
-      .then((_) => setPlayers(game.players))
-      .catch((err) => console.log(err));
   }, players.length);
 
   const startTheGame = () => {
@@ -68,13 +73,7 @@ function Lobby() {
       </li>
     ))
 
-
-  if (!game) return <LoadingSpinner />;
-
-  if (game.state === 'playing') {
-    console.log('here', game)
-    navigate(`/play/game/${id}`);
-  }
+    if (!game) return <LoadingSpinner />;
 
   return (
     <div className="lobby-container">
