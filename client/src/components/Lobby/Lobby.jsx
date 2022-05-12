@@ -13,12 +13,11 @@ import './Lobby.scss';
 
 function Lobby() {
   const [players, setPlayers] = useState(['twheeler', 'lcosta', 'mteran']);
-  const [game, setGame] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
+  const { game, setGame } = useStore((state) => ({ game: state.game, setGame: state.setGame }));
   const socket = useStore((state) => state.socket);
   const setSocket = useStore((state) => state.setSocket);
-  // const [socket, setSocket] = useState(io('/play', { query: { id } }));
   const user = useStore((state) => state.user);
 
   useEffect(() => {
@@ -51,7 +50,7 @@ function Lobby() {
   if (!game) return <LoadingSpinner />;
 
   if (game.state === 'playing') {
-    return <GameView socket={socket} />;
+    navigate(`/play/game/${id}`);
   }
 
   return (

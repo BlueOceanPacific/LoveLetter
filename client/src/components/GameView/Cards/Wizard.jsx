@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 
-function Wizard({ players, target, targetChangeHandler, showModal }) {
+function Wizard({ game, target, targetChangeHandler, showModal }) {
   useEffect(() => {
     showModal && targetChangeHandler("0");
   }, [showModal])
@@ -15,7 +16,7 @@ function Wizard({ players, target, targetChangeHandler, showModal }) {
       <option defaultValue value="0">
         Choose a target player
       </option>
-      {players.map(({ username }) => (
+      {game.players.map(({ username }) => (
         <option key={username} value={username}>
           {username}
         </option>
