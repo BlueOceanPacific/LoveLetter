@@ -19,10 +19,6 @@ export default function CreateGame() {
   const prizeChangeHandler = (ev) => setPrize(ev.target.value);
   const isPublicChangeHandler = (ev) => setIsPublic(ev.target.value);
 
-  const leaveLoobbyHandler = () => {
-    navigate('/');
-  }
-
   const createLobbyHandler = (event) => {
     event.preventDefault();
     axios
@@ -46,7 +42,8 @@ export default function CreateGame() {
   };
 
   const leaveCreateGameHandler = () => {
-    navigate('/');
+    // stay when
+    navigate("/");
   };
 
   return (
@@ -128,7 +125,7 @@ export default function CreateGame() {
             <button
               className="btn btn-primary btn-lg  back-btn mt-5"
               type="button"
-              onClick={leaveLoobbyHandler}
+              onClick={leaveCreateGameHandler}
             >
               Back
             </button>
