@@ -49,8 +49,8 @@ playNamespace.on('connection', (socket) => {
   const room = socket.handshake.query.id;
   socket.join(room);
 
-  socket.on('join', () => {
-    socket.broadcast.to(room).emit('join');
+  socket.on('lobbyUpdate', () => {
+    socket.broadcast.to(room).emit('lobbyUpdate');
   });
 
   socket.on('updateGameState', ({ game, user, move }) => {

@@ -36,9 +36,9 @@ function Lobby() {
   useEffect(() => {
     if (socket) {
       if (!players.map((player) => player.username).includes(user.username)) {
-        socket.emit('join');
+        socket.emit('lobbyUpdate');
       }
-      socket.on('join', () => {
+      socket.on('lobbyUpdate', () => {
         axios
           .get(`/games/${id}`)
           .then(({ data }) => {
@@ -53,6 +53,7 @@ function Lobby() {
   const startTheGame = () => {
     if (game) {
       axios.post(`/games/${game.name}/start`).then(() => {
+        socket.emit('lobbyUpdate');
         navigate(`/play/game/${game.name}`);
       });
     }
