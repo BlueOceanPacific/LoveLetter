@@ -8,18 +8,6 @@ function DiscardPile() {
   const game = useStore(state => state.game);
 
   const cards = game.currentRound.discardPile.map((card) => <Card currentCard={ card.image }/>)
-  cards.push(
-    <Card currentCard="/images/cards/Minister_Card.png"/>
-  )
-  cards.push(
-    <Card currentCard="/images/cards/Minister_Card.png"/>
-  )
-  cards.push(
-    <Card currentCard="/images/cards/Minister_Card.png"/>
-  )
-  cards.push(
-    <Card currentCard="/images/cards/Minister_Card.png"/>
-  )
 
   return (
     <div className="discard-pile">

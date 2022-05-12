@@ -27,6 +27,7 @@ module.exports = function (app) {
     .then((game) => {
       if(game.players.length < 4) {
         game.players.push(req.body.user);
+        game.players = game.players.filter((elem, idx, arr) => arr.indexOf(elem) === idx);
         game.markModified('players');
         game.save()
           .then(() => res.sendStatus(201))

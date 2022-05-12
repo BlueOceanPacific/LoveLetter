@@ -61,14 +61,14 @@ function Lobby() {
     navigate('/');
   };
 
-  const populatePlayers = () => {
-    return players.map((player) => (
+  const populatePlayers = () =>
+    players.map((player) => (
       <li className="list-group-item" key={ player.id }>
         <img src={ player.avatar } className="lobby-icon" alt="icon" />
         { player.username }
       </li>
     ))
-  }
+
 
   if (!game) return <LoadingSpinner />;
 
@@ -79,9 +79,6 @@ function Lobby() {
 
   return (
     <div className="lobby-container">
-      {/* <div className="lobby-title-container">
-        <h3>...waiting for other players</h3>
-      </div> */}
       <div className="lobby-player-list-container">
         <h4 className="lobby-player-list-title">Current Players</h4>
         <ul className="lobby-list-group">

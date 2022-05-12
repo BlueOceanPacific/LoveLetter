@@ -22,7 +22,7 @@ function TestHome() {
               <div className="top-slogan"> lucky in games, lucky in love</div>
             </div>
             <div className="row">
-            <img className="main-title" src="images/branding/Tittle_TypeWriter.png" alt="main logo" />
+              <img className="main-title" src="images/branding/Tittle_TypeWriter.png" alt="main logo" />
             </div>
             <div className="row">
               <div className="bottom-slogan"> a game of chivalry</div>
@@ -32,7 +32,7 @@ function TestHome() {
           {/* second column */}
           <div className="col">
             <div className="row center">
-            <div className="col"> </div>
+              <div className="col"> </div>
               {/* carousel */}
               <div id="cards-carousel" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
@@ -106,15 +106,47 @@ function TestHome() {
         <hr />
         <div className="row align-items-start">
           <div className="col" id="project-description">
-            <p> the project </p>
-              <img className="corporate-logo" src="images/branding/blueOceanPacific_logo.png" alt="blue ocean and pacific team logo" />
+            <div className="row">
+              <h4> The project </h4>
+              <div className="col">
+                <img className="corporate-logo" src="images/branding/blueOceanPacific_logo.png" alt="blue ocean and pacific team logo" />
+              </div>
+              <div className="col">
+                <p>Love Letter was commissioned by
+                  <span className="bold-names"> His Grace Sir Dareitus Shakesperion III,
+                    Chivalrous King of Reactia</span>. Developed by <span className="bold-names"> Team Pacific </span>, at <span className="bold-names"> Blue Ocean Corp</span>.
+                </p>
+              </div>
+            </div>
           </div>
           <div className="col"
             id="the-team">
-            <p> the team </p>
+            <h4> The team </h4>
+            <ul className="footer-list">
+              <li>Tyler Fleshren: Product Manager</li>
+              <li>Tom Wheeler: Back-End Architecture Owner</li>
+              <li>Matt Teran: UI Owner</li>
+              <li>Lucas Bonner: Front-End Architecture Owner</li>
+              <li>Alex Abushanab: Support Product Manager</li>
+              <li>Jacky Lin: Support Back-End Architecture</li>
+              <li>Marilene Soares da Costa: Support UI</li>
+              <li>Jacob Hansen: Support Front-End Architecture</li>
+              <li>Nicholas Sooter: General support</li>
+              <li> Paul Koh: General support</li>
+            </ul>
           </div>
           <div className="col">
-            <p> the stack</p>
+            <h4> The stack</h4>
+            <ul className="footer-list">
+              <li>React, Zustand</li>
+              <li>HTML, SCSS, Bootstrap, Style Loader</li>
+              <li>Babel, Webpack</li>
+              <li>Node, Express, Axios</li>
+              <li>MongoDB, Mongoose</li>
+              <li>Socket.IO</li>
+              <li>Bcrypt</li>
+              <li>Bad Words</li>
+            </ul>
           </div>
         </div>
       </div>
