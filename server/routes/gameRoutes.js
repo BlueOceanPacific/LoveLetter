@@ -31,6 +31,27 @@ module.exports = function (app) {
       .catch((err) => res.status(500).send(err));
   });
 
+  app.post("/games/:name/join", (req, res) => {
+    console.log('Game name: ', req.params.name);
+    console.log('Body: ', req.body);
+    //Search for the game, confirm it has less than 4 players
+    Game.findOne({ name: req.params.name }).exec()
+    .then((game) => {
+      if(game.players.length < 4) {
+        game.players.push(req.body.user);
+        game.markModified('players');
+        game.save()
+          .then(() => res.sendStatus(201))
+          .catch(()=> res.sendStatus(500));
+      } else {
+        res.sendStatus(500);
+      }
+    })
+    .catch(() => res.sendStatus(500));
+    //If it does, add the input player and send success
+    //If it doesnt, send error
+  });
+
   // need to add a join game route and communicate with Nick
   app.get("/games", (req, res) => {
     console.log("Game data");
