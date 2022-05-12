@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import Filter from 'bad-words';
 import useStore from '../Store/store';
 import MessagesList from './MessagesList';
@@ -9,7 +8,6 @@ import './Chat.scss';
 function Chat() {
   const [newMessageText, setNewMessageText] = useState('');
   const [messages, setMessages] = useState([]);
-  const { id } = useParams();
 
   const user = useStore((store) => store.user);
   const socket = useStore(store => store.socket);

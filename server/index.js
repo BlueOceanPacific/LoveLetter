@@ -9,6 +9,7 @@ const { Server } = require('socket.io');
 
 const io = new Server(httpServer);
 
+const gameEngine = require('./routes/gameEngine');
 // ------------ Middleware setup --------------------
 app.use(express.static(`${__dirname}/../client/dist`));
 app.use(express.json());
@@ -47,9 +48,12 @@ playNamespace.on('connection', (socket) => {
   socket.on('join', (user) => { // whenever a player joins a game, this event is fired
     console.log(user.username, 'connected in room', room);
   });
-
-  socket.on('updateGameState', (updateInfo) => { // whenever a player joins a game, this event is fired
-    console.log(`${updateInfo.user} played ${updateInfo.move.card.name} in ${updateInfo.game}`)
+  
+  socket.on('updateGameState', ({game, user, move}) => { // whenever a player joins a game, this event is fired
+    console.log(`${user} played ${move} in ${game}`)
+    gameEngine.process(game, user, move).then(gameState => {
+      socket.to(room).emit("updateGameState", gameState);
+    })
   });
 
   socket.on('disconnect', () => { // whenever a player disconnect, this event is fired
