@@ -50,7 +50,7 @@ function Lobby() {
   const populatePlayers = () => {
     if (game) {
       return players.map((player) => (
-        <li className="list-group-item" key={ player.id }>
+        <li className="list-group-item" key={ player.username }>
           <img src={ player.avatar } className="lobby-icon" alt="icon" />
           { player.username }
         </li>

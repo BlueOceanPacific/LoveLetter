@@ -182,6 +182,8 @@ function endRound(state) {
 }
 
 module.exports.nextRound = (state) => {
+  state.markModified('currentRound');
+  state.markModified('roundWins');
   state.currentRound.roundNumber += 1;
   state.currentRound.turnNumber = 1;
   state.currentRound.currentPlayer = state.host.username;
@@ -189,6 +191,7 @@ module.exports.nextRound = (state) => {
   state.currentRound.faceDownCard = newDeck.pop();
   state.currentRound.deck = newDeck;
   state.currentRound.discardPile = [];
+  state.roundWins = state.roundWins || {};
   let newHands = {};
   for (let i = 0; i < state.players.length; i++) {
     const card = state.currentRound.deck.pop();
@@ -197,6 +200,7 @@ module.exports.nextRound = (state) => {
       value: card.value,
       targetable: true,
     }
+    state.roundWins[state.players[i].username] = state.roundWins[state.players[i].username] || 0;
   }
   state.currentRound.activeHands = newHands;
   // shuffle deck, reset hands,  increment round counter, re-deal
