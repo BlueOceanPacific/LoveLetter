@@ -14,8 +14,14 @@ mongoose.connect(mongoDB);
 Game.find({}).exec()
   .then((results) => {
     if (!results.length) {
-      const BuildingGame = new Game(TestData.demoBuilding);
-      BuildingGame.save();
+      const BuildingGameOne = new Game(TestData.demoBuildingOne);
+      BuildingGameOne.save();
+      const BuildingGameTwo = new Game(TestData.demoBuildingTwo);
+      BuildingGameTwo.save();
+      const BuildingGameThree = new Game(TestData.demoBuildingThree);
+      BuildingGameThree.save();
+      const BuildingGameFour = new Game(TestData.demoBuildingFour);
+      BuildingGameFour.save();
       const PlayingGame = new Game(TestData.demoPlaying);
       PlayingGame.save();
     }
