@@ -13,7 +13,7 @@ function OpponentsHand({ player }) {
   };
 
   let card;
-
+  console.log('In ops hand, player: ', player, ', user.username: ', user)
   if (!game.currentRound.activeHands[player.username]) {  // If they are out of the round, don't display any cards
     card = null;
   } else if (game.currentRound.activeHands[user.username].canSee === player.username ) { // If they are in the round and the user has played a clown card on them, show their card
