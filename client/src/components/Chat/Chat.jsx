@@ -44,7 +44,7 @@ function Chat() {
       <div className="input-group mb-3 chat-input">
         <input
           type="text"
-          className="form-control"
+          className="form-control input-text"
           placeholder="Type to chat..."
           aria-label="User's chat message"
           value={newMessageText}
