@@ -2,10 +2,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min';
 import React from 'react';
 // import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import useStore from './Store/store';
 
 function Home() {
-  // const user = useStore((state) => state.user);
+  const navigate = useNavigate();
+  const handleGetStarted = () => {
+    navigate('/login');
+  }
   return (
     <div>
       {/* these 2 images are hidden initially - don't change */}
@@ -96,7 +100,7 @@ function Home() {
               <div className="col"> </div>
             </div>
             <div className="row get-started">
-              <button type="button" className="btn btn-ligth">Get started</button>
+              <button type="button" className="btn btn-ligth" onClick={handleGetStarted}>Get started</button>
             </div>
           </div>
         </div>
