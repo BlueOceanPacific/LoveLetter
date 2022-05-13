@@ -29,16 +29,6 @@ function Lobby() {
         setGame(data);
         setPlayers(data.players);
       })
-      .then((_) => {
-        if (game.state === 'building') {
-          navigate(`/play/lobby/${id}`);
-        }
-
-
-        if (game.state === 'playing') {
-          navigate(`/play/game/${id}`);
-        }
-      })
       .catch((err) => console.log(err));
     setSocket(io('/play', { query: { id } }));
   }, []);
@@ -86,7 +76,8 @@ function Lobby() {
 
   if (!game) return <LoadingSpinner />;
 
-  if (game.state === 'playing') {
+  if (game.state !== 'building' && game.state === game[id]) {
+    console.log('in redirecting', 'game');
     navigate(`/play/game/${id}`);
   }
 
