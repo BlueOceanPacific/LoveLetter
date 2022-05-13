@@ -18,6 +18,7 @@ import './GameView.scss';
 import useStore from '../Store/store';
 
 function GameView() {
+  const user = useStore(state => state.user);
   const { game, setGame } = useStore(state => ({ game: state.game, setGame: state.setGame }));
   const { socket, setSocket } = useStore(state => ({ socket: state.socket, setSocket: state.setSocket }));
   const { id } = useParams();
@@ -53,7 +54,7 @@ function GameView() {
             <div className="col-3 hand">
               {/** ******************* OpponentsHand.jsx ************************** */}
               {game ? (
-                <OpponentsHand player={game.players[1]} />
+                <OpponentsHand player={game.players.filter(player => player.username !== user.username)[0]} />
               ) : (
                 <LoadingSpinner />
               )}
@@ -77,13 +78,13 @@ function GameView() {
                 <div className="col-3 hand">
                   {/** ******************* OpponentsHand.jsx ************************** */}
                   {game.players.length > 2 ? (
-                    <OpponentsHand player={game.players[2]} />
+                    <OpponentsHand player={game.players.filter(player => player.username !== user.username[1])} />
                   ) : null}
                 </div>
                 <div className="col-3 hand">
                   {/** ******************* OpponentsHand.jsx ************************** */}
                   {game.players.length > 3 ? (
-                    <OpponentsHand player={game.players[3]} />
+                    <OpponentsHand player={game.players.filter(player => player.username !== user.username)[2]} />
                   ) : null}
                 </div>
               </div>
