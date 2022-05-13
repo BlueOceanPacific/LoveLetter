@@ -32,7 +32,7 @@ function GameView() {
       });
     }
     socket.on('updateGameState', () => {
-      console.log('updatedGame');
+      console.log('updatedGame - new state');
       axios.get(`/games/${id}`).then(({ data }) => {
         setGame(data);
       });

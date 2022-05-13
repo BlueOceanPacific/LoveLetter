@@ -12,9 +12,6 @@ function OpponentsHand({ player }) {
     boxShadow: `0 0 1.5rem #ffe100`,
   };
 
-  console.log('current game: ', game);
-  console.log('Current user: ', user);
-
   let card;
 
   if (!game.currentRound.activeHands[player.username]) {  // If they are out of the round, don't display any cards
