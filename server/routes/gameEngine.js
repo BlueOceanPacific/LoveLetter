@@ -42,7 +42,7 @@ function discardCard(state, user, move) {
   } else {
     state.currentRound.activeHands[user].hand = [state.currentRound.activeHands[user].hand[0]];
   }
-  state.currentRound.activeHands[user].value -= parseInt(move.card.value, 10);
+  updateHandValues(state)
 }
 
 // Process the move based on given rules;
@@ -56,24 +56,24 @@ function processMove(state, user, move) { // refactor play messages to be added 
   state.currentRound.activeHands[user].targetable = true; // reset targetable status
   state.currentRound.activeHands[user].canSee = null; // reset targetable status
   switch (move.card.name.toLowerCase()) {
-    case 'prince': //Out of the match
+    case 'prince': // Out of the match
       state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
       delete state.currentRound.activeHands[user];
       state.systemChat =`${user} is out of the round - they played the Prince!`;
       break;
-    case 'princess': //Out of the match
+    case 'princess': // Out of the match
       state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
       delete state.currentRound.activeHands[user];
       state.systemChat =`${user} is out of the round - they played the Princess!`;
       break;
-    case 'liege': //Out of the match
+    case 'liege': // Out of the match
       state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
       delete state.currentRound.activeHands[user];
       state.systemChat = `${user} is out of the round - they played the Liege!`;
       break;
-    case 'minister': //no effect on discard
+    case 'minister': // no effect on discard
       break;
-    case 'general': //Change hands with target player (must not be self) CURRENTLY NO VALIDATION ON SELF TARGET
+    case 'general': // Change hands with target player (must not be self) CURRENTLY NO VALIDATION ON SELF TARGET
       const userHand = state.currentRound.activeHands[user].hand.slice();
       const targetHand = state.currentRound.activeHands[move.target].hand.slice();
       state.currentRound.activeHands[user].hand = targetHand;
@@ -109,16 +109,24 @@ function processMove(state, user, move) { // refactor play messages to be added 
       break;
     case 'soldier': // Choose a card type other than Soldier. If target player has card, they are out
       if(state.currentRound.activeHands[move.target].hand[0].card.toLowerCase() === move.cardType.toLowerCase()) {
-        console.log('Soldier hits!')
         state.currentRound.discardPile.push(...state.currentRound.activeHands[move.target].hand);
         delete state.currentRound.activeHands[move.target];
         state.systemChat =`${user}'s Soldier strikes ${move.target} with a fatal blow!`;
-        console.log('Active hands after soldier hit: ', state.currentRound.activeHands);
       } else {
         state.systemChat =`${user}'s Soldier misses their mark!`;
       }
       break;
     default:
+  }
+}
+
+function updateHandValues(state) {
+  const players = Object.keys(state.currentRound.activeHands)
+  for (let i = 0; i < players.length; i+= 1) {
+    state.currentRound.activeHands[players[i]].value = 0;
+    for (let j = 0; j < state.currentRound.activeHands[players[i]].hand.length; j+= 1) {
+      state.currentRound.activeHands[players[i]].value += state.currentRound.activeHands[players[i]].hand[j].value;
+    }
   }
 }
 
@@ -148,13 +156,12 @@ function processDraw(state) {
   }
   state.currentRound.currentPlayer = nextPlayer;
   state.currentRound.activeHands[nextPlayer].hand.push(nextCard);
-  state.currentRound.activeHands[nextPlayer].value += nextCard.value;
   // check if new player has drawn over 12 with a minister, if so we kick them
   if (state.currentRound.activeHands[nextPlayer].value >= 12 && (state.currentRound.activeHands[nextPlayer].hand[0].card === 'Minister' || state.currentRound.activeHands[nextPlayer].hand[1].card === 'Minister')) {
     state.currentRound.discardPile.push(...state.currentRound.activeHands[nextPlayer].hand);
     delete state.currentRound.activeHands[nextPlayer];
   }
-
+  updateHandValues(state)
   if (Object.keys(state.currentRound.activeHands).length === 1) {
     endRound(state);
   }
@@ -164,6 +171,7 @@ function processDraw(state) {
 // re-shuffle deck, re-deal
 function endRound(state) {
   // determine winner
+  updateHandValues(state)
   const activePlayers = Object.keys(state.currentRound.activeHands);
   let winner = activePlayers[0];
   let highestHand = state.currentRound.activeHands[activePlayers[0]];
@@ -199,7 +207,7 @@ module.exports.nextRound = (state) => {
   state.currentRound.deck = newDeck;
   state.currentRound.discardPile = [];
   state.roundWins = state.roundWins || {};
-  let newHands = {};
+  const newHands = {};
   for (let i = 0; i < state.players.length; i+= 1) {
     const card = state.currentRound.deck.pop();
     newHands[state.players[i].username] = {
@@ -210,7 +218,9 @@ module.exports.nextRound = (state) => {
     state.roundWins[state.players[i].username] = state.roundWins[state.players[i].username] || 0;
   }
   state.currentRound.activeHands = newHands;
-  state.currentRound.activeHands[state.currentRound.currentPlayer].hand.push(state.currentRound.deck.pop());
+  const firstDraw = state.currentRound.deck.pop();
+  state.currentRound.activeHands[state.currentRound.currentPlayer].hand.push(firstDraw);
+  state.currentRound.activeHands[state.currentRound.currentPlayer].value += firstDraw.value;
   // shuffle deck, reset hands,  increment round counter, re-deal
   function shuffleDeck() {
     const deck = fullDeck.slice();
