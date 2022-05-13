@@ -22,7 +22,7 @@ function Login() {
       })
       .catch(() => {
         document.getElementById('login-help').style.color = '#ff0000';
-        setUsernameHelper('the credentials you entered did not match our records.');
+        setUsernameHelper('The credentials you entered did not match our records.');
       });
   };
 
