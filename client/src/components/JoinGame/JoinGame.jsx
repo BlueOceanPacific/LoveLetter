@@ -26,6 +26,7 @@ function JoinGame() {
   // socket.emit - This method is responsible for sending messages. socket.on - This method is responsible for listening for incoming messages.
 
   const handleJoin = (gameName = games[0].name) => {
+    console.log('GameName: ', gameName);
     axios.post(`/games/${gameName}/join`, {user})
       .then(() => navigate(`/play/lobby/${gameName}`))
       .catch(() => {
@@ -39,7 +40,7 @@ function JoinGame() {
       <div className="row">
         <div className="col-sm-4">
           <div className="p-2" />
-          <button type="button" className="btn btn-success btn-lg" onClick={handleJoin}>Auto-Join</button>
+          <button type="button" className="btn btn-success btn-lg" onClick={() => handleJoin()}>Auto-Join</button>
         </div>
         <div className="col-sm-8"><div className="p-4"><h1>Join a Game</h1></div></div>
       </div>

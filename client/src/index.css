@@ -8,12 +8,27 @@ body {
   background-color: white;
 } */
 
-.navbar-icon {
+.navbar-icon, .avatar-nav {
   height: 30px;
   width: 30px;
   padding-bottom: 2px;
 }
 
+.avatar-nav {
+  height:40px;
+  width: auto;
+}
+
+.login-corner{
+  color: grey;
+  padding-top:3px;
+}
+
+
+.login-msg{
+  color: grey;
+  padding-top:6px;
+}
 
 /* ******** balloon Animation ********* */
 .balloon {
@@ -124,58 +139,86 @@ body {
   /*  optional background - yellow green theme */
   background: rgb(84,84,87);
   background: linear-gradient(270deg, rgba(84,84,87,0.6965379901960784) 5%, rgba(27,214,188,0.6377144607843137) 57%, rgba(248,254,85,0.6825323879551821) 99%);
-  padding: 20px;
+
 }
 
 .get-started button {
   height: 200px;
-  font-size: 2em;
+  font-size: 3em;
   color: rgb(243, 75, 103);
   margin: auto;
-  /* border: solid 2px red; */
-  width: 50%;
-  text-align: left;
+  text-align: center;
 }
 
 .main-title {
   max-width: 500px;
   max-height: 500px;
+  padding-left: 50px;
 }
 
 #cards-carousel {
   padding-top: 20px;
   margin: auto;
-  width: 50%;
-  /* background-color: rgba(248,254,85,0.6825323879551821); */
-
 }
 
 .carousel-card {
   height: 280px;
   max-width: 160px;
-}
-
-.footer {
-  margin-top: 20px;
-  background-color: white;
-  min-height: 600px;
-  padding: 20px;
-  font-size: 1.2em;
-  text-align: center;
-  color: rgb(243, 75, 103);
-}
-
-#project-description,
-#the-team {
-  border-right: solid 1px grey;
+  margin:auto;
 }
 
 .top-slogan {
   font-size: 1.5em;
-  padding-left: 35px;
   color: rgb(243, 75, 103);
+  padding-left: 60px;
 }
 
-.display-5 {
- text-align: center;
+.bottom-slogan {
+ font-size: 2em;
+ padding-left: 60px;
+ color: rgb(129, 118, 118);
+}
+
+.footer {
+  margin-top: 150px;
+  background-color: white;
+  min-height: 600px;
+  padding: 20px;
+  font-size: 1.2em;
+  /* text-align: center; */
+  color: rgb(112, 110, 110);
+}
+
+.corporate-logo {
+  height:200px;
+  width: auto;
+  text-align: left;
+  padding-top:15px;
+}
+
+.footer p {
+  margin-top:30px;
+  padding-top:30px;
+  text-align: left;
+  font-size: 0.7em;
+}
+
+.bold-names {
+  /* text-decoration: underline; */
+  font-weight:600;
+}
+
+#the-team {
+  border-right: solid 1px  rgb(243, 75, 103, 0.6);
+  border-left: solid 1px  rgb(243, 75, 103, 0.6);
+}
+
+hr {
+  color:rgb(243, 75, 103);
+  border-top: solid 3px rgb(243, 75, 103);
+}
+
+.footer-list li {
+  padding-top:10px;
+  font-size:0.7em;
 }

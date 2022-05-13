@@ -26,55 +26,65 @@ function Lobby() {
   const user = useStore((state) => state.user);
 
   useEffect(() => {
-    setSocket(io("/play", { query: { id } }));
-    if (socket) {
-      socket.emit("join", user);
-      socket.on("join", () => {
-        console.log("someone connected");
-      });
-    }
     axios
       .get(`/games/${id}`)
-      .then(({ data }) => setGame(data) && console.log(data))
-      .then((_) => setPlayers(game.players))
+      .then(({ data }) => {
+        setGame(data);
+        setPlayers(data.players);
+      })
       .catch((err) => console.log(err));
-  }, players.length);
+    setSocket(io('/play', { query: { id } }));
+  }, []);
+
+  useEffect(() => {
+    if (socket) {
+      if (!players.map((player) => player.username).includes(user.username)) {
+        socket.emit('lobbyUpdate');
+      }
+      socket.on('lobbyUpdate', () => {
+        axios
+          .get(`/games/${id}`)
+          .then(({ data }) => {
+            setGame(data);
+            setPlayers(data.players);
+          })
+          .catch((err) => console.log(err));
+      });
+    }
+  }, [socket]);
 
   const startTheGame = () => {
     if (game) {
-      axios
-        .post(`/games/${game.name}/start`)
-        .then((_) => navigate(`/play/game/${game.name}`));
+      axios.post(`/games/${game.name}/start`).then(() => {
+        socket.emit('lobbyUpdate');
+        navigate(`/play/game/${game.name}`);
+      });
     }
   };
 
   const leaveLobbyHandler = () => {
     // add logic to disconnect from socket io connection
-    navigate("/");
+    axios.post(`/games/${game.name}/leave`, { user: user.username });
+    // .then((_) => navigate('/'))
+    navigate('/');
   };
 
-  const populatePlayers = () => {
-    if (game) {
-      return players.map((player) => (
-        <li className="list-group-item" key={player.username}>
-          <img src={player.avatar} className="lobby-icon" alt="icon" />
-          {player.username}
-        </li>
-      ));
-    }
-  };
+  const populatePlayers = () =>
+    players.map((player) => (
+      <li className="list-group-item" key={player.username}>
+        <img src={player.avatar} className="lobby-icon" alt="icon" />
+        {player.username}
+      </li>
+    ));
 
   if (!game) return <LoadingSpinner />;
 
-  if (game.state === "playing") {
+  if (game.state !== 'building' && game.state === game[id]) {
     navigate(`/play/game/${id}`);
   }
 
   return (
     <div className="lobby-container">
-      {/* <div className="lobby-title-container">
-        <h3>...waiting for other players</h3>
-      </div> */}
       <div className="lobby-player-list-container">
         <h4 className="lobby-player-list-title">Current Players</h4>
         <ul className="lobby-list-group">{populatePlayers()}</ul>
@@ -100,7 +110,6 @@ function Lobby() {
       >
         Start Game
       </button>
-      ;
     </div>
   );
 }

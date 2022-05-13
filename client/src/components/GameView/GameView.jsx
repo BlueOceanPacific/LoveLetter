@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import io from 'socket.io-client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Chat from '../Chat/Chat';
@@ -19,40 +18,46 @@ import './GameView.scss';
 import useStore from '../Store/store';
 
 function GameView() {
+  const user = useStore(state => state.user);
   const { game, setGame } = useStore(state => ({ game: state.game, setGame: state.setGame }));
   const { socket, setSocket } = useStore(state => ({ socket: state.socket, setSocket: state.setSocket }));
   const { id } = useParams();
 
-  useEffect(() => {
-    if (!socket) setSocket(io('/play', { query: { id } }));
 
-    axios.get(`/games/${id}`).then(({ data }) => {
-      setGame(data);
-    });
-    if (socket) {
-      socket.on('updateGameState', (updatedGame) => {
-        console.log(updatedGame);
-        setGame(updatedGame);
+  useEffect(() => {
+    if (!game.currentRound.activeHands) {
+      axios.get(`/games/${id}`).then(({ data }) => {
+        console.log('Setting data to: ', data)
+        setGame(data);
       });
     }
-
+    socket.on('updateGameState', () => {
+      console.log('updatedGame - new state');
+      axios.get(`/games/${id}`).then(({ data }) => {
+        setGame(data);
+      });
+    });
   }, []);
 
-  if (!game) return <LoadingSpinner />
+
+  if (!game.currentRound.activeHands) return <LoadingSpinner />;
 
   return (
     <div className="bg-gradient gameview">
-      {(game.state !== 'playing') && <GameOver winner='winner' />} {/* -- STILL NEED TO FIGURE OUT HOW TO ACCESS THE GAME WINNER -- */}
+      {(game.state === 'ended') ? <GameOver winningMessage={game.message} /> : null} {/* -- not a great way to test this at the moment until we can complete a game -- */}
       <div className="row justify-content-between align-items-center top-row">
         <div className="col-3 leaderboard">
-          {/** ******************* LocalLeaderboard.jsx ************************** */}
           {game ? <LocalLeaderboard /> : <LoadingSpinner />}
         </div>
         <div className="col">
           <div className="row justify-content-center">
             <div className="col-3 hand">
               {/** ******************* OpponentsHand.jsx ************************** */}
-              {game ? <OpponentsHand player={game.players[1]} /> : <LoadingSpinner />}
+              {game ? (
+                <OpponentsHand player={game.players.filter(player => player.username !== user.username)[0]} />
+              ) : (
+                <LoadingSpinner />
+              )}
             </div>
           </div>
         </div>
@@ -72,11 +77,15 @@ function GameView() {
               <div className="row justify-content-evenly">
                 <div className="col-3 hand">
                   {/** ******************* OpponentsHand.jsx ************************** */}
-                  {game.players.length > 2 ? <OpponentsHand player={game.players[2]} /> : null}
+                  {game.players.length > 2 ? (
+                    <OpponentsHand player={game.players.filter(player => player.username !== user.username[1])} />
+                  ) : null}
                 </div>
                 <div className="col-3 hand">
                   {/** ******************* OpponentsHand.jsx ************************** */}
-                  {game.players.length > 3 ? <OpponentsHand player={game.players[3]} /> : null}
+                  {game.players.length > 3 ? (
+                    <OpponentsHand player={game.players.filter(player => player.username !== user.username)[2]} />
+                  ) : null}
                 </div>
               </div>
             </div>

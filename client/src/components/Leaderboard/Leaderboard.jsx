@@ -18,7 +18,7 @@ function Leaderboard() {
     const currentPlayer = inOrder[i];
     currentPlayer.percentage = (
       Math.round((100 * (currentPlayer.gamesWon / currentPlayer.gamesPlayed)))
-    );
+    ) || 0;
   }
   inOrder.sort((a, b) => b.percentage - a.percentage);
 

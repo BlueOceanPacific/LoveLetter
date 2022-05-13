@@ -58,7 +58,7 @@ function Soldier({
           Choose a Card Type
         </option>
         {CARD_TYPES.filter(({value}) => value !== "1").map(({ name, value }) => (
-          <option key={value} value={value}>
+          <option key={value} value={name}>
             {name}
           </option>
         ))}

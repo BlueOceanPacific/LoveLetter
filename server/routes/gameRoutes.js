@@ -25,8 +25,16 @@ module.exports = function (app) {
     // Search for the game, confirm it has less than 4 players
     Game.findOne({ name: req.params.name }).exec()
     .then((game) => {
-      if(game.players.length < 4) {
+      if (game.players.length < 4) {
+        let username = req.body.user.username;
+        let usernames = game.players.map((users) => users.username);
+
+        if (usernames.includes(username)) {
+          res.sendStatus(201);
+          return;
+        }
         game.players.push(req.body.user);
+
         game.markModified('players');
         game.save()
           .then(() => res.sendStatus(201))
@@ -40,6 +48,21 @@ module.exports = function (app) {
     // If it doesnt, send error
   });
 
+  //remove a player if leave lobby
+  app.post("/games/:name/leave", (req, res) => {
+    //Search for the game, confirm it has less than 4 players
+    Game.findOne({ name: req.params.name }).exec()
+    .then((game) => {
+      const index = game.players.indexOf(req.body.user)
+      game.players.splice(index, 1)
+      game.markModified('players');
+      game.save()
+        .then(() => res.sendStatus(201))
+        .catch(()=> res.sendStatus(500));
+    })
+    .catch(() => res.sendStatus(500));
+  });
+
   app.post("/games/:name/start", (req, res) => {
     // Search for the game, confirm it has less than 4 players
     Game.findOne({ name: req.params.name }).exec()
@@ -47,10 +70,19 @@ module.exports = function (app) {
       game.state = 'playing';
       GameEngine.nextRound(game);
       game.save()
-        .then(() => res.sendStatus(201))
-        .catch((err) => res.status(500).send(err));
+        .then(() => {
+          console.log('Game saved: ', JSON.stringify(game));
+          res.sendStatus(201)
+        })
+        .catch((err) => {
+          console.log(err)
+          res.status(500).send(err)
+        });
     })
-    .catch((err) => res.status(500).send(err));
+    .catch((err) => {
+      console.log(err);
+    res.status(500).send(err)
+  });
     // If it does, add the input player and send success
     // If it doesnt, send error
   });

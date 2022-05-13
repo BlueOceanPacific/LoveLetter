@@ -37,77 +37,85 @@ function discardCard(state, user, move) {
   // add card from move to users discarded pile
   state.currentRound.discardPile.push(move.card);
   // remove card from move from users hand
-  if (state.currentRound.activeHands[user].hand[0].card === move.card.card) {
+  if (state.currentRound.activeHands[user].hand[0].card.toLowerCase() === move.card.name.toLowerCase()) {
     state.currentRound.activeHands[user].hand = [state.currentRound.activeHands[user].hand[1]];
   } else {
     state.currentRound.activeHands[user].hand = [state.currentRound.activeHands[user].hand[0]];
   }
-  state.currentRound.activeHands[user].value -= move.card.value;
+  state.currentRound.activeHands[user].value -= parseInt(move.card.value, 10);
 }
 
 // Process the move based on given rules;
-function processMove(state, user, move) { //refactor play messages to be added to chat
-  state.markModified('chat');
+function processMove(state, user, move) { // refactor play messages to be added to chat
+  state.message = null;
+  state.systemChat = null;
+  console.log('Move registered in process move: ', user, move)
+  state.markModified('message');
+  state.markModified('systemChat');
+  state.currentRound.markModified('activeHands');
   state.currentRound.activeHands[user].targetable = true; // reset targetable status
   state.currentRound.activeHands[user].canSee = null; // reset targetable status
-  switch (move.card.card) {
-    case 'Prince': //Out of the match
+  switch (move.card.name.toLowerCase()) {
+    case 'prince': //Out of the match
       state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
       delete state.currentRound.activeHands[user];
-      state.chat.push({username: 'system', message:`${user} is out of the round - they played the Prince!`});
+      state.systemChat =`${user} is out of the round - they played the Prince!`;
       break;
-    case 'Princess': //Out of the match
+    case 'princess': //Out of the match
       state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
       delete state.currentRound.activeHands[user];
-      state.chat.push({username: 'system', message:`${user} is out of the round - they played the Princess!`});
+      state.systemChat =`${user} is out of the round - they played the Princess!`;
       break;
-    case 'Liege': //Out of the match
+    case 'liege': //Out of the match
       state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
       delete state.currentRound.activeHands[user];
-      state.chat.push({username: 'system', message:`${user} is out of the round - they played the Liege!`});
+      state.systemChat = `${user} is out of the round - they played the Liege!`;
       break;
-    case 'Minister': //no effect on discard
+    case 'minister': //no effect on discard
       break;
-    case 'General': //Change hands with target player (must not be self) CURRENTLY NO VALIDATION ON SELF TARGET
-      const tmp = state.currentRound.activeHands[user].hand.slice();
-      state.currentRound.activeHands[user] = state.currentRound.activeHands[move.target].hand.slice();
-      state.currentRound.activeHands[move.target].hand = tmp;
-      state.chat.push({username: 'system', message:`${user} uses the General to change hands with ${move.target}!`});
+    case 'general': //Change hands with target player (must not be self) CURRENTLY NO VALIDATION ON SELF TARGET
+      const userHand = state.currentRound.activeHands[user].hand.slice();
+      const targetHand = state.currentRound.activeHands[move.target].hand.slice();
+      state.currentRound.activeHands[user].hand = targetHand;
+      state.currentRound.activeHands[move.target].hand = userHand;
+      state.systemChat =`${user} uses the General to change hands with ${move.target}!`;
       break;
-    case 'Wizard': // Target player discards hand, draws new card (can target self)
+    case 'wizard': // Target player discards hand, draws new card (can target self)
       state.currentRound.activeHands[move.target].hand = state.currentRound.deck.length ? [state.currentRound.deck.pop()] : [state.currentRound.faceDownCard];
-      state.chat.push({username: 'system', message:`${user} plays the Wizard. ${move.target} draws a new hand!`});
+      state.systemChat =`${user} plays the Wizard. ${move.target} draws a new hand!`;
       break;
-    case 'Priestess': // Cannot be targeted by other players until your next turn NOT SURE HOW TO HANDLE
+    case 'priestess': // Cannot be targeted by other players until your next turn NOT SURE HOW TO HANDLE
       state.currentRound.activeHands[user].targetable = false;
-      state.chat.push({username: 'system', message:`${user} is protected by the Priestess - they may not be targeted until the next round!`});
+      state.systemChat =`${user} is protected by the Priestess - they may not be targeted until the next round!`;
       break;
-    case 'Knight':
+    case 'knight':
       // Compare hand value with target player. Lowest value is out of the round, tie = both stay;
       const handDiff = state.currentRound.activeHands[user].value - state.currentRound.activeHands[move.target].value;
       if (handDiff > 0) { // user hand is higher value than target hand
         state.currentRound.discardPile.push(...state.currentRound.activeHands[move.target].hand);
         delete state.currentRound.activeHands[move.target];
-        state.chat.push({username: 'system', message:`${move.target} is knocked out of the round by a Knight!`});
+        state.systemChat =`${move.target} is knocked out of the round by a Knight!`;
       } else if (handDiff < 0) { // user hand is lower value than target hand
         state.currentRound.discardPile.push(...state.currentRound.activeHands[user].hand);
         delete state.currentRound.activeHands[user];
-        state.chat.push({username: 'system', message:`${user} is knocked out of the round by a Knight!`});
+        state.systemChat =`${user} is knocked out of the round by a Knight!`;
       } else {
-        state.chat.push({username: 'system', message:`A knight is played - neither side has an advantage!`});
+        state.systemChat =`A knight is played - neither side has an advantage!`;
       }
       break;
-    case 'Clown': // Look at target players hand. Can see prop is rendered in OpponenetsHand.jsx
+    case 'clown': // Look at target players hand. Can see prop is rendered in OpponenetsHand.jsx
       state.currentRound.activeHands[user].canSee = move.target;
-      state.chat.push({username: 'system', message:`A clown is played - someones hand is visible!`});
+      state.systemChat =`A clown is played - someones hand is visible!`;
       break;
-    case 'Soldier': // Choose a card type other than Soldier. If target player has card, they are out
-      if(state.currentRound.activeHands[move.target].hand[0].card === move.guess) {
+    case 'soldier': // Choose a card type other than Soldier. If target player has card, they are out
+      if(state.currentRound.activeHands[move.target].hand[0].card.toLowerCase() === move.cardType.toLowerCase()) {
+        console.log('Soldier hits!')
         state.currentRound.discardPile.push(...state.currentRound.activeHands[move.target].hand);
         delete state.currentRound.activeHands[move.target];
-        state.chat.push({username: 'system', message:`${user}'s Soldier strikes ${move.target} with a fatal blow!`});
+        state.systemChat =`${user}'s Soldier strikes ${move.target} with a fatal blow!`;
+        console.log('Active hands after soldier hit: ', state.currentRound.activeHands);
       } else {
-        state.chat.push({username: 'system', message:`${user}'s Soldier misses their mark!`});
+        state.systemChat =`${user}'s Soldier misses their mark!`;
       }
       break;
     default:
@@ -124,7 +132,6 @@ function processDraw(state) {
   }
   const nextCard = state.currentRound.deck.pop();
   const { currentPlayer } = state.currentRound;
-  console.log('CurrentPlayer: ', currentPlayer);
   let playerPos;
   for (let i = 0; i < state.players.length; i += 1) {
     if (state.players[i].username === currentPlayer) {
@@ -135,7 +142,6 @@ function processDraw(state) {
   while (!nextPlayer) {
     playerPos = (playerPos + 1) % (state.players.length);
     const playerName = state.players[playerPos].username;
-    console.log('PlayerName: ', playerName);
     if (state.currentRound.activeHands[playerName]) {
       nextPlayer = playerName;
     }
@@ -171,11 +177,12 @@ function endRound(state) {
   state.roundWins[winner] += 1;
   state.markModified('roundWins');
   if (state.roundWins[winner] === 4) { // end the game
+    module.exports.nextRound(state);
     state.message = `${winner} has won the game!`;
-    state.markModified('message');
     state.state = 'ended';
     state.markModified('state');
   } else {// end the round
+    state.systemChat = `${winner} has won the round!`;
     module.exports.nextRound(state);
     // shuffle deck, reset hands,  increment round counter, re-deal
   }
@@ -193,7 +200,7 @@ module.exports.nextRound = (state) => {
   state.currentRound.discardPile = [];
   state.roundWins = state.roundWins || {};
   let newHands = {};
-  for (let i = 0; i < state.players.length; i++) {
+  for (let i = 0; i < state.players.length; i+= 1) {
     const card = state.currentRound.deck.pop();
     newHands[state.players[i].username] = {
       hand: [card],
@@ -203,6 +210,7 @@ module.exports.nextRound = (state) => {
     state.roundWins[state.players[i].username] = state.roundWins[state.players[i].username] || 0;
   }
   state.currentRound.activeHands = newHands;
+  state.currentRound.activeHands[state.currentRound.currentPlayer].hand.push(state.currentRound.deck.pop());
   // shuffle deck, reset hands,  increment round counter, re-deal
   function shuffleDeck() {
     const deck = fullDeck.slice();
@@ -228,16 +236,4 @@ module.exports.nextRound = (state) => {
 
     return shuffle(deck);
   }
-}
-
-
-
-// check if the round has ended
-function checkGameEnd(state) {
-  return false;
-}
-
-// ends a game
-function endGame(state) {
-  return true;
 }

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import useStore from '../Store/store';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Navbar() {
   const logOut = useStore(state => state.logOut);
   const loggedInStatus = useStore(state => state.loggedIn);
-  const username = useStore(state => state.username);
+  const user = useStore((state) => state.user);
+  const navigate = useNavigate();
+  const { game, setGame } = useStore((state) => ({ game: state.game, setGame: state.setGame }));
 
   let logInDisplay = null;
 
@@ -76,7 +80,7 @@ function Navbar() {
 
     gameDisplay = createGameDisplay();
   }
-//  navbar-dark bg-dark
+  //  navbar-dark bg-dark
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -111,6 +115,15 @@ function Navbar() {
             </li>
             <li>
               {signup}
+            </li>
+            <li>
+              {user ?
+                <div className="login-corner">
+                  <img className="avatar-nav" src={`${user.avatar}`} />
+                  <span> {user.username} </span>
+                </div> :
+                <span>  </span>
+              }
             </li>
           </ul>
         </div>
