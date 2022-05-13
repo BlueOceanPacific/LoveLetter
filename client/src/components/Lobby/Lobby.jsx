@@ -76,12 +76,7 @@ function Lobby() {
 
   if (!game) return <LoadingSpinner />;
 
-  if (game.state === 'playing') {
-<<<<<<< HEAD
-    console.log('Game in lobby: ', game)
-    console.log('Line 75 navigation');
-=======
->>>>>>> fc04c3ffa2a75967372bb9911f12fb65d8054644
+  if (game.state === 'playing' && game.name === id) {
     navigate(`/play/game/${id}`);
   }
 

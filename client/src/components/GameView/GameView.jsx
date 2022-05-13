@@ -44,7 +44,7 @@ function GameView() {
 
   return (
     <div className="bg-gradient gameview">
-      {(game.state === 'playing') && <GameOver winningMessage={game.message} />} {/* -- not a great way to test this at the moment until we can complete a game -- */}
+      {(game.state === 'ended') ? <GameOver winningMessage={game.message} /> : null} {/* -- not a great way to test this at the moment until we can complete a game -- */}
       <div className="row justify-content-between align-items-center top-row">
         <div className="col-3 leaderboard">
           {game ? <LocalLeaderboard /> : <LoadingSpinner />}

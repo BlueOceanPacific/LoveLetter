@@ -37,12 +37,12 @@ function discardCard(state, user, move) {
   // add card from move to users discarded pile
   state.currentRound.discardPile.push(move.card);
   // remove card from move from users hand
-  if (state.currentRound.activeHands[user].hand[0].card === move.card.name) {
+  if (state.currentRound.activeHands[user].hand[0].card.toLowerCase() === move.card.name.toLowerCase()) {
     state.currentRound.activeHands[user].hand = [state.currentRound.activeHands[user].hand[1]];
   } else {
     state.currentRound.activeHands[user].hand = [state.currentRound.activeHands[user].hand[0]];
   }
-  state.currentRound.activeHands[user].value -= move.card.value;
+  state.currentRound.activeHands[user].value -= parseInt(move.card.value, 10);
 }
 
 // Process the move based on given rules;
@@ -177,6 +177,7 @@ function endRound(state) {
   state.roundWins[winner] += 1;
   state.markModified('roundWins');
   if (state.roundWins[winner] === 4) { // end the game
+    module.exports.nextRound(state);
     state.message = `${winner} has won the game!`;
     state.state = 'ended';
     state.markModified('state');
