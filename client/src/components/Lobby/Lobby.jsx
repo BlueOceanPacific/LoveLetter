@@ -1,14 +1,17 @@
 // 1. package imports
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import io from 'socket.io-client';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import io from "socket.io-client";
 // 2. component imports
-import useStore from '../Store/store';
-import Chat from '../Chat/Chat';
-import LoadingSpinner from '../../util/LoadingSpinner';
+import useStore from "../Store/store";
+import GameView from "../GameView/GameView";
+import Chat from "../Chat/Chat";
+import LoadingSpinner from "../../util/LoadingSpinner";
 // 3. css
-import './Lobby.scss';
+import "./Lobby.scss";
+// ? 4. Video chat component;
+import VideoChat from "../VideoChat/VideoChat";
 
 function Lobby() {
   const [players, setPlayers] = useState([]);
@@ -85,6 +88,9 @@ function Lobby() {
       <div className="lobby-player-list-container">
         <h4 className="lobby-player-list-title">Current Players</h4>
         <ul className="lobby-list-group">{populatePlayers()}</ul>
+      </div>
+      <div className="">
+        <VideoChat />
       </div>
       <div className="chat-container">
         <Chat socket={socket} />

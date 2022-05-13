@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@reonomy/react-confetti-explosion": "^1.0.32",
+    "agora-rtc-react": "^1.1.1",
     "axios": "^0.27.2",
     "bad-words": "^3.0.4",
     "bcryptjs": "^2.4.3",
