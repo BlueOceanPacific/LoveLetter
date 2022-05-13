@@ -18,7 +18,7 @@ module.exports = function (app) {
    * Will sends an error in any other case
    */
   app.post('/user/login', (req, res) => {
-    User.findOne({ username: req.body.username })
+    User.findOne({ username: req.body.username.trim() })
       .exec()
       .then((user) => {
         bcrypt.compare(req.body.password, user.password, (error, isMatch) => {

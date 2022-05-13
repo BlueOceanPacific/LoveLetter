@@ -26,7 +26,15 @@ module.exports = function (app) {
     Game.findOne({ name: req.params.name }).exec()
     .then((game) => {
       if (game.players.length < 4) {
+        let username = req.body.user.username;
+        let usernames = game.players.map((users) => users.username);
+
+        if (usernames.includes(username)) {
+          res.sendStatus(201);
+          return;
+        }
         game.players.push(req.body.user);
+
         game.markModified('players');
         game.save()
           .then(() => res.sendStatus(201))
