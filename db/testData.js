@@ -91,8 +91,236 @@ module.exports.demoPlaying = {
   ],
 };
 
-module.exports.demoBuilding = {
-  name: 'demo-building',
+module.exports.demoBuildingOne = {
+  name: 'Blue Ocean Pacific',
+  privacy: 'public',
+  state: 'building', // state is building, playing, or ended
+  host: { username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
+  players: [
+    { username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
+    { username: 'lcosta', pronouns: 'she/her/hers', avatar: 'test1.png' },
+  ],
+  currentRound: {
+    roundNumber: 2,
+    turnNumber: 7,
+    currentPlayer: 'twheeler',
+    activeHands: {
+      twheeler: {
+        value: 3,
+        hand: [
+          {
+            card: 'Clown',
+            value: 2,
+            image: 'imageUrlHere',
+          },
+          {
+            card: 'Soldier',
+            value: 1,
+            image: 'imageUrlHere',
+          },
+        ],
+      },
+      mteran: {
+        value: 4,
+        hand: [{
+          card: 'Priestess',
+          value: 4,
+          image: 'imageUrlHere',
+        }],
+      },
+    },
+    discardPile: [],
+    deck: [{
+      card: 'General',
+      value: 6,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Minister',
+      value: 7,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Clown',
+      value: 2,
+      image: 'imageUrlHere',
+    },
+    {
+      card: 'Soldier',
+      value: 1,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Wizard',
+      value: 5,
+      image: 'imageUrlHere',
+    }], // rewrite deck as array of objects
+  },
+  roundWins: {
+    twheeler: 0,
+    lcosta: 1,
+    mteran: 0,
+  },
+  chat: [
+    {
+      id: 3425432543,
+      username: 'mteran',
+      message: 'nice play @lcosta!',
+    },
+  ],
+};
+
+module.exports.demoBuildingTwo = {
+  name: 'Blue Ocean Atlantic',
+  privacy: 'public',
+  state: 'building', // state is building, playing, or ended
+  host: { username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
+  players: [
+    { username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
+    { username: 'lcosta', pronouns: 'she/her/hers', avatar: 'test1.png' },
+  ],
+  currentRound: {
+    roundNumber: 2,
+    turnNumber: 7,
+    currentPlayer: 'twheeler',
+    activeHands: {
+      twheeler: {
+        value: 3,
+        hand: [
+          {
+            card: 'Clown',
+            value: 2,
+            image: 'imageUrlHere',
+          },
+          {
+            card: 'Soldier',
+            value: 1,
+            image: 'imageUrlHere',
+          },
+        ],
+      },
+      mteran: {
+        value: 4,
+        hand: [{
+          card: 'Priestess',
+          value: 4,
+          image: 'imageUrlHere',
+        }],
+      },
+    },
+    discardPile: [],
+    deck: [{
+      card: 'General',
+      value: 6,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Minister',
+      value: 7,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Clown',
+      value: 2,
+      image: 'imageUrlHere',
+    },
+    {
+      card: 'Soldier',
+      value: 1,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Wizard',
+      value: 5,
+      image: 'imageUrlHere',
+    }], // rewrite deck as array of objects
+  },
+  roundWins: {
+    twheeler: 0,
+    lcosta: 1,
+    mteran: 0,
+  },
+  chat: [
+    {
+      id: 3425432543,
+      username: 'mteran',
+      message: 'nice play @lcosta!',
+    },
+  ],
+};
+
+module.exports.demoBuildingThree = {
+  name: "Timmy's lobby",
+  privacy: 'public',
+  state: 'building', // state is building, playing, or ended
+  host: { username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
+  players: [
+    { username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },
+    { username: 'lcosta', pronouns: 'she/her/hers', avatar: 'test1.png' },
+  ],
+  currentRound: {
+    roundNumber: 2,
+    turnNumber: 7,
+    currentPlayer: 'twheeler',
+    activeHands: {
+      twheeler: {
+        value: 3,
+        hand: [
+          {
+            card: 'Clown',
+            value: 2,
+            image: 'imageUrlHere',
+          },
+          {
+            card: 'Soldier',
+            value: 1,
+            image: 'imageUrlHere',
+          },
+        ],
+      },
+      mteran: {
+        value: 4,
+        hand: [{
+          card: 'Priestess',
+          value: 4,
+          image: 'imageUrlHere',
+        }],
+      },
+    },
+    discardPile: [],
+    deck: [{
+      card: 'General',
+      value: 6,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Minister',
+      value: 7,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Clown',
+      value: 2,
+      image: 'imageUrlHere',
+    },
+    {
+      card: 'Soldier',
+      value: 1,
+      image: 'imageUrlHere',
+    }, {
+      card: 'Wizard',
+      value: 5,
+      image: 'imageUrlHere',
+    }], // rewrite deck as array of objects
+  },
+  roundWins: {
+    twheeler: 0,
+    lcosta: 1,
+    mteran: 0,
+  },
+  chat: [
+    {
+      id: 3425432543,
+      username: 'mteran',
+      message: 'nice play @lcosta!',
+    },
+  ],
+};
+
+module.exports.demoBuildingFour = {
+  name: 'Join me!!!!',
   privacy: 'public',
   state: 'building', // state is building, playing, or ended
   host: { username: 'twheeler', pronouns: 'he/him/his', avatar: 'test.png' },

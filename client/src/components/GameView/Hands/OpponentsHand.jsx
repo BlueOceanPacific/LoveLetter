@@ -13,18 +13,42 @@ function OpponentsHand({ player }) {
   };
 
   let card;
-  console.log('In ops hand, player: ', player, ', user.username: ', user)
-  if (!game.currentRound.activeHands[player.username]) {  // If they are out of the round, don't display any cards
+  console.log('In ops hand, player: ', player, ', user.username: ', user);
+  if (!game.currentRound.activeHands[player.username]) {
+    // If they are out of the round, don't display any cards
     card = null;
-  } else if (game.currentRound.activeHands[user.username].canSee === player.username ) { // If they are in the round and the user has played a clown card on them, show their card
-    card = <Card currentCard={game.currentRound.activeHands[player.username].hand[0].image} />;
-  } else { // Otherwise, show the back of a card
+  } else if (
+    game.currentRound.activeHands[user.username].canSee === player.username
+  ) {
+    // If they are in the round and the user has played a clown card on them, show their card
+    card = (
+      <Card
+        currentCard={
+          game.currentRound.activeHands[player.username].hand[0].image
+        }
+      />
+    );
+  } else {
+    // Otherwise, show the back of a card
     card = <Card currentCard="/images/cards/BackCard.png" />;
   }
   return (
-    <ul className="list-group list-group-horizontal hand" style={game.currentRound.currentPlayer === player.username ? styles : null}>
-      {card}
-    </ul>
+    <>
+      <img
+        src={player.avatar}
+        className="rounded-circle"
+        alt="..."
+        style={{ width: '4%', position: 'absolute', zIndex: '10' }}
+      />
+      <ul
+        className="list-group list-group-horizontal hand"
+        style={
+          game.currentRound.currentPlayer === player.username ? styles : null
+        }
+      >
+        {card}
+      </ul>
+    </>
   );
 }
 
