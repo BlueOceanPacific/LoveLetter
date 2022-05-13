@@ -7,7 +7,7 @@ import agoraHooks from './hooks';
 // * Prerequisite setting
 const appId = "4c3907e2dacc4d5fa4427baf17facea1";
 const token =
-  "0064c3907e2dacc4d5fa4427baf17facea1IABaqilHHpTfVl3ALYqXibRBP1jiUn/8K4T7GRowb3t2yXH3mfgAAAAAEAA5DUG6WH5+YgEAAQBYfn5i";
+  "0064c3907e2dacc4d5fa4427baf17facea1IADVNVidJ7WJXjvY8pdRbCrZgRqm3g6G0GxbKYLFgshs+nH3mfgAAAAAEAA5DUG6G9t/YgEAAQAa239i";
 
 // * Get current client from hooks
 // * Video & Audio Tracks
