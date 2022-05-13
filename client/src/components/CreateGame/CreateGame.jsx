@@ -74,7 +74,7 @@ export default function CreateGame() {
               className="form-select form-select-lg"
               onChange={prizeChangeHandler}
             >
-              <option defaultValue>Who will you playing for?</option>
+              <option defaultValue>Who will you be playing for?</option>
               <option value="1">Prince</option>
               <option value="2">Princess</option>
               <option value="3">My Liege</option>
