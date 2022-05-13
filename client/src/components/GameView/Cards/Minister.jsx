@@ -10,7 +10,7 @@ function Minister({ game, target, targetChangeHandler, showModal, socket, played
       socket.emit('updateGameState', {
         game: game.name,
         user: user.username,
-        move: { card: { name: 'liege', value: "8" }, target: null, cardType: null },
+        move: { card: { name: 'minister', value: "7" }, target: null, cardType: null },
       });
     }
   }, [played]);
