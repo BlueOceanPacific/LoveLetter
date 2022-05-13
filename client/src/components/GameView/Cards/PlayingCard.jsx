@@ -5,13 +5,13 @@ import useStore from '../../Store/store';
 function PlayingCard({ card, target = false, cardType = false, children }) {
   const [showModal, setShowModal] = useState(0);
   const [played, setPlayed] = useState(false);
-  const {game, user} = useStore(state => ({game: state.game, user: state.user}));
+  const { game, user } = useStore((state) => ({ game: state.game, user: state.user }));
   const modalElement = useRef();
 
   const playCardHandler = () => {
     setShowModal(false);
     setPlayed(true);
-  }
+  };
 
   return (
     <>
@@ -23,7 +23,7 @@ function PlayingCard({ card, target = false, cardType = false, children }) {
         aria-labelledby={`${card.name}-modal-label`}
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id={`${card.card}-modal-label`}>
@@ -36,9 +36,7 @@ function PlayingCard({ card, target = false, cardType = false, children }) {
                 aria-label="Close"
               />
             </div>
-            <div className="modal-body">
-              {React.cloneElement(children, { showModal, played })}
-            </div>
+            <div className="modal-body">{React.cloneElement(children, { showModal, played })}</div>
             <div className="modal-footer">
               <button
                 type="button"
@@ -53,7 +51,10 @@ function PlayingCard({ card, target = false, cardType = false, children }) {
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
                 onClick={playCardHandler}
-                disabled={!(target !== "0" && cardType !== "0") || game.currentRound.currentPlayer !== user.username}
+                disabled={
+                  !(target !== '0' && cardType !== '0') ||
+                  game.currentRound.currentPlayer !== user.username
+                }
               >
                 Play Card
               </button>
