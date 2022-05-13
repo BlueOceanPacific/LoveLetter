@@ -77,7 +77,6 @@ function Lobby() {
   if (!game) return <LoadingSpinner />;
 
   if (game.state !== 'building' && game.state === game[id]) {
-    console.log('in redirecting', 'game');
     navigate(`/play/game/${id}`);
   }
 
