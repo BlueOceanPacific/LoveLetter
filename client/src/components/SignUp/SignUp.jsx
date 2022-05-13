@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import './SignUp.scss';
 
@@ -233,9 +233,11 @@ function SignUp() {
         </div>
 
         <div className="su-buttons" id="su-buttons">
-          <button type="button" className="btn btn-primary" id="su-back-button">
-            Back
-          </button>
+          <Link to="/#">
+            <button type="button" className="btn btn-primary" id="su-back-button">
+              Back
+            </button>
+          </Link>
           <button type="submit" className="btn btn-primary" id="su-submit-button">
             Submit
           </button>
