@@ -48,7 +48,8 @@ function discardCard(state, user, move) {
 // Process the move based on given rules;
 function processMove(state, user, move) { // refactor play messages to be added to chat
   state.message = null;
-  state.systemChat = 'hello world';
+  state.systemChat = null;
+  console.log('Move registered in process move: ', user, move)
   state.markModified('message');
   state.markModified('systemChat');
   state.currentRound.markModified('activeHands');
@@ -108,9 +109,11 @@ function processMove(state, user, move) { // refactor play messages to be added 
       break;
     case 'soldier': // Choose a card type other than Soldier. If target player has card, they are out
       if(state.currentRound.activeHands[move.target].hand[0].card.toLowerCase() === move.cardType.toLowerCase()) {
+        console.log('Soldier hits!')
         state.currentRound.discardPile.push(...state.currentRound.activeHands[move.target].hand);
         delete state.currentRound.activeHands[move.target];
         state.systemChat =`${user}'s Soldier strikes ${move.target} with a fatal blow!`;
+        console.log('Active hands after soldier hit: ', state.currentRound.activeHands);
       } else {
         state.systemChat =`${user}'s Soldier misses their mark!`;
       }

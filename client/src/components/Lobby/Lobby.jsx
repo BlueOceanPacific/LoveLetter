@@ -52,18 +52,10 @@ function Lobby() {
 
   const startTheGame = () => {
     if (game) {
-<<<<<<< HEAD
-      axios.post(`/games/${game.name}/start`)
-        .then((_) => {
-          console.log('Line 51 navigation');
-          navigate(`/play/game/${game.name}`);
-        });
-=======
       axios.post(`/games/${game.name}/start`).then(() => {
         socket.emit('lobbyUpdate');
         navigate(`/play/game/${game.name}`);
       });
->>>>>>> 8615e69126535fbed5a08de0d5701178dea3c371
     }
   };
 
@@ -85,6 +77,7 @@ function Lobby() {
   if (!game) return <LoadingSpinner />;
 
   if (game.state === 'playing') {
+    console.log('Game in lobby: ', game)
     console.log('Line 75 navigation');
     navigate(`/play/game/${id}`);
   }

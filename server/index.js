@@ -64,7 +64,6 @@ playNamespace.on('connection', (socket) => {
     });
   });
 
-<<<<<<< HEAD
   socket.on('updateGameState', ({game, user, move}) => { // whenever a player joins a game, this event is fired
     console.log(`${user} played ${move} in ${game}`)
     gameEngine.process(game, user, move).then(gameState => {
@@ -88,10 +87,6 @@ playNamespace.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => { // whenever a player disconnect, this event is fired
-=======
-  socket.on('disconnect', () => {
-    // whenever a player disconnect, this event is fired
->>>>>>> 8615e69126535fbed5a08de0d5701178dea3c371
     socket.leave(room);
   });
   // on 'chat' events in a room, send chat to clients in room, excluding sender
