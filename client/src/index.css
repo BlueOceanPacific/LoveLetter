@@ -8,12 +8,27 @@ body {
   background-color: white;
 } */
 
-.navbar-icon {
+.navbar-icon, .avatar-nav {
   height: 30px;
   width: 30px;
   padding-bottom: 2px;
 }
 
+.avatar-nav {
+  height:40px;
+  width: auto;
+}
+
+.login-corner{
+  color: grey;
+  padding-top:3px;
+}
+
+
+.login-msg{
+  color: grey;
+  padding-top:6px;
+}
 
 /* ******** balloon Animation ********* */
 .balloon {
