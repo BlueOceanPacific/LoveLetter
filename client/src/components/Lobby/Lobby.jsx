@@ -76,7 +76,7 @@ function Lobby() {
 
   if (!game) return <LoadingSpinner />;
 
-  if (game.state === 'playing') {
+  if (game.state !== 'building' && game.state === game[id]) {
     navigate(`/play/game/${id}`);
   }
 

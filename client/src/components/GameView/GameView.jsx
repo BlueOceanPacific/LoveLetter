@@ -25,7 +25,6 @@ function GameView() {
 
   useEffect(() => {
     if (!game.currentRound.activeHands) {
-      console.log('No active hands found!')
       axios.get(`/games/${id}`).then(({ data }) => {
         console.log('Setting data to: ', data)
         setGame(data);
