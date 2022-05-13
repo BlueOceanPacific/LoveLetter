@@ -11,10 +11,11 @@ import Liege from '../Cards/Liege';
 import General from '../Cards/General';
 import Minister from '../Cards/Minister';
 
-function MyHand({ game, socket }) {
+function MyHand({ socket }) {
   const [target, setTarget] = useState();
   const [cardType, setCardType] = useState();
   const user = useStore((state) => state.user);
+  const game = useStore(state => state.game);
 
   const targetChangeHandler = (val) => setTarget(val);
   const cardTypeChangeHandler = (val) => setCardType(val);
@@ -67,10 +68,15 @@ function MyHand({ game, socket }) {
     Liege: <Liege socket={socket} game={game} />,
   };
 
+  const styles = {
+    boxShadow: `0 0 1.5rem #ffe100`,
+    justifyContent: 'center'
+  };
+
   return (
     <ul
       className="list-group list-group-horizontal my-hand"
-      style={{ justifyContent: 'center' }}
+      style={game.currentRound.currentPlayer === user.username ? styles : {justifyContent: 'center'}}
     >
       {game &&
         game.currentRound.activeHands[user.username].hand.map((card, i) => (
