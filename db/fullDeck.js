@@ -2,7 +2,7 @@ module.exports = [
   {
     card: 'Liege',
     value: 8,
-    image: '/images/cards/Liege_Card.png',
+    image: '/images/cards/MyLiege_Card.png',
   },
   {
     card: 'Minister',
