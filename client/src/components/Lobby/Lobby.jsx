@@ -1,31 +1,36 @@
 // 1. package imports
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import io from 'socket.io-client';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import io from "socket.io-client";
 // 2. component imports
-import useStore from '../Store/store';
-import GameView from '../GameView/GameView';
-import Chat from '../Chat/Chat';
-import LoadingSpinner from '../../util/LoadingSpinner';
+import useStore from "../Store/store";
+import GameView from "../GameView/GameView";
+import Chat from "../Chat/Chat";
+import LoadingSpinner from "../../util/LoadingSpinner";
 // 3. css
-import './Lobby.scss';
+import "./Lobby.scss";
+// ? 4. Video chat component;
+import VideoChat from "../VideoChat/VideoChat";
 
 function Lobby() {
   const [players, setPlayers] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
-  const { game, setGame } = useStore((state) => ({ game: state.game, setGame: state.setGame }));
+  const { game, setGame } = useStore((state) => ({
+    game: state.game,
+    setGame: state.setGame,
+  }));
   const socket = useStore((state) => state.socket);
   const setSocket = useStore((state) => state.setSocket);
   const user = useStore((state) => state.user);
 
   useEffect(() => {
-    setSocket(io('/play', { query: { id } }));
+    setSocket(io("/play", { query: { id } }));
     if (socket) {
-      socket.emit('join', user);
-      socket.on('join', () => {
-        console.log('someone connected');
+      socket.emit("join", user);
+      socket.on("join", () => {
+        console.log("someone connected");
       });
     }
     axios
@@ -37,31 +42,31 @@ function Lobby() {
 
   const startTheGame = () => {
     if (game) {
-      axios.post(`/games/${game.name}/start`)
-        .then((_) => navigate(`/play/game/${game.name}`))
+      axios
+        .post(`/games/${game.name}/start`)
+        .then((_) => navigate(`/play/game/${game.name}`));
     }
-  }
+  };
 
   const leaveLobbyHandler = () => {
     // add logic to disconnect from socket io connection
-    navigate('/');
+    navigate("/");
   };
 
   const populatePlayers = () => {
     if (game) {
       return players.map((player) => (
-        <li className="list-group-item" key={ player.username }>
-          <img src={ player.avatar } className="lobby-icon" alt="icon" />
-          { player.username }
+        <li className="list-group-item" key={player.username}>
+          <img src={player.avatar} className="lobby-icon" alt="icon" />
+          {player.username}
         </li>
-      ))
+      ));
     }
-  }
-
+  };
 
   if (!game) return <LoadingSpinner />;
 
-  if (game.state === 'playing') {
+  if (game.state === "playing") {
     navigate(`/play/game/${id}`);
   }
 
@@ -72,9 +77,10 @@ function Lobby() {
       </div> */}
       <div className="lobby-player-list-container">
         <h4 className="lobby-player-list-title">Current Players</h4>
-        <ul className="lobby-list-group">
-          {populatePlayers()}
-        </ul>
+        <ul className="lobby-list-group">{populatePlayers()}</ul>
+      </div>
+      <div className="">
+        <VideoChat />
       </div>
       <div className="chat-container">
         <Chat socket={socket} />

@@ -33,12 +33,18 @@ export default function Controls(props) {
   return (
     <div className="controls">
       <p className={trackState.audio ? "on" : ""} onClick={() => mute("audio")}>
-        {trackState.audio ? "MuteAudio" : "UnmuteAudio"}
+        {trackState.audio ? <i className="fa-solid fa-lg fa-microphone" /> :  <i className="fa-solid fa-lg fa-microphone-slash"/>}
       </p>
       <p className={trackState.video ? "on" : ""} onClick={() => mute("video")}>
-        {trackState.video ? "MuteVideo" : "UnmuteVideo"}
+        {trackState.video ? (
+          <i className="fa-solid fa-lg fa-video"/>
+        ) : (
+          <i className="fa-solid fa-lg fa-video-slash"/>
+        )}
       </p>
-      <p onClick={() => leaveChannel()}>Leave</p>
+      <p onClick={() => leaveChannel()}>
+        <i className="fa-solid fa-lg fa-arrow-right-from-bracket" />
+      </p>
     </div>
   );
 }

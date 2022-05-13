@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import VideoCall from "./VideoCall";
+import './VideoChat.css';
 
 const channelName = "asd";
 function VideoChat() {
@@ -8,7 +9,7 @@ function VideoChat() {
     setInCall(true);
   };
   return (
-    <div className="vchat-heading">
+    <div className="vchat-container">
       {inCall ? (
         <VideoCall setInCall={setInCall} channelName={channelName} />
       ) : (

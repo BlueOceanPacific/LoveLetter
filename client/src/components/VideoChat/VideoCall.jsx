@@ -46,7 +46,7 @@ export default function VideoCall(props) {
       // listen for disconnect
       client.on("user-unpublished", (user, type) => {
         if (type === "audio") {
-          user.audioTrack.stop();
+          user.audioTrack.remove();
         }
         if (type === "video") {
           setUsers((prevUsers) =>
@@ -73,11 +73,11 @@ export default function VideoCall(props) {
   }, [client, ready, tracks]);
 
   return (
-    <div className="App">
+    <div className="videocall">
+      {start && tracks && <Videos users={users} tracks={tracks} />}
       {ready && tracks && (
         <Controls tracks={tracks} setStart={setStart} setInCall={setInCall} />
       )}
-      {start && tracks && <Videos users={users} tracks={tracks} />}
     </div>
   );
 }
