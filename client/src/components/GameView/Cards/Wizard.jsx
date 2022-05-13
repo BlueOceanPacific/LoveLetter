@@ -1,10 +1,23 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
+import useStore  from '../../Store/store';
 
-function Wizard({ game, target, targetChangeHandler, showModal }) {
+function Wizard({ game, target, targetChangeHandler, showModal, socket, played }) {
+  const user = useStore(store => store.user);
+  
   useEffect(() => {
     showModal && targetChangeHandler("0");
   }, [showModal])
+
+  useEffect(() => {
+    if (played) {
+      socket.emit('updateGameState', {
+        game: game.name,
+        user: user.username,
+        move: { card: { name: 'wizard', value: "5" }, target, cardType: null },
+      });
+    }
+  }, [played]);
 
   return (
     <select

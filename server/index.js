@@ -72,7 +72,7 @@ playNamespace.on('connection', (socket) => {
       // broadcast a system message chat
       if(gameState.systemChat) {
         console.log('systemChat generated! ', gameState.systemChat, room);
-        //socket.broadcast.to(room).emit('chat', gameState.systemChat);
+        // socket.broadcast.to(room).emit('chat', gameState.systemChat);
         const chat = {
           id: Date.now(),
           username: 'system',
