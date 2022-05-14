@@ -125,18 +125,18 @@ function Home() {
           </div>
           <div className="col"
             id="the-team">
-            <h4> The team </h4>
+            <h4> Contributors </h4>
             <ul className="footer-list">
-              <li>Tyler Fleshren: Product Manager</li>
-              <li>Tom Wheeler: Back-End Architecture Owner</li>
-              <li>Matt Teran: UI Owner</li>
-              <li>Lucas Bonner: Front-End Architecture Owner</li>
-              <li>Alex Abushanab: Support Product Manager</li>
-              <li>Jacky Lin: Support Back-End Architecture</li>
-              <li>Marilene Soares da Costa: Support UI</li>
-              <li>Jacob Hansen: Support Front-End Architecture</li>
-              <li>Nicholas Sooter: General support</li>
-              <li> Paul Koh: General support</li>
+              <li>Tyler Fleshren</li>
+              <li>Tom Wheeler</li>
+              <li>Matt Teran</li>
+              <li>Lucas Bonner</li>
+              <li>Alex Abushanab</li>
+              <li>Jacky Lin</li>
+              <li>Marilene Soares da Costa</li>
+              <li>Jacob Hansen</li>
+              <li>Nicholas Sooter</li>
+              <li>Paul Koh</li>
             </ul>
           </div>
           <div className="col">
