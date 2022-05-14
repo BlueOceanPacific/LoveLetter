@@ -3,7 +3,6 @@
 <div align="center">
 <img src="https://lh6.googleusercontent.com/ZxY_Hdh6z2B-KWsTdMvf_I2V9efGtDsHkFgxwUGm8fPt_sZhECULK10dnBwTS_tOXLu0sBPkW-MTcFN8x7VXgT9-JtwNFa2h7LN0mg6LmPhePjNFW2l1jxVXg1uZX6C2Lx6eK4Smbhjz2kJRow" height="300px" width="300px" alt="img" align="center" style="zoom:25%;" /></div>
 
-<div align="center">Love Letter was commissioned by <strong>His Grace Sir Dareitus Shakesperion III, Chivalrous King of Reactia</strong>. Developed by <strong>Team Pacific</strong>, at <strong>Blue Ocean Corp</strong>  </div>
 
 <div align="center"><h3>
  <a href="http://3.128.64.56:4000/">
@@ -22,7 +21,7 @@
 
 ## Description
 
-The Blue Ocean project is the culmination of the Hack Reactor Software Engineering Immersive, where a team of full-stack engineers applies Agile practices, uses Git workflows while maintaining productive team dynamics. Our team (Team Pacific) was tasked by a fictional client (the King of Reactia) to build a game (Love Letter) in just over a week.
+The Blue Ocean project is a project that Our team (Team Pacific) was tasked by a client to build a game (Love Letter) in just over a week.
 
 
 <div align="center">
